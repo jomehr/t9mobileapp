@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">t9_mobileapp</string>
+    <string name="app_name">Bolzer</string>
+    <string name="home_profile">Profile</string>
+    <string name="home_team">Team</string>
+    <string name="home_searchplayer">Spielersuche</string>
+    <string name="home_searchteam">Teamsuche</string>
+    <string name="home_eventradar">Event-Radar</string>
+    <string name="home_league">Turniere/Liga</string>
 </resources>
