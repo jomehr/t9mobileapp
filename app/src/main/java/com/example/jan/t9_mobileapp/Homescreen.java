@@ -19,11 +19,22 @@ public class Homescreen extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        assert myToolbar != null;
+
         Button btn_profile = (Button) findViewById(R.id.button);
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Homescreen.this, Profile.class));
+            }
+        });
+
+        Button btn_team = (Button) findViewById(R.id.button2);
+        btn_team.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Homescreen.this, Team.class));
             }
         });
     }
