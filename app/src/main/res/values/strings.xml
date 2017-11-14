@@ -7,4 +7,6 @@
     <string name="home_eventradar">Event-Radar</string>
     <string name="home_league">Turniere/Liga</string>
     <string name="title_homescreen">Bolzer</string>
+    <string name="action_logout">Abmelden</string>
+    <string name="action_faq">FAQ</string>
 </resources>
