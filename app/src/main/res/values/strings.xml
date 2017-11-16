@@ -9,4 +9,7 @@
     <string name="title_homescreen">Bolzer</string>
     <string name="action_logout">Abmelden</string>
     <string name="action_faq">FAQ</string>
+    <string name="bild">einfach ein Bild</string>
+    <string name="event_Radar_Start">EventRadar gestartet</string>
+    <string name="add_action">addButton</string>
 </resources>
