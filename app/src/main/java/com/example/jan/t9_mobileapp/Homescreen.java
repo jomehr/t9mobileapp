@@ -22,6 +22,7 @@ public class Homescreen extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         assert myToolbar != null;
 
+        //Listener für "click" auf Profile_Button
         Button btn_profile = (Button) findViewById(R.id.button);
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,11 +31,21 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
+        //Listener für "click" auf Team_Button
         Button btn_team = (Button) findViewById(R.id.button2);
         btn_team.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Homescreen.this, Team.class));
+            }
+        });
+
+        //Listener für "click" aufEventRadar_Button
+        Button btn_EventRadar = (Button) findViewById(R.id.btnEventRadar);
+        btn_EventRadar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Homescreen.this, EventRadar.class));
             }
         });
     }
