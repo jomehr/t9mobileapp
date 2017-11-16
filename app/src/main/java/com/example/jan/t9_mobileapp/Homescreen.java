@@ -37,6 +37,14 @@ public class Homescreen extends AppCompatActivity {
                 startActivity(new Intent(Homescreen.this, Team.class));
             }
         });
+
+        Button btn_playerSuche = (Button) findViewById(R.id.button3);
+        btn_playerSuche.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Homescreen.this, playerSuche.class));
+            }
+        });
     }
 
     @Override

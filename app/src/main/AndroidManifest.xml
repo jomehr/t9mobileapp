@@ -16,8 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Profile"></activity>
-        <activity android:name=".Team"></activity>
+        <activity android:name=".Profile" />
+        <activity android:name=".Team" />
+        <activity android:name=".playerSuche"></activity>
     </application>
 
 </manifest>
