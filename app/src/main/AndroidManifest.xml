@@ -15,11 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Profile"></activity>
-        <activity android:name=".Team"></activity>
-        <activity android:name=".EventRadar"></activity>
-        <activity android:name=".League"></activity>
-        <activity android:name=".Search"></activity>
+        <activity android:name=".Profile" />
+        <activity android:name=".Team" />
+        <activity android:name=".EventRadar" />
+        <activity android:name=".League" />
+        <activity android:name=".Search" />
     </application>
 
 </manifest>
