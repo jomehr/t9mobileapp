@@ -1,38 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jan.t9_mobileapp.EventRadar">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="0dp"
-        android:layout_height="?android:attr/actionBarSize"
-        android:layout_weight="1"
-        android:background="@android:color/darker_gray"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:clickable="false"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:typeface="sans"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="19dp" />
-
-    </android.support.v7.widget.Toolbar>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/image"
@@ -42,8 +22,9 @@
         android:layout_marginTop="30dp"
         android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:srcCompat="@android:drawable/ic_menu_compass" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@android:drawable/ic_menu_compass"
+        android:layout_marginLeft="30dp" />
 
 
     <CheckBox
@@ -55,6 +36,7 @@
         android:layout_weight="1"
         android:text="EventRadar gestartet"
         app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginLeft="20dp" />
 
 </android.support.constraint.ConstraintLayout>

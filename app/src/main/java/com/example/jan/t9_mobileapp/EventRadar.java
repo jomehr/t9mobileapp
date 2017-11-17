@@ -18,7 +18,7 @@ public class EventRadar extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
+        getSupportActionBar().setTitle("Event-Radar");
     }
 
     @Override
