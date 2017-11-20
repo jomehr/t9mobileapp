@@ -32,7 +32,6 @@
         <activity android:name=".EventRadar"></activity>
         <activity android:name=".League"></activity>
         <activity android:name=".Search"></activity>
-        <activity android:name=".MapsActivity"></activity>
     </application>
 
 </manifest>
