@@ -1,12 +1,12 @@
 package com.example.jan.t9_mobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -41,8 +41,8 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
         btn_Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Create a Game", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(EventRadar.this, CreateGame.class));
+                //Toast.makeText(getApplicationContext(), "Create a Game", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(EventRadar.this, CreateEvent.class));
             }
         });
     }
