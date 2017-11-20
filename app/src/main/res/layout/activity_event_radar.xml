@@ -14,6 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- GOOGLE MAPS API-KEY :  AIzaSyA5mDcg50eP9TZ6XncmYgECbPXNS9Be8R0 -->
+
     <ImageView
         android:id="@+id/image"
         android:layout_width="50dp"
