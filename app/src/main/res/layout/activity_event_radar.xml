@@ -43,6 +43,7 @@
         android:layout_marginLeft="20dp" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -60,6 +61,15 @@
             android:background="@drawable/oval"
             android:contentDescription="@string/add_action"
             android:src="@drawable/ic_add_white_50dp" />
+
+        <Button
+            android:id="@+id/btnMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Map" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

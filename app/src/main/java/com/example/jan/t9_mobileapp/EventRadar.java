@@ -1,10 +1,12 @@
 package com.example.jan.t9_mobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -23,7 +25,16 @@ public class EventRadar extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Event-Radar");
 
-        //Listener für "click" aufEventRadar_Button
+        //Listener für "click" auf btnMap
+        Button btn_Map = (Button) findViewById(R.id.btnMap);
+        btn_Map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(EventRadar.this, MapsActivity.class));
+            }
+        });
+
+        //Listener für "click" auf EventRadar_Button
         ImageButton btn_Add = (ImageButton) findViewById(R.id.btnAdd);
         btn_Add.setOnClickListener(new View.OnClickListener() {
             @Override
