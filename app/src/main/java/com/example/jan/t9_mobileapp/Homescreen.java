@@ -18,12 +18,10 @@ public class Homescreen extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        assert myToolbar != null;
+        getSupportActionBar().setTitle(R.string.app_name);
 
         //Listener für "click" auf Profile_Button
-        Button btn_profile = (Button) findViewById(R.id.button);
+        Button btn_profile = (Button) findViewById(R.id.btnProfile);
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,7 +30,7 @@ public class Homescreen extends AppCompatActivity {
         });
 
         //Listener für "click" auf Team_Button
-        Button btn_team = (Button) findViewById(R.id.button2);
+        Button btn_team = (Button) findViewById(R.id.btnTeam);
         btn_team.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,12 +38,30 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
-        //Listener für "click" aufEventRadar_Button
+        //Listener für "click" auf EventRadar_Button
         Button btn_EventRadar = (Button) findViewById(R.id.btnEventRadar);
         btn_EventRadar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Homescreen.this, EventRadar.class));
+            }
+        });
+
+        //Listener für "click" auf League_Button
+        Button btn_League = (Button) findViewById(R.id.btnLeague);
+        btn_League.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Homescreen.this, League.class));
+            }
+        });
+
+        //Listener für "click" auf Search_Button
+        Button btn_search = (Button) findViewById(R.id.btnSearch);
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Homescreen.this, Search.class));
             }
         });
     }
