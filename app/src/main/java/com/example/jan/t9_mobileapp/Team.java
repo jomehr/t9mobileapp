@@ -59,7 +59,7 @@ public class Team extends AppCompatActivity {
         return true;
     }
 
-    //deleted PLaceholderFragment class from here
+    //deleted PlaceholderFragment class from here
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
