@@ -1,15 +1,27 @@
 package com.example.jan.t9_mobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageButton;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
- * Created by taraszaika on 16.11.17.
+ * Updated by taraszaika on 20.11.17.
  */
 
-public class EventRadar extends AppCompatActivity {
+public class EventRadar extends AppCompatActivity implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +30,42 @@ public class EventRadar extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Event-Radar");
+        getSupportActionBar().setTitle(R.string.home_eventradar);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        //Listener für "click" auf EventRadar_Button
+        ImageButton btn_Add = (ImageButton) findViewById(R.id.btnAdd);
+        btn_Add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getApplicationContext(), "Create a Game", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(EventRadar.this, CreateEvent.class));
+            }
+        });
+    }
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Gummersbach and move the camera
+        LatLng campusGummersbach = new LatLng(51.022964, 7.561997);
+        mMap.addMarker(new MarkerOptions().position(campusGummersbach).title("Marker TH Köln Campus Gummersbach"));
+
+        //Kamera wird auf Campus hingerichtet mit 18.0 Zoom
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusGummersbach, 18.0f));
     }
 
     @Override

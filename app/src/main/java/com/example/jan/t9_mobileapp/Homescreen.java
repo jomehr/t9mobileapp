@@ -18,6 +18,7 @@ public class Homescreen extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+
         getSupportActionBar().setTitle(R.string.app_name);
 
         //Listener für "click" auf Profile_Button
