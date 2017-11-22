@@ -1,57 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jan.t9_mobileapp.EventRadar">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.jan.t9_mobileapp.EventRadar" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
-    <include
-        android:id="@+id/footer"
-        layout="@layout/footer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <!-- GOOGLE MAPS API-KEY :  AIzaSyA5mDcg50eP9TZ6XncmYgECbPXNS9Be8R0 -->
+        <!-- GOOGLE MAPS API-KEY :  AIzaSyA5mDcg50eP9TZ6XncmYgECbPXNS9Be8R0 -->
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="457dp"
+            app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <ImageButton
-            android:id="@+id/btnAdd"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="35dp"
-            android:layout_marginEnd="26dp"
-            android:layout_marginRight="26dp"
-            android:background="@drawable/oval"
-            android:contentDescription="@string/add_action"
-            android:src="@drawable/ic_add_white_50dp" />
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.example.jan.t9_mobileapp.EventRadar" />
 
+            <ImageButton
+                android:id="@+id/btnAdd"
+                style="@style/Widget.AppCompat.ImageButton"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="35dp"
+                android:layout_marginEnd="26dp"
+                android:layout_marginRight="26dp"
+                android:background="@drawable/oval"
+                android:contentDescription="@string/add_action"
+                android:src="@drawable/ic_add_white_50dp" />
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/navigation_bar"
+            layout="@layout/navigation_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
