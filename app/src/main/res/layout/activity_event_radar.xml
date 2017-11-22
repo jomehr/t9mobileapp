@@ -21,6 +21,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <include
+        android:id="@+id/footer"
+        layout="@layout/footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <!-- GOOGLE MAPS API-KEY :  AIzaSyA5mDcg50eP9TZ6XncmYgECbPXNS9Be8R0 -->
 
 

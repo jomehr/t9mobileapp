@@ -6,12 +6,28 @@
     tools:context=".activity.MainActivity">
 
     <item
-        android:id="@+id/action_sign_out"
-        android:title="@string/action_logout"
+        android:id="@+id/action_settings"
+        android:title="Settings"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_developer"
+        android:title="Entwickler"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_privacy"
+        android:title="Datenschutz"
+        app:showAsAction="never"/>
+
     <item
         android:id="@+id/action_faq"
         android:title="@string/action_faq"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_sign_out"
+        android:title="@string/action_logout"
         app:showAsAction="never"/>
 
 </menu>
