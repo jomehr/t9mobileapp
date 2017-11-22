@@ -6,15 +6,20 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Jan on 17.11.2017.
+ * Created by Tarek on 17.11.2017.
  */
 
 public class Search extends AppCompatActivity{
@@ -31,8 +36,6 @@ public class Search extends AppCompatActivity{
 
     ArrayList<HashMap<String, String >>productList;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +47,8 @@ public class Search extends AppCompatActivity{
 
         //ListView Data Array Adapter
 
-        String playerName[] = {"Tarek", "Jan", "Taras", "Max", "Simon", "Chris"};
+        String playerName[] = {"Tarek", "Jan", "Taras", "Max", "Simon", "Chris", "Jonas", "Hannes", "Omar", "Omas", "Omag", "Omaw"};
+        int playerImages[] = {R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp};
 
         lv = (ListView) findViewById(R.id.list_view);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
@@ -54,7 +58,23 @@ public class Search extends AppCompatActivity{
         adapter = new ArrayAdapter<String>(this, R.layout.activity_list_player, R.id.player_name, playerName);
                 lv.setAdapter(adapter);
 
+        // ** Adding the name and image of the players in the listview **  TEST//
 
+        //START
+
+        
+        /*class ViewHolder
+        {
+            TextView tvw1;
+            ImageView imw1;
+            ViewHolder (View v)
+            {
+               tvw1 = (TextView) v.findViewById(R.id.player_name);
+               imw1 = (ImageView) v.findViewById(R.id.playerImage);
+            }
+        }*/
+
+        // ** END ** //
 
 
         // ** Enabling Search **/
@@ -77,9 +97,6 @@ public class Search extends AppCompatActivity{
 
             }
         });
-
-
-
     }
 
     @Override
@@ -87,5 +104,4 @@ public class Search extends AppCompatActivity{
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-
 }
