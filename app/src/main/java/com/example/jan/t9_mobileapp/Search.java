@@ -47,7 +47,7 @@ public class Search extends AppCompatActivity{
 
         //ListView Data Array Adapter
 
-        String playerName[] = {"Tarek", "Jan", "Taras", "Max", "Simon", "Chris", "Jonas", "Hannes", "Omar", "Omas", "Omag", "Omaw"};
+        String playerName[] = {"Tarek", "Jan", "Taras", "Max", "Simon", "Chris", "Jonas", "Hannes", "Omar", "Omas", "Omag"};
         int playerImages[] = {R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp};
 
         lv = (ListView) findViewById(R.id.list_view);
