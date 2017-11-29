@@ -6,4 +6,5 @@
     <color name="my_costom_color">#0c761e</color>
     <color name="colorPrimaryText">#000000</color>
     <color name="colorAccent">#0c761e</color>
+    <color name="colorPrimaryOpacity">#a2031305</color>
 </resources>
