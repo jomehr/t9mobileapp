@@ -39,19 +39,12 @@
                 android:layout_height="65dp"
                 android:layout_above="@+id/navigation_bar"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="34dp"
                 android:layout_marginEnd="28dp"
                 android:background="@drawable/oval"
                 android:contentDescription="@string/add_action"
                 android:src="@drawable/ic_add_white_50dp" />
-
-            <include
-                android:id="@+id/navigation_bar"
-                layout="@layout/navigation_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                app:layout_constraintBottom_toBottomOf="parent" />
 
         </RelativeLayout>
 
