@@ -106,6 +106,7 @@
             android:paddingBottom="100dp">
 
             <ImageView
+
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -113,11 +114,12 @@
                 app:srcCompat="@drawable/ic_edit_black_30dp" />
 
             <TextView
+                android:id="@+id/eventDescriptionText"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="@string/beschreibung"
+                android:text="@string/description"
                 android:textSize="24sp"
                 android:visibility="visible" />
 
