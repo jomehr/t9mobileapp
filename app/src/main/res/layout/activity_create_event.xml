@@ -17,6 +17,7 @@
 
         <LinearLayout
             android:id="@+id/eventOrt"
+            android:onClick="pickAPlace"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
@@ -30,6 +31,7 @@
                 app:srcCompat="@drawable/ic_add_location_black_30dp" />
 
             <TextView
+                android:id="@+id/eventOrtText"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
