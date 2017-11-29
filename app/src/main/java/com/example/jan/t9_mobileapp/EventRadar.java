@@ -2,20 +2,15 @@ package com.example.jan.t9_mobileapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -36,41 +31,6 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle(R.string.home_eventradar);
 
-        //adds Navigation Menu
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_bar);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId())
-                {
-                    case R.id.navigation_profile:
-                        Toast.makeText(EventRadar.this, "Profil", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(EventRadar.this, Profile.class));
-                        break;
-                    case R.id.navigation_team:
-                        Toast.makeText(EventRadar.this, "Team", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(EventRadar.this, Team.class));
-                        break;
-                    case R.id.navigation_event:
-                        Toast.makeText(EventRadar.this, "Events", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(EventRadar.this, EventRadar.class));
-                        break;
-                    case R.id.navigation_league:
-                        Toast.makeText(EventRadar.this, "Liga", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(EventRadar.this, League.class));
-                        break;
-                    case R.id.navigation_search:
-                        Toast.makeText(EventRadar.this, "Suche", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(EventRadar.this, Search.class));
-                        break;
-                }
-                return true;
-            }
-        });
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
         //Listener für "click" auf EventRadar_Button
         ImageButton btn_Add = (ImageButton) findViewById(R.id.btnAdd);
