@@ -9,8 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/toolbar"
@@ -22,7 +21,7 @@
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="457dp"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
@@ -38,26 +37,24 @@
                 style="@style/Widget.AppCompat.ImageButton"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
-                android:layout_alignParentBottom="true"
+                android:layout_above="@+id/navigation_bar"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="35dp"
-                android:layout_marginEnd="26dp"
-                android:layout_marginRight="26dp"
+                android:layout_marginBottom="34dp"
+                android:layout_marginEnd="28dp"
                 android:background="@drawable/oval"
                 android:contentDescription="@string/add_action"
                 android:src="@drawable/ic_add_white_50dp" />
 
+            <include
+                android:id="@+id/navigation_bar"
+                layout="@layout/navigation_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
         </RelativeLayout>
 
-        <include
-            android:id="@+id/navigation_bar"
-            layout="@layout/navigation_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>
