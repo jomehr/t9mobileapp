@@ -1,5 +1,6 @@
 package com.example.jan.t9_mobileapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,6 +27,7 @@ import java.util.HashMap;
 public class Search extends AppCompatActivity{
 
     private ListView lv;
+    EditText editInput;
 
     //ListView Adapter
     ArrayAdapter<String>adapter;
@@ -58,6 +61,23 @@ public class Search extends AppCompatActivity{
         adapter = new ArrayAdapter<String>(this, R.layout.activity_list_player, R.id.player_name, playerName);
                 lv.setAdapter(adapter);
 
+        // ** Showing the keyboard when pressing on "Search Players" ** //
+
+        editInput = (EditText) findViewById(R.id.inputSearch);
+        //InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        //mgr.showSoftInput(inputSearch, InputMethodManager.SHOW_IMPLICIT);
+
+        editInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(editInput, InputMethodManager.SHOW_IMPLICIT);
+                }
+
+            }
+        });
+
         // ** Adding the name and image of the players in the listview **  TEST//
 
         //START
@@ -75,7 +95,6 @@ public class Search extends AppCompatActivity{
         }*/
 
         // ** END ** //
-
 
         // ** Enabling Search **/
 
@@ -96,6 +115,9 @@ public class Search extends AppCompatActivity{
             public void afterTextChanged(Editable editable) {
 
             }
+
+            // ** Showing the keyboard when pressing on "Search Players" ** //
+
         });
     }
 

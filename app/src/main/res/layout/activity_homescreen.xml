@@ -7,104 +7,166 @@
     android:layout_height="match_parent"
     tools:context="com.example.jan.t9_mobileapp.Homescreen">
 
-    <Button
-        android:id="@+id/btnProfile"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="48dp"
-        android:background="@android:color/transparent"
-        android:drawableTop="@drawable/ic_person_black_72dp"
-        android:padding="8dp"
-        android:text="@string/home_profile"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
-        android:typeface="sans"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:layout_marginLeft="40dp" />
-
-    <Button
-        android:id="@+id/btnTeam"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="48dp"
-        android:background="@android:color/transparent"
-        android:drawableTop="@drawable/ic_group_black_72dp"
-        android:padding="8dp"
-        android:text="@string/home_team"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
-        android:typeface="sans"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:layout_marginRight="40dp" />
-
-    <Button
-        android:id="@+id/btnEventRadar"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="48dp"
-        android:background="@android:color/transparent"
-        android:drawableTop="@drawable/ic_explore_black_72dp"
-        android:padding="0dp"
-        android:text="@string/home_eventradar"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
-        android:typeface="sans"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnProfile"
-        android:layout_marginLeft="40dp" />
-
-    <Button
-        android:id="@+id/btnLeague"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="48dp"
-        android:background="@android:color/transparent"
-        android:drawableTop="@drawable/ic_star_black_72dp"
-        android:text="@string/home_league"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
-        android:typeface="sans"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTeam"
-        android:layout_marginRight="40dp" />
-
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="48dp"
-        android:background="@android:color/transparent"
-        android:drawableTop="@drawable/ic_search_black_72dp"
-        android:text="@string/home_search"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
-        android:typeface="sans"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEventRadar"
-        app:layout_constraintVertical_bias="1.0" />
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/banner_btn1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/footer"
-        layout="@layout/footer"
+    <RelativeLayout
+        android:id="@+id/banner_btn1"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:clickable="true" android:focusable="true">
+
+        <ImageView
+            android:id="@+id/banner_image1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/banner1"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/banner_text1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorPrimaryOpacity"
+            android:gravity="bottom|left"
+            android:padding="4dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:text="Finde ein Spiel"
+            android:textAlignment="gravity"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/banner_btn2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner_btn1" android:focusable="true">
+
+        <ImageView
+            android:id="@+id/banner_image2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/banner_text2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorPrimaryOpacity"
+            android:gravity="bottom|right"
+            android:padding="4dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:text="Erstelle ein Spiel"
+            android:textAlignment="gravity"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/banner_image2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/banner_btn3"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner_btn2" android:focusable="true">
+
+        <ImageView
+            android:id="@+id/banner_image3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/banner_text3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorPrimaryOpacity"
+            android:gravity="bottom|left"
+            android:padding="4dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:text="Liga"
+            android:textAlignment="gravity"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/banner_image3" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/banner_btn4"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner_btn3" android:focusable="true">
+
+        <ImageView
+            android:id="@+id/banner_image4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/banner_text4"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorPrimaryOpacity"
+            android:gravity="bottom|right"
+            android:padding="4dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:text="Team"
+            android:textAlignment="gravity"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/banner_image4" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

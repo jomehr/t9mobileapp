@@ -6,7 +6,7 @@
     android:id="@+id/navigation_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
+    android:layout_gravity="center_horizontal"
     app:itemBackground="@android:color/background_dark"
     app:itemIconTint="@drawable/nav_item_color_state"
     app:itemTextColor="@drawable/nav_item_color_state"
