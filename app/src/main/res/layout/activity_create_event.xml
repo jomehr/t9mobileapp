@@ -137,58 +137,6 @@
         </RelativeLayout>
 
 
-        <LinearLayout
-            android:id="@+id/eventMaxPlayers"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                app:srcCompat="@drawable/ic_max_players_black_30dp" />
-
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/maxAnzahl"
-                android:textSize="24sp"
-                android:visibility="visible" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/eventDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                app:srcCompat="@drawable/ic_max_players_black_30dp" />
-
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/maxAnzahl"
-                android:textSize="24sp"
-                android:visibility="visible" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
     <include
