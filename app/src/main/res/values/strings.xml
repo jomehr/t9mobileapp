@@ -24,5 +24,9 @@
     <string name="playerdummy">Hier steht ein Spielername</string>
     <string name="chatimplementation">Hier wird der Chat implementiert</string>
     <string name="chatputpost">Post verfassen</string>
+    <string name="beschreibung">Beschreibung:</string>
+    <string name="ort_auswahl">Ort Auswählen</string>
+    <string name="setDateAndTime">Datum und Uhrzeit</string>
+    <string name="max">Post verfassen</string>
 
 </resources>
