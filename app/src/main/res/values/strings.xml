@@ -28,5 +28,6 @@
     <string name="ort_auswahl">Ort Auswählen</string>
     <string name="setDateAndTime">Datum und Uhrzeit</string>
     <string name="maxAnzahl">Maximale Spieler-Anzahl</string>
+    <string name="erstellen">Erstellen</string>
 
 </resources>

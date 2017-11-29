@@ -98,25 +98,44 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:clickable="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="100dp">
 
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
-                app:srcCompat="@drawable/ic_max_players_black_30dp" />
+                app:srcCompat="@drawable/ic_edit_black_30dp" />
 
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="@string/maxAnzahl"
+                android:text="@string/beschreibung"
                 android:textSize="24sp"
                 android:visibility="visible" />
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/eventCreateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentTop="true"
+                android:background="@color/colorPrimaryLight"
+                android:padding="15dp"
+                android:text="@string/erstellen"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
 
     </LinearLayout>
 
