@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -40,7 +41,7 @@ public class Homescreen extends AppCompatActivity {
         });
 
         RelativeLayout banner3 = findViewById(R.id.banner_btn3);
-        banner2.setOnClickListener(new View.OnClickListener() {
+        banner3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Homescreen.this, League.class));
@@ -48,10 +49,10 @@ public class Homescreen extends AppCompatActivity {
         });
 
         RelativeLayout banner4 = findViewById(R.id.banner_btn4);
-        banner2.setOnClickListener(new View.OnClickListener() {
+        banner4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, Search.class));
+                startActivity(new Intent(Homescreen.this, Team.class));
             }
         });
 
@@ -63,5 +64,18 @@ public class Homescreen extends AppCompatActivity {
         return true;
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                startActivity(new Intent(Homescreen.this, Search.class));
+                return true;
+            case R.id.action_profile:
+                startActivity(new Intent(Homescreen.this, Profile.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

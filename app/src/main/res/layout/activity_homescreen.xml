@@ -161,7 +161,7 @@
             android:padding="4dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:text="Suche"
+            android:text="Team"
             android:textAlignment="gravity"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
