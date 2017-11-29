@@ -33,6 +33,7 @@
         <activity android:name=".League"></activity>
         <activity android:name=".Search"></activity>
         <activity android:name=".CreateEvent"></activity>
+        <activity android:name=".TeamSearch"></activity>
     </application>
 
 </manifest>
