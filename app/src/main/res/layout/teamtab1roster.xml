@@ -28,7 +28,9 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:contentDescription="Aufstellung 4"
-                android:src="@android:color/background_dark" />
+                android:background="#ebebeb"
+                android:padding="4dp"
+                android:src="@drawable/ic_person_black_72dp" />
 
             <TextView
                 android:id="@+id/spielernameaufstellung1"
@@ -53,7 +55,9 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:contentDescription="Aufstellung 4"
-                android:src="@android:color/background_dark" />
+                android:background="#ebebeb"
+                android:padding="4dp"
+                android:src="@drawable/ic_person_black_72dp" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -75,10 +79,13 @@
 
             <ImageView
                 android:id="@+id/imageView3"
+                android:background="#ebebeb"
+                android:padding="4dp"
+                android:src="@drawable/ic_person_black_72dp"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:contentDescription="Aufstellung 4"
-                android:src="@android:color/background_dark" />
+                 />
 
             <TextView
                 android:id="@+id/textView3"
@@ -100,10 +107,13 @@
 
             <ImageView
                 android:id="@+id/imageView4"
+                android:background="#ebebeb"
+                android:padding="4dp"
+                android:src="@drawable/ic_person_black_72dp"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:contentDescription="Wiliam Shakespear"
-                android:src="@android:color/background_dark" />
+                />
 
             <TextView
                 android:id="@+id/textView4"
@@ -129,7 +139,9 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:contentDescription="The Mountain"
-                android:src="@android:color/background_dark" />
+                android:background="#ebebeb"
+                android:padding="4dp"
+                android:src="@drawable/ic_person_black_72dp" />
 
             <TextView
                 android:id="@+id/textView5"
