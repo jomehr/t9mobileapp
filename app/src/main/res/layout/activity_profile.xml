@@ -22,7 +22,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/profileBanner"
+                android:id="@+id/teamBanner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/banner1"
@@ -66,7 +66,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/profileName"
+                android:id="@+id/teamProfileName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
@@ -78,7 +78,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/profileAge"
+                android:id="@+id/teamSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
@@ -90,7 +90,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/profileLocation"
+                android:id="@+id/teamEstablishment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
