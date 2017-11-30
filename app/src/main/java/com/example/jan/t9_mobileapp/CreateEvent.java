@@ -277,5 +277,10 @@ public class CreateEvent extends AppCompatActivity implements
         //Tastatur automatisch öfnnen
         input.requestFocus();
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+        /*
+        TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schkiesst sich die Tastatur
+        TODO Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.
+        */
     }
 }
