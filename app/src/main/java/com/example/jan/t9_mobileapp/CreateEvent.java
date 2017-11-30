@@ -106,7 +106,6 @@ public class CreateEvent extends AppCompatActivity implements
     public void pickAPlace(View view) {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         Intent intent;
-
         try {
             intent = builder.build(this);
             startActivityForResult(intent,PLACE_PICKER_REQUEST);
