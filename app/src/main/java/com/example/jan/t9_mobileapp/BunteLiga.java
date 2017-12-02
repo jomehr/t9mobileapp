@@ -21,7 +21,7 @@ public class BunteLiga extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Bunteliga");
+        getSupportActionBar().setTitle("Bunte Liga");
 
         RelativeLayout team_btn = findViewById(R.id.team_btn);
 
