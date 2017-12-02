@@ -37,7 +37,7 @@
         <activity android:name=".Profile"></activity>
         <activity android:name=".Team"></activity>
         <activity android:name=".EventRadar"></activity>
-        <activity android:name=".League"></activity>
+        <activity android:name=".BunteLiga"></activity>
         <activity android:name=".Search"></activity>
         <activity android:name=".CreateEvent"></activity>
     </application>

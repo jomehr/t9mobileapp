@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 
@@ -44,10 +43,12 @@ public class Homescreen extends AppCompatActivity {
         banner3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, League.class));
+                startActivity(new Intent(Homescreen.this, BunteLiga.class));
             }
         });
 
+        /*
+        //TeamButton
         RelativeLayout banner4 = findViewById(R.id.banner_btn4);
         banner4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +56,7 @@ public class Homescreen extends AppCompatActivity {
                 startActivity(new Intent(Homescreen.this, Team.class));
             }
         });
+        */
 
     }
 

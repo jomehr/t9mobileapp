@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jan.t9_mobileapp.Homescreen">
+    tools:context="com.example.jan.t9_mobileapp.BunteLiga">
 
     <include
         android:id="@+id/toolbar"
@@ -45,7 +45,7 @@
             android:padding="4dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:text="Finde ein Spiel"
+            android:text="News"
             android:textAlignment="gravity"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
@@ -83,7 +83,7 @@
             android:padding="4dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:text="Erstelle ein Spiel"
+            android:text="Teams"
             android:textAlignment="gravity"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
@@ -122,7 +122,7 @@
             android:padding="4dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:text="Bunteliga"
+            android:text="Tabelle"
             android:textAlignment="gravity"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
@@ -130,9 +130,8 @@
             app:layout_constraintTop_toBottomOf="@id/banner_image3" />
     </RelativeLayout>
 
-    <!--
     <RelativeLayout
-        android:id="@+id/banner_btn4"
+        android:id="@+id/team_btn"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginEnd="16dp"
@@ -145,14 +144,14 @@
         app:layout_constraintTop_toBottomOf="@+id/banner_btn3" android:focusable="true">
 
         <ImageView
-            android:id="@+id/banner_image4"
+            android:id="@+id/team_btnImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@color/colorPrimaryDark"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/banner_text4"
+            android:id="@+id/team_btntext"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
@@ -167,8 +166,7 @@
             android:textAllCaps="true"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/banner_image4" />
+            app:layout_constraintTop_toBottomOf="@id/team_btnImage" />
     </RelativeLayout>
-    -->
 
 </android.support.constraint.ConstraintLayout>
