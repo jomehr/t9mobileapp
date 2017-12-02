@@ -78,7 +78,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/teamSize"
+                android:id="@+id/alter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
@@ -90,13 +90,46 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/teamEstablishment"
+                android:id="@+id/wohnort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="4dp"
                 android:text="Wohnort: Gummersbach"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/erfahrung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:text="Erfahrung als Kicker: Ja/Nein"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/spielarea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:text="Wo ich spielen will: [Hier Button für Karte]"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/teamzuteilung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:text="Primäres Team: 1. FC wubba lubba dub dub"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textSize="18sp" />
 
@@ -115,17 +148,6 @@
                 android:textAppearance="@android:style/TextAppearance"
                 android:textSize="18sp"
                 android:typeface="serif" />
-
-            <TextView
-                android:id="@+id/profileLocation2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="4dp"
-                android:text="Wohnort: Gummersbach"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textSize="18sp" />
 
         </LinearLayout>
 
