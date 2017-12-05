@@ -110,7 +110,7 @@ public class CreateEvent extends AppCompatActivity implements
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         Intent intent;
         try {
-            intent = builder.build(this);
+            intent = builder.build(CreateEvent.this);
             startActivityForResult(intent,PLACE_PICKER_REQUEST);
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
