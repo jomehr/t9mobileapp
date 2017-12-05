@@ -30,12 +30,48 @@
 
         <activity android:name=".Homescreen">
         </activity>
-        <activity android:name=".Profile" />
-        <activity android:name=".Team" />
-        <activity android:name=".EventRadar" />
-        <activity android:name=".BunteLiga" />
-        <activity android:name=".Search" />
-        <activity android:name=".CreateEvent" />
+        <activity
+            android:name=".Profile"
+            android:parentActivityName=".Homescreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Homescreen" />
+        </activity>
+        <activity
+            android:name=".Team"
+            android:parentActivityName=".BunteLiga">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BunteLiga" />
+        </activity>
+        <activity
+            android:name=".EventRadar"
+            android:parentActivityName=".Homescreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Homescreen" />
+        </activity>
+        <activity
+            android:name=".BunteLiga"
+            android:parentActivityName=".Homescreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Homescreen" />
+        </activity>
+        <activity
+            android:name=".Search"
+            android:parentActivityName=".Homescreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Homescreen" />
+        </activity>
+        <activity
+            android:name=".CreateEvent"
+            android:parentActivityName=".EventRadar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EventRadar" />
+        </activity>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

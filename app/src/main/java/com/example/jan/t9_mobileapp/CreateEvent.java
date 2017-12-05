@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -58,6 +60,7 @@ public class CreateEvent extends AppCompatActivity implements
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Event erstellen");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         eventOrtText = (TextView) findViewById(R.id.eventOrtText);
         eventDateAndTimeText = (TextView) findViewById(R.id.eventDateAndTimeText);
@@ -281,5 +284,16 @@ public class CreateEvent extends AppCompatActivity implements
         TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schkiesst sich die Tastatur
         TODO Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.
         */
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -7,18 +7,6 @@
     android:id="@+id/toolbar_menu">
 
     <item
-        android:id="@+id/action_search"
-        android:title="Suche"
-        android:icon="@drawable/ic_search_black_72dp"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_profile"
-        android:title="Profil"
-        android:icon="@drawable/ic_person_black_72dp"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/action_settings"
         android:title="Settings"
         app:showAsAction="never"/>
