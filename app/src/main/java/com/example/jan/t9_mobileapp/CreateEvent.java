@@ -11,7 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -113,7 +112,6 @@ public class CreateEvent extends AppCompatActivity implements
         try {
 
             startActivityForResult(builder.build(this),PLACE_PICKER_REQUEST);
-            Log.println(Log.ERROR,"tag", "aktivity gestartet");
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         } catch (GooglePlayServicesNotAvailableException e) {
@@ -122,7 +120,6 @@ public class CreateEvent extends AppCompatActivity implements
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.println(Log.ERROR,"tag", "requestCode " + requestCode + " resultCode " + resultCode);
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(this, data);
