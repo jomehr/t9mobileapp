@@ -69,7 +69,7 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
         mMap.addMarker(new MarkerOptions().position(campusGummersbach).title("Marker TH Köln Campus Gummersbach"));
 
         //Kamera wird auf Campus hingerichtet mit 18.0 Zoom
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusGummersbach, 18.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusGummersbach, 17.0f));
     }
 
     @Override

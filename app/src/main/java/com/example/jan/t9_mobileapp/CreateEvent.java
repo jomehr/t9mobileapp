@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -28,6 +29,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Calendar;
 
@@ -42,6 +44,16 @@ public class CreateEvent extends AppCompatActivity implements
 
     private int day, month, year, hour, minute;
     private int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
+
+    //private String fileName = "eventDataFile.txt";
+    //private String filePath = "myExternalFilePath";
+
+    //File myExternalFile;
+    //String myData = "";
+
+    LatLng eventLatLng;
+
+    Button creatEvent;
 
     TextView eventOrtText;
     TextView eventDateAndTimeText;
@@ -61,6 +73,8 @@ public class CreateEvent extends AppCompatActivity implements
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Event erstellen");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        creatEvent = (Button) findViewById(R.id.eventCreateButton);
 
         eventOrtText = (TextView) findViewById(R.id.eventOrtText);
         eventDateAndTimeText = (TextView) findViewById(R.id.eventDateAndTimeText);
@@ -92,8 +106,69 @@ public class CreateEvent extends AppCompatActivity implements
             }
         });
 
+        creatEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //creatEventData();
+            }
+        });
 
+        /*
+        if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
+            creatEvent.setEnabled(false);
+        } else {
+            myExternalFile = new File(getExternalFilesDir(filePath), fileName);
+        }
+        */
     }
+
+
+    private void creatEventData() {
+    /*    if (eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime)
+                && eventOrtText.getText() != getResources().getString(R.string.ort_auswahl)
+                && eventLatLng != null)
+        {
+            try {
+                FileOutputStream fos = new FileOutputStream(myExternalFile);
+                String data = eventLatLng.latitude + "::"
+                        + eventLatLng.longitude + "::"
+                        + eventOrtText + "::"
+                        + dayFinal + "::"
+                        + monthFinal + "::"
+                        + yearFinal + "::"
+                        + hourFinal + "::"
+                        + minuteFinal + "::"
+                        + eventMaxPlayersNumberText + "::"
+                        + eventDescriptionText;
+                fos.write(data.getBytes());
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(getApplicationContext(), "SampleFile.txt saved to External Storage...", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Bitte füllen Sie alle Daten", Toast.LENGTH_SHORT).show();
+        }
+        */
+    }
+ /*
+    private static boolean isExternalStorageReadOnly() {
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isExternalStorageAvailable() {
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
+            return true;
+        }
+        return false;
+    }
+*/
 
 
     //Menü
@@ -107,22 +182,34 @@ public class CreateEvent extends AppCompatActivity implements
 
     //Place Picker
     public void pickAPlace(View view) {
+
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
         try {
-
             startActivityForResult(builder.build(this),PLACE_PICKER_REQUEST);
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         } catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
+        //TODO catch-Block implementieren
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(this, data);
+
+                //Layout anpassen
+                ViewGroup.LayoutParams params = eventOrtText.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                eventOrtText.setLayoutParams(params);
+
+                //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
+                if(eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime))
+                    creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+
+                eventLatLng = place.getLatLng();
                 eventOrtText.setText(place.getAddress());
             }
         }
@@ -168,18 +255,18 @@ public class CreateEvent extends AppCompatActivity implements
         hourFinal = hour;
         minuteFinal = minute;
 
+        //Layout anpassen
         ViewGroup.LayoutParams params = eventDateAndTimeText.getLayoutParams();
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-
         eventDateAndTimeText.setLayoutParams(params);
 
+        //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
+        if(eventOrtText.getText() != getResources().getString(R.string.ort_auswahl))
+            creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+
+        //TextView füllen
         eventDateAndTimeText.setText("Datum: "+ dayFinal + "."+ monthFinal + "." + yearFinal
                 + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal));
-
-
-        //Toast.makeText(getApplicationContext(),
-        //        "Datum: "+ dayFinal + "."+ minuteFinal + "." + yearFinal + ", Uhrzeit: " + hourFinal + ":" + minuteFinal,
-        //        Toast.LENGTH_SHORT).show();
 
     }
 
@@ -232,7 +319,7 @@ public class CreateEvent extends AppCompatActivity implements
 
         container.addView(input);
 
-        if (!eventDescriptionText.getText().equals("Beschreibung"))
+        if (!eventDescriptionText.getText().equals(getResources().getString(R.string.description)))
             input.setText(eventDescriptionText.getText());
 
         //View zuweisen
