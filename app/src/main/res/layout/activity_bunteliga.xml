@@ -80,7 +80,8 @@
             android:id="@+id/banner_image2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/colorPrimaryDark"
+            android:src="@drawable/banner_teams2"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -119,7 +120,8 @@
             android:id="@+id/banner_image3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/colorPrimaryDark"
+            android:src="@drawable/banner_tabele"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView

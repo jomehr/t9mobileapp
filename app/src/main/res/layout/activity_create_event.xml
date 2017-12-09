@@ -48,7 +48,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/ort_auswahl"
                 android:textSize="24sp"
-                android:textColor="#000000"
+                android:textColor="@color/colorBlack"
                 android:visibility="visible" />
 
         </LinearLayout>
@@ -76,7 +76,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/setDateAndTime"
                 android:textSize="24sp"
-                android:textColor="#000000"
+                android:textColor="@color/colorBlack"
                 android:visibility="visible" />
 
         </LinearLayout>
@@ -104,7 +104,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/maxAnzahl"
                 android:textSize="24sp"
-                android:textColor="#000000"
+                android:textColor="@color/colorBlack"
                 android:visibility="visible" />
 
         </LinearLayout>
@@ -134,7 +134,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/description"
                 android:textSize="24sp"
-                android:textColor="#000000"
+                android:textColor="@color/colorBlack"
                 android:visibility="visible" />
 
         </LinearLayout>
