@@ -147,7 +147,8 @@
             android:id="@+id/team_btnImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/colorPrimaryDark"
+            android:src="@drawable/banner_team"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView

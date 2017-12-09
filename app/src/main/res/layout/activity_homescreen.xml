@@ -30,7 +30,7 @@
             android:id="@+id/banner_image1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/banner1"
+            android:src="@drawable/banner_find_game"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -69,7 +69,8 @@
             android:id="@+id/banner_image2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/colorPrimaryDark"
+            android:src="@drawable/banner_creat_event"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -108,7 +109,8 @@
             android:id="@+id/banner_image3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/colorPrimaryDark"
+            android:src="@drawable/banner_liga"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView

@@ -71,7 +71,7 @@ public class CreateEvent extends AppCompatActivity implements
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Event erstellen");
+        getSupportActionBar().setTitle(getResources().getString(R.string.erstellen));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         creatEvent = (Button) findViewById(R.id.eventCreateButton);
