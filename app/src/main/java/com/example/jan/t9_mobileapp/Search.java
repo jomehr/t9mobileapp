@@ -62,7 +62,7 @@ public class Search extends AppCompatActivity{
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
-        final SearchAdapter adapter = new SearchAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        //final SearchAdapter adapter = new SearchAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -84,7 +84,7 @@ public class Search extends AppCompatActivity{
 
     }
 
-    public class sectionsPageAdapter extends FragmentPagerAdapter {
+/*    public class sectionsPageAdapter extends FragmentPagerAdapter {
         private sectionsPageAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -116,7 +116,7 @@ public class Search extends AppCompatActivity{
             }
             return null;
         }
-    }
+    }*/
     public void onFragmentInteraction(Uri uri) {
 
     }
