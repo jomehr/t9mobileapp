@@ -27,7 +27,7 @@ public class TeamTab1Roster extends Fragment{
             "Taras Zaika",
             "Tarek Al Ashi",};
     /*
-         Hardcoded picture paths, should get names from the Database and and them before building the layout
+         Hardcoded picture paths, should get names from the Database before building the layout
     */
     Integer[] imageId = {
             R.drawable.ic_person_black_72dp,
@@ -53,7 +53,7 @@ public class TeamTab1Roster extends Fragment{
                                     int position, long id) {
                 //Test notification on click , can be commented out after debugging
                 Toast.makeText(getActivity(), "You Clicked at " +playernames[+ position], Toast.LENGTH_SHORT).show();
-                //links to the playerprofile
+                //links to the player profile
                 startActivity(new Intent(getActivity(), Profile.class));
 
             }

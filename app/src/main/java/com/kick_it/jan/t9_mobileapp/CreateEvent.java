@@ -71,7 +71,7 @@ public class CreateEvent extends AppCompatActivity implements
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(getResources().getString(R.string.erstellen));
+        getSupportActionBar().setTitle(getResources().getString(R.string.create));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         creatEvent = (Button) findViewById(R.id.eventCreateButton);
@@ -261,7 +261,7 @@ public class CreateEvent extends AppCompatActivity implements
         eventDateAndTimeText.setLayoutParams(params);
 
         //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
-        if(eventOrtText.getText() != getResources().getString(R.string.ort_auswahl))
+        if(eventOrtText.getText() != getResources().getString(R.string.pick_place))
             creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
 
         //TextView füllen
@@ -281,7 +281,7 @@ public class CreateEvent extends AppCompatActivity implements
 
         //Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(myNumberPicker);
-        builder.setTitle(R.string.maxAnzahl);
+        builder.setTitle(R.string.max_amount);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override

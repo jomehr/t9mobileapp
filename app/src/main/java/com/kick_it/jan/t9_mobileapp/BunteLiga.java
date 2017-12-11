@@ -44,13 +44,16 @@ public class BunteLiga extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+            case R.id.action_search:
+                startActivity(new Intent(this, Search.class));
                 return true;
+            case R.id.action_profile:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
-
 }

@@ -5,7 +5,7 @@
     android:id="@+id/team"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jan.t9_mobileapp.Search">
+    tools:context="com.kick_it.jan.t9_mobileapp.Search">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -29,13 +29,13 @@
                 android:id="@+id/tabItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/spielersuche" />
+                android:text="@string/playersearch" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/teamsuche" />
+                android:text="@string/teamsearch" />
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 

@@ -3,14 +3,13 @@
     <string name="app_name">Kick It - Matchfinder</string>
     <string name="home_profile">Profile</string>
     <string name="home_team">Team</string>
-    <string name="home_searchplayer">Spielersuche</string>
-    <string name="home_searchteam">Teamsuche</string>
+    <string name="home_searchplayer">Spieler</string>
+    <string name="home_searchteam">Teams</string>
     <string name="home_eventradar">Events</string>
     <string name="home_league">Liga</string>
-    <string name="title_homescreen">Bolzer</string>
+    <string name="title_homescreen">Kick It</string>
     <string name="action_logout">Abmelden</string>
     <string name="action_faq">FAQ</string>
-    <string name="bild">einfach ein Bild</string>
     <string name="event_Radar_Start">EventRadar gestartet</string>
     <string name="add_action">addButton</string>
     <string name="home_search">Suche</string>
@@ -18,22 +17,28 @@
     <string name="templatestring_long">""Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsumy""</string>
     <string name="teamtab1roster">Aufstellung</string>
     <string name="teamtab2profile">Profil</string>
-    <string name="abouttheteam">Über das Team</string>
-    <string name="spielersuche">Spieler</string>
-    <string name="teamsuche">Teams</string>
-    <string name="eventticker">Eventticker</string>
-    <string name="singleevent">Single Event</string>
     <string name="teamtab3teamchat">Team Chat</string>
-    <string name="playerdummy">Hier steht ein Spielername</string>
-    <string name="chatimplementation">Hier wird der Chat implementiert</string>
-    <string name="chatputpost">Post verfassen</string>
-    <string name="description">Beschreibung</string>
-    <string name="ort_auswahl">Ort Auswählen</string>
+    <string name="abouttheteam">Über das Team</string>
+    <string name="playersearch">Spieler</string>
+    <string name="teamsearch">Teams</string>
+    <string name="find_a_game">Finde ein Spiel</string>
+    <string name="create_a_game">Erstelle ein Spiel</string>
+    <string name="create">Erstellen</string>
+    <string name="max_amount">Maximale Spieler-Anzahl</string>
+    <string name="event_ticker">Eventticker</string>
+    <string name="single_event">Single Event</string>
+    <string name="chat_put_post">Post verfassen</string>
+    <string name="bunte_liga">Bunte Liga</string>
+    <string name="pick_place">Ort Auswählen</string>
     <string name="setDateAndTime">Datum und Uhrzeit</string>
-    <string name="maxAnzahl">Maximale Spieler-Anzahl</string>
-    <string name="erstellen">Erstellen</string>
+    <string name="contentDescriptionRoster">Aufstellung</string>
+    <string name="description">Beschreibung</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="randomimage">Einfach ein Bild</string>
+    <string name="chatimplementation">Hier wird der Chat implementiert</string>
+    <string name="teamname">Die Streetfoodballer</string>
+    <string name="teamplayercount">Spieleranzahl: 5/5</string>
+    <string name="teamestablishment">Gegründet am 12.12.2005</string>
 </resources>

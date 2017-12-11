@@ -18,7 +18,7 @@ import android.widget.ListView;
 public class SearchTab2Teamsearch extends Fragment{
     ListView list;
     /*
-        Hardcoded names, should get names from the Database and and them before building the layout
+        Hardcoded names, should get names from the Database before building the layout
      */
     String[] teamnames = {
             "Jan Mehr",
@@ -28,7 +28,7 @@ public class SearchTab2Teamsearch extends Fragment{
             "Taras Zaika",
             "Tarek Al Ashi",};
     /*
-        Hardcoded picture paths, should get names from the Database and and them before building the layout
+        Hardcoded picture paths, should get pictures from the Database before building the layout
      */
     Integer[] imageId = {
             R.drawable.ic_person_black_72dp,
