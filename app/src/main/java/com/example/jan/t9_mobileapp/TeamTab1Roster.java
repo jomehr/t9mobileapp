@@ -6,29 +6,65 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.Toast;
+import android.widget.ListView;
 
 /**
  * Created by Christopher on 20.11.2017.
  */
 
 public class TeamTab1Roster extends Fragment{
+    ListView list;
+    String[] playernames = {
+            "Jan Mehr",
+            "Christopher Huntscha",
+            "Simon Mertens",
+            "Maximilian Storr",
+            "Taras Zaika",
+            "Tarek Al Ashi",};
+
+    Integer[] imageId = {
+            R.drawable.ic_person_black_72dp,
+            R.drawable.ic_person_black_72dp,
+            R.drawable.ic_person_black_72dp,
+            R.drawable.ic_person_black_72dp,
+            R.drawable.ic_person_black_72dp,
+            R.drawable.ic_person_black_72dp};
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.teamtab1roster, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_teamtab1roster, container, false);
 
+        CustomList adapter = new
+                CustomList(getActivity(), playernames, imageId);
+        list=(ListView)rootView.findViewById(R.id.listView1);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                //Testnotification on click
+                Toast.makeText(getActivity(), "You Clicked at " +playernames[+ position], Toast.LENGTH_SHORT).show();
+                //links to the playerprofile
+                startActivity(new Intent(getActivity(), Profile.class));
+
+            }
+        });
+
+        // Für die statische Seite, kann später gelöscht werden
+        /*
         //Listener für "click" auf den ersten Spieler von oben in der Teamaufstellung
-        LinearLayout toProfile1 = (LinearLayout) rootView.findViewById(R.id.spielercontainer1);
+        LinearLayout toProfile1 = (LinearLayout) rootView.findViewById(R.id.spielercontainer);
         toProfile1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), Profile.class));
             }
         });
+
         //Listener für "click" auf den ersten Spieler von oben in der Teamaufstellung
         LinearLayout toProfile2 = (LinearLayout) rootView.findViewById(R.id.spielercontainer2);
         toProfile2.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +97,7 @@ public class TeamTab1Roster extends Fragment{
                 startActivity(new Intent(getActivity(), Profile.class));
             }
         });
+        */
         return rootView;
     }
 }
