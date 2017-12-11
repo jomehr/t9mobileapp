@@ -1,5 +1,6 @@
 package com.example.jan.t9_mobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,16 +10,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
+import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-/**
- * Created by Chris on 13.11.2017.
+/*
+ * Created by Christopher on 13.11.2017.
  */
 
 public class Team extends AppCompatActivity {
@@ -31,7 +26,8 @@ public class Team extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        //getSupportActionBar().setTitle("Team");
+        getSupportActionBar().setTitle("Team");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -101,6 +97,20 @@ public class Team extends AppCompatActivity {
                     return "Chat";
             }
             return null;
+        }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                startActivity(new Intent(Team.this, Search.class));
+                return true;
+            case R.id.action_profile:
+                startActivity(new Intent(Team.this, Profile.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
