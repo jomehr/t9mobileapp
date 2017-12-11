@@ -1,6 +1,6 @@
 <resources>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDEYH_d0EQpvyxlYvNWnsKReSY7T1enYFU</string>
-    <string name="app_name">Bolzer</string>
+    <string name="app_name">Kick It - Matchfinder</string>
     <string name="home_profile">Profile</string>
     <string name="home_team">Team</string>
     <string name="home_searchplayer">Spielersuche</string>
@@ -15,7 +15,7 @@
     <string name="add_action">addButton</string>
     <string name="home_search">Suche</string>
     <string name="profileBanner">Profilbanner</string>
-    <string name="templatestring_long">"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsumy"</string>
+    <string name="templatestring_long">""Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsumy""</string>
     <string name="teamtab1roster">Aufstellung</string>
     <string name="teamtab2profile">Profil</string>
     <string name="abouttheteam">Über das Team</string>
