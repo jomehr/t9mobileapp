@@ -41,7 +41,7 @@
             android:id="@+id/banner_image1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/banner1"
+            android:src="@drawable/profilpic"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -80,7 +80,7 @@
             android:id="@+id/banner_image2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/banner_teams2"
+            android:src="@drawable/banner_team"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -120,7 +120,7 @@
             android:id="@+id/banner_image3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/banner_tabele"
+            android:src="@drawable/banner_liga"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -160,7 +160,7 @@
             android:id="@+id/team_btnImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/banner_team"
+            android:src="@drawable/banner_teams2"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
