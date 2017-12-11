@@ -17,7 +17,7 @@ import android.widget.ListView;
 public class TeamTab1Roster extends Fragment{
     ListView list;
     /*
-    Hardcoded names, should get names from the Database and and them before building the layout
+        Hardcoded names, should get names from the Database and and them before building the layout
      */
     String[] playernames = {
             "Jan Mehr",
@@ -26,7 +26,9 @@ public class TeamTab1Roster extends Fragment{
             "Maximilian Storr",
             "Taras Zaika",
             "Tarek Al Ashi",};
-
+    /*
+         Hardcoded picture paths, should get names from the Database and and them before building the layout
+    */
     Integer[] imageId = {
             R.drawable.ic_person_black_72dp,
             R.drawable.ic_person_black_72dp,
@@ -49,7 +51,7 @@ public class TeamTab1Roster extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                //Testnotification on click
+                //Test notification on click , can be commented out after debugging
                 Toast.makeText(getActivity(), "You Clicked at " +playernames[+ position], Toast.LENGTH_SHORT).show();
                 //links to the playerprofile
                 startActivity(new Intent(getActivity(), Profile.class));

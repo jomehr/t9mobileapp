@@ -29,7 +29,7 @@ public class Search extends AppCompatActivity{
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Search");
+        getSupportActionBar().setTitle("Suche");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
