@@ -38,7 +38,7 @@ public class BunteLiga extends AppCompatActivity {
         teamsearch_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(BunteLiga.this, SearchTab2Teamsearch.class));
+                startActivity(new Intent(BunteLiga.this, Search.class));
             }
         });
         //Clicklistener links to activity Tables
