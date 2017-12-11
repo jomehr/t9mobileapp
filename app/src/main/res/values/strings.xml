@@ -19,6 +19,8 @@
     <string name="teamtab1roster">Aufstellung</string>
     <string name="teamtab2profile">Profil</string>
     <string name="abouttheteam">Über das Team</string>
+    <string name="spielersuche">Spielersuche</string>
+    <string name="teamsuche">Teamsuche</string>
     <string name="eventticker">Eventticker</string>
     <string name="singleevent">Single Event</string>
     <string name="teamtab3teamchat">Team Chat</string>
