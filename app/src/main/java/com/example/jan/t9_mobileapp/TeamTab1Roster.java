@@ -54,7 +54,7 @@ public class TeamTab1Roster extends Fragment{
             }
         });
 
-        // Für die statische Seite, kann später gelöscht werden
+        // Für die statische Seite, kann später gelöscht werden.
         /*
         //Listener für "click" auf den ersten Spieler von oben in der Teamaufstellung
         LinearLayout toProfile1 = (LinearLayout) rootView.findViewById(R.id.spielercontainer);
