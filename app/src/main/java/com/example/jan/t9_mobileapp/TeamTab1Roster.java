@@ -16,6 +16,9 @@ import android.widget.ListView;
 
 public class TeamTab1Roster extends Fragment{
     ListView list;
+    /*
+    Hardcoded names, should get names from the Database and and them before building the layout
+     */
     String[] playernames = {
             "Jan Mehr",
             "Christopher Huntscha",
