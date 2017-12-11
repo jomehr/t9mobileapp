@@ -1,4 +1,4 @@
-package com.example.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

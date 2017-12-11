@@ -1,6 +1,5 @@
-package com.example.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;

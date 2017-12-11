@@ -1,4 +1,4 @@
-package com.example.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.jan.t9_mobileapp", appContext.getPackageName());
+        assertEquals("com.kick_it.jan.t9_mobileapp", appContext.getPackageName());
     }
 }

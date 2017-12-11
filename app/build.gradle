@@ -7,7 +7,7 @@ def versionBuild = 2 // bump for dogfood builds, public alphas, public betas, et
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.example.jan.t9_mobileapp"
+        applicationId "com.kick_it.jan.t9_mobileapp"
         minSdkVersion 23
         targetSdkVersion 27
         versionCode versionMajor * 100 + versionMinor * 10 + versionBuild

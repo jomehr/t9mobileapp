@@ -1,4 +1,4 @@
-package com.example.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp;
 
 /**
  * Created by Christopher on 11.12.2017.

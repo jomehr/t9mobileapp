@@ -1,4 +1,4 @@
-package com.example.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
