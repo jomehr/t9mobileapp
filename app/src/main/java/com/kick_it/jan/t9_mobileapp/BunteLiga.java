@@ -2,7 +2,6 @@ package com.kick_it.jan.t9_mobileapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,8 +25,32 @@ public class BunteLiga extends AppCompatActivity {
         getSupportActionBar().setTitle("Bunte Liga");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        RelativeLayout team_btn = findViewById(R.id.team_btn);
-
+        //Clicklistener links to activity News
+        RelativeLayout news_btn = findViewById(R.id.newsContainer);
+        news_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BunteLiga.this, LeagueNews.class));
+            }
+        });
+        //Clicklistener links to Fragment Teamsearch
+        RelativeLayout teamsearch_btn = findViewById(R.id.searchTeamContainer);
+        teamsearch_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BunteLiga.this, SearchTab2Teamsearch.class));
+            }
+        });
+        //Clicklistener links to activity Tables
+        RelativeLayout tables_btn = findViewById(R.id.tableContainer);
+        tables_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BunteLiga.this, LeagueTables.class));
+            }
+        });
+        //Clicklistener links to activity Team
+        RelativeLayout team_btn = findViewById(R.id.teamContainer);
         team_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

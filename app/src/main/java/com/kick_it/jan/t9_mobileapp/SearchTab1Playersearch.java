@@ -25,7 +25,7 @@ public class SearchTab1Playersearch extends Fragment{
             "Simon Mertens",
             "Maximilian Storr",
             "Taras Zaika",
-            "Tarek Al Ashi",};
+            "Tarek Al Ashi"};
     /*
         Hardcoded picture paths, should get names from the Database and and them before building the layout
      */

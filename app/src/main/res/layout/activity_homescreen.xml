@@ -10,7 +10,7 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
-        app:layout_constraintBottom_toTopOf="@+id/banner_btn1"
+        app:layout_constraintBottom_toTopOf="@+id/newsContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +26,7 @@
         android:scaleType="centerCrop"/>
 
     <RelativeLayout
-        android:id="@+id/banner_btn1"
+        android:id="@+id/newsContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginEnd="16dp"
@@ -38,7 +38,7 @@
         android:clickable="true" android:focusable="true">
 
         <ImageView
-            android:id="@+id/banner_image1"
+            android:id="@+id/banner_img2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/banner_find_game"
@@ -64,7 +64,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/banner_btn2"
+        android:id="@+id/searchTeamContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginEnd="16dp"
@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner_btn1" android:focusable="true">
+        app:layout_constraintTop_toBottomOf="@+id/newsContainer" android:focusable="true">
 
         <ImageView
             android:id="@+id/banner_image2"
@@ -104,7 +104,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/banner_btn3"
+        android:id="@+id/tableContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginEnd="16dp"
@@ -114,7 +114,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner_btn2" android:focusable="true">
+        app:layout_constraintTop_toBottomOf="@+id/searchTeamContainer" android:focusable="true">
 
         <ImageView
             android:id="@+id/banner_image3"

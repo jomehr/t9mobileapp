@@ -22,7 +22,7 @@ public class Homescreen extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.app_name);
 
         //Listener für "click" auf Banner1
-        RelativeLayout banner1 = findViewById(R.id.banner_btn1);
+        RelativeLayout banner1 = findViewById(R.id.newsContainer);
         banner1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,7 +30,7 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
-        RelativeLayout banner2 = findViewById(R.id.banner_btn2);
+        RelativeLayout banner2 = findViewById(R.id.searchTeamContainer);
         banner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +38,7 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
-        RelativeLayout banner3 = findViewById(R.id.banner_btn3);
+        RelativeLayout banner3 = findViewById(R.id.tableContainer);
         banner3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

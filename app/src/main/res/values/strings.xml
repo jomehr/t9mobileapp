@@ -21,6 +21,7 @@
     <string name="abouttheteam">Über das Team</string>
     <string name="playersearch">Spieler</string>
     <string name="teamsearch">Teams</string>
+    <string name="search_teams">Teams suchen</string>
     <string name="find_a_game">Finde ein Spiel</string>
     <string name="create_a_game">Erstelle ein Spiel</string>
     <string name="create">Erstellen</string>
@@ -33,6 +34,8 @@
     <string name="setDateAndTime">Datum und Uhrzeit</string>
     <string name="contentDescriptionRoster">Aufstellung</string>
     <string name="description">Beschreibung</string>
+
+    <string name="team_tabels">Tabellen</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
