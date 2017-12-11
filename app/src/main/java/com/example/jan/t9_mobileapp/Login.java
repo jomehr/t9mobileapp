@@ -33,13 +33,9 @@ public class Login extends AppCompatActivity {
         edit_email = (EditText)findViewById(R.id.login_inputEmail);
         edit_password = (EditText)findViewById(R.id.login_inputPassword);
 
-        String email = edit_email.getText().toString();
-        String password = edit_password.getText().toString();
-
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ezLogin();
                 login();
             }
         });
@@ -52,16 +48,6 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public void ezLogin() {
-        if(edit_email.getText().toString().equals("admin") && edit_password.getText().toString().equals("admin")) {
-            Toast.makeText(getApplicationContext(), "Login...",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(), Homescreen.class));
-            finish();
-        }else{
-            onLoginFailed();
-        }
-    }
-
     public void login() {
 
         if (!validate()) {
@@ -69,7 +55,7 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        sharedPreferences = getSharedPreferences(PREFER_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(PREFER_NAME, 0);
         String email = edit_email.getText().toString();
         String password = edit_password.getText().toString();
 
@@ -77,10 +63,10 @@ public class Login extends AppCompatActivity {
         String prefPw = null;
 
         if (sharedPreferences.contains("Email")) {
-            prefEmail = sharedPreferences.getString("Email", "");
+            prefEmail = sharedPreferences.getString("Email", null);
         }
         if (sharedPreferences.contains("Passwort")) {
-            prefPw = sharedPreferences.getString("Passwort", "");
+            prefPw = sharedPreferences.getString("Passwort", null);
         }
         if (email.equals(prefEmail) && password.equals(prefPw)) {
             startActivity(new Intent(getApplicationContext(), Homescreen.class));

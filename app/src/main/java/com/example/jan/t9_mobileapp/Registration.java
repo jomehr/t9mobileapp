@@ -58,24 +58,24 @@ public class Registration extends AppCompatActivity{
             return;
         }
 
-        sharedPreferences = getApplicationContext().getSharedPreferences(PREFER_NAME,0);
+        sharedPreferences = getSharedPreferences(PREFER_NAME,0);
         editor = sharedPreferences.edit();
 
         String email = edit_email.getText().toString();
         String name = edit_name.getText().toString();
         String password = edit_password.getText().toString();
 
-        if (sharedPreferences.contains("Email")){
-            String curMail = sharedPreferences.getString("Email", "");
-            if (curMail.equals(email)){
-                Toast.makeText(getApplicationContext(), "Account existiert bereits",Toast.LENGTH_SHORT).show();
-            }
+        String curMail = sharedPreferences.getString("Email", null);
+
+        if (sharedPreferences.contains("Email") && curMail.equals(email)){
+            Toast.makeText(getApplicationContext(), "Account existiert bereits",Toast.LENGTH_SHORT).show();
         }else {
-            editor.clear().commit();
+            //editor.clear().commit();
             editor.putString("Email", email);
             editor.putString("Name", name);
             editor.putString("Passwort", password);
             editor.commit();
+            Toast.makeText(getApplicationContext(), "Daten bearbeitet",Toast.LENGTH_SHORT).show();
 
             startActivity(new Intent(Registration.this, Login.class));
             finish();

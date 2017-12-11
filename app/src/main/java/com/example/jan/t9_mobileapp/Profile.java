@@ -2,6 +2,7 @@ package com.example.jan.t9_mobileapp;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
@@ -29,25 +32,36 @@ import android.widget.ImageView;
 
 public class Profile extends AppCompatActivity {
 
+    private static final String PREFER_NAME = "Registration";
+    private SharedPreferences sharedPreferences;
+
     private static int RESULT_LOAD_IMAGE = 1;
     private static final int PERMISSION_REQUEST_STORAGE = 0;
-    private View mLayout;
+    private View coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        mLayout =  findViewById(R.id.profile_coordinatorLayout);
 
+        sharedPreferences = getSharedPreferences(PREFER_NAME, 0);
+        String profileName = sharedPreferences.getString("Name", null);
+
+        coordinatorLayout =  (CoordinatorLayout) findViewById(R.id.profile_coordinatorLayout);
         final Toolbar myToolbar = findViewById(R.id.profile_collapsingStaticToolbar);
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.profile_collapsingToolbar);
         AppBarLayout appBar = (AppBarLayout)findViewById(R.id.profile_collapsingToolbarLayout);
+        final View optionalData = (View) findViewById(R.id.profile_infoOptional);
+        FloatingActionButton editBtn = (FloatingActionButton) findViewById(R.id.profile_editBtn);
+        ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
 
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Profil");
+        getSupportActionBar().setTitle(profileName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
+
+        optionalData.setVisibility(View.GONE);
 
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -62,10 +76,17 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
+        editBtn.setOnClickListener(new FloatingActionButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(coordinatorLayout,"Dieses Feature ist noch in Bearbeitung", Snackbar.LENGTH_SHORT).show();
+                optionalData.setVisibility(View.VISIBLE);
+            }
+        });
+
         profilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(android.view.View view) {
+            public void onClick(View view) {
                 loadProfilePicture();
             }
         });
@@ -131,7 +152,7 @@ public class Profile extends AppCompatActivity {
             // Provide an additional rationale to the user if the permission was not granted
             // and the user would benefit from additional context for the use of the permission.
             // Display a SnackBar with a button to request the missing permission.
-            Snackbar.make(mLayout, "Camera access is required to display the camera preview.",
+            Snackbar.make(coordinatorLayout, "Speicherzugang wird benötigt um auf Bilder zugreifen zu können",
                     Snackbar.LENGTH_INDEFINITE).setAction("OK", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -143,8 +164,8 @@ public class Profile extends AppCompatActivity {
             }).show();
 
         } else {
-            Snackbar.make(mLayout,
-                    "Permission is not available. Requesting camera permission.",
+            Snackbar.make(coordinatorLayout,
+                    "Speicherzugang nicht vorhanden. Zugang freigeben?",
                     Snackbar.LENGTH_SHORT).show();
             // Request the permission. The result will be received in onRequestPermissionResult().
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
