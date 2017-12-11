@@ -42,7 +42,7 @@ public class TeamTab1Roster extends Fragment{
 
         CustomList adapter = new
                 CustomList(getActivity(), playernames, imageId);
-        list=(ListView)rootView.findViewById(R.id.listView1);
+        list = rootView.findViewById(R.id.listView1);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

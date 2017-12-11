@@ -34,7 +34,7 @@ public class Team extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         final TabLayout tabLayout = findViewById(R.id.tabs);
@@ -104,14 +104,13 @@ public class Team extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_search:
-                startActivity(new Intent(Team.this, Search.class));
+                startActivity(new Intent(this, Search.class));
                 return true;
             case R.id.action_profile:
-                startActivity(new Intent(Team.this, Profile.class));
+                startActivity(new Intent(this, Profile.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
