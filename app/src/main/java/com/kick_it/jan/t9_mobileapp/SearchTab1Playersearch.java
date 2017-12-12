@@ -39,7 +39,7 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
         for (int i = 0; i < 20; i++) {
             strings.add(String.valueOf(i));
         }
-        strings.add("11");
+        strings.add("12");
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);
 
 
