@@ -1,6 +1,6 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.Interfaces;
 
-/**
+/*
  * Created by Christopher on 12.12.2017.
  */
 

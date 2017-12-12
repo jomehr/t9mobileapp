@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kick_it.jan.t9_mobileapp.BunteLiga">
+    tools:context="com.kick_it.jan.t9_mobileapp.Activities.BunteLiga">
 
     <include
         android:id="@+id/toolbar"
@@ -182,7 +182,7 @@
             android:padding="4dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:text="Dein Team"
+            android:text="@string/your_team"
             android:textAlignment="gravity"
             android:textAllCaps="true"
             android:textColor="@android:color/white"

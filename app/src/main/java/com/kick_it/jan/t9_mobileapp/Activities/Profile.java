@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.Activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -25,7 +25,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-/**
+import com.kick_it.jan.t9_mobileapp.R;
+
+/*
  * Created by Jan on 13.11.2017.
  */
 

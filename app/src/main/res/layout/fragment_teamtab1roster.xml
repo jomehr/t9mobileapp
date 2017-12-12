@@ -6,7 +6,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context="com.kick_it.jan.t9_mobileapp.Team">
+    tools:context="com.kick_it.jan.t9_mobileapp.Activities.Team">
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"

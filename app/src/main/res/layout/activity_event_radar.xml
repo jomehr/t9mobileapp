@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kick_it.jan.t9_mobileapp.EventRadar">
+    tools:context="com.kick_it.jan.t9_mobileapp.Activities.EventRadar">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.kick_it.jan.t9_mobileapp.EventRadar" />
+                tools:context="com.kick_it.jan.t9_mobileapp.Activities.EventRadar" />
 
             <ImageButton
                 android:id="@+id/btnAdd"

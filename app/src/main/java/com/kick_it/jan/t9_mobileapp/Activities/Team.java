@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.kick_it.jan.t9_mobileapp.R;
+import com.kick_it.jan.t9_mobileapp.fragments.TeamTab1Roster;
+import com.kick_it.jan.t9_mobileapp.fragments.TeamTab2Profile;
+import com.kick_it.jan.t9_mobileapp.fragments.TeamTab3Chat;
 
 /*
  * Created by Christopher on 13.11.2017.
@@ -67,14 +72,11 @@ public class Team extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch(position){
                 case 0:
-                    TeamTab1Roster tab1 = new TeamTab1Roster();
-                    return tab1;
+                    return new TeamTab1Roster();
                 case 1:
-                    TeamTab2Profile tab2 = new TeamTab2Profile();
-                    return tab2;
+                    return new TeamTab2Profile();
                 case 2:
-                    TeamTab3Chat tab3 = new TeamTab3Chat();
-                    return tab3;
+                    return new TeamTab3Chat();
                 default:
                     return null;
             }

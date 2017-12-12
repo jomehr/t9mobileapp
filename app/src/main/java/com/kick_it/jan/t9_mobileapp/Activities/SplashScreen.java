@@ -1,9 +1,11 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.Activities;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.kick_it.jan.t9_mobileapp.R;
 
 public class SplashScreen extends AppCompatActivity {
     private static int welcome = 1500;

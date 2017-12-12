@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.Activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -30,10 +30,11 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+import com.kick_it.jan.t9_mobileapp.R;
 
 import java.util.Calendar;
 
-/**
+/*
  * Created by Taras on 20.11.2017.
  */
 
@@ -265,8 +266,9 @@ public class CreateEvent extends AppCompatActivity implements
             creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
 
         //TextView füllen
-        eventDateAndTimeText.setText("Datum: "+ dayFinal + "."+ monthFinal + "." + yearFinal
-                + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal));
+        String dateAndTimeText = "Datum: "+ dayFinal + "."+ monthFinal + "." + yearFinal
+                + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal);
+        eventDateAndTimeText.setText(dateAndTimeText);
 
     }
 

@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.RelativeLayout;
+
+import com.kick_it.jan.t9_mobileapp.R;
 
 public class Homescreen extends AppCompatActivity {
 
