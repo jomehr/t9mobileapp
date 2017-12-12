@@ -50,7 +50,7 @@ public class TeamTab1Roster extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                //Test notification on click , can be commented out after debugging
+                //Test notification on click , can be commented out after debugging.
                 Toast.makeText(getActivity(), "You Clicked at " +playernames[+ position], Toast.LENGTH_SHORT).show();
                 //links to the player profile
                 startActivity(new Intent(getActivity(), Profile.class));
