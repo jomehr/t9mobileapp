@@ -46,13 +46,13 @@ public class Profile extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(PREFER_NAME, 0);
         String profileName = sharedPreferences.getString("Name", null);
 
-        coordinatorLayout =  (CoordinatorLayout) findViewById(R.id.profile_coordinatorLayout);
+        coordinatorLayout =   findViewById(R.id.profile_coordinatorLayout);
         final Toolbar myToolbar = findViewById(R.id.profile_collapsingStaticToolbar);
-        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.profile_collapsingToolbar);
-        AppBarLayout appBar = (AppBarLayout)findViewById(R.id.profile_collapsingToolbarLayout);
-        final View optionalData = (View) findViewById(R.id.profile_infoOptional);
-        FloatingActionButton editBtn = (FloatingActionButton) findViewById(R.id.profile_editBtn);
-        ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
+        final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.profile_collapsingToolbar);
+        AppBarLayout appBar = findViewById(R.id.profile_collapsingToolbarLayout);
+        final View optionalData =  findViewById(R.id.profile_infoOptional);
+        FloatingActionButton editBtn = findViewById(R.id.profile_editBtn);
+        ImageView profilePicture =  findViewById(R.id.profile_picture);
 
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle(profileName);
@@ -124,7 +124,7 @@ public class Profile extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView new_profilPicture = (ImageView) findViewById(R.id.profile_picture);
+            ImageView new_profilPicture = findViewById(R.id.profile_picture);
             new_profilPicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
         }

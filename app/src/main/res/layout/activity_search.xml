@@ -1,64 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/team"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.kick_it.jan.t9_mobileapp.Search">
-
-    <ImageView
-        android:id="@+id/backgroundimageview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/screen_background3"
-        android:scaleType="centerCrop"/>
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/appbar_padding_top">
-
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
-            app:layout_constraintBottom_toTopOf="@+id/newsContainer"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/playersearch" />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/teamsearch" />
-        </android.support.design.widget.TabLayout>
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-</android.support.design.widget.CoordinatorLayout>
--->
-
 <LinearLayout
     android:id="@+id/main_layout"
     android:orientation="vertical"
@@ -70,14 +10,12 @@
     tools:context=".Search">
 
     <!-- our toolbar -->
-    <android.support.v7.widget.Toolbar
+    <include
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        layout="@layout/toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- our tablayout to display tabs  -->
     <android.support.design.widget.TabLayout

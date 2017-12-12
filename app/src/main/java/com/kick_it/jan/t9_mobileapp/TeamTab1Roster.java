@@ -25,7 +25,7 @@ public class TeamTab1Roster extends Fragment{
             "Simon Mertens",
             "Maximilian Storr",
             "Taras Zaika",
-            "Tarek Al Ashi",};
+            "Tarek Al Ashi"};
     /*
          Hardcoded picture paths, should get names from the Database before building the layout
     */
@@ -42,8 +42,7 @@ public class TeamTab1Roster extends Fragment{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_teamtab1roster, container, false);
 
-        CustomList adapter = new
-                CustomList(getActivity(), playernames, imageId);
+        CustomList adapter = new CustomList(getActivity(), playernames, imageId);
         list = rootView.findViewById(R.id.listView1);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -55,54 +54,8 @@ public class TeamTab1Roster extends Fragment{
                 Toast.makeText(getActivity(), "You Clicked at " +playernames[+ position], Toast.LENGTH_SHORT).show();
                 //links to the player profile
                 startActivity(new Intent(getActivity(), Profile.class));
-
             }
         });
-
-        // Für die statische Seite, kann später gelöscht werden.
-        /*
-        //Listener für "click" auf den ersten Spieler von oben in der Teamaufstellung
-        LinearLayout toProfile1 = (LinearLayout) rootView.findViewById(R.id.spielercontainer);
-        toProfile1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), Profile.class));
-            }
-        });
-
-        //Listener für "click" auf den ersten Spieler von oben in der Teamaufstellung
-        LinearLayout toProfile2 = (LinearLayout) rootView.findViewById(R.id.spielercontainer2);
-        toProfile2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), Profile.class));
-            }
-        });
-        //Listener für "click" auf den ersten Spieler von oben in der Teamaufstellung
-        LinearLayout toProfile3 = (LinearLayout) rootView.findViewById(R.id.spielercontainer3);
-        toProfile3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), Profile.class));
-            }
-        });
-        //Listener für "click" auf den ersten Spieler von oben in der Teamaufstellung
-        LinearLayout toProfile4 = (LinearLayout) rootView.findViewById(R.id.spielercontainer4);
-        toProfile4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), Profile.class));
-            }
-        });
-        //Listener für "click" auf den ersten Spieler von oben in der Teamaufstellung
-        LinearLayout toProfile5 = (LinearLayout) rootView.findViewById(R.id.spielercontainer5);
-        toProfile5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), Profile.class));
-            }
-        });
-        */
         return rootView;
     }
 }

@@ -29,11 +29,11 @@ public class Registration extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        btn_register = (Button)findViewById(R.id.register_registerBtn);
-        btn_login = (TextView) findViewById(R.id.register_loginBtn);
-        edit_email = (EditText)findViewById(R.id.register_inputEmail);
-        edit_name = (EditText)findViewById(R.id.register_inputName);
-        edit_password = (EditText)findViewById(R.id.register_inputPassword);
+        btn_register = findViewById(R.id.register_registerBtn);
+        btn_login =  findViewById(R.id.register_loginBtn);
+        edit_email = findViewById(R.id.register_inputEmail);
+        edit_name = findViewById(R.id.register_inputName);
+        edit_password = findViewById(R.id.register_inputPassword);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override

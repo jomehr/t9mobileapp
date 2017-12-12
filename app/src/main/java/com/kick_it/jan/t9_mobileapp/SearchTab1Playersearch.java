@@ -20,6 +20,7 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
     private static final String ARG_SEARCHTERM = "search_term";
     private String mSearchTerm = null;
 
+
     ArrayList<String> strings = null;
     private IFragmentListener mIFragmentListener = null;
     ArrayAdapter<String> arrayAdapter = null;
@@ -36,14 +37,29 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
         // CREATE THE ARRAYLIST
         strings = new ArrayList<>();
         // FILL THE ARRAYLIST
-        for (int i = 0; i < 20; i++) {
-            strings.add(String.valueOf(i));
-        }
-        strings.add("12");
+            strings.add("Jan Mehr");
+            strings.add("Christopher Huntscha");
+            strings.add("Simon Mertens");
+            strings.add("Maximilian Storr");
+            strings.add("Taras Zaika");
+            strings.add("Tarek Al Ashi");
+
+        //copy arraylist to an array for the CostumArrayList
+        String list2[] = new String[strings.size()];
+        list2 = strings.toArray(list2);
+
+        Integer[] imageId = {
+                R.drawable.ic_person_black_72dp,
+                R.drawable.ic_person_black_72dp,
+                R.drawable.ic_person_black_72dp,
+                R.drawable.ic_person_black_72dp,
+                R.drawable.ic_person_black_72dp,
+                R.drawable.ic_person_black_72dp};
+
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);
 
-
-        listView.setAdapter(arrayAdapter);
+        CustomList adapter = new CustomList(getActivity(), list2, imageId);
+        listView.setAdapter(adapter);
         Search mainActivity = (Search) getActivity();
         mainActivity.getDataFromFragment_one(strings);
         if (getArguments() != null) {

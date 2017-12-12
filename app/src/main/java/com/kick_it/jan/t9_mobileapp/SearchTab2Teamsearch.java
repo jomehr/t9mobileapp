@@ -36,10 +36,17 @@ public class SearchTab2Teamsearch extends Fragment implements ISearch {
         // CREATE THE ARRAYLIST
         strings = new ArrayList<>();
         // FILL THE ARRAYLIST
-        for (int i = 19; i < 39; i++) {
-            strings.add(String.valueOf(i));
-        }
-        strings.add("12");
+        strings.add("Krampfadergeschwader");
+        strings.add("Kebab Connection");
+        strings.add("Chronisch Überhopft");
+        strings.add("Gardoffelsalaad");
+        strings.add("Die glorreichen 7");
+        strings.add("3sporty5us");
+        strings.add("Die Streetfighters");
+        strings.add("Babos ohne Namen");
+        strings.add("6 richtige plus Superzahl");
+        strings.add("Kenias allerletzte Reserve");
+
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);
 
 
