@@ -1,5 +1,6 @@
 package com.kick_it.jan.t9_mobileapp;
 
+/*
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,12 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+*/
 
-
-/**
+/*
  * Created by Tarek on 17.11.2017.
  */
-
+/*
 public class Search extends AppCompatActivity{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -51,10 +52,14 @@ public class Search extends AppCompatActivity{
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-    /**
+    */
+
+    /*
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+
+    /*
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private SectionsPagerAdapter(FragmentManager fm) {
@@ -106,5 +111,134 @@ public class Search extends AppCompatActivity{
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+}*/
+
+import android.app.SearchManager;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import java.util.ArrayList;
+
+public class Search extends AppCompatActivity implements TabLayout.OnTabSelectedListener, SearchView.OnQueryTextListener, IFragmentListener {
+
+    //This is our tablayout
+    private TabLayout tabLayout;
+
+    //This is our viewPager
+    private ViewPager viewPager;
+
+    ArrayList<ISearch> iSearch = new ArrayList<>();
+    private MenuItem searchMenuItem;
+    private String newText;
+    private PageAdapter adapter;
+    ArrayList<String> listData = null;
+
+    IDataCallback iDataCallback = null;
+
+    public void setiDataCallback(IDataCallback iDataCallback) {
+        this.iDataCallback = iDataCallback;
+        iDataCallback.onFragmentCreated(listData);
+    }
+
+    @Override
+    public void addiSearch(ISearch iSearch) {
+        this.iSearch.add(iSearch);
+    }
+
+    @Override
+    public void removeISearch(ISearch iSearch) {
+        this.iSearch.remove(iSearch);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search);
+
+        //Adding toolbar to the activity
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        listData = new ArrayList<>();
+        //Initializing the tablayout
+        tabLayout = findViewById(R.id.tabLayout);
+
+        //Adding the tabs using addTab() method
+        tabLayout.addTab(tabLayout.newTab().setText("Spieler"));
+        tabLayout.addTab(tabLayout.newTab().setText("Teams"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        //Initializing viewPager
+        viewPager =  findViewById(R.id.pager);
+
+        //Creating our pager adapter
+        adapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), newText);
+
+        //Adding adapter to pager
+        viewPager.setAdapter(adapter);
+
+        //Adding onTabSelectedListener to swipe views
+        tabLayout.setOnTabSelectedListener(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        //ersetzen durch unsere appbar
+        inflater.inflate(R.menu.menu, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchMenuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchMenuItem.getActionView();
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(this);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+
+    public void getDataFromFragment_one(ArrayList<String> listData) {
+        this.listData = listData;
+        Log.e("-->", "" + listData.toString());
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        this.newText = newText;
+        adapter.setTextQueryChanged(newText);
+
+        for (ISearch iSearchLocal : this.iSearch)
+            iSearchLocal.onTextQuery(newText);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
     }
 }
