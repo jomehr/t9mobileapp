@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.activities;
 
 /*
 import android.content.Intent;
@@ -126,6 +126,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.kick_it.jan.t9_mobileapp.interfaces.IDataCallback;
+import com.kick_it.jan.t9_mobileapp.interfaces.IFragmentListener;
+import com.kick_it.jan.t9_mobileapp.interfaces.ISearch;
+import com.kick_it.jan.t9_mobileapp.PageAdapter;
+import com.kick_it.jan.t9_mobileapp.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,11 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import android.widget.ListView;
 
-/**
+import com.kick_it.jan.t9_mobileapp.activities.Profile;
+import com.kick_it.jan.t9_mobileapp.CustomList;
+import com.kick_it.jan.t9_mobileapp.R;
+
+/*
  * Created by Christopher on 20.11.2017.
  */
 

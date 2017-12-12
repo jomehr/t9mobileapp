@@ -6,7 +6,7 @@
     android:id="@+id/team"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kick_it.jan.t9_mobileapp.Search">
+    tools:contecom.kick_it.jan.t9_mobileactivitiesties.Searcharch">
 
     <ImageView
         android:id="@+id/backgroundimageview"
@@ -67,7 +67,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Search">
+    tools:context=".activities.Search">
 
     <!-- our toolbar -->
     <android.support.v7.widget.Toolbar

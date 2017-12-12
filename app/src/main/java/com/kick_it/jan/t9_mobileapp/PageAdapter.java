@@ -1,6 +1,6 @@
 package com.kick_it.jan.t9_mobileapp;
 
-/**
+/*
  * Created by Christopher on 12.12.2017.
  */
 
@@ -8,11 +8,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.kick_it.jan.t9_mobileapp.fragments.SearchTab1Playersearch;
+import com.kick_it.jan.t9_mobileapp.fragments.SearchTab2Teamsearch;
+
 public class PageAdapter extends FragmentStatePagerAdapter {
 
     private String mSearchTerm;
+
     //integer to count number of tabs
-    int tabCount;
+    private int tabCount;
 
     //Constructor to the class
     public PageAdapter(FragmentManager fm, int tabCount, String searchTerm) {
@@ -28,11 +32,9 @@ public class PageAdapter extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                SearchTab1Playersearch tab1 = SearchTab1Playersearch.newInstance(mSearchTerm);
-                return tab1;
+                return SearchTab1Playersearch.newInstance(mSearchTerm);
             case 1:
-                SearchTab2Teamsearch tab2 = SearchTab2Teamsearch.newInstance(mSearchTerm);
-                return tab2;
+                return SearchTab2Teamsearch.newInstance(mSearchTerm);
             default:
                 return null;
         }

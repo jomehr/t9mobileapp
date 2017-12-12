@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
+import com.kick_it.jan.t9_mobileapp.R;
+
+/*
  * Created by Jan on 10.12.2017.
  */
 
@@ -68,7 +70,7 @@ public class Registration extends AppCompatActivity{
 
         if (sharedPreferences.contains("Email") && curMail.equals(email)){
             Toast.makeText(getApplicationContext(), "Account existiert bereits",Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             //editor.clear().commit();
             editor.putString("Email", email);
             editor.putString("Name", name);
