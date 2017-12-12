@@ -88,17 +88,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.kick_it.jan.t9_mobileapp.Registration">
-            android:screenOrientation="portrait"
-        </activity>
-        <activity android:name="com.kick_it.jan.t9_mobileapp.SplashScreen">
-            android:screenOrientation="portrait"
-        </activity>
-        <activity android:name="com.kick_it.jan.t9_mobileapp.LeagueNews">
-            android:screenOrientation="portrait"
-        </activity>
-        <activity android:name="com.kick_it.jan.t9_mobileapp.LeagueTables">
-            android:screenOrientation="portrait"
-        </activity>
+        <activity android:name="com.kick_it.jan.t9_mobileapp.Registration" android:screenOrientation="portrait" />
+        <activity android:name="com.kick_it.jan.t9_mobileapp.SplashScreen" android:screenOrientation="portrait"/>
+        <activity android:name="com.kick_it.jan.t9_mobileapp.LeagueNews" android:screenOrientation="portrait"/>
+        <activity android:name="com.kick_it.jan.t9_mobileapp.LeagueTables" android:screenOrientation="portrait"/>
     </application>
 </manifest>
