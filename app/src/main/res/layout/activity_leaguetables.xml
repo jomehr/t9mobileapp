@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context="com.kick_it.jan.t9_mobileapp.LeagueTables">
 
+    <ImageView
+        android:id="@+id/backgroundimageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/screen_background3"
+        android:scaleType="centerCrop"/>
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
@@ -14,10 +25,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:text="TABELLEN" />
+    <RelativeLayout
+        android:background="@drawable/border_shadow"
+        android:id="@+id/newsContainer"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:clickable="true" android:focusable="true">
+
+        <ImageView
+            android:id="@+id/banner_img2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/banner_find_game"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/banner_text1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorPrimaryOpacity"
+            android:gravity="bottom|left"
+            android:padding="4dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:text="@string/leaguetabels"
+            android:textAlignment="gravity"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

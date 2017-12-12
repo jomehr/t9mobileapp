@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/backgroundimageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,6 +26,7 @@
         android:scaleType="centerCrop"/>
 
     <RelativeLayout
+        android:background="@drawable/border_shadow"
         android:id="@+id/newsContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
@@ -64,6 +65,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@drawable/border_shadow"
         android:id="@+id/searchTeamContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
@@ -104,6 +106,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@drawable/border_shadow"
         android:id="@+id/tableContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
@@ -145,6 +148,7 @@
 
     <!--
     <RelativeLayout
+        android:background="@drawable/border_shadow"
         android:id="@+id/banner_btn4"
         android:layout_width="0dp"
         android:layout_height="100dp"

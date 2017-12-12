@@ -6,7 +6,7 @@
     <string name="home_searchplayer">Spieler</string>
     <string name="home_searchteam">Teams</string>
     <string name="home_eventradar">Events</string>
-    <string name="home_league">Liga</string>
+    <string name="league">Liga</string>
     <string name="title_homescreen">Kick It</string>
     <string name="action_logout">Abmelden</string>
     <string name="action_faq">FAQ</string>
@@ -44,4 +44,6 @@
     <string name="teamname">Die Streetfoodballer</string>
     <string name="teamplayercount">Spieleranzahl: 5/5</string>
     <string name="teamestablishment">Gegründet am 12.12.2005</string>
+    <string name="leaguenews">News</string>
+    <string name="leaguetabels">Tabellen</string>
 </resources>

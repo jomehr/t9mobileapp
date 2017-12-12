@@ -31,9 +31,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.kick_it.jan.t9_mobileapp.Homescreen">
-        </activity>
+        <activity android:name="com.kick_it.jan.t9_mobileapp.Homescreen"
+                 android:screenOrientation="portrait"></activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.kick_it.jan.t9_mobileapp.Profile"
             android:parentActivityName="com.kick_it.jan.t9_mobileapp.Homescreen">
             <meta-data
@@ -41,6 +42,7 @@
                 android:value="com.kick_it.jan.t9_mobileapp.Homescreen" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.kick_it.jan.t9_mobileapp.Team"
             android:parentActivityName="com.kick_it.jan.t9_mobileapp.BunteLiga">
             <meta-data
@@ -48,6 +50,7 @@
                 android:value="com.kick_it.jan.t9_mobileapp.BunteLiga" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.kick_it.jan.t9_mobileapp.EventRadar"
             android:parentActivityName="com.kick_it.jan.t9_mobileapp.Homescreen">
             <meta-data
@@ -55,6 +58,7 @@
                 android:value="com.kick_it.jan.t9_mobileapp.Homescreen" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.kick_it.jan.t9_mobileapp.BunteLiga"
             android:parentActivityName="com.kick_it.jan.t9_mobileapp.Homescreen">
             <meta-data
@@ -62,6 +66,7 @@
                 android:value="com.kick_it.jan.t9_mobileapp.Homescreen" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.kick_it.jan.t9_mobileapp.Search"
             android:parentActivityName="com.kick_it.jan.t9_mobileapp.Homescreen">
             <meta-data
@@ -69,25 +74,31 @@
                 android:value="com.kick_it.jan.t9_mobileapp.Homescreen" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.kick_it.jan.t9_mobileapp.CreateEvent"
             android:parentActivityName="com.kick_it.jan.t9_mobileapp.EventRadar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kick_it.jan.t9_mobileapp.EventRadar" />
         </activity>
-        <activity android:name="com.kick_it.jan.t9_mobileapp.Login">
+        <activity android:name="com.kick_it.jan.t9_mobileapp.Login"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.kick_it.jan.t9_mobileapp.Registration">
+            android:screenOrientation="portrait"
         </activity>
         <activity android:name="com.kick_it.jan.t9_mobileapp.SplashScreen">
+            android:screenOrientation="portrait"
         </activity>
         <activity android:name="com.kick_it.jan.t9_mobileapp.LeagueNews">
+            android:screenOrientation="portrait"
         </activity>
         <activity android:name="com.kick_it.jan.t9_mobileapp.LeagueTables">
+            android:screenOrientation="portrait"
         </activity>
     </application>
 </manifest>

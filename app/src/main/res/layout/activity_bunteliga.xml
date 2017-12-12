@@ -14,8 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <!--<ImageView
+        android:id="@+id/backgroundimageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,9 +23,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/screen_background3"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"/>-->
 
     <RelativeLayout
+        android:background="@drawable/border_shadow"
         android:id="@+id/newsContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
@@ -35,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:clickable="true" android:focusable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <ImageView
             android:id="@+id/banner_img2"
@@ -56,7 +58,7 @@
             android:padding="4dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:text="News"
+            android:text="@string/leaguenews"
             android:textAlignment="gravity"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
@@ -64,6 +66,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@drawable/border_shadow"
         android:id="@+id/searchTeamContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
@@ -105,6 +108,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@drawable/border_shadow"
         android:id="@+id/tableContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
@@ -145,6 +149,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@drawable/border_shadow"
         android:id="@+id/teamContainer"
         android:layout_width="0dp"
         android:layout_height="100dp"
