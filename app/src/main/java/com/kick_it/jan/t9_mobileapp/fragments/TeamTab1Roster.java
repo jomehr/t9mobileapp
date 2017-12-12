@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import android.widget.ListView;
 
-import com.kick_it.jan.t9_mobileapp.activities.Profile;
+import com.kick_it.jan.t9_mobileapp.Activities.Profile;
 import com.kick_it.jan.t9_mobileapp.CustomList;
 import com.kick_it.jan.t9_mobileapp.R;
 

@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp.activities;
+package com.kick_it.jan.t9_mobileapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,16 +13,16 @@ import com.kick_it.jan.t9_mobileapp.R;
  * Created by Christopher on 11.12.2017.
  */
 
-public class LeagueTables extends AppCompatActivity {
+public class LeagueNews extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leaguetables);
+        setContentView(R.layout.activity_leaguenews);
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Tabellen");
+        getSupportActionBar().setTitle("News");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
