@@ -114,73 +114,131 @@ public class Search extends AppCompatActivity{
     }
 }*/
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class Search extends AppCompatActivity{
-    private Fragment fragment = null;
-    private FragmentManager fragmentManager;
+import java.util.ArrayList;
+
+public class Search extends AppCompatActivity implements TabLayout.OnTabSelectedListener, SearchView.OnQueryTextListener, IFragmentListener {
+
+    //This is our tablayout
+    private TabLayout tabLayout;
+
+    //This is our viewPager
+    private ViewPager viewPager;
+
+    ArrayList<ISearch> iSearch = new ArrayList<>();
+    private MenuItem searchMenuItem;
+    private String newText;
+    private PageAdapter adapter;
+    ArrayList<String> listData = null;
+
+    IDataCallback iDataCallback = null;
+
+    public void setiDataCallback(IDataCallback iDataCallback) {
+        this.iDataCallback = iDataCallback;
+        iDataCallback.onFragmentCreated(listData);
+    }
+
+    @Override
+    public void addiSearch(ISearch iSearch) {
+        this.iSearch.add(iSearch);
+    }
+
+    @Override
+    public void removeISearch(ISearch iSearch) {
+        this.iSearch.remove(iSearch);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        //Adding toolbar to the activity
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        listData = new ArrayList<>();
+        //Initializing the tablayout
+        tabLayout = findViewById(R.id.tabLayout);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        //Adding the tabs using addTab() method
+        tabLayout.addTab(tabLayout.newTab().setText("Spieler"));
+        tabLayout.addTab(tabLayout.newTab().setText("Teams"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        displayView(0); // call search fragment.
+        //Initializing viewPager
+        viewPager =  findViewById(R.id.pager);
+
+        //Creating our pager adapter
+        adapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), newText);
+
+        //Adding adapter to pager
+        viewPager.setAdapter(adapter);
+
+        //Adding onTabSelectedListener to swipe views
+        tabLayout.setOnTabSelectedListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        // getMenuInflater().inflate(R.menu.main, menu);
+        MenuInflater inflater = getMenuInflater();
+        //ersetzen durch unsere appbar
+        inflater.inflate(R.menu.menu, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchMenuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchMenuItem.getActionView();
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(this);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+
+    public void getDataFromFragment_one(ArrayList<String> listData) {
+        this.listData = listData;
+        Log.e("-->", "" + listData.toString());
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        this.newText = newText;
+        adapter.setTextQueryChanged(newText);
+
+        for (ISearch iSearchLocal : this.iSearch)
+            iSearchLocal.onTextQuery(newText);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void displayView(int position) {
-        fragment = null;
-        String fragmentTags = "";
-        switch (position) {
-            case 0:
-                fragment = new SearchFragment();
-                break;
-
-            default:
-                break;
-        }
-
-        if (fragment != null) {
-            fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, fragmentTags).commit();
-        }
+    public boolean onQueryTextSubmit(String query) {
+        return false;
     }
 }

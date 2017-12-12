@@ -1,65 +1,95 @@
 package com.kick_it.jan.t9_mobileapp;
 
-import android.content.Intent;
+/**
+ * Created by Christopher on 20.11.2017.
+ */
+
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-/**
- * Created by Christopher on 11.12.2017.
- * Edited by Tarek
- */
+import java.util.ArrayList;
 
-public class SearchTab2Teamsearch extends Fragment{
-    ListView list;
-    /*
-        Hardcoded names, should get names from the Database before building the layout
-     */
-    String[] teamnames = {
-            "Jan Mehr",
-            "Christopher Huntscha",
-            "Simon Mertens",
-            "Maximilian Storr",
-            "Taras Zaika",
-            "Tarek Al Ashi",};
-    /*
-        Hardcoded picture paths, should get pictures from the Database before building the layout
-     */
-    Integer[] imageId = {
-            R.drawable.ic_person_black_72dp,
-            R.drawable.ic_person_black_72dp,
-            R.drawable.ic_person_black_72dp,
-            R.drawable.ic_person_black_72dp,
-            R.drawable.ic_person_black_72dp,
-            R.drawable.ic_person_black_72dp};
+
+public class SearchTab2Teamsearch extends Fragment implements ISearch {
+    private static final String ARG_SEARCHTERM = "search_term";
+    private String mSearchTerm = null;
+
+    ArrayList<String> strings = null;
+    private IFragmentListener mIFragmentListener = null;
+    ArrayAdapter<String> arrayAdapter = null;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_searchtab2teamsearch, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view;
+        //Returning the layout file after inflating
+        //Change R.layout.tab1 in you classes
+        view = inflater.inflate(R.layout.fragment_searchtab2teamsearch, container, false);
+        ListView listView = view.findViewById(R.id.listview1);
 
-        CustomList adapter = new
-                CustomList(getActivity(), teamnames, imageId);
-        list = rootView.findViewById(R.id.listView2TeamSearch);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                //Test notification on click , can be commented out after debugging
-                Toast.makeText(getActivity(), "You Clicked at " +teamnames[+ position], Toast.LENGTH_SHORT).show();
-                //links to the team profiles
-                startActivity(new Intent(getActivity(), Profile.class));
+        // CREATE THE ARRAYLIST
+        strings = new ArrayList<>();
+        // FILL THE ARRAYLIST
+        for (int i = 19; i < 39; i++) {
+            strings.add(String.valueOf(i));
+        }
+        strings.add("11");
+        arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);
 
-            }
-        });
-        return rootView;
+
+        listView.setAdapter(arrayAdapter);
+        Search mainActivity = (Search) getActivity();
+        mainActivity.getDataFromFragment_one(strings);
+        if (getArguments() != null) {
+            mSearchTerm = (String) getArguments().get(ARG_SEARCHTERM);
+        }
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (null != mSearchTerm) {
+            onTextQuery(mSearchTerm);
+        }
+    }
+
+    public SearchTab2Teamsearch() {
+    }
+
+    public static SearchTab2Teamsearch newInstance(String searchTerm) {
+        SearchTab2Teamsearch fragment = new SearchTab2Teamsearch();
+        Bundle bundle = new Bundle();
+        bundle.putString(ARG_SEARCHTERM, searchTerm);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    public void onTextQuery(String text) {
+        arrayAdapter.getFilter().filter(text);
+        arrayAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mIFragmentListener = (IFragmentListener) context;
+        mIFragmentListener.addiSearch(SearchTab2Teamsearch.this);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (null != mIFragmentListener)
+            mIFragmentListener.removeISearch(SearchTab2Teamsearch.this);
     }
 }
 
