@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp.Activities;
+package com.kick_it.jan.t9_mobileapp.aktivitaeten;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.kick_it.jan.t9_mobileapp.R;
-import com.kick_it.jan.t9_mobileapp.fragments.TeamTab1Roster;
-import com.kick_it.jan.t9_mobileapp.fragments.TeamTab2Profile;
-import com.kick_it.jan.t9_mobileapp.fragments.TeamTab3Chat;
+import com.kick_it.jan.t9_mobileapp.fragmenten.TeamTab1Roster;
+import com.kick_it.jan.t9_mobileapp.fragmenten.TeamTab2Profile;
+import com.kick_it.jan.t9_mobileapp.fragmenten.TeamTab3Chat;
 
 /*
  * Created by Christopher on 13.11.2017.

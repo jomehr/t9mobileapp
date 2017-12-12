@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp.fragments;
+package com.kick_it.jan.t9_mobileapp.fragmenten;
 
 /*
  * Created by Christopher on 20.11.2017.
@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.kick_it.jan.t9_mobileapp.Activities.Search;
-import com.kick_it.jan.t9_mobileapp.Interfaces.IFragmentListener;
-import com.kick_it.jan.t9_mobileapp.Interfaces.ISearch;
+import com.kick_it.jan.t9_mobileapp.aktivitaeten.Search;
+import com.kick_it.jan.t9_mobileapp.schnittstellen.IFragmentListener;
+import com.kick_it.jan.t9_mobileapp.schnittstellen.ISearch;
 import com.kick_it.jan.t9_mobileapp.R;
 
 import java.util.ArrayList;

@@ -8,8 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.kick_it.jan.t9_mobileapp.fragments.SearchTab1Playersearch;
-import com.kick_it.jan.t9_mobileapp.fragments.SearchTab2Teamsearch;
+import com.kick_it.jan.t9_mobileapp.fragmenten.SearchTab1Playersearch;
+import com.kick_it.jan.t9_mobileapp.fragmenten.SearchTab2Teamsearch;
 
 public class PageAdapter extends FragmentStatePagerAdapter {
 

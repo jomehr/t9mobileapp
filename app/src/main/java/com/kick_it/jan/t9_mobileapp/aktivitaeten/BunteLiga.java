@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp.Activities;
+package com.kick_it.jan.t9_mobileapp.aktivitaeten;
 
 import android.content.Intent;
 import android.os.Bundle;
