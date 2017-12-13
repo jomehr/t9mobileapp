@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -42,6 +41,7 @@ public class CreateEvent extends AppCompatActivity implements
         DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
     private int PLACE_PICKER_REQUEST = 1;
+    private int REQUEST = 1;
 
     private int day, month, year, hour, minute;
     private int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
@@ -75,16 +75,16 @@ public class CreateEvent extends AppCompatActivity implements
         getSupportActionBar().setTitle(getResources().getString(R.string.create));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        creatEvent = (Button) findViewById(R.id.eventCreateButton);
+        creatEvent = (Button) findViewById(R.id.createEvent_createButton);
 
-        eventOrtText = (TextView) findViewById(R.id.eventOrtText);
-        eventDateAndTimeText = (TextView) findViewById(R.id.eventDateAndTimeText);
-        eventMaxPlayersNumberText = (TextView) findViewById(R.id.eventMaxPlayersText);
-        eventDescriptionText = (TextView) findViewById(R.id.eventDescriptionText);
+        eventOrtText = (TextView) findViewById(R.id.createEvent_eventOrtText);
+        eventDateAndTimeText = (TextView) findViewById(R.id.createEvent_eventDateAndTimeText);
+        eventMaxPlayersNumberText = (TextView) findViewById(R.id.createEvent_eventMaxPlayersText);
+        eventDescriptionText = (TextView) findViewById(R.id.createEvent_eventDescriptionText);
 
-        dateAndTimeLayout = (LinearLayout) findViewById(R.id.eventDateAndTime);
-        maxPlayersLayout = (LinearLayout) findViewById(R.id.eventMaxPlayers);
-        descriptionLayout = (LinearLayout) findViewById(R.id.eventDescription);
+        dateAndTimeLayout = (LinearLayout) findViewById(R.id.createEvent_eventDateAndTime);
+        maxPlayersLayout = (LinearLayout) findViewById(R.id.createEvent_eventMaxPlayers);
+        descriptionLayout = (LinearLayout) findViewById(R.id.createEvent_eventDescription);
 
         dateAndTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -291,6 +291,7 @@ public class CreateEvent extends AppCompatActivity implements
                 eventMaxPlayersNumberText.setText(String.format("%01d", myNumberPicker.getValue()));
             }
         });
+
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
@@ -377,12 +378,16 @@ public class CreateEvent extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+            case R.id.action_search:
+                startActivityIfNeeded(new Intent(this, Search.class), REQUEST);
                 return true;
+            case R.id.action_profile:
+                startActivityIfNeeded(new Intent(this, Profile.class), REQUEST);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

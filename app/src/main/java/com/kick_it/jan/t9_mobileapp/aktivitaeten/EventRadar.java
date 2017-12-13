@@ -2,7 +2,6 @@ package com.kick_it.jan.t9_mobileapp.aktivitaeten;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -25,6 +24,7 @@ import com.kick_it.jan.t9_mobileapp.R;
 public class EventRadar extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private int REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +42,12 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
 
         //Listener für "click" auf EventRadar_Button
-        ImageButton btn_Add = (ImageButton) findViewById(R.id.btnAdd);
+        ImageButton btn_Add = (ImageButton) findViewById(R.id.eventRadar_btnAdd);
         btn_Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(getApplicationContext(), "Create a Game", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(EventRadar.this, CreateEvent.class));
+                System.out.println(startActivityIfNeeded(new Intent(EventRadar.this, CreateEvent.class), REQUEST));
             }
         });
     }
@@ -81,12 +81,16 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+            case R.id.action_search:
+                startActivityIfNeeded(new Intent(this, Search.class), REQUEST);
                 return true;
+            case R.id.action_profile:
+                startActivityIfNeeded(new Intent(this, Profile.class), REQUEST);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -33,7 +33,7 @@
                 tools:context="com.kick_it.jan.t9_mobileapp.aktivitaeten.EventRadar" />
 
             <ImageButton
-                android:id="@+id/btnAdd"
+                android:id="@+id/eventRadar_btnAdd"
                 style="@style/Widget.AppCompat.ImageButton"
                 android:layout_width="65dp"
                 android:layout_height="65dp"

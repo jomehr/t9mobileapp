@@ -14,6 +14,8 @@ import com.kick_it.jan.t9_mobileapp.R;
 
 public class Homescreen extends AppCompatActivity {
 
+    private int REQUEST = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,11 +26,12 @@ public class Homescreen extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.app_name);
 
         //Listener für "click" auf Banner1
-        RelativeLayout banner1 = findViewById(R.id.newsContainer);
+        RelativeLayout banner1 = findViewById(R.id.homescreen_findGameContainer);
         banner1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, EventRadar.class));
+                startActivityIfNeeded(new Intent(Homescreen.this, EventRadar.class), REQUEST);
+                //startActivity(new Intent(Homescreen.this, EventRadar.class));
             }
         });
 
