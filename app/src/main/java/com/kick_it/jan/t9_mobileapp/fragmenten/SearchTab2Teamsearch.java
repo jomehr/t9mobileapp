@@ -38,22 +38,23 @@ public class SearchTab2Teamsearch extends Fragment implements ISearch {
         ListView listView = view.findViewById(R.id.listview1);
 
 
-        // CREATE THE ARRAYLIST
+        // CREATE AND FILL THE ARRAYLIST
         strings = new ArrayList<>();
-        // FILL THE ARRAYLIST
         strings.add("Krampfadergeschwader");
         strings.add("Kebab Connection");
         strings.add("Chronisch Überhopft");
         strings.add("Gardoffelsalaad");
-        strings.add("Die glorreichen 7");
+        strings.add("Die glorreichen 70iger");
         strings.add("3sporty5us");
         strings.add("Die Streetfighters");
         strings.add("Babos ohne Namen");
         strings.add("6 richtige plus Superzahl");
         strings.add("Kenias allerletzte Reserve");
 
+        //standard item layout
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);
-
+        //Own item Layout
+        //arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.item_teamsearch, strings);
 
         listView.setAdapter(arrayAdapter);
         Search mainActivity = (Search) getActivity();

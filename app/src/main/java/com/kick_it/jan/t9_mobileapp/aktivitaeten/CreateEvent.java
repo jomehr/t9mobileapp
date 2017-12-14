@@ -75,16 +75,16 @@ public class CreateEvent extends AppCompatActivity implements
         getSupportActionBar().setTitle(getResources().getString(R.string.create));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        creatEvent = (Button) findViewById(R.id.createEvent_createButton);
+        creatEvent = findViewById(R.id.createEvent_createButton);
 
-        eventOrtText = (TextView) findViewById(R.id.createEvent_eventOrtText);
-        eventDateAndTimeText = (TextView) findViewById(R.id.createEvent_eventDateAndTimeText);
-        eventMaxPlayersNumberText = (TextView) findViewById(R.id.createEvent_eventMaxPlayersText);
-        eventDescriptionText = (TextView) findViewById(R.id.createEvent_eventDescriptionText);
+        eventOrtText =  findViewById(R.id.createEvent_eventOrtText);
+        eventDateAndTimeText = findViewById(R.id.createEvent_eventDateAndTimeText);
+        eventMaxPlayersNumberText =  findViewById(R.id.createEvent_eventMaxPlayersText);
+        eventDescriptionText =  findViewById(R.id.createEvent_eventDescriptionText);
 
-        dateAndTimeLayout = (LinearLayout) findViewById(R.id.createEvent_eventDateAndTime);
-        maxPlayersLayout = (LinearLayout) findViewById(R.id.createEvent_eventMaxPlayers);
-        descriptionLayout = (LinearLayout) findViewById(R.id.createEvent_eventDescription);
+        dateAndTimeLayout =  findViewById(R.id.createEvent_eventDateAndTime);
+        maxPlayersLayout =  findViewById(R.id.createEvent_eventMaxPlayers);
+        descriptionLayout =  findViewById(R.id.createEvent_eventDescription);
 
         dateAndTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -54,6 +54,7 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
         String list2[] = new String[strings.size()];
         list2 = strings.toArray(list2);
 
+        //Should be an Arraylist so you can dynamicly delete and add Entries
         Integer[] imageId = {
                 R.drawable.ic_person_black_72dp,
                 R.drawable.ic_person_black_72dp,
@@ -62,12 +63,29 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
                 R.drawable.ic_person_black_72dp,
                 R.drawable.ic_person_black_72dp};
 
+        //standard item layout
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);
+        //Own item Layout
+        //arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.item_playersearch, strings);
 
+        /*
+        * TESTING COSTUMList like in TeamTab1Roster
+        */
+        /*
         CustomList adapter = new CustomList(getActivity(), list2, imageId);
+
         listView.setAdapter(adapter);
-        Search mainActivity = (Search) getActivity();
-        mainActivity.getDataFromFragment_one(strings);
+        Search searchActivity = (Search) getActivity();
+        searchActivity.getDataFromFragment_one(strings);
+        if (getArguments() != null) {
+            mSearchTerm = (String) getArguments().get(ARG_SEARCHTERM);
+        }
+        */
+
+        //Just the standard
+        listView.setAdapter(arrayAdapter);
+        Search searchActivity = (Search) getActivity();
+        searchActivity.getDataFromFragment_one(strings);
         if (getArguments() != null) {
             mSearchTerm = (String) getArguments().get(ARG_SEARCHTERM);
         }

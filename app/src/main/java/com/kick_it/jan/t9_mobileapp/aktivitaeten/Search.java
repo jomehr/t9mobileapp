@@ -175,6 +175,7 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Suche");
+        getSupportActionBar().setElevation(20);
         listData = new ArrayList<>();
         //Initializing the tablayout
         tabLayout = findViewById(R.id.tabLayout);
@@ -195,6 +196,8 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
 
         //Adding onTabSelectedListener to swipe views
         tabLayout.addOnTabSelectedListener(this);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
 
     @Override
