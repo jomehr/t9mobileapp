@@ -5,7 +5,7 @@
     android:background="@drawable/border_shadow">
     <TableRow>
         <ImageView
-            android:id="@+id/img"
+            android:id="@+id/image1"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/ic_person_black_72dp"
