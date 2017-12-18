@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,22 +18,36 @@ import com.kick_it.jan.t9_mobileapp.R;
  */
 
 public class Login extends AppCompatActivity {
-    private static final String PREFER_NAME = "Registration";
-    private SharedPreferences sharedPreferences;
 
-    Button btn_login;
-    TextView btn_register;
-    EditText edit_email,edit_password;
+    private  String PREFER_NAME = "Registration";
+    private  SharedPreferences sharedPreferences;
+    private  SharedPreferences.Editor editor;
+
+    private Button btn_login;
+    private TextView btn_register;
+    private EditText edit_email,edit_password;
+    private CheckBox check_remember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        btn_login = (Button)findViewById(R.id.login_loginBtn);
-        btn_register = (TextView) findViewById(R.id.login_registerBtn);
-        edit_email = (EditText)findViewById(R.id.login_inputEmail);
-        edit_password = (EditText)findViewById(R.id.login_inputPassword);
+        sharedPreferences = getSharedPreferences(PREFER_NAME, 0);
+        editor = sharedPreferences.edit();
+
+        btn_login = findViewById(R.id.login_loginBtn);
+        btn_register = findViewById(R.id.login_registerBtn);
+        edit_email = findViewById(R.id.login_inputEmail);
+        edit_password = findViewById(R.id.login_inputPassword);
+        check_remember = findViewById(R.id.login_checkBox);
+
+        Boolean remember = sharedPreferences.getBoolean("Erinnerung", false);
+        if (remember == true) {
+            edit_email.setText(sharedPreferences.getString("Email", null));
+            edit_password.setText(sharedPreferences.getString("Passwort", null));
+            check_remember.setChecked(true);
+        }
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +71,11 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        sharedPreferences = getSharedPreferences(PREFER_NAME, 0);
+        if(check_remember.isChecked()) {
+            editor.putBoolean("Erinnerung", true);
+            editor.commit();
+        }
+
         String email = edit_email.getText().toString();
         String password = edit_password.getText().toString();
 

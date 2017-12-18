@@ -40,6 +40,18 @@
         android:textColor="@color/colorPrimaryText"
         android:textSize="35dp" />
 
+    <CheckBox
+        android:id="@+id/login_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/login_imageView"
+        android:layout_marginTop="12dp"
+        android:text="Auto-Login"
+        android:textSize="12sp"
+        android:textColorHighlight="@color/colorAccent"
+        android:textColorHint="@color/colorSecondaryText" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

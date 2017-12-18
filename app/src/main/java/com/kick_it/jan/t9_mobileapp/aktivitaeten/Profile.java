@@ -79,8 +79,9 @@ public class Profile extends AppCompatActivity {
         editBtn.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(coordinatorLayout,"Dieses Feature ist noch in Bearbeitung", Snackbar.LENGTH_SHORT).show();
-                optionalData.setVisibility(View.VISIBLE);
+                //Snackbar.make(coordinatorLayout,"Dieses Feature ist noch in Bearbeitung", Snackbar.LENGTH_SHORT).show();
+                //optionalData.setVisibility(View.VISIBLE);
+                startActivity(new Intent(Profile.this, ProfileEdit.class));
             }
         });
 

@@ -35,6 +35,11 @@
     <string name="contentDescriptionRoster">Aufstellung</string>
     <string name="description">Beschreibung</string>
     <string name="your_team">Dein Team</string>
+    <string name="profiledit_description">Beschreibe dich kurz</string>
+    <string name="profiledit_ageday">Tag</string>
+    <string name="profiledit_agemonth">Monat</string>
+    <string name="profiledit_ageyear">Jahr</string>
+    <string name="profiledit_residence">Dein Wohnort</string>
 
     <string name="team_tabels">Tabellen</string>
 
