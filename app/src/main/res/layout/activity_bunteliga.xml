@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--buggy mit goßen bitmaps
+    <!--buggy mit goßen bitmaps-->
         <ImageView
         android:id="@+id/backgroundimageview"
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/screen_background3"
-        android:scaleType="centerCrop"/>-->
+        android:scaleType="centerCrop"/>
 
     <RelativeLayout
         android:background="@drawable/border_shadow"
