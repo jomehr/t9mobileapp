@@ -9,37 +9,37 @@
         android:icon="@drawable/ic_search_black_72dp"
         yourapp:showAsAction="collapseActionView|always"
         yourapp:actionViewClass="android.support.v7.widget.SearchView"
-        android:title="Search"/>
+        android:title="@string/home_search"/>
 
     <item
         android:id="@+id/action_profile"
-        android:title="Profil"
+        android:title="@string/home_profile"
         android:icon="@drawable/ic_person_black_72dp"
         yourapp:showAsAction="never" />
 
     <item
         android:id="@+id/action_settings"
-        android:title="Settings"
+        android:title="@string/settings"
         yourapp:showAsAction="never"/>
 
     <item
         android:id="@+id/action_developer"
-        android:title="Entwickler"
+        android:title="@string/developer"
         yourapp:showAsAction="never"/>
 
     <item
         android:id="@+id/action_privacy"
-        android:title="Datenschutz"
+        android:title="@string/data_privacy"
         yourapp:showAsAction="never"/>
 
     <item
         android:id="@+id/action_faq"
-        android:title="@string/action_faq"
+        android:title="@string/faq"
         yourapp:showAsAction="never"/>
 
     <item
         android:id="@+id/action_sign_out"
-        android:title="@string/action_logout"
+        android:title="@string/logout"
         yourapp:showAsAction="never"/>
 
 </menu>

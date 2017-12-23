@@ -146,7 +146,7 @@
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_edit_black_30dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/profiledit_descriptionText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -154,8 +154,8 @@
                 android:padding="5dp"
                 android:maxLength="128"
                 android:layout_weight="6"
-                android:inputType="textCapWords"
                 android:hint="@string/profiledit_description"
+                android:text=""
                 android:background="@null"
                 android:focusable = "true"
                 android:textColorHighlight = "@color/colorAccent"

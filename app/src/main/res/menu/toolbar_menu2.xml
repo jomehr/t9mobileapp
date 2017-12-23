@@ -8,27 +8,27 @@
 
     <item
         android:id="@+id/action_settings"
-        android:title="Settings"
+        android:title="@string/settings"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_developer"
-        android:title="Entwickler"
+        android:title="@string/developer"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_privacy"
-        android:title="Datenschutz"
+        android:title="@string/data_privacy"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_faq"
-        android:title="@string/action_faq"
+        android:title="@string/faq"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_sign_out"
-        android:title="@string/action_logout"
+        android:title="@string/logout"
         app:showAsAction="never"/>
 
 </menu>

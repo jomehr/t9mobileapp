@@ -1,6 +1,7 @@
 package com.kick_it.jan.t9_mobileapp.aktivitaeten;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -17,12 +19,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.kick_it.jan.t9_mobileapp.R;
 
@@ -32,11 +34,13 @@ import com.kick_it.jan.t9_mobileapp.R;
 
 public class Profile extends AppCompatActivity {
 
-    private static final String PREFER_NAME = "Registration";
-    private SharedPreferences sharedPreferences;
+    private String PREFER_NAME_REGISTRATION = "Registration";
+    private String PREFER_NAME_PROFILDATA = "ProfilData";
+    private SharedPreferences sharedPreferencesReg;
+    private SharedPreferences sharedPreferencesProf;
 
     private static int RESULT_LOAD_IMAGE = 1;
-    private static final int PERMISSION_REQUEST_STORAGE = 0;
+    private static int PERMISSION_REQUEST_STORAGE = 0;
     private View coordinatorLayout;
 
     @Override
@@ -44,10 +48,15 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        sharedPreferences = getSharedPreferences(PREFER_NAME, 0);
-        String profileName = sharedPreferences.getString("Name", null);
+        sharedPreferencesReg = getSharedPreferences(PREFER_NAME_REGISTRATION, Context.MODE_PRIVATE);
+        sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA, Context.MODE_PRIVATE);
+        String profileName = sharedPreferencesReg.getString("Name", "Profil");
+        String profileBirthday = sharedPreferencesProf.getString("Geburtstag", null);
+        String profileDescription = sharedPreferencesProf.getString("ProfilBeschreibung", null);
 
         coordinatorLayout =   findViewById(R.id.profile_coordinatorLayout);
+        TextView birtdayText = findViewById(R.id.profile_ageValue);
+        TextView descriptionText = findViewById(R.id.profile_descriptionText);
         final Toolbar myToolbar = findViewById(R.id.profile_collapsingStaticToolbar);
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.profile_collapsingToolbar);
         AppBarLayout appBar = findViewById(R.id.profile_collapsingToolbarLayout);
@@ -60,8 +69,6 @@ public class Profile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
-
-        optionalData.setVisibility(View.GONE);
 
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -76,11 +83,12 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        birtdayText.setText(profileBirthday);
+        descriptionText.setText(profileDescription);
+
         editBtn.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(coordinatorLayout,"Dieses Feature ist noch in Bearbeitung", Snackbar.LENGTH_SHORT).show();
-                //optionalData.setVisibility(View.VISIBLE);
                 startActivity(new Intent(Profile.this, ProfileEdit.class));
             }
         });

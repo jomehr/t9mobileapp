@@ -8,39 +8,39 @@
 
     <item
         android:id="@+id/action_search"
-        android:title="Suche"
+        android:title="@string/home_search"
         android:icon="@drawable/ic_search_black_72dp"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_profile"
-        android:title="Profil"
+        android:title="@string/home_profile"
         android:icon="@drawable/ic_person_black_72dp"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_settings"
-        android:title="Settings"
+        android:title="@string/settings"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_developer"
-        android:title="Entwickler"
+        android:title="@string/developer"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_privacy"
-        android:title="Datenschutz"
+        android:title="@string/data_privacy"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_faq"
-        android:title="@string/action_faq"
+        android:title="@string/faq"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_sign_out"
-        android:title="@string/action_logout"
+        android:title="@string/logout"
         app:showAsAction="never"/>
 
 </menu>
