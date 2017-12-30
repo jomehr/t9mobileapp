@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -30,7 +31,14 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.kick_it.jan.t9_mobileapp.R;
+import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.interceptors.ParseLogInterceptor;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /*
@@ -45,14 +53,9 @@ public class CreateEvent extends AppCompatActivity implements
 
     private int day, month, year, hour, minute;
     private int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
-
-    //private String fileName = "eventDataFile.txt";
-    //private String filePath = "myExternalFilePath";
-
-    //File myExternalFile;
-    //String myData = "";
-
     LatLng eventLatLng;
+    private int eventMaxPlayersNumber = -1;
+    private String eventDescription = "";
 
     Button creatEvent;
 
@@ -110,66 +113,62 @@ public class CreateEvent extends AppCompatActivity implements
         creatEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //creatEventData();
+                try {
+                    creatEventData();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
-        /*
-        if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
-            creatEvent.setEnabled(false);
-        } else {
-            myExternalFile = new File(getExternalFilesDir(filePath), fileName);
-        }
-        */
     }
 
 
-    private void creatEventData() {
-    /*    if (eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime)
-                && eventOrtText.getText() != getResources().getString(R.string.ort_auswahl)
-                && eventLatLng != null)
-        {
-            try {
-                FileOutputStream fos = new FileOutputStream(myExternalFile);
-                String data = eventLatLng.latitude + "::"
-                        + eventLatLng.longitude + "::"
-                        + eventOrtText + "::"
-                        + dayFinal + "::"
-                        + monthFinal + "::"
-                        + yearFinal + "::"
-                        + hourFinal + "::"
-                        + minuteFinal + "::"
-                        + eventMaxPlayersNumberText + "::"
-                        + eventDescriptionText;
-                fos.write(data.getBytes());
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Toast.makeText(getApplicationContext(), "SampleFile.txt saved to External Storage...", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(getApplicationContext(), "Bitte füllen Sie alle Daten", Toast.LENGTH_SHORT).show();
-        }
-        */
-    }
- /*
-    private static boolean isExternalStorageReadOnly() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
-            return true;
-        }
-        return false;
-    }
+    private void creatEventData() throws ParseException {
 
-    private static boolean isExternalStorageAvailable() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
-            return true;
+        //TODO: Initialisieren in Homescreen oder Login
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+        // Optionally enable public read access.
+        // defaultACL.setPublicReadAccess(true);
+        //False = only master key access
+        ParseACL.setDefaultACL(defaultACL, true);
+
+        // Add your initialization code here
+        // Parse API is initilized here.
+        Parse.addParseNetworkInterceptor(new ParseLogInterceptor());
+        final String YOUR_APPLICATION_ID = "MatchFinder";
+        final String YOUR_CLIENT_KEY = "matchfinderclientkey";
+        final String YOUR_SERVER_URL = "https://matchfinder.dock.moxd.io/api/";
+        Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
+                .applicationId(YOUR_APPLICATION_ID)
+                .clientKey(YOUR_CLIENT_KEY)
+                .server(YOUR_SERVER_URL)   // '/' important after 'api'
+                .build());
+
+        ParseObject eventObjekt = new ParseObject("Event");
+
+        //eventObjekt.put("Place", eventLatLng);
+        //Datum und Zeit in long millis
+        try {
+            long epoch = new SimpleDateFormat("MM/DD/YYYY HH:mm:ss")
+                    .parse(monthFinal + "/" + dayFinal + "/" + yearFinal + " " + hourFinal + ":" + minuteFinal + ":00").getTime() / 1000;
+            eventObjekt.put("DateAndTime", epoch);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
         }
-        return false;
+
+        eventObjekt.put("MaxPleyersNumber", eventMaxPlayersNumber);
+        eventObjekt.put("Description", eventDescription);
+
+        eventObjekt.saveInBackground();
+
+        Toast.makeText(this, "Event Saved ", Toast.LENGTH_SHORT).show();
+
     }
-*/
 
 
     //Menü
@@ -288,6 +287,7 @@ public class CreateEvent extends AppCompatActivity implements
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                eventMaxPlayersNumber = myNumberPicker.getValue();
                 eventMaxPlayersNumberText.setText(String.format("%01d", myNumberPicker.getValue()));
             }
         });
@@ -348,6 +348,7 @@ public class CreateEvent extends AppCompatActivity implements
                 //Set eventDescriptionLayout (Linear Layout) paddingBottom to 10dp
                 descriptionLayout.setPadding(0,0,0,10);
 
+                eventDescription = input.getText().toString();
                 eventDescriptionText.setText(input.getText().toString());
             }
         });
