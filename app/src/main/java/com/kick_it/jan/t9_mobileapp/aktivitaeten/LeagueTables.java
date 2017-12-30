@@ -1,19 +1,42 @@
 package com.kick_it.jan.t9_mobileapp.aktivitaeten;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import com.kick_it.jan.t9_mobileapp.R;
-
-/*
+/**
  * Created by Christopher on 11.12.2017.
  */
 
+/*
 public class LeagueTables extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_leaguetables);
+
+
+
+    }
+
+
+}
+*/
+
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import com.kick_it.jan.t9_mobileapp.R;
+
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+
+public class LeagueTables extends AppCompatActivity {
+
+    ExpandableRelativeLayout expandableLayout1, expandableLayout2, expandableLayout3, expandableLayout4;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +48,21 @@ public class LeagueTables extends AppCompatActivity {
         getSupportActionBar().setTitle("Tabellen");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    public void expandableFirstLeague(View view) {
+        expandableLayout1 =  findViewById(R.id.expandableLayout1);
+        expandableLayout1.toggle(); // toggle expand and collapse
+    }
+
+    public void expandableSecondLeague(View view) {
+        expandableLayout2 =  findViewById(R.id.expandableLayout2);
+        expandableLayout2.toggle(); // toggle expand and collapse
+    }
+
+    public void expandableThirdLeague(View view) {
+        expandableLayout3 =  findViewById(R.id.expandableLayout3);
+        expandableLayout3.toggle(); // toggle expand and collapse
     }
 
     @Override
@@ -47,4 +85,5 @@ public class LeagueTables extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
