@@ -34,6 +34,7 @@ import android.view.MenuItem;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 public class LeagueTables extends AppCompatActivity {
+    final private String title = "Tabellen";
 
     ExpandableRelativeLayout expandableLayout1, expandableLayout2, expandableLayout3, expandableLayout4;
     Toolbar toolbar;
@@ -45,7 +46,9 @@ public class LeagueTables extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Tabellen");
+        if (title != null && !title.isEmpty()){
+            getSupportActionBar().setTitle(title);
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
