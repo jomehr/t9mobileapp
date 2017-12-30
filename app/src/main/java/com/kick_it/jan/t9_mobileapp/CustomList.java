@@ -26,19 +26,14 @@ public class CustomList extends ArrayAdapter<String>{
         this.web = web;
         this.imageId = imageId;
     }
-    public CustomList(Activity context,
-                      String[] web) {
-        super(context, R.layout.item_playersearch, web);
-        this.context = context;
-        this.web = web;
-    }
+
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.item_roster, null, true);
-        TextView txtTitle = rowView.findViewById(R.id.text1);
+        TextView txtTitle = rowView.findViewById(R.id.text);
 
-        ImageView imageView = rowView.findViewById(R.id.image1);
+        ImageView imageView = rowView.findViewById(R.id.img);
         txtTitle.setText(web[position]);
 
         imageView.setImageResource(imageId[position]);
