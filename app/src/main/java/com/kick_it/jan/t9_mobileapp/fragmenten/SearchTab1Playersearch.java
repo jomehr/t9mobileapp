@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.kick_it.jan.t9_mobileapp.aktivitaeten.Search;
-import com.kick_it.jan.t9_mobileapp.CustomList;
 import com.kick_it.jan.t9_mobileapp.schnittstellen.IFragmentListener;
 import com.kick_it.jan.t9_mobileapp.schnittstellen.ISearch;
 import com.kick_it.jan.t9_mobileapp.R;
@@ -23,9 +22,9 @@ import java.util.ArrayList;
 
 
 public class SearchTab1Playersearch extends Fragment implements ISearch {
+
     private static final String ARG_SEARCHTERM = "search_term";
     private String mSearchTerm = null;
-
 
     ArrayList<String> strings = null;
     private IFragmentListener mIFragmentListener = null;

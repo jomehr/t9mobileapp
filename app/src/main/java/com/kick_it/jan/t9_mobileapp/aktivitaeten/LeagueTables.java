@@ -4,23 +4,6 @@ package com.kick_it.jan.t9_mobileapp.aktivitaeten;
  * Created by Christopher on 11.12.2017.
  */
 
-/*
-public class LeagueTables extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leaguetables);
-
-
-
-    }
-
-
-}
-*/
-
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -34,10 +17,9 @@ import android.view.MenuItem;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 public class LeagueTables extends AppCompatActivity {
-    final private String title = "Tabellen";
 
-    ExpandableRelativeLayout expandableLayout1, expandableLayout2, expandableLayout3, expandableLayout4;
-    Toolbar toolbar;
+
+    ExpandableRelativeLayout expandableLayout1, expandableLayout2, expandableLayout3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +28,7 @@ public class LeagueTables extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        if (title != null && !title.isEmpty()){
-            getSupportActionBar().setTitle(title);
-        }
+        getSupportActionBar().setTitle(R.string.tabels);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }

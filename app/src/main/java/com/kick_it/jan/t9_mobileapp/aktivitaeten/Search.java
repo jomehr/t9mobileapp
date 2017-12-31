@@ -174,15 +174,15 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
         //Adding toolbar to the activity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Suche");
+        getSupportActionBar().setTitle(R.string.search);
         getSupportActionBar().setElevation(20);
         listData = new ArrayList<>();
         //Initializing the tablayout
         tabLayout = findViewById(R.id.tabLayout);
 
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("Spieler"));
-        tabLayout.addTab(tabLayout.newTab().setText("Teams"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.home_searchplayer));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.home_searchteam));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Initializing viewPager
@@ -203,7 +203,7 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        //ersetzen durch unsere appbar
+
         inflater.inflate(R.menu.menu, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchMenuItem = menu.findItem(R.id.action_search);

@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.kick_it.jan.t9_mobileapp.R;
 
 public class SplashScreen extends AppCompatActivity {
-    private static int welcome = 1500;
+    private static int welcome = 500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

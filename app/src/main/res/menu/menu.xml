@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/action_profile"
-        android:title="@string/home_profile"
+        android:title="@string/home_profiles"
         android:icon="@drawable/ic_person_black_72dp"
         yourapp:showAsAction="never" />
 

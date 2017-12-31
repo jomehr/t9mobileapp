@@ -47,7 +47,7 @@ public class ProfileEdit extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Profil bearbeiten");
+        getSupportActionBar().setTitle(R.string.profiledit);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton submitBtn = findViewById(R.id.profiledit_submitbtn);

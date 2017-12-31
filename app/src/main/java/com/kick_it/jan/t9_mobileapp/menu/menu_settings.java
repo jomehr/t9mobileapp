@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp.aktivitaeten;
+package com.kick_it.jan.t9_mobileapp.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,23 +8,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.kick_it.jan.t9_mobileapp.R;
+import com.kick_it.jan.t9_mobileapp.aktivitaeten.Profile;
+import com.kick_it.jan.t9_mobileapp.aktivitaeten.Search;
 
-/*
- * Created by Christopher on 11.12.2017.
+
+/**
+ * Created by Christopher on 31.12.2017.
  */
 
-public class LeagueNews extends AppCompatActivity {
-
+public class menu_settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leaguenews);
+        setContentView(R.layout.activity_menu_settings);
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.news);
+        getSupportActionBar().setTitle(R.string.settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override
@@ -48,3 +49,4 @@ public class LeagueNews extends AppCompatActivity {
         }
     }
 }
+

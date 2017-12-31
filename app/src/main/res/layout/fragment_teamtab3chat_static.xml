@@ -1,0 +1,222 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kick_it.jan.t9_mobileapp.aktivitaeten.Team">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scroll">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:id="@+id/ownmessage"
+                android:layout_above="@id/othersmessage1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_bg_rounded"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                                                             android:text="Taras Zaika" />
+
+                <TextView
+                    android:id="@+id/chattxt1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Denn foult der gleiche Mann noch mal den Gegner regelrecht brutal, so zeigt die rote Karte diesem: Mit Recht wird er vom Feld verwiesen!" />
+
+                <TextView
+                    android:id="@+id/clockdate1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:text="20:37" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/othersmessage1"
+                android:layout_below="@id/ownmessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_bg_rounded"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                                                                 android:text="Jan Mehr" />
+
+                <TextView
+                    android:id="@+id/chattxt2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="So mancher stürzt von ganz allein zu Boden hin und hält das Bein. Dann hilft kein Arzt und keine Salbe: Es handelt sich um eine Schwalbe!" />
+
+                <TextView
+                    android:id="@+id/clockdate2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:text="20:37" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_below="@+id/othersmessage1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/othersmessage2"
+
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_bg_rounded"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                                                                     android:text="asfasdasd" />
+
+                <TextView
+                    android:id="@+id/chattxt3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Wer sich an keine Regeln hält, der fliegt zur Strafe selbst vom Feld! Denn für böse Spielvernichter gibt es einen Schiedsrichter." />
+
+                <TextView
+                    android:id="@+id/clockdate3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:text="20:37" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_bg_rounded"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                                                                                 android:text="Christopher Huntscha" />
+
+                <TextView
+                    android:id="@+id/chattxt4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Wer sich an keine Regeln hält, der fliegt zur Strafe selbst vom Feld! Denn für böse Spielvernichter gibt es einen Schiedsrichter." />
+
+                <TextView
+                    android:id="@+id/clockdate4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:text="20:37" />
+            </LinearLayout>
+  <!--
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/othersmessage4"
+                android:layout_below="@+id/othersmessage3"
+
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_bg_rounded"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Christopher Huntscha" />
+
+                <TextView
+                    android:id="@+id/chattxt5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Wer sich an keine Regeln hält, der fliegt zur Strafe selbst vom Feld! Denn für böse Spielvernichter gibt es einen Schiedsrichter." />
+
+                <TextView
+                    android:id="@+id/clockdate5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:text="20:37" />
+            </LinearLayout>
+            -->
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_alignEnd="@+id/scroll"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:inputType="textMultiLine"
+            android:text="@string/chat_put_post"
+            android:textColor="#333333" />
+    </RelativeLayout>
+
+</RelativeLayout>
