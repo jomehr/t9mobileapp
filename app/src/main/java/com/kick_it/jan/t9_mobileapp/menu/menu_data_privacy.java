@@ -16,7 +16,7 @@ import com.kick_it.jan.t9_mobileapp.aktivitaeten.Search;
  * Created by Christopher on 31.12.2017.
  */
 
-public class menu_security extends AppCompatActivity {
+public class menu_data_privacy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

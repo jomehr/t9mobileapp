@@ -11,7 +11,7 @@ import android.widget.Toast;
 import android.widget.ListView;
 
 import com.kick_it.jan.t9_mobileapp.aktivitaeten.Profile;
-import com.kick_it.jan.t9_mobileapp.CustomList;
+import com.kick_it.jan.t9_mobileapp.schnittstellen.CustomList;
 import com.kick_it.jan.t9_mobileapp.R;
 
 /*

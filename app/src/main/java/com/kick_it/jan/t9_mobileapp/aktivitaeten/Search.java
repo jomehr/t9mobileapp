@@ -130,7 +130,7 @@ import android.view.MenuItem;
 import com.kick_it.jan.t9_mobileapp.schnittstellen.IDataCallback;
 import com.kick_it.jan.t9_mobileapp.schnittstellen.IFragmentListener;
 import com.kick_it.jan.t9_mobileapp.schnittstellen.ISearch;
-import com.kick_it.jan.t9_mobileapp.PageAdapter;
+import com.kick_it.jan.t9_mobileapp.schnittstellen.PageAdapter;
 import com.kick_it.jan.t9_mobileapp.R;
 
 import java.util.ArrayList;

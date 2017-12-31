@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.kick_it.jan.t9_mobileapp.R;
+import com.kick_it.jan.t9_mobileapp.menu.*;
 
 /*
  * Created by Jan on 17.11.2017.
@@ -24,7 +25,7 @@ public class BunteLiga extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Bunte Liga");
+        getSupportActionBar().setTitle(R.string.bunte_liga);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Clicklistener links to activity News
@@ -76,6 +77,21 @@ public class BunteLiga extends AppCompatActivity {
                 return true;
             case R.id.action_profile:
                 startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_settings:
+                startActivity(new Intent(this, menu_settings.class));
+                return true;
+            case R.id.action_developer:
+                startActivity(new Intent(this, menu_developer.class));
+                return true;
+            case R.id.action_faq:
+                startActivity(new Intent(this, menu_faq.class));
+                return true;
+            case R.id.action_sign_out:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_data_privacy:
+                startActivity(new Intent(this, menu_data_privacy.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

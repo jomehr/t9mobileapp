@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.schnittstellen;
 
 /**
  * Created by Jan on 18.12.2017.

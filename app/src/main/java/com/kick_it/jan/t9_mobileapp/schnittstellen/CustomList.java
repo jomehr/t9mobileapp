@@ -1,4 +1,4 @@
-package com.kick_it.jan.t9_mobileapp;
+package com.kick_it.jan.t9_mobileapp.schnittstellen;
 
 /**
  * Created by Christopher on 11.12.2017.
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.kick_it.jan.t9_mobileapp.R;
 
 public class CustomList extends ArrayAdapter<String>{
 

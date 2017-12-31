@@ -28,7 +28,7 @@
         yourapp:showAsAction="never"/>
 
     <item
-        android:id="@+id/action_privacy"
+        android:id="@+id/action_data_privacy"
         android:title="@string/data_privacy"
         yourapp:showAsAction="never"/>
 

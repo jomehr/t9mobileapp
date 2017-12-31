@@ -15,6 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy;
+import com.kick_it.jan.t9_mobileapp.menu.menu_developer;
+import com.kick_it.jan.t9_mobileapp.menu.menu_faq;
+import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
 
 public class LeagueTables extends AppCompatActivity {
 
@@ -63,6 +67,21 @@ public class LeagueTables extends AppCompatActivity {
                 return true;
             case R.id.action_profile:
                 startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_settings:
+                startActivity(new Intent(this, menu_settings.class));
+                return true;
+            case R.id.action_developer:
+                startActivity(new Intent(this, menu_developer.class));
+                return true;
+            case R.id.action_faq:
+                startActivity(new Intent(this, menu_faq.class));
+                return true;
+            case R.id.action_sign_out:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_data_privacy:
+                startActivity(new Intent(this, menu_data_privacy.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

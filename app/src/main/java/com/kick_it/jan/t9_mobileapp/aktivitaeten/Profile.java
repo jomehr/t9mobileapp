@@ -114,6 +114,29 @@ public class Profile extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
+            /*
+            case R.id.action_search:
+                startActivity(new Intent(this, Search.class));
+                return true;
+            case R.id.action_profile:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_settings:
+                startActivity(new Intent(this, menu_settings.class));
+                return true;
+            case R.id.action_developer:
+                startActivity(new Intent(this, menu_developer.class));
+                return true;
+            case R.id.action_faq:
+                startActivity(new Intent(this, menu_faq.class));
+                return true;
+            case R.id.action_sign_out:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_data_privacy:
+                startActivity(new Intent(this, menu_data_privacy.class));
+                return true;
+             */
         }
         return super.onOptionsItemSelected(item);
     }
