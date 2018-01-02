@@ -30,19 +30,9 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
     //This is our viewPager
     private ViewPager viewPager;
 
-    private ArrayList<ISearch> iSearch = new ArrayList<>();
+    private final ArrayList<ISearch> iSearch = new ArrayList<>();
     private String newText;
     private PageAdapter adapter;
-    private ArrayList<String> listData = null;
-
-    /* never used
-    private IDataCallback iDataCallback = null;
-
-    public void setiDataCallback(IDataCallback iDataCallback) {
-        this.iDataCallback = iDataCallback;
-        iDataCallback.onFragmentCreated(listData);
-    }
-    */
 
     @Override
     public void addiSearch(ISearch iSearch) {
@@ -56,6 +46,7 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ArrayList<String> listData = null;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
@@ -136,9 +127,9 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
     }
 
 
-    public void getDataFromFragment_one(ArrayList<String> listData) {
-        this.listData = listData;
-        Log.e("-->", "" + listData.toString());
+    public void getDataFromFragment_one(ArrayList<String> listsData) {
+        ArrayList<String> outputdata = listsData;
+        Log.e("-->", "" + outputdata.toString());
     }
 
     @Override

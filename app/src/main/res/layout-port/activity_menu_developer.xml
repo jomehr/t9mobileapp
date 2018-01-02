@@ -32,7 +32,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="15dp"
-                    android:text="Wer sind wir?"/>
+                    android:text="@string/developer"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

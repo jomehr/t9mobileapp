@@ -27,7 +27,7 @@ import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
 
 public class EventRadar extends AppCompatActivity implements OnMapReadyCallback {
 
-    private int REQUEST = 1;
+    private final int REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

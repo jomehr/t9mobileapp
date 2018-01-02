@@ -16,7 +16,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     private String mSearchTerm;
 
     //integer to count number of tabs
-    private int tabCount;
+    private final int tabCount;
 
     //Constructor to the class
     public PageAdapter(FragmentManager fm, int tabCount, String searchTerm) {

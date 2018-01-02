@@ -35,8 +35,8 @@ import com.kick_it.jan.t9_mobileapp.menu.*;
 
 public class Profile extends AppCompatActivity {
 
-    private static int RESULT_LOAD_IMAGE = 1;
-    private static int PERMISSION_REQUEST_STORAGE = 0;
+    private final static int RESULT_LOAD_IMAGE = 1;
+    private final static int PERMISSION_REQUEST_STORAGE = 0;
     private View coordinatorLayout;
 
     @Override

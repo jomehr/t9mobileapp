@@ -43,8 +43,9 @@ import java.util.Calendar;
 
 public class CreateEvent extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
-    private int PLACE_PICKER_REQUEST = 1;
-    private int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
+    private final int PLACE_PICKER_REQUEST = 1;
+
+    private int dayFinal, monthFinal, yearFinal;
 
     //private String fileName = "eventDataFile.txt";
     //private String filePath = "myExternalFilePath";
@@ -249,8 +250,8 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
 
-        hourFinal = hour;
-        minuteFinal = minute;
+        int hourFinal = hour;
+        int minuteFinal = minute;
 
 
         //Layout anpassen

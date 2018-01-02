@@ -22,7 +22,7 @@ public class TeamTab1Roster extends Fragment{
     /*
         Hardcoded names, should get names from the Database and and them before building the layout
      */
-    private String[] playernames = {
+    private final String[] playernames = {
             "Jan Mehr",
             "Christopher Huntscha",
             "Simon Mertens",
@@ -32,7 +32,7 @@ public class TeamTab1Roster extends Fragment{
     /*
          Hardcoded picture paths, should get names from the Database before building the layout
     */
-    private Integer[] imageId = {
+    private final Integer[] imageId = {
             R.drawable.ic_person_black_72dp,
             R.drawable.ic_person_black_72dp,
             R.drawable.ic_person_black_72dp,

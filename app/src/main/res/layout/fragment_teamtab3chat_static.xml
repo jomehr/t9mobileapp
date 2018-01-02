@@ -29,7 +29,8 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    tools:ignore="HardcodedText" />
                 <TextView
                     android:id="@+id/chattxt2"
                     android:layout_width="match_parent"
@@ -66,7 +67,8 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    tools:ignore="HardcodedText" />
                 <TextView
                     android:id="@+id/chattxt3"
                     android:layout_width="match_parent"
@@ -101,7 +103,8 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    tools:ignore="HardcodedText" />
                 <TextView
                     android:id="@+id/chattxt4"
                     android:layout_width="match_parent"
@@ -136,7 +139,8 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    tools:ignore="HardcodedText" />
                 <TextView
                     android:id="@+id/chattxt5"
                     android:layout_width="match_parent"
@@ -171,7 +175,8 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    tools:ignore="HardcodedText" />
                 <TextView
                     android:id="@+id/ownchattxt"
                     android:layout_width="match_parent"
@@ -194,7 +199,6 @@
 
     <RelativeLayout
         android:id="@+id/postchat"
-        android:layout_weight="1"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
