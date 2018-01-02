@@ -11,7 +11,7 @@
     <application
         android:fullBackupContent="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="Kick It - Matchfinder"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
