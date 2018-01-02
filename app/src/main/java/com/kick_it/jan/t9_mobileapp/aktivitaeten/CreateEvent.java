@@ -28,7 +28,6 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.maps.model.LatLng;
 import com.kick_it.jan.t9_mobileapp.R;
 import com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.kick_it.jan.t9_mobileapp.menu.menu_developer;
