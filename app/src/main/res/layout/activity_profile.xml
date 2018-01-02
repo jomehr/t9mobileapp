@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="200dp"
                 android:maxHeight="300dp"
-                android:src="@drawable/default_profile"
+                android:src="@raw/default_profile"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"

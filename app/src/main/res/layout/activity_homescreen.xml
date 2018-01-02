@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/screen_background3"
+        app:srcCompat="@raw/screen_background3"
         tools:ignore="ContentDescription"/>
 
     <RelativeLayout
@@ -44,7 +44,7 @@
             android:id="@+id/banner_img2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/banner_find_game"
+            android:src="@raw/banner_find_game"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="ContentDescription"/>
@@ -85,7 +85,7 @@
             android:id="@+id/banner_image2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/banner_creat_event"
+            android:src="@raw/banner_creat_event"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="ContentDescription"/>
@@ -127,7 +127,7 @@
             android:id="@+id/banner_image3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/banner_liga"
+            android:src="@raw/banner_liga"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="ContentDescription"/>
@@ -150,47 +150,4 @@
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/banner_image3" />
     </RelativeLayout>
-
-    <!--
-    <RelativeLayout
-        android:background="@drawable/border_shadow"
-        android:id="@+id/banner_btn4"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner_btn3" android:focusable="true">
-
-        <ImageView
-            android:id="@+id/banner_image4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/colorPrimaryDark"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/banner_text4"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerVertical="true"
-            android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|right"
-            android:padding="4dp"
-            android:paddingLeft="16dp"
-            android:paddingStart="16dp"
-            android:text="Team"
-            android:textAlignment="gravity"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/banner_image4" />
-    </RelativeLayout>
-    -->
-
 </android.support.constraint.ConstraintLayout>

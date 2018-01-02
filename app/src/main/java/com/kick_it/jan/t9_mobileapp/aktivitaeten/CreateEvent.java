@@ -176,15 +176,12 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
     }
 */
 
-
     //Menü
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-
-
 
     //Place Picker
     public void pickAPlace(View view) {

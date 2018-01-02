@@ -36,15 +36,12 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
         try {
             getSupportActionBar().setTitle(R.string.home_eventradar);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

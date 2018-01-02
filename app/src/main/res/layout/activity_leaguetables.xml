@@ -42,7 +42,7 @@
                      android:id="@+id/firstleague_img"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
-                     android:src="@drawable/profilpic"
+                     android:src="@raw/profilpic"
                      android:scaleType="centerCrop"
                      app:layout_constraintStart_toStartOf="parent" />
 
@@ -630,7 +630,7 @@
                      android:id="@+id/secondleague_img"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
-                     android:src="@drawable/profilpic"
+                     android:src="@raw/profilpic"
                      android:scaleType="centerCrop"
                      app:layout_constraintStart_toStartOf="parent" />
 
@@ -1216,7 +1216,7 @@
                     android:id="@+id/thirdleague_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/profilpic"
+                    android:src="@raw/profilpic"
                     android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent" />
 
