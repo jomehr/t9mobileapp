@@ -27,7 +27,12 @@ public class Homescreen extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.app_name);
+
+        try {
+            getSupportActionBar().setTitle(R.string.app_name);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
         //Listener für "click" auf Banner1
         RelativeLayout banner1 = findViewById(R.id.homescreen_findGameContainer);

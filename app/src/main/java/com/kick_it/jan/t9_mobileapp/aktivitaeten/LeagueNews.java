@@ -26,7 +26,11 @@ public class LeagueNews extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.news);
+        try {
+            getSupportActionBar().setTitle(R.string.news);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }

@@ -24,7 +24,11 @@ public class menu_impressum extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.impressum);
+        try {
+            getSupportActionBar().setTitle(R.string.impressum);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

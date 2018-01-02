@@ -70,7 +70,13 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(getResources().getString(R.string.create));
+
+        try {
+            getSupportActionBar().setTitle(getResources().getString(R.string.create));
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         creatEvent = findViewById(R.id.createEvent_createButton);
@@ -336,6 +342,8 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
                 //Tastatur schlissen
                 //imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+
                 imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
 
                 //Set TextViewLayout to WRAP_CONTENT
@@ -366,7 +374,12 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
         //Tastatur automatisch öfnnen
         input.requestFocus();
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        try {
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
 
         /*
         TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schkiesst sich die Tastatur

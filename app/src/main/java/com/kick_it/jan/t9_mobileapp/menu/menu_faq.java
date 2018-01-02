@@ -24,7 +24,11 @@ public class menu_faq extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.faq);
+        try {
+            getSupportActionBar().setTitle(R.string.faq);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

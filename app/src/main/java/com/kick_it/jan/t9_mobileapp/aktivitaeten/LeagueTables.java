@@ -29,7 +29,11 @@ public class LeagueTables extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.tabels);
+        try {
+            getSupportActionBar().setTitle(R.string.tabels);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }

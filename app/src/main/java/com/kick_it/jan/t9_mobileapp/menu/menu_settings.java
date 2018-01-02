@@ -24,7 +24,11 @@ public class menu_settings extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.settings);
+        try {
+            getSupportActionBar().setTitle(R.string.settings);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

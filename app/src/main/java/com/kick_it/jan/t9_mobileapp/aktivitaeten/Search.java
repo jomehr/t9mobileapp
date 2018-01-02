@@ -46,16 +46,18 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ArrayList<String> listData = null;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
         //Adding toolbar to the activity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.search);
+        try {
+            getSupportActionBar().setTitle(R.string.search);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         getSupportActionBar().setElevation(20);
-        listData = new ArrayList<>();
         //Initializing the tablayout
         TabLayout tabLayout = findViewById(R.id.tabLayout);
 
@@ -115,7 +117,11 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchMenuItem.getActionView();
 
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        try {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
         return super.onCreateOptionsMenu(menu);
@@ -128,8 +134,7 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
 
 
     public void getDataFromFragment_one(ArrayList<String> listsData) {
-        ArrayList<String> outputdata = listsData;
-        Log.e("-->", "" + outputdata.toString());
+        Log.e("-->", "" + listsData.toString());
     }
 
     @Override

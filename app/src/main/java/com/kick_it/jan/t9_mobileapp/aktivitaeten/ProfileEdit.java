@@ -45,7 +45,12 @@ public class ProfileEdit extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.profiledit);
+
+        try {
+            getSupportActionBar().setTitle(R.string.profiledit);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton submitBtn = findViewById(R.id.profiledit_submitbtn);
@@ -195,8 +200,11 @@ public class ProfileEdit extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 //Tastatur schlissen
                 //imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-                imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
-
+                try {
+                    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
                 //Set TextViewLayout to WRAP_CONTENT
                 ViewGroup.LayoutParams paramsDescriptionText = descriptionText.getLayoutParams();
                 paramsDescriptionText.height = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -214,7 +222,12 @@ public class ProfileEdit extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //Tastatur schlissen
                 //imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-                imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                try {
+                    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+
                 dialog.cancel();
             }
         });
@@ -223,7 +236,12 @@ public class ProfileEdit extends AppCompatActivity {
 
         //Tastatur automatisch öfnnen
         input.requestFocus();
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        try {
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
         /*
         TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schkiesst sich die Tastatur
         TODO Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.

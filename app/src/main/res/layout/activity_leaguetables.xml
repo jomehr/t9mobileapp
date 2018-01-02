@@ -705,7 +705,7 @@
                                  android:layout_height="wrap_content"
                                  android:layout_gravity="center"
                                  android:text="Spiele"
-                                 tools:ignore="HardcodedText" />
+                                 tools:ignore="HardcodedText,TooManyViews" />
 
                              <TextView
                                  android:id="@+id/textView61"

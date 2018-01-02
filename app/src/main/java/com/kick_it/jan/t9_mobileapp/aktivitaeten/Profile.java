@@ -61,7 +61,11 @@ public class Profile extends AppCompatActivity {
         ImageView profilePicture =  findViewById(R.id.profile_picture);
 
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(profileName);
+        try {
+            getSupportActionBar().setTitle(profileName);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
@@ -70,11 +74,27 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if ((collapsingToolbarLayout.getHeight() + verticalOffset) < (2 * ViewCompat.getMinimumHeight(collapsingToolbarLayout))) {
-                    myToolbar.getOverflowIcon().setColorFilter(getColor(R.color.colorPrimaryText), PorterDuff.Mode.SRC_ATOP);
-                    myToolbar.getNavigationIcon().setColorFilter(getColor(R.color.colorPrimaryText), PorterDuff.Mode.SRC_ATOP);
+                    try {
+                        myToolbar.getOverflowIcon().setColorFilter(getColor(R.color.colorPrimaryText), PorterDuff.Mode.SRC_ATOP);
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        myToolbar.getNavigationIcon().setColorFilter(getColor(R.color.colorPrimaryText), PorterDuff.Mode.SRC_ATOP);
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
                 } else {
-                    myToolbar.getOverflowIcon().setColorFilter(getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
-                    myToolbar.getNavigationIcon().setColorFilter(getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
+                    try {
+                        myToolbar.getOverflowIcon().setColorFilter(getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        myToolbar.getNavigationIcon().setColorFilter(getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -145,7 +165,11 @@ public class Profile extends AppCompatActivity {
 
             Cursor cursor = getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
-            cursor.moveToFirst();
+            try {
+                cursor.moveToFirst();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);

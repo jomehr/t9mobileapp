@@ -24,7 +24,11 @@ public class menu_data_privacy extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.data_privacy);
+        try {
+            getSupportActionBar().setTitle(R.string.data_privacy);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

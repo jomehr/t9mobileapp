@@ -64,7 +64,8 @@ public class Registration extends AppCompatActivity{
 
         String curMail = sharedPreferences.getString("Email", null);
 
-        if (sharedPreferences.contains("Email") && curMail.equals(email)){
+        if (sharedPreferences.contains("Email") &&
+                curMail.equals(email)){
             Toast.makeText(getApplicationContext(), "Account existiert bereits",Toast.LENGTH_SHORT).show();
         } else {
             //editor.clear().commit();

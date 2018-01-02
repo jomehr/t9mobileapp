@@ -25,7 +25,13 @@ public class BunteLiga extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(R.string.bunte_liga);
+
+        try {
+            getSupportActionBar().setTitle(R.string.bunte_liga);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Clicklistener links to activity News
