@@ -95,9 +95,6 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.action_search:
-                startActivity(new Intent(this, Search.class));
-                return true;
             case R.id.action_profile:
                 startActivity(new Intent(this, Profile.class));
                 return true;

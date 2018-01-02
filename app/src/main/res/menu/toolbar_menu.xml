@@ -15,7 +15,7 @@
 
     <item
         android:id="@+id/action_profile"
-        android:title="@string/home_profiles"
+        android:title="@string/home_profile"
         android:icon="@drawable/ic_person_black_72dp"
         app:showAsAction="ifRoom" />
 
