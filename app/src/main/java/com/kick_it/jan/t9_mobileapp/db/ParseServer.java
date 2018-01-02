@@ -6,7 +6,6 @@ import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.parse.interceptors.ParseLogInterceptor;
 
 /*
  * Created by taraszaika on 02.01.18.
@@ -31,9 +30,10 @@ public class ParseServer {
         //False = only master key access
         ParseACL.setDefaultACL(defaultACL, true);
 
-        // Add your initialization code here
-        // Parse API is initilized here.
-        Parse.addParseNetworkInterceptor(new ParseLogInterceptor());
+        // Only for logcat and debug mode
+        // Parse.addParseNetworkInterceptor(new ParseLogInterceptor());
+
+        //initialize
         final String YOUR_APPLICATION_ID = "MatchFinder";
         final String YOUR_CLIENT_KEY = "matchfinderclientkey";
         final String YOUR_SERVER_URL = "https://matchfinder.dock.moxd.io/api/";
