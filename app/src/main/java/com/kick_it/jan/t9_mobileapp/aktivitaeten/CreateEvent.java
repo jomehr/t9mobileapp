@@ -31,19 +31,16 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.kick_it.jan.t9_mobileapp.R;
+import com.kick_it.jan.t9_mobileapp.db.ParseServer;
 import com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.kick_it.jan.t9_mobileapp.menu.menu_developer;
 import com.kick_it.jan.t9_mobileapp.menu.menu_faq;
 import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-import com.parse.interceptors.ParseLogInterceptor;
 
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /*
  * Created by Taras on 20.11.2017.
@@ -57,11 +54,12 @@ public class CreateEvent extends AppCompatActivity implements
 
     private int day, month, year, hour, minute;
     private int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
-    LatLng eventLatLng;
+    private long eventDateAndTimeFinal = -1;
+    private LatLng eventPlace;
     private int eventMaxPlayersNumber = -1;
     private String eventDescription = "";
 
-    Button creatEvent;
+    Button creatEventButton;
 
     TextView eventOrtText;
     TextView eventDateAndTimeText;
@@ -82,7 +80,7 @@ public class CreateEvent extends AppCompatActivity implements
         getSupportActionBar().setTitle(getResources().getString(R.string.create));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        creatEvent = findViewById(R.id.createEvent_createButton);
+        creatEventButton = findViewById(R.id.createEvent_createButton);
 
         eventOrtText =  findViewById(R.id.createEvent_eventOrtText);
         eventDateAndTimeText = findViewById(R.id.createEvent_eventDateAndTimeText);
@@ -114,70 +112,30 @@ public class CreateEvent extends AppCompatActivity implements
             }
         });
 
-        creatEvent.setOnClickListener(new View.OnClickListener() {
+        creatEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    creatEventData();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                createEvent();
             }
         });
 
     }
 
-    private void creatEventData() throws ParseException {
+    /**
+     * Create an event and store eventData in ParseServer
+     */
+    private void createEvent() {
 
-        //TODO: Initialisieren in Homescreen oder Login
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
+        ParseServer ps = ParseServer.getInstance(this);
 
-        ParseUser.enableAutomaticUser();
-        ParseACL defaultACL = new ParseACL();
-        // Optionally enable public read access.
-        // defaultACL.setPublicReadAccess(true);
-        //False = only master key access
-        ParseACL.setDefaultACL(defaultACL, true);
+        //TODO: unable createEvent-Button until at least Place, Date and Time are chosen
 
-        // Add your initialization code here
-        // Parse API is initilized here.
-        Parse.addParseNetworkInterceptor(new ParseLogInterceptor());
-        final String YOUR_APPLICATION_ID = "MatchFinder";
-        final String YOUR_CLIENT_KEY = "matchfinderclientkey";
-        final String YOUR_SERVER_URL = "https://matchfinder.dock.moxd.io/api/";
-        Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
-                .applicationId(YOUR_APPLICATION_ID)
-                .clientKey(YOUR_CLIENT_KEY)
-                .server(YOUR_SERVER_URL)   // '/' important after 'api'
-                .build());
+        //Default eventPlace
+        eventPlace = eventPlace == null? new LatLng(0,0) : eventPlace;
 
-        ParseObject eventObjekt = new ParseObject("Event");
-
-        //eventObjekt.put("Place", eventLatLng);
-        //Datum und Zeit in long millis
-        try {
-            long epoch = new SimpleDateFormat("MM/DD/YYYY HH:mm:ss")
-                    .parse(monthFinal + "/" + dayFinal + "/" + yearFinal + " " + hourFinal + ":" + minuteFinal + ":00").getTime() / 1000;
-            eventObjekt.put("DateAndTime", epoch);
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-
-        eventObjekt.put("MaxPleyersNumber", eventMaxPlayersNumber);
-        eventObjekt.put("Description", eventDescription);
-
-        eventObjekt.saveInBackground();
+        ps.saveEventData(eventPlace.latitude, eventPlace.longitude, eventDateAndTimeFinal, eventMaxPlayersNumber, eventDescription);
 
         Toast.makeText(this, "Event Saved ", Toast.LENGTH_SHORT).show();
-
-    }
-
-    //Menü
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return true;
     }
 
     //Place Picker
@@ -207,9 +165,9 @@ public class CreateEvent extends AppCompatActivity implements
 
                 //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
                 if(eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime))
-                    creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+                    creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
 
-                eventLatLng = place.getLatLng();
+                eventPlace = place.getLatLng();
                 eventOrtText.setText(place.getAddress());
             }
         }
@@ -260,12 +218,15 @@ public class CreateEvent extends AppCompatActivity implements
 
         //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
         if(eventOrtText.getText() != getResources().getString(R.string.pick_place))
-            creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+            creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
 
         //TextView füllen
-        String dateAndTimeText = "Datum: "+ dayFinal + "."+ monthFinal + "." + yearFinal
-                + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal);
+        String dateAndTimeText =  (String) ("Datum: " + String.format("%02d", dayFinal) + "." + String.format("%02d",monthFinal) + "." + yearFinal
+                + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal));
         eventDateAndTimeText.setText(dateAndTimeText);
+
+        //set eventDateAndTimeFinal (long) number in milliseconds
+        eventDateAndTimeFinal = convertDateToLong();
 
     }
 
@@ -369,6 +330,36 @@ public class CreateEvent extends AppCompatActivity implements
         TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schkiesst sich die Tastatur
         TODO Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.
         */
+    }
+
+    /**
+     * Method to convert Date and Time - String to long. number of milliseconds;
+     * @return Date and Time as a number of milliseconds.
+     */
+    private long convertDateToLong() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        String dateString = String.format("%02d", dayFinal) + "."+ String.format("%02d", monthFinal) + "." + yearFinal + " "
+                + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal) + ":00";
+        return dateFormat.parse(dateString, new ParsePosition(0)).getTime();
+    }
+
+    /**
+     * Method to convert Date and Time - milliseconds to String.
+     * @return Date and Time as a String of format dd.MM.yyyy HH:mm:ss.
+     */
+    private String convertLongToDate() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        Date eventDate = new Date(eventDateAndTimeFinal);
+        return  dateFormat.format(eventDate);
+    }
+
+    //Menü
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 
     @Override
