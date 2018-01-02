@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@raw/screen_background3"
+        app:srcCompat="@drawable/screen_background3"
         android:scaleType="centerCrop"/>
 
     <RelativeLayout
@@ -42,11 +42,10 @@
         android:focusable="true">
 
         <ImageView
-            android:contentDescription="@string/button_image"
             android:id="@+id/banner_img2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@raw/profilpic"
+            android:src="@drawable/profilpic"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -57,10 +56,10 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|start"
+            android:gravity="bottom|left"
             android:padding="4dp"
+            android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:text="@string/news"
             android:textAlignment="gravity"
             android:textAllCaps="true"
@@ -88,7 +87,7 @@
             android:id="@+id/banner_image2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@raw/banner_team"
+            android:src="@drawable/banner_team"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -99,10 +98,10 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|end"
+            android:gravity="bottom|right"
             android:padding="4dp"
+            android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:text="@string/search_teams"
             android:textAlignment="gravity"
             android:textAllCaps="true"
@@ -130,7 +129,7 @@
             android:id="@+id/banner_image3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@raw/banner_liga"
+            android:src="@drawable/banner_liga"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -141,10 +140,10 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|start"
+            android:gravity="bottom|left"
             android:padding="4dp"
+            android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:text="@string/tabels"
             android:textAlignment="gravity"
             android:textAllCaps="true"
@@ -172,7 +171,7 @@
             android:id="@+id/team_btnImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@raw/banner_teams2"
+            android:src="@drawable/banner_teams2"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -183,10 +182,10 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|end"
+            android:gravity="bottom|right"
             android:padding="4dp"
+            android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:text="@string/your_team"
             android:textAlignment="gravity"
             android:textAllCaps="true"

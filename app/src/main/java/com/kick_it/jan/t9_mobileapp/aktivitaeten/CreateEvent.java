@@ -29,37 +29,44 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.kick_it.jan.t9_mobileapp.R;
+import com.kick_it.jan.t9_mobileapp.db.ParseServer;
 import com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.kick_it.jan.t9_mobileapp.menu.menu_developer;
 import com.kick_it.jan.t9_mobileapp.menu.menu_faq;
 import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /*
  * Created by Taras on 20.11.2017.
  */
 
-public class CreateEvent extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class CreateEvent extends AppCompatActivity implements
+        DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
-    private final int PLACE_PICKER_REQUEST = 1;
+    private int PLACE_PICKER_REQUEST = 1;
+    private int REQUEST = 1;
 
-    private int dayFinal, monthFinal, yearFinal;
+    private int day, month, year, hour, minute;
+    private int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
+    private long eventDateAndTimeFinal = -1;
+    private LatLng eventPlace;
+    private int eventMaxPlayersNumber = -1;
+    private String eventDescription = "";
 
-    //private String fileName = "eventDataFile.txt";
-    //private String filePath = "myExternalFilePath";
+    Button creatEventButton;
 
-    //File myExternalFile;
-    //String myData = "";
+    TextView eventOrtText;
+    TextView eventDateAndTimeText;
+    TextView eventMaxPlayersNumberText;
+    TextView eventDescriptionText;
 
-    private Button creatEvent;
-    private TextView eventOrtText;
-    private TextView eventDateAndTimeText;
-    private TextView eventMaxPlayersNumberText;
-    private TextView eventDescriptionText;
-
-
-    private LinearLayout descriptionLayout;
+    LinearLayout dateAndTimeLayout;
+    LinearLayout maxPlayersLayout;
+    LinearLayout descriptionLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,24 +76,18 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
-        try {
-            getSupportActionBar().setTitle(getResources().getString(R.string.create));
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-
+        getSupportActionBar().setTitle(getResources().getString(R.string.create));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        creatEvent = findViewById(R.id.createEvent_createButton);
+        creatEventButton = findViewById(R.id.createEvent_createButton);
 
         eventOrtText =  findViewById(R.id.createEvent_eventOrtText);
         eventDateAndTimeText = findViewById(R.id.createEvent_eventDateAndTimeText);
         eventMaxPlayersNumberText =  findViewById(R.id.createEvent_eventMaxPlayersText);
         eventDescriptionText =  findViewById(R.id.createEvent_eventDescriptionText);
 
-        LinearLayout dateAndTimeLayout =  findViewById(R.id.createEvent_eventDateAndTime);
-        LinearLayout maxPlayersLayout =  findViewById(R.id.createEvent_eventMaxPlayers);
+        dateAndTimeLayout =  findViewById(R.id.createEvent_eventDateAndTime);
+        maxPlayersLayout =  findViewById(R.id.createEvent_eventMaxPlayers);
         descriptionLayout =  findViewById(R.id.createEvent_eventDescription);
 
         dateAndTimeLayout.setOnClickListener(new View.OnClickListener() {
@@ -110,76 +111,30 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
             }
         });
 
-        creatEvent.setOnClickListener(new View.OnClickListener() {
+        creatEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //creatEventData();
+                createEvent();
             }
         });
 
-        /*
-        if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
-            creatEvent.setEnabled(false);
-        } else {
-            myExternalFile = new File(getExternalFilesDir(filePath), fileName);
-        }
-        */
     }
 
-/*
-    private void creatEventData() {
-        if (eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime)
-                && eventOrtText.getText() != getResources().getString(R.string.ort_auswahl)
-                && eventLatLng != null)
-        {
-            try {
-                FileOutputStream fos = new FileOutputStream(myExternalFile);
-                String data = eventLatLng.latitude + "::"
-                        + eventLatLng.longitude + "::"
-                        + eventOrtText + "::"
-                        + dayFinal + "::"
-                        + monthFinal + "::"
-                        + yearFinal + "::"
-                        + hourFinal + "::"
-                        + minuteFinal + "::"
-                        + eventMaxPlayersNumberText + "::"
-                        + eventDescriptionText;
-                fos.write(data.getBytes());
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Toast.makeText(getApplicationContext(), "SampleFile.txt saved to External Storage...", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(getApplicationContext(), "Bitte füllen Sie alle Daten", Toast.LENGTH_SHORT).show();
-        }
+    /**
+     * Create an event and store eventData in ParseServer
+     */
+    private void createEvent() {
 
-    }
-    */
- /*
-    private static boolean isExternalStorageReadOnly() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
-            return true;
-        }
-        return false;
-    }
+        ParseServer ps = ParseServer.getInstance(this);
 
-    private static boolean isExternalStorageAvailable() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
-            return true;
-        }
-        return false;
-    }
-*/
+        //TODO: unable createEvent-Button until at least Place, Date and Time are chosen
 
-    //Menü
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return true;
+        //Default eventPlace
+        eventPlace = eventPlace == null? new LatLng(0,0) : eventPlace;
+
+        ps.saveEventData(eventPlace.latitude, eventPlace.longitude, eventDateAndTimeFinal, eventMaxPlayersNumber, eventDescription);
+
+        Toast.makeText(this, "Event Saved ", Toast.LENGTH_SHORT).show();
     }
 
     //Place Picker
@@ -187,9 +142,9 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
             startActivityForResult(builder.build(this),PLACE_PICKER_REQUEST);
-        }catch (GooglePlayServicesNotAvailableException e) {
+        } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
-        }catch (GooglePlayServicesRepairableException e) {
+        } catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
         //TODO catch-Block implementieren
@@ -207,9 +162,9 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
                 //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
                 if(eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime))
-                    creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+                    creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
 
-                //LatLng eventLatLng = place.getLatLng();
+                eventPlace = place.getLatLng();
                 eventOrtText.setText(place.getAddress());
             }
         }
@@ -221,9 +176,9 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
     //Wenn auch Zeit gesetzt ist werden die Daten in TextView geändert.
     private void dateTimePickerDialog() {
         Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(CreateEvent.this,CreateEvent.this,
                 year,month,day);
@@ -238,8 +193,8 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
         dayFinal = day;
 
         Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
+        hour = c.get(Calendar.HOUR_OF_DAY);
+        minute = c.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(CreateEvent.this, CreateEvent.this,
                 hour, minute, DateFormat.is24HourFormat(this));
@@ -249,6 +204,10 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+
+        hourFinal = hour;
+        minuteFinal = minute;
+
         //Layout anpassen
         ViewGroup.LayoutParams params = eventDateAndTimeText.getLayoutParams();
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -256,16 +215,17 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
         //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
         if(eventOrtText.getText() != getResources().getString(R.string.pick_place))
-            creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+            creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
 
         //TextView füllen
-        String dateAndTimeText = "Datum: "+ dayFinal + "."+ monthFinal + "." + yearFinal
-                + "\nUhrzeit: " + String.format("%02d", hour) + ":" + String.format("%02d", minute);
+        String dateAndTimeText =  (String) ("Datum: " + String.format("%02d", dayFinal) + "." + String.format("%02d",monthFinal) + "." + yearFinal
+                + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal));
         eventDateAndTimeText.setText(dateAndTimeText);
 
+        //set eventDateAndTimeFinal (long) number in milliseconds
+        eventDateAndTimeFinal = convertDateToLong();
+
     }
-
-
 
     //Number Picker
     private void numberPickerDialog() {
@@ -281,6 +241,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                eventMaxPlayersNumber = myNumberPicker.getValue();
                 eventMaxPlayersNumberText.setText(String.format("%01d", myNumberPicker.getValue()));
             }
         });
@@ -294,7 +255,6 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
         builder.show();
     }
-
 
     //Text Picker
     private void textPickerDialog() {
@@ -331,8 +291,6 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
                 //Tastatur schlissen
                 //imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-
-
                 imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
 
                 //Set TextViewLayout to WRAP_CONTENT
@@ -343,6 +301,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
                 //Set eventDescriptionLayout (Linear Layout) paddingBottom to 10dp
                 descriptionLayout.setPadding(0,0,0,10);
 
+                eventDescription = input.getText().toString();
                 eventDescriptionText.setText(input.getText().toString());
             }
         });
@@ -358,22 +317,46 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
             }
         });
 
-
         builder.show();
 
         //Tastatur automatisch öfnnen
         input.requestFocus();
-        try {
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
         /*
         TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schkiesst sich die Tastatur
         TODO Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.
         */
+    }
+
+    /**
+     * Method to convert Date and Time - String to long. number of milliseconds;
+     * @return Date and Time as a number of milliseconds.
+     */
+    private long convertDateToLong() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        String dateString = String.format("%02d", dayFinal) + "."+ String.format("%02d", monthFinal) + "." + yearFinal + " "
+                + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal) + ":00";
+        return dateFormat.parse(dateString, new ParsePosition(0)).getTime();
+    }
+
+    /**
+     * Method to convert Date and Time - milliseconds to String.
+     * @return Date and Time as a String of format dd.MM.yyyy HH:mm:ss.
+     */
+    private String convertLongToDate() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        Date eventDate = new Date(eventDateAndTimeFinal);
+        return  dateFormat.format(eventDate);
+    }
+
+    //Menü
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 
     @Override
