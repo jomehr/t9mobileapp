@@ -188,9 +188,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
     //Place Picker
     public void pickAPlace(View view) {
-
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
         try {
             startActivityForResult(builder.build(this),PLACE_PICKER_REQUEST);
         }catch (GooglePlayServicesNotAvailableException e) {
@@ -215,7 +213,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
                 if(eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime))
                     creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
 
-                LatLng eventLatLng = place.getLatLng();
+                //LatLng eventLatLng = place.getLatLng();
                 eventOrtText.setText(place.getAddress());
             }
         }
@@ -255,11 +253,6 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-
-        int hourFinal = hour;
-        int minuteFinal = minute;
-
-
         //Layout anpassen
         ViewGroup.LayoutParams params = eventDateAndTimeText.getLayoutParams();
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -271,7 +264,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
 
         //TextView füllen
         String dateAndTimeText = "Datum: "+ dayFinal + "."+ monthFinal + "." + yearFinal
-                + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal);
+                + "\nUhrzeit: " + String.format("%02d", hour) + ":" + String.format("%02d", minute);
         eventDateAndTimeText.setText(dateAndTimeText);
 
     }

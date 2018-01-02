@@ -5,6 +5,7 @@ package com.kick_it.jan.t9_mobileapp.schnittstellen;
  * CustomList for the Team Roster Tab to display an image and the name in a Row.
  */
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,7 @@ public class CustomList extends ArrayAdapter<String>{
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView= inflater.inflate(R.layout.item_roster, null, true);
+        @SuppressLint("InflateParams") View rowView= inflater.inflate(R.layout.item_roster, null, true);
         TextView txtTitle = rowView.findViewById(R.id.text);
 
         ImageView imageView = rowView.findViewById(R.id.img);

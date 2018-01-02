@@ -72,14 +72,14 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        GoogleMap mMap = googleMap;
+
 
         // Add a marker in Gummersbach and move the camera
         LatLng campusGummersbach = new LatLng(51.022964, 7.561997);
-        mMap.addMarker(new MarkerOptions().position(campusGummersbach).title("Marker TH Köln Campus Gummersbach"));
+        googleMap.addMarker(new MarkerOptions().position(campusGummersbach).title("Marker TH Köln Campus Gummersbach"));
 
         //Kamera wird auf Campus hingerichtet mit 18.0 Zoom
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusGummersbach, 17.0f));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusGummersbach, 17.0f));
     }
 
     @Override
