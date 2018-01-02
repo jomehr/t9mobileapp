@@ -14,9 +14,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--buggy mit goßen bitmaps-->
+    <!--buggy mit goßen bitmaps
         <ImageView
         android:id="@+id/backgroundimageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/screen_background3"
+        android:scaleType="centerCrop"/>-->
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +68,7 @@
             android:padding="4dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:text="@string/news"
+            android:text="@string/leaguenews"
             android:textAlignment="gravity"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
@@ -141,7 +150,7 @@
             android:padding="4dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
-            android:text="@string/tabels"
+            android:text="@string/team_tabels"
             android:textAlignment="gravity"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
