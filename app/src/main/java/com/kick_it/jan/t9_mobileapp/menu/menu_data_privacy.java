@@ -20,7 +20,7 @@ public class menu_data_privacy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_security);
+        setContentView(R.layout.activity_menu_data_privacy);
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -43,6 +43,21 @@ public class menu_data_privacy extends AppCompatActivity {
                 return true;
             case R.id.action_profile:
                 startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_settings:
+                startActivity(new Intent(this, menu_settings.class));
+                return true;
+            case R.id.action_developer:
+                startActivity(new Intent(this, menu_developer.class));
+                return true;
+            case R.id.action_faq:
+                startActivity(new Intent(this, menu_faq.class));
+                return true;
+            case R.id.action_sign_out:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_data_privacy:
+                startActivity(new Intent(this, menu_data_privacy.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

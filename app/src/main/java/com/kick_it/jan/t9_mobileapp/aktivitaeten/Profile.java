@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kick_it.jan.t9_mobileapp.R;
+import com.kick_it.jan.t9_mobileapp.menu.*;
 
 /*
  * Created by Jan on 13.11.2017.
@@ -103,7 +104,7 @@ public class Profile extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu2, menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 
@@ -114,7 +115,6 @@ public class Profile extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            /*
             case R.id.action_search:
                 startActivity(new Intent(this, Search.class));
                 return true;
@@ -130,13 +130,12 @@ public class Profile extends AppCompatActivity {
             case R.id.action_faq:
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
-            case R.id.action_sign_out:
-                startActivity(new Intent(this, Profile.class));
-                return true;
             case R.id.action_data_privacy:
                 startActivity(new Intent(this, menu_data_privacy.class));
                 return true;
-             */
+            case R.id.action_sign_out:
+                startActivity(new Intent(this, Login.class));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

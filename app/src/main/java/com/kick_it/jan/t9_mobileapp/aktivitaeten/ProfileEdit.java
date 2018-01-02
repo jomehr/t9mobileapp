@@ -2,6 +2,7 @@ package com.kick_it.jan.t9_mobileapp.aktivitaeten;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kick_it.jan.t9_mobileapp.menu.*;
 import com.kick_it.jan.t9_mobileapp.schnittstellen.InputFilterMinMax;
 import com.kick_it.jan.t9_mobileapp.R;
 
@@ -90,7 +92,7 @@ public class ProfileEdit extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu2, menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 
@@ -101,7 +103,6 @@ public class ProfileEdit extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            /*
             case R.id.action_search:
                 startActivity(new Intent(this, Search.class));
                 return true;
@@ -118,12 +119,11 @@ public class ProfileEdit extends AppCompatActivity {
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                startActivity(new Intent(this, Profile.class));
+                startActivity(new Intent(this, Login.class));
                 return true;
             case R.id.action_data_privacy:
                 startActivity(new Intent(this, menu_data_privacy.class));
                 return true;
-             */
         }
         return super.onOptionsItemSelected(item);
     }

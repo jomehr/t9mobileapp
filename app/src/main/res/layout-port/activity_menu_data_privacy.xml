@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kick_it.jan.t9_mobileapp.menu.menu_faq">
+    tools:context="com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="15dp"
-                    android:text="Placeholder FAQ Bereich"/>
+                    android:text="Placeholder Datenschutzerklärung"/>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
