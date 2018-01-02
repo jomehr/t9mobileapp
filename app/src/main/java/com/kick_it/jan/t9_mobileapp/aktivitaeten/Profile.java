@@ -35,11 +35,6 @@ import com.kick_it.jan.t9_mobileapp.menu.*;
 
 public class Profile extends AppCompatActivity {
 
-    private String PREFER_NAME_REGISTRATION = "Registration";
-    private String PREFER_NAME_PROFILDATA = "ProfilData";
-    private SharedPreferences sharedPreferencesReg;
-    private SharedPreferences sharedPreferencesProf;
-
     private static int RESULT_LOAD_IMAGE = 1;
     private static int PERMISSION_REQUEST_STORAGE = 0;
     private View coordinatorLayout;
@@ -49,8 +44,8 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        sharedPreferencesReg = getSharedPreferences(PREFER_NAME_REGISTRATION, Context.MODE_PRIVATE);
-        sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferencesReg = getSharedPreferences("Registration", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferencesProf = getSharedPreferences("ProfilData", Context.MODE_PRIVATE);
         String profileName = sharedPreferencesReg.getString("Name", "Profil");
         String profileBirthday = sharedPreferencesProf.getString("Geburtstag", null);
         String profileDescription = sharedPreferencesProf.getString("ProfilBeschreibung", null);
@@ -61,7 +56,7 @@ public class Profile extends AppCompatActivity {
         final Toolbar myToolbar = findViewById(R.id.profile_collapsingStaticToolbar);
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.profile_collapsingToolbar);
         AppBarLayout appBar = findViewById(R.id.profile_collapsingToolbarLayout);
-        final View optionalData =  findViewById(R.id.profile_infoOptional);
+        //final View optionalData =  findViewById(R.id.profile_infoOptional);
         FloatingActionButton editBtn = findViewById(R.id.profile_editBtn);
         ImageView profilePicture =  findViewById(R.id.profile_picture);
 

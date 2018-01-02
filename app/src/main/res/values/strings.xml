@@ -3,8 +3,6 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDEYH_d0EQpvyxlYvNWnsKReSY7T1enYFU</string>
 
     <!-- TODO: Placeholder -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="randomimage">Einfach ein Bild</string>
     <string name="teamname">Die Streetfoodballer</string>
     <string name="teamplayercount">Spieleranzahl: 6</string>
     <string name="teamestablishment">Gegründet am 12.12.2005</string>
@@ -18,14 +16,12 @@
     <string name="clock">20:37</string>
 
     <!-- TODO: Miscellaneous -->
-    <string name="event_Radar_Start">EventRadar gestartet</string>
     <string name="add_action">addButton</string>
-    <string name="abouttheteam">Über das Team</string>
     <string name="create">Erstellen</string>
     <string name="max_amount">Maximale Spieler-Anzahl</string>
     <string name="event_ticker">Eventticker</string>
     <string name="single_event">Single Event</string>
-    <string name="chat_put_post">Post verfassen...</string>
+    <string name="chat_put_post">Post verfassen&#8230;</string>
     <string name="pick_place">Ort Auswählen</string>
     <string name="setDateAndTime">Datum und Uhrzeit</string>
     <string name="description">Beschreibung</string>
@@ -46,7 +42,6 @@
     <!-- TODO: SetTitle(), etc. -->
     <string name="bunte_liga">Bunte Liga</string>
     <string name="home_eventradar">Events</string>
-    <string name="home_team">Team</string>
     <string name="home_searchplayer">Spieler</string>
     <string name="home_searchteam">Teams</string>
     <string name="home_search">Suche</string>
@@ -54,11 +49,8 @@
     <string name="teamtab2profile">Profil</string>
     <string name="search_teams">Teams suchen</string>
     <string name="search">Suche</string>
-    <string name="league">Liga</string>
     <string name="news">News</string>
     <string name="tabels">Tabellen</string>
-    <string name="playersearch">Spieler</string>
-    <string name="teams">Teams</string>
     <string name="roster">Aufstellung</string>
     <string name="teamtab3teamchat">Chat</string>
     <string name="find_a_game">Finde ein Spiel</string>
@@ -73,8 +65,18 @@
     <string name="faq">FAQ</string>
     <string name="logout">Abmelden</string>
 
-    <!-- TODO: Navigation Drawer-->
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- TODO: Image Content Description-->
+    <string name="colored_background">Farbiger Hintergrund</string>
+    <string name="button_image">Farbiger Hintergrund</string>
+    <string name="football">Login Fußball Bild</string>
+    <string name="editAgeImage">Alter</string>
+    <string name="editPlaceImage">Wohnort</string>
+    <string name="editDescritionImage">Beschreibung</string>
 
+    <!-- TODO: Login Screen-->
+    <string name="not_a_member_yet">Noch kein Mitglied? Registriere dich!</string>
+    <string name="login">Login</string>
+    <string name="enter_passwort">Passwort eingben</string>
+    <string name="enter_email">EMail eingeben</string>
+    <string name="autologin">Auto-Login</string>
 </resources>

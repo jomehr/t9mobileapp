@@ -12,7 +12,7 @@ import com.kick_it.jan.t9_mobileapp.aktivitaeten.Profile;
 import com.kick_it.jan.t9_mobileapp.aktivitaeten.Search;
 
 
-/**
+/*
  * Created by Christopher on 31.12.2017.
  */
 

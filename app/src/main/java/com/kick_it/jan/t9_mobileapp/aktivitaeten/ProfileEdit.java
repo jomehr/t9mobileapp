@@ -27,7 +27,7 @@ import com.kick_it.jan.t9_mobileapp.schnittstellen.InputFilterMinMax;
 import com.kick_it.jan.t9_mobileapp.R;
 
 
-/**
+/*
  * Created by Jan on 18.12.2017.
  */
 
@@ -35,12 +35,8 @@ public class ProfileEdit extends AppCompatActivity {
 
     private int mDay, mMonth, mYear;
     private EditText editDay, editMonth, editYear;
-    private LinearLayout descriptionLayout, residenceLayout;
+    private LinearLayout descriptionLayout;
     private TextView descriptionText;
-
-    private String PREFER_NAME = "ProfilData";
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +53,7 @@ public class ProfileEdit extends AppCompatActivity {
         editMonth = findViewById(R.id.profiledit_ageMonth);
         editYear = findViewById(R.id.profiledit_ageYear);
         descriptionLayout = findViewById(R.id.profiledit_descriptionLayout);
-        residenceLayout = findViewById(R.id.profiledit_residenceLayout);
+        LinearLayout residenceLayout = findViewById(R.id.profiledit_residenceLayout);
         descriptionText = findViewById(R.id.profiledit_descriptionText);
 
         editDay.setFilters(new InputFilter[]{ new InputFilterMinMax(1, 31)});
@@ -128,7 +124,7 @@ public class ProfileEdit extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean validate() {
+    private boolean validate() {
         boolean valid = true;
 
         mDay = Integer.parseInt(editDay.getText().toString());
@@ -159,14 +155,14 @@ public class ProfileEdit extends AppCompatActivity {
         return  valid;
     }
 
-    public void onValidationFailed() {
+    private void onValidationFailed() {
         Toast.makeText(getApplicationContext(), "Validierung fehlgeschlagen",Toast.LENGTH_SHORT).show();
     }
 
     //Text Picker
     private void textPickerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        String descText = descriptionText.toString();
+        //String descText = descriptionText.toString();
         builder.setTitle(R.string.description);
 
         // Set up the input
@@ -234,14 +230,14 @@ public class ProfileEdit extends AppCompatActivity {
         */
     }
 
-    public void saveData() {
-        sharedPreferences = getSharedPreferences(PREFER_NAME,Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("ProfilData",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         String appendDate = mDay + "." + mMonth + "." +mYear;
         editor.putString("Geburtstag", appendDate);
         editor.putString("ProfilBeschreibung", descriptionText.getText().toString());
-        editor.commit();
+        editor.apply();
     }
 
 }

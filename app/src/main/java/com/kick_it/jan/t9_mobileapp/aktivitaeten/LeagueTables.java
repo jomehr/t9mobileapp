@@ -1,6 +1,6 @@
 package com.kick_it.jan.t9_mobileapp.aktivitaeten;
 
-/**
+/*
  * Created by Christopher on 11.12.2017.
  */
 
@@ -22,9 +22,6 @@ import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
 
 public class LeagueTables extends AppCompatActivity {
 
-
-    ExpandableRelativeLayout expandableLayout1, expandableLayout2, expandableLayout3;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +35,17 @@ public class LeagueTables extends AppCompatActivity {
     }
 
     public void expandableFirstLeague(View view) {
-        expandableLayout1 =  findViewById(R.id.expandableLayout1);
+        ExpandableRelativeLayout expandableLayout1 =  findViewById(R.id.expandableLayout1);
         expandableLayout1.toggle(); // toggle expand and collapse
     }
 
     public void expandableSecondLeague(View view) {
-        expandableLayout2 =  findViewById(R.id.expandableLayout2);
+        ExpandableRelativeLayout expandableLayout2 =  findViewById(R.id.expandableLayout2);
         expandableLayout2.toggle(); // toggle expand and collapse
     }
 
     public void expandableThirdLeague(View view) {
-        expandableLayout3 =  findViewById(R.id.expandableLayout3);
+        ExpandableRelativeLayout expandableLayout3 =  findViewById(R.id.expandableLayout3);
         expandableLayout3.toggle(); // toggle expand and collapse
     }
 

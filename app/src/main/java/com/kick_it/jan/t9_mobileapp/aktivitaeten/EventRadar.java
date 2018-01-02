@@ -27,7 +27,6 @@ import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
 
 public class EventRadar extends AppCompatActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
     private int REQUEST = 1;
 
     @Override
@@ -46,7 +45,7 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
 
         //Listener für "click" auf EventRadar_Button
-        ImageButton btn_Add = (ImageButton) findViewById(R.id.eventRadar_btnAdd);
+        ImageButton btn_Add = findViewById(R.id.eventRadar_btnAdd);
         btn_Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +66,7 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        GoogleMap mMap = googleMap;
 
         // Add a marker in Gummersbach and move the camera
         LatLng campusGummersbach = new LatLng(51.022964, 7.561997);

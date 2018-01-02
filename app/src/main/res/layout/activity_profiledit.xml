@@ -33,6 +33,7 @@
             android:weightSum="7">
 
             <ImageView
+                android:contentDescription="@string/editAgeImage"
                 android:id="@+id/profiledit_ageImage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -106,6 +107,7 @@
             android:weightSum="7">
 
             <ImageView
+                android:contentDescription="@string/editPlaceImage"
                 android:id="@+id/profiledit_residenceImage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -140,6 +142,7 @@
             android:weightSum="7">
 
             <ImageView
+                android:contentDescription="@string/editDescritionImage"
                 android:id="@+id/profiledit_descriptionImage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

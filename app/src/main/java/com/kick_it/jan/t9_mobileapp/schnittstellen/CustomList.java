@@ -1,11 +1,10 @@
 package com.kick_it.jan.t9_mobileapp.schnittstellen;
 
-/**
- * Created by Christopher on 11.12.2017.
- */
 /*
-    CustomList for the Team Roster Tab to display an image and the name in a Row.
+ * Created by Christopher on 11.12.2017.
+ * CustomList for the Team Roster Tab to display an image and the name in a Row.
  */
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;

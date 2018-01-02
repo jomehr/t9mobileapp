@@ -25,9 +25,8 @@ public class SearchTab2Teamsearch extends Fragment implements ISearch {
     private static final String ARG_SEARCHTERM = "search_term";
     private String mSearchTerm = null;
 
-    ArrayList<String> strings = null;
     private IFragmentListener mIFragmentListener = null;
-    ArrayAdapter<String> arrayAdapter = null;
+    private ArrayAdapter<String> arrayAdapter = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class SearchTab2Teamsearch extends Fragment implements ISearch {
 
 
         // CREATE AND FILL THE ARRAYLIST
-        strings = new ArrayList<>();
+        ArrayList<String> strings = new ArrayList<>();
         strings.add("Krampfadergeschwader");
         strings.add("Kebab Connection");
         strings.add("Chronisch Überhopft");

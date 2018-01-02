@@ -1,6 +1,6 @@
 package com.kick_it.jan.t9_mobileapp.schnittstellen;
 
-/**
+/*
  * Created by Jan on 18.12.2017.
  */
 
@@ -16,10 +16,12 @@ public class InputFilterMinMax implements InputFilter {
         this.max = max;
     }
 
+    /*
     public InputFilterMinMax(String min, String max) {
         this.min = Integer.parseInt(min);
         this.max = Integer.parseInt(max);
     }
+    */
 
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -27,7 +29,9 @@ public class InputFilterMinMax implements InputFilter {
             int input = Integer.parseInt(dest.toString() + source.toString());
             if (isInRange(min, max, input))
                 return null;
-        } catch (NumberFormatException nfe) { }
+        } catch (NumberFormatException nfe) {
+            return null;
+        }
         return "";
     }
 

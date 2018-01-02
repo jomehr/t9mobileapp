@@ -20,7 +20,7 @@
          <LinearLayout
              android:layout_gravity="center_horizontal"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
+             android:layout_height="wrap_content"
              android:orientation="vertical">
 
              <RelativeLayout
@@ -39,6 +39,7 @@
                  android:focusable="true">
 
                  <ImageView
+                     android:contentDescription="@string/button_image"
                      android:id="@+id/firstleague_img"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
@@ -56,7 +57,9 @@
                      android:gravity="bottom|left"
                      android:padding="4dp"
                      android:paddingLeft="16dp"
+                     android:paddingRight="16dp"
                      android:paddingStart="16dp"
+                     android:paddingEnd="16dp"
                      android:text="1. Liga"
                      android:textAlignment="gravity"
                      android:textAllCaps="true"
@@ -81,7 +84,7 @@
                      <TableLayout
                          android:layout_gravity="center_horizontal"
                          android:layout_width="match_parent"
-                         android:layout_height="match_parent">
+                         android:layout_height="wrap_content">
 
                          <TableRow
 
@@ -574,6 +577,7 @@
                  android:focusable="true">
 
                  <ImageView
+                     android:contentDescription="@string/button_image"
                      android:id="@+id/secondleague_img"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
@@ -591,7 +595,9 @@
                      android:gravity="bottom|left"
                      android:padding="4dp"
                      android:paddingLeft="16dp"
+                     android:paddingRight="16dp"
                      android:paddingStart="16dp"
+                     android:paddingEnd="16dp"
                      android:text="2. Liga"
                      android:textAlignment="gravity"
                      android:textAllCaps="true"
@@ -603,7 +609,6 @@
                  android:id="@+id/expandableLayout2"
                  android:layout_width="match_parent"
                  android:layout_height="150dp"
-                 android:layout_below="@+id/secondLeague"
                  android:layout_marginLeft="40dp"
                  app:ael_duration="800"
                  app:ael_expanded="false"
@@ -617,7 +622,7 @@
                      <TableLayout
                          android:layout_gravity="center_horizontal"
                          android:layout_width="match_parent"
-                         android:layout_height="match_parent">
+                         android:layout_height="wrap_content">
 
                          <TableRow
                              android:layout_gravity="center"
@@ -1107,6 +1112,7 @@
                 android:focusable="true">
 
                 <ImageView
+                    android:contentDescription="@string/button_image"
                     android:id="@+id/thirdleague_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -1125,6 +1131,8 @@
                     android:padding="4dp"
                     android:paddingLeft="16dp"
                     android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingRight="16dp"
                     android:text="3. Liga"
                     android:textAlignment="gravity"
                     android:textAllCaps="true"
@@ -1137,7 +1145,6 @@
                 android:layout_marginLeft="40dp"
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
-                 android:layout_below="@+id/thirdLeagueBox"
                  app:ael_duration="400"
                  app:ael_expanded="false"
                  app:ael_interpolator="accelerate"
@@ -1150,7 +1157,7 @@
                     <TableLayout
                         android:layout_gravity="center_horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
                         <TableRow
                             android:layout_gravity="center"

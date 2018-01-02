@@ -26,9 +26,8 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
     private static final String ARG_SEARCHTERM = "search_term";
     private String mSearchTerm = null;
 
-    ArrayList<String> strings = null;
     private IFragmentListener mIFragmentListener = null;
-    ArrayAdapter<String> arrayAdapter = null;
+    private ArrayAdapter<String> arrayAdapter = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
 
 
         // CREATE THE ARRAYLIST
-        strings = new ArrayList<>();
+        ArrayList<String> strings = new ArrayList<>();
         // FILL THE ARRAYLIST
             strings.add("Jan Mehr");
             strings.add("Christopher Huntscha");
@@ -49,11 +48,8 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
             strings.add("Taras Zaika");
             strings.add("Tarek Al Ashi");
 
-        //copy arraylist to an array for the CostumArrayList
-        String list2[] = new String[strings.size()];
-        list2 = strings.toArray(list2);
-
         //Should be an Arraylist so you can dynamicly delete and add Entries
+        /*
         Integer[] imageId = {
                 R.drawable.ic_person_black_72dp,
                 R.drawable.ic_person_black_72dp,
@@ -61,6 +57,7 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
                 R.drawable.ic_person_black_72dp,
                 R.drawable.ic_person_black_72dp,
                 R.drawable.ic_person_black_72dp};
+         */
 
         //standard item layout
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);

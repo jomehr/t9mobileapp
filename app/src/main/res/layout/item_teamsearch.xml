@@ -16,8 +16,9 @@
             android:layout_width="277dp"
             android:background="#E2E2E2"
             android:layout_height="match_parent"
-            android:gravity="center|right"
+            android:gravity="center|end"
             android:paddingEnd="32dp"
+            android:paddingStart="32dp"
             android:textSize="24sp" />
     </TableRow>
 </TableLayout>

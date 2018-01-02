@@ -41,13 +41,9 @@ import java.util.Calendar;
  * Created by Taras on 20.11.2017.
  */
 
-public class CreateEvent extends AppCompatActivity implements
-        DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class CreateEvent extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
     private int PLACE_PICKER_REQUEST = 1;
-    private int REQUEST = 1;
-
-    private int day, month, year, hour, minute;
     private int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
 
     //private String fileName = "eventDataFile.txt";
@@ -56,21 +52,18 @@ public class CreateEvent extends AppCompatActivity implements
     //File myExternalFile;
     //String myData = "";
 
-    LatLng eventLatLng;
+    private Button creatEvent;
+    private TextView eventOrtText;
+    private TextView eventDateAndTimeText;
+    private TextView eventMaxPlayersNumberText;
+    private TextView eventDescriptionText;
 
-    Button creatEvent;
 
-    TextView eventOrtText;
-    TextView eventDateAndTimeText;
-    TextView eventMaxPlayersNumberText;
-    TextView eventDescriptionText;
-
-    LinearLayout dateAndTimeLayout;
-    LinearLayout maxPlayersLayout;
-    LinearLayout descriptionLayout;
+    private LinearLayout descriptionLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
@@ -86,8 +79,8 @@ public class CreateEvent extends AppCompatActivity implements
         eventMaxPlayersNumberText =  findViewById(R.id.createEvent_eventMaxPlayersText);
         eventDescriptionText =  findViewById(R.id.createEvent_eventDescriptionText);
 
-        dateAndTimeLayout =  findViewById(R.id.createEvent_eventDateAndTime);
-        maxPlayersLayout =  findViewById(R.id.createEvent_eventMaxPlayers);
+        LinearLayout dateAndTimeLayout =  findViewById(R.id.createEvent_eventDateAndTime);
+        LinearLayout maxPlayersLayout =  findViewById(R.id.createEvent_eventMaxPlayers);
         descriptionLayout =  findViewById(R.id.createEvent_eventDescription);
 
         dateAndTimeLayout.setOnClickListener(new View.OnClickListener() {
@@ -127,9 +120,9 @@ public class CreateEvent extends AppCompatActivity implements
         */
     }
 
-
+/*
     private void creatEventData() {
-    /*    if (eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime)
+        if (eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime)
                 && eventOrtText.getText() != getResources().getString(R.string.ort_auswahl)
                 && eventLatLng != null)
         {
@@ -155,8 +148,9 @@ public class CreateEvent extends AppCompatActivity implements
         else {
             Toast.makeText(getApplicationContext(), "Bitte füllen Sie alle Daten", Toast.LENGTH_SHORT).show();
         }
-        */
+
     }
+    */
  /*
     private static boolean isExternalStorageReadOnly() {
         String extStorageState = Environment.getExternalStorageState();
@@ -192,9 +186,9 @@ public class CreateEvent extends AppCompatActivity implements
 
         try {
             startActivityForResult(builder.build(this),PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException e) {
+        }catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
+        }catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         }
         //TODO catch-Block implementieren
@@ -214,13 +208,11 @@ public class CreateEvent extends AppCompatActivity implements
                 if(eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime))
                     creatEvent.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
 
-                eventLatLng = place.getLatLng();
+                LatLng eventLatLng = place.getLatLng();
                 eventOrtText.setText(place.getAddress());
             }
         }
     }
-
-
 
     //Date/Time Picker
     //Zuerst wird datePickerDialog gestartet.
@@ -228,9 +220,9 @@ public class CreateEvent extends AppCompatActivity implements
     //Wenn auch Zeit gesetzt ist werden die Daten in TextView geändert.
     private void dateTimePickerDialog() {
         Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(CreateEvent.this,CreateEvent.this,
                 year,month,day);
@@ -245,8 +237,8 @@ public class CreateEvent extends AppCompatActivity implements
         dayFinal = day;
 
         Calendar c = Calendar.getInstance();
-        hour = c.get(Calendar.HOUR_OF_DAY);
-        minute = c.get(Calendar.MINUTE);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(CreateEvent.this, CreateEvent.this,
                 hour, minute, DateFormat.is24HourFormat(this));
@@ -259,6 +251,7 @@ public class CreateEvent extends AppCompatActivity implements
 
         hourFinal = hour;
         minuteFinal = minute;
+
 
         //Layout anpassen
         ViewGroup.LayoutParams params = eventDateAndTimeText.getLayoutParams();

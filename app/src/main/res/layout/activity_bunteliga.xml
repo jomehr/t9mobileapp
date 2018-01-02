@@ -15,7 +15,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--buggy mit goßen bitmaps-->
-        <ImageView
+    <ImageView
+        android:contentDescription="@string/colored_background"
         android:id="@+id/backgroundimageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,6 +42,7 @@
         android:focusable="true">
 
         <ImageView
+            android:contentDescription="@string/button_image"
             android:id="@+id/banner_img2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,10 +57,11 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|left"
+            android:gravity="bottom|start"
             android:padding="4dp"
-            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="@string/news"
             android:textAlignment="gravity"
             android:textAllCaps="true"
@@ -82,6 +85,7 @@
         android:focusable="true">
 
         <ImageView
+            android:contentDescription="@string/button_image"
             android:id="@+id/banner_image2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -96,10 +100,11 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|right"
+            android:gravity="bottom|end"
             android:padding="4dp"
-            android:paddingLeft="16dp"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingRight="16dp"
             android:text="@string/search_teams"
             android:textAlignment="gravity"
             android:textAllCaps="true"
@@ -123,6 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/searchTeamContainer" android:focusable="true">
 
         <ImageView
+            android:contentDescription="@string/button_image"
             android:id="@+id/banner_image3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -137,10 +143,11 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|left"
+            android:gravity="bottom|start"
             android:padding="4dp"
-            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="@string/tabels"
             android:textAlignment="gravity"
             android:textAllCaps="true"
@@ -164,6 +171,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tableContainer" android:focusable="true">
 
         <ImageView
+            android:contentDescription="@string/button_image"
             android:id="@+id/team_btnImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -178,10 +186,11 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|right"
+            android:gravity="bottom|end"
             android:padding="4dp"
-            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="@string/your_team"
             android:textAlignment="gravity"
             android:textAllCaps="true"

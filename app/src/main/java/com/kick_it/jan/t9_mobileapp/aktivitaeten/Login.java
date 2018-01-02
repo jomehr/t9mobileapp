@@ -19,12 +19,9 @@ import com.kick_it.jan.t9_mobileapp.R;
 
 public class Login extends AppCompatActivity {
 
-    private  String PREFER_NAME = "Registration";
-    private  SharedPreferences sharedPreferences;
-    private  SharedPreferences.Editor editor;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
-    private Button btn_login;
-    private TextView btn_register;
     private EditText edit_email,edit_password;
     private CheckBox check_remember;
 
@@ -33,17 +30,18 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        sharedPreferences = getSharedPreferences(PREFER_NAME, 0);
+        sharedPreferences = getSharedPreferences("Registration", 0);
         editor = sharedPreferences.edit();
+        editor.apply();
 
-        btn_login = findViewById(R.id.login_loginBtn);
-        btn_register = findViewById(R.id.login_registerBtn);
+        Button btn_login = findViewById(R.id.login_loginBtn);
+        TextView btn_register = findViewById(R.id.login_registerBtn);
         edit_email = findViewById(R.id.login_inputEmail);
         edit_password = findViewById(R.id.login_inputPassword);
         check_remember = findViewById(R.id.login_checkBox);
 
         Boolean remember = sharedPreferences.getBoolean("Erinnerung", false);
-        if (remember == true) {
+        if (remember) {
             edit_email.setText(sharedPreferences.getString("Email", null));
             edit_password.setText(sharedPreferences.getString("Passwort", null));
             check_remember.setChecked(true);
@@ -64,7 +62,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public void login() {
+    private void login() {
 
         if (!validate()) {
             onLoginFailed();
@@ -96,7 +94,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    public boolean validate() {
+    private boolean validate() {
         boolean valid = true;
 
         String email = edit_email.getText().toString();

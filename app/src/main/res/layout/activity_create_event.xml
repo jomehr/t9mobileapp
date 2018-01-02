@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
+        android:contentDescription="@string/colored_background"
         android:id="@+id/backgroundimageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,9 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
+            android:focusable="true"
             android:orientation="horizontal">
 
             <ImageView
+                android:contentDescription="@string/button_image"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -59,9 +61,11 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:clickable="true"
+            android:focusable="true"
             android:orientation="horizontal">
 
             <ImageView
+                android:contentDescription="@string/button_image"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -87,9 +91,11 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:clickable="true"
+            android:focusable="true"
             android:orientation="horizontal">
 
             <ImageView
+                android:contentDescription="@string/button_image"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -115,10 +121,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:clickable="true"
+            android:focusable="true"
             android:orientation="horizontal"
             android:paddingBottom="100dp">
 
             <ImageView
+                android:contentDescription="@string/button_image"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

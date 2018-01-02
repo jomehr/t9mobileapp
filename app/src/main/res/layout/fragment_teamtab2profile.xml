@@ -21,6 +21,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
+                android:contentDescription="@string/button_image"
                 android:id="@+id/teamBanner"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"

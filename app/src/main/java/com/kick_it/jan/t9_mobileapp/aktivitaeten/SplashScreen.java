@@ -8,9 +8,9 @@ import android.os.Bundle;
 import com.kick_it.jan.t9_mobileapp.R;
 
 public class SplashScreen extends AppCompatActivity {
-    private static int welcome = 500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int timeInMS = 500;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
 
@@ -21,6 +21,6 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },welcome);
+        },timeInMS);
     }
 }

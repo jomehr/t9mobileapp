@@ -18,7 +18,6 @@ import com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.kick_it.jan.t9_mobileapp.menu.menu_developer;
 import com.kick_it.jan.t9_mobileapp.menu.menu_faq;
 import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
-import com.kick_it.jan.t9_mobileapp.schnittstellen.IDataCallback;
 import com.kick_it.jan.t9_mobileapp.schnittstellen.IFragmentListener;
 import com.kick_it.jan.t9_mobileapp.schnittstellen.ISearch;
 import com.kick_it.jan.t9_mobileapp.schnittstellen.PageAdapter;
@@ -28,24 +27,22 @@ import java.util.ArrayList;
 
 public class Search extends AppCompatActivity implements TabLayout.OnTabSelectedListener, SearchView.OnQueryTextListener, IFragmentListener {
 
-    //This is our tablayout
-    private TabLayout tabLayout;
-
     //This is our viewPager
     private ViewPager viewPager;
 
-    ArrayList<ISearch> iSearch = new ArrayList<>();
-    private MenuItem searchMenuItem;
+    private ArrayList<ISearch> iSearch = new ArrayList<>();
     private String newText;
     private PageAdapter adapter;
-    ArrayList<String> listData = null;
+    private ArrayList<String> listData = null;
 
-    IDataCallback iDataCallback = null;
+    /* never used
+    private IDataCallback iDataCallback = null;
 
     public void setiDataCallback(IDataCallback iDataCallback) {
         this.iDataCallback = iDataCallback;
         iDataCallback.onFragmentCreated(listData);
     }
+    */
 
     @Override
     public void addiSearch(ISearch iSearch) {
@@ -69,7 +66,7 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
         getSupportActionBar().setElevation(20);
         listData = new ArrayList<>();
         //Initializing the tablayout
-        tabLayout = findViewById(R.id.tabLayout);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
 
         //Adding the tabs using addTab() method
         tabLayout.addTab(tabLayout.newTab().setText(R.string.home_searchplayer));
@@ -124,7 +121,7 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
 
         inflater.inflate(R.menu.menu, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchMenuItem = menu.findItem(R.id.action_search);
+        MenuItem searchMenuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchMenuItem.getActionView();
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));

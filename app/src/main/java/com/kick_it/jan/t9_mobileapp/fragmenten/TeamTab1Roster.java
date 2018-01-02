@@ -19,11 +19,10 @@ import com.kick_it.jan.t9_mobileapp.R;
  */
 
 public class TeamTab1Roster extends Fragment{
-    ListView list;
     /*
         Hardcoded names, should get names from the Database and and them before building the layout
      */
-    String[] playernames = {
+    private String[] playernames = {
             "Jan Mehr",
             "Christopher Huntscha",
             "Simon Mertens",
@@ -33,7 +32,7 @@ public class TeamTab1Roster extends Fragment{
     /*
          Hardcoded picture paths, should get names from the Database before building the layout
     */
-    Integer[] imageId = {
+    private Integer[] imageId = {
             R.drawable.ic_person_black_72dp,
             R.drawable.ic_person_black_72dp,
             R.drawable.ic_person_black_72dp,
@@ -47,7 +46,7 @@ public class TeamTab1Roster extends Fragment{
         View rootView = inflater.inflate(R.layout.fragment_teamtab1roster, container, false);
 
         CustomList adapter = new CustomList(getActivity(), playernames, imageId);
-        list = rootView.findViewById(R.id.listView1);
+        ListView list = rootView.findViewById(R.id.listView1);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

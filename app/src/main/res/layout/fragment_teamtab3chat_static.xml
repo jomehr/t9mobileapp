@@ -26,9 +26,9 @@
                     android:id="@+id/name2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"/>
                 <TextView
                     android:id="@+id/chattxt2"
@@ -63,9 +63,9 @@
                     android:text="Christopher Huntscha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"/>
                 <TextView
                     android:id="@+id/chattxt3"
@@ -98,9 +98,9 @@
                     android:text="Simon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"/>
                 <TextView
                     android:id="@+id/chattxt4"
@@ -133,9 +133,9 @@
                     android:text="Tarek"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"/>
                 <TextView
                     android:id="@+id/chattxt5"
@@ -168,9 +168,9 @@
                     android:id="@+id/ownname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"/>
                 <TextView
                     android:id="@+id/ownchattxt"
@@ -200,6 +200,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
         <EditText
+            android:labelFor="@+id/editText"
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="40dp"

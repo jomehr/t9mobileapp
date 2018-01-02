@@ -20,19 +20,15 @@ public class Registration extends AppCompatActivity{
 
     private static final String PREFER_NAME = "Registration";
 
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    Button btn_register;
-    TextView btn_login;
-    EditText edit_email, edit_name, edit_password;
+    private EditText edit_email, edit_name, edit_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        btn_register = findViewById(R.id.register_registerBtn);
-        btn_login =  findViewById(R.id.register_loginBtn);
+        Button btn_register = findViewById(R.id.register_registerBtn);
+        TextView btn_login =  findViewById(R.id.register_loginBtn);
         edit_email = findViewById(R.id.register_inputEmail);
         edit_name = findViewById(R.id.register_inputName);
         edit_password = findViewById(R.id.register_inputPassword);
@@ -52,15 +48,15 @@ public class Registration extends AppCompatActivity{
         });
     }
 
-    public void register() {
+    private void register() {
 
         if (!validate()) {
             onRegistrationFailed();
             return;
         }
 
-        sharedPreferences = getSharedPreferences(PREFER_NAME,0);
-        editor = sharedPreferences.edit();
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFER_NAME,0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         String email = edit_email.getText().toString();
         String name = edit_name.getText().toString();
@@ -75,7 +71,7 @@ public class Registration extends AppCompatActivity{
             editor.putString("Email", email);
             editor.putString("Name", name);
             editor.putString("Passwort", password);
-            editor.commit();
+            editor.apply();
             Toast.makeText(getApplicationContext(), "Daten bearbeitet",Toast.LENGTH_SHORT).show();
 
             startActivity(new Intent(Registration.this, Login.class));
@@ -83,7 +79,7 @@ public class Registration extends AppCompatActivity{
         }
     }
 
-    public boolean validate() {
+    private boolean validate() {
         boolean valid = true;
 
         String email = edit_email.getText().toString();
@@ -114,7 +110,7 @@ public class Registration extends AppCompatActivity{
         return valid;
     }
 
-    public void onRegistrationFailed() {
+    private void onRegistrationFailed() {
         Toast.makeText(getApplicationContext(), "Registrierung fehlgeschlagen",Toast.LENGTH_SHORT).show();
     }
 }
