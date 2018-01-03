@@ -79,4 +79,11 @@
     <string name="enter_passwort">Passwort eingben</string>
     <string name="enter_email">EMail eingeben</string>
     <string name="autologin">Auto-Login</string>
+    <string name="experiences">Erfahrungen:</string>
+    <string name="favourite_team">Lieblings-Team:</string>
+    <string name="profile_defaultDescription">Beschreibe dich in wenigen Worten. Deine Mitspieler würden gerne mehr über dich erfahren.</string>
+    <string name="profiledit_favouriteareas">Deine Lieblingsplätze</string>
+    <string name="profiledit_yourexperience">Deine Erfahrungen</string>
+    <string name="profiledit_yourfavouriteteam">Dein Lieblingsteam</string>
+    <string name="profiledit_yourteam">Dein Team</string>
 </resources>

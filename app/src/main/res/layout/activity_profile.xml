@@ -82,7 +82,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/profile_infoRequired"
+                android:divider="@drawable/divider_green"
+                android:showDividers="middle|end"
+                android:dividerPadding="8dp"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/profile_descriptionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="2sp"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="@string/profile_defaultDescription"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="22sp"
+                    android:textStyle="italic"
+                    android:typeface="sans" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -108,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="20dp"
-                        android:text="@string/n_a"
+                        android:hint="@string/n_a"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="24sp" />
                 </LinearLayout>
@@ -137,25 +155,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="20dp"
-                        android:text="@string/n_a"
+                        android:hint="@string/n_a"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="24sp" />
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/profile_descriptionText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="2sp"
-                    android:layout_marginTop="8dp"
-                    android:padding="4dp"
-                    android:text="@string/templatestring_long"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="22sp"
-                    android:textStyle="italic"
-                    android:typeface="sans" />
 
             </LinearLayout>
 
@@ -163,7 +166,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/profile_infoOptional"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:divider="@drawable/divider_green"
+                android:dividerPadding="8dp"
+                android:showDividers="middle">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -189,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="20dp"
-                        android:text="@string/n_a"
+                        android:hint="@string/n_a"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="24sp" />
 
@@ -205,7 +211,7 @@
 
                     <TextView
                         android:id="@+id/profile_areaHeader"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="10dp"
@@ -235,7 +241,7 @@
                         android:id="@+id/profile_experienceHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/experience_as_player"
+                        android:text="@string/experiences"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="10dp"
@@ -245,7 +251,37 @@
                         android:id="@+id/profile_experienceValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/n_a"
+                        android:hint="@string/n_a"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profile_favouriteTeam"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/profile_favouriteTeamHeader"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/favourite_team"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/profile_favouriteTeamValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/n_a"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="20dp"
