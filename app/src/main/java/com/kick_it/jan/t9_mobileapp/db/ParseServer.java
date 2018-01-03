@@ -36,7 +36,7 @@ public class ParseServer {
         //False = only master key access
         ParseACL.setDefaultACL(defaultACL, true);
 
-        // Only for logcat and debug mode
+        // Only for Logcat and debug mode
         // Parse.addParseNetworkInterceptor(new ParseLogInterceptor());
 
         //initialize
