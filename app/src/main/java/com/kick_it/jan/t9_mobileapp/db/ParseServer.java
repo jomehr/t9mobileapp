@@ -1,10 +1,16 @@
 package com.kick_it.jan.t9_mobileapp.db;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /*
@@ -61,13 +67,37 @@ public class ParseServer {
 
         ParseObject eventObjekt = new ParseObject("Event");
 
-        eventObjekt.put("PlaceLat", placeLat);
-        eventObjekt.put("PlaceLng", placeLng);
-        eventObjekt.put("DateAndTime", dateAndTime);
-        eventObjekt.put("MaxPleyersNumber", maxPlayersNumber);
-        eventObjekt.put("Description", description);
+        eventObjekt.put("placeLat", placeLat);
+        eventObjekt.put("placeLng", placeLng);
+        eventObjekt.put("dateAndTime", dateAndTime);
+        eventObjekt.put("maxPleyersNumber", maxPlayersNumber);
+        eventObjekt.put("description", description);
 
         eventObjekt.saveInBackground();
+
+    }
+
+    public synchronized void loadEventData(final Context appContext)  {
+
+        //save context to handle it into the inner class for making Toast on UI
+        final Context con = appContext;
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+
+        ///Example
+        query.getInBackground("UDcxbKDuWD", new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    // object will be your event
+                    Toast.makeText(con,"Ort: " + object.getLong("placeLat")+ " , " + object.getLong("placeLng")
+                            ,Toast.LENGTH_SHORT).show();
+                } else {
+                    // something went wrong
+                    Log.d("Getting", "Something wrong getting File " + e);
+                }
+            }
+        });
+        ///
 
     }
 }
