@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.kick_it.jan.t9_mobileapp.db.entities.Event;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -18,6 +19,8 @@ import com.parse.ParseUser;
  * new ParseServer
  */
 public class ParseServer {
+
+    public static Event event;
 
     // Eine (versteckte) Klassenvariable vom Typ der eigene Klasse
     private static ParseServer instance;
@@ -77,19 +80,40 @@ public class ParseServer {
 
     }
 
-    public synchronized void loadEventData(final Context appContext)  {
+    public synchronized void loadEventData(Context appContex)  {
 
         //save context to handle it into the inner class for making Toast on UI
-        final Context con = appContext;
+        final Context con = appContex;
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
 
         ///Example
-        query.getInBackground("UDcxbKDuWD", new GetCallback<ParseObject>() {
+        try {
+            ParseObject object = query.get("mmcotyyC79");
+            event = new Event(object.getObjectId(),
+                    object.getDouble("placeLat"),
+                    object.getDouble("placeLng"),
+                    object.getLong("dateAndTime"),
+                    object.getInt("maxPlayersNumber"),
+                    object.getString("description"));
+            Toast.makeText(con,"Ort: " + object.getDouble("placeLat")+ " , " + object.getDouble("placeLng")
+                    ,Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        /*
+        query.getInBackground("mmcotyyC79", new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     // object will be your event
-                    Toast.makeText(con,"Ort: " + object.getLong("placeLat")+ " , " + object.getLong("placeLng")
+                      event = new Event(object.getObjectId(),
+                            object.getDouble("placeLat"),
+                            object.getDouble("placeLng"),
+                            object.getLong("dateAndTime"),
+                            object.getInt("maxPlayersNumber"),
+                            object.getString("description"));
+                    Toast.makeText(con,"Ort: " + object.getDouble("placeLat")+ " , " + object.getDouble("placeLng")
                             ,Toast.LENGTH_SHORT).show();
                 } else {
                     // something went wrong
@@ -97,6 +121,7 @@ public class ParseServer {
                 }
             }
         });
+        */
         ///
 
     }

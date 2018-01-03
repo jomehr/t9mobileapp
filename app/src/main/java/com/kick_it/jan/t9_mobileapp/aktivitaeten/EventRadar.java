@@ -16,10 +16,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kick_it.jan.t9_mobileapp.R;
+import com.kick_it.jan.t9_mobileapp.db.ParseServer;
 import com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.kick_it.jan.t9_mobileapp.menu.menu_developer;
 import com.kick_it.jan.t9_mobileapp.menu.menu_faq;
 import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Updated by taraszaika on 20.11.17.
@@ -73,10 +76,19 @@ public class EventRadar extends AppCompatActivity implements OnMapReadyCallback 
 
         // Add a marker in Gummersbach and move the camera
         LatLng campusGummersbach = new LatLng(51.022964, 7.561997);
+
+        ///TEST
+        ParseServer ps = ParseServer.getInstance(this);
+        ps.loadEventData(this);
+        LatLng kosivSchool = new LatLng(ParseServer.event.getPlaceLatitude(), ParseServer.event.getPlaceLongitude());
+        googleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + "     "+ParseServer.event.getDescription()));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kosivSchool, 17.0f));
+        ///
+
         googleMap.addMarker(new MarkerOptions().position(campusGummersbach).title("Marker TH Köln Campus Gummersbach"));
 
-        //Kamera wird auf Campus hingerichtet mit 18.0 Zoom
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusGummersbach, 17.0f));
+        //Kamera wird auf Campus hingerichtet mit 17.0 Zoom
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusGummersbach, 17.0f));
     }
 
     @Override
