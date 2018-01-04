@@ -73,6 +73,7 @@ public class LeagueTables extends AppCompatActivity {
                 thirdLeagueRanks, thirdLeagueTeamNames, thirdLeagueGamesPlayed, thirdLeagueGoaldDiff, thirdLeaguePoints);
         ListView thirdleague = findViewById(R.id.thirdleagueTable);
         thirdleague.setAdapter(thirdLeagueAdapter);
+
     }
 
     public void expandableFirstLeague(View view) {

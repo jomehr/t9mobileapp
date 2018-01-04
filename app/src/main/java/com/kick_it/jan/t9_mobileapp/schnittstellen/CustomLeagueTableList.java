@@ -24,6 +24,7 @@ public class CustomLeagueTableList extends ArrayAdapter<String>{
     private final int[] teamgamesplayed;
     private final int[] teamgoaldifference;
 
+
     public CustomLeagueTableList(Activity context, int[] teamrank, String[] teamname, int[] teampoints, int[] teamgamesplayed, int[] teamgoaldifference) {
         super(context, R.layout.item_league_tables, teamname);
         this.context = context;
@@ -32,7 +33,6 @@ public class CustomLeagueTableList extends ArrayAdapter<String>{
         this.teampoints = teampoints;
         this.teamgamesplayed = teamgamesplayed;
         this.teamgoaldifference = teamgoaldifference;
-
     }
 
     @Override

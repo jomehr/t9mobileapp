@@ -13,15 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
+        android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <RelativeLayout
                 android:background="@drawable/border_shadow"
                 android:id="@+id/firstleague"
@@ -36,7 +36,6 @@
                 android:onClick="expandableFirstLeague"
                 android:clickable="true"
                 android:focusable="true">
-
                 <ImageView
                     android:contentDescription="@string/button_image"
                     android:id="@+id/firstleague_img"
@@ -45,7 +44,6 @@
                     android:src="@raw/profilpic"
                     android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent" />
-
                 <TextView
                     android:id="@+id/fistleague_txt"
                     android:layout_width="match_parent"
@@ -59,99 +57,97 @@
                     android:paddingRight="16dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:text="1. Liga"
+                    android:text="@string/firstLeague"
                     android:textAlignment="gravity"
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    tools:ignore="HardcodedText" />
+                    android:textSize="20sp"/>
             </RelativeLayout>
-
             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
                 android:id="@+id/expandableLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginStart="40dp"
-                app:ael_duration="800"
+                android:background="#E6E6E6"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:ael_duration="1600"
                 app:ael_expanded="false"
                 app:ael_interpolator="accelerate"
                 app:ael_orientation="vertical">
-                <android.support.v4.widget.NestedScrollView
-                    android:layout_gravity="center_horizontal"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <TableLayout
-                        android:layout_gravity="center_horizontal"
+                <TableLayout
+                    android:id="@+id/firstleagueDescription"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent" >
 
-                        <TableRow
+                        <TextView
+                            android:id="@+id/leagueplacenumber"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/rank" />
 
-                            android:layout_marginRight="5dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                        <TextView
+                            android:layout_marginEnd="7dp"
+                            android:layout_weight="1"
+                            android:id="@+id/leagueteamname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/team" />
 
-                            <TextView
-                                android:id="@+id/leagueplacenumber"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Platz"
-                                tools:ignore="HardcodedText" />
+                        <TextView
+                            android:id="@+id/leaguegamesplayed"
+                            android:layout_marginEnd="15dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/amount_games" />
 
-                            <TextView
-                                android:layout_marginEnd="5dp"
-                                android:id="@+id/leagueteamname"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Team"
-                                tools:ignore="HardcodedText" />
+                        <TextView
+                            android:id="@+id/leaguegoaldifference"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/goal_difference" />
 
-                            <TextView
-                                android:id="@+id/leaguegamesplayed"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Spiele"
-                                tools:ignore="HardcodedText" />
-
-                            <TextView
-                                android:id="@+id/leaguegoaldifference"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Tordifferenz"
-                                tools:ignore="HardcodedText" />
-
-                            <TextView
-                                android:id="@+id/leaguepoints"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Punkte"
-                                tools:ignore="HardcodedText" />
-                        </TableRow>
-
-                        <ListView
-                            android:id="@+id/firstleagueTable"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:divider="#00000000"
-                            android:dividerHeight="16dp">
-                        </ListView>
-                    </TableLayout>
-                </android.support.v4.widget.NestedScrollView>
-
+                        <TextView
+                            android:id="@+id/leaguepoints"
+                            android:layout_marginEnd="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/points"
+                            android:layout_weight="1"
+                            />
+                    </TableRow>
+                </TableLayout>
+                <ListView
+                    android:layout_below="@id/firstleagueDescription"
+                    android:id="@+id/firstleagueTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:dividerHeight="3dp">
+                </ListView>
+                </RelativeLayout>
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
             <RelativeLayout
+                android:layout_below="@+id/expandableLayout1"
                 android:background="@drawable/border_shadow"
                 android:id="@+id/secondLeague"
                 android:layout_width="match_parent"
@@ -182,103 +178,97 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerVertical="true"
                     android:background="@color/colorPrimaryOpacity"
-                    android:gravity="bottom|start"
+                    android:gravity="bottom|end"
                     android:padding="4dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:text="2. Liga"
+                    android:text="@string/secondLeague"
                     android:textAlignment="gravity"
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    tools:ignore="HardcodedText" />
+                    android:textSize="20sp"/>
             </RelativeLayout>
-
             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
                 android:id="@+id/expandableLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginStart="40dp"
-                app:ael_duration="800"
+                android:background="#E6E6E6"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:ael_duration="1600"
                 app:ael_expanded="false"
                 app:ael_interpolator="accelerate"
                 app:ael_orientation="vertical">
-                <android.support.v4.widget.NestedScrollView
-                    android:layout_gravity="center_horizontal"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <TableLayout
-                        android:layout_gravity="center_horizontal"
+                <TableLayout
+                    android:id="@+id/secondleagueDescription"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent" >
 
-                        <TableRow
+                        <TextView
+                            android:id="@+id/leagueplacenumber2"
+                            android:layout_marginEnd="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:text="@string/rank"/>
 
-                            <TextView
-                                android:id="@+id/textView80"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Platz"
-                                tools:ignore="HardcodedText" />
+                        <TextView
+                            android:layout_marginEnd="5dp"
+                            android:id="@+id/leagueteamname2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/team" />
 
-                            <TextView
-                                android:layout_marginEnd="5dp"
-                                android:id="@+id/textView70"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Team"
-                                tools:ignore="HardcodedText" />
+                        <TextView
+                            android:id="@+id/leaguegamesplayed2"
+                            android:layout_marginEnd="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/amount_games"/>
 
-                            <TextView
-                                android:id="@+id/textfasdView6sdf0"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Spiele"
-                                tools:ignore="HardcodedText,TooManyViews" />
+                        <TextView
+                            android:id="@+id/leaguegoaldifference2"
+                            android:layout_marginEnd="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/goal_difference"/>
 
-                            <TextView
-                                android:id="@+id/textView61"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Tordifferenz"
-                                tools:ignore="HardcodedText" />
-
-                            <TextView
-                                android:id="@+id/textView104"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Punkte"
-                                tools:ignore="HardcodedText" />
-                        </TableRow>
-
-
-                        <ListView
-                            android:id="@+id/secondleagueTable"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:divider="#00000000"
-                            android:dividerHeight="16dp">
-                        </ListView>
-                    </TableLayout>
-                </android.support.v4.widget.NestedScrollView>
+                        <TextView
+                            android:id="@+id/leaguepoints2"
+                            android:layout_marginEnd="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/points"/>
+                    </TableRow>
+                </TableLayout>
+                </RelativeLayout>
+                <ListView
+                    android:id="@+id/secondleagueTable"
+                    android:layout_below="@id/secondleagueDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:dividerHeight="3dp">
+                </ListView>
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
             <RelativeLayout
+                android:layout_below="@+id/expandableLayout2"
                 android:background="@drawable/border_shadow"
                 android:id="@+id/thirdLeagueBox"
                 android:layout_width="match_parent"
@@ -292,7 +282,6 @@
                 android:onClick="expandableThirdLeague"
                 android:clickable="true"
                 android:focusable="true">
-
                 <ImageView
                     android:contentDescription="@string/button_image"
                     android:id="@+id/thirdleague_img"
@@ -301,7 +290,6 @@
                     android:src="@raw/profilpic"
                     android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent" />
-
                 <TextView
                     android:id="@+id/thirdleague_txt"
                     android:layout_width="match_parent"
@@ -315,95 +303,83 @@
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:paddingRight="16dp"
-                    android:text="3. Liga"
+                    android:text="@string/thridLeague"
                     android:textAlignment="gravity"
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    tools:ignore="HardcodedText" />
-            </RelativeLayout>
-
+                    android:textSize="20sp"/>
+        </RelativeLayout>
             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
                 android:id="@+id/expandableLayout3"
-                android:layout_marginStart="40dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:ael_duration="400"
+                android:layout_height="150dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                app:ael_duration="800"
                 app:ael_expanded="false"
                 app:ael_interpolator="accelerate"
                 app:ael_orientation="vertical">
-
-                <android.support.v4.widget.NestedScrollView
+                <TableLayout
+                    android:id="@+id/thirdleagueDescription"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TableLayout
-                        android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent" >
 
-                        <TableRow
+                        <TextView
+                            android:id="@+id/leagueplacenumber3"
+                            android:layout_marginEnd="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:text="@string/rank"/>
 
-                            <TextView
-                                android:id="@+id/textView8"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Platz"
-                                tools:ignore="HardcodedText" />
+                        <TextView
+                            android:layout_marginEnd="5dp"
+                            android:id="@+id/leagueteamname3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/team" />
 
-                            <TextView
-                                android:layout_marginEnd="5dp"
-                                android:id="@+id/textView7"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Team"
-                                tools:ignore="HardcodedText" />
+                        <TextView
+                            android:id="@+id/leaguegamesplayed3"
+                            android:layout_marginEnd="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/amount_games"/>
 
-                            <TextView
-                                android:id="@+id/textView6"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Spiele"
-                                tools:ignore="HardcodedText" />
+                        <TextView
+                            android:id="@+id/leaguegoaldifference3"
+                            android:layout_marginEnd="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/goal_difference"/>
 
-                            <TextView
-                                android:id="@+id/textView"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Tordifferenz"
-                                tools:ignore="HardcodedText" />
-
-                            <TextView
-                                android:id="@+id/textView10"
-                                android:layout_marginEnd="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Punkte"
-                                tools:ignore="HardcodedText" />
-                        </TableRow>
-
-                        <ListView
-                            android:id="@+id/thirdleagueTable"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:divider="#00000000"
-                            android:dividerHeight="16dp">
-                        </ListView>
-                    </TableLayout>
-                </android.support.v4.widget.NestedScrollView>
+                        <TextView
+                            android:id="@+id/leaguepoints3"
+                            android:layout_marginEnd="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/points"/>
+                    </TableRow>
+                </TableLayout>
+                <ListView
+                    android:layout_below="@id/thirdleagueDescription"
+                    android:id="@+id/thirdleagueTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:dividerHeight="3dp">
+                </ListView>
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
