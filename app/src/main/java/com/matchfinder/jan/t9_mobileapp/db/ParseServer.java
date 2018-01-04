@@ -86,7 +86,7 @@ public class ParseServer {
 
         ///Example
         try {
-            ParseObject object = query.get("TtCmeUDrHg");
+            ParseObject object = query.get("SkNnLghmo3");
             event = new Event(object.getObjectId(),
                     object.getDouble("placeLat"),
                     object.getDouble("placeLng"),
