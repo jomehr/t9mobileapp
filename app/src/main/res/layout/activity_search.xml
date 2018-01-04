@@ -8,7 +8,7 @@
     app:actionViewClass="android.support.v7.widget.SearchView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kick_it.jan.t9_mobileapp.aktivitaeten.Search">
+    tools:context="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Search">
 
     <!-- our toolbar -->
     <android.support.v7.widget.Toolbar
