@@ -33,7 +33,8 @@
     <string name="profiledit">Profil bearbeiten</string>
     <string name="profileBanner">Profilbild</string>
     <string name="residence">Wohnort:</string>
-    <string name="age">Alter:</string>
+    <string name="your_selected_age">Alter:</string>
+    <string name="your_selected_team">Team:</string>
     <string name="n_a">N/A</string>
     <string name="team">Team</string>
     <string name="favorite_football_ground">Lieblings-Bolzplätze:</string>
@@ -79,4 +80,22 @@
     <string name="enter_passwort">Passwort eingben</string>
     <string name="enter_email">EMail eingeben</string>
     <string name="autologin">Auto-Login</string>
+    <string name="experiences">Erfahrungen:</string>
+    <string name="favourite_team">Lieblings-Team:</string>
+    <string name="profile_defaultDescription">Beschreibe dich in wenigen Worten. Deine Mitspieler würden gerne mehr über dich erfahren.</string>
+    <string name="profiledit_favouriteareas">Deine Lieblingsplätze</string>
+    <string name="profiledit_yourexperience">Deine Erfahrungen</string>
+    <string name="profiledit_yourfavouriteteam">Dein Lieblingsteam</string>
+    <string name="profiledit_yourteam">Dein Team</string>
+
+    <!-- TODO: League Table Description-->
+    <string name="rank">Platz</string>
+    <string name="points">Punkte</string>
+    <string name="goal_difference">Tordifferenz</string>
+    <string name="amount_games">Spiele</string>
+    <string name="firstLeague">1. Liga</string>
+    <string name="secondLeague">2. Liga</string>
+    <string name="thridLeague">3. Liga</string>
+    <string name="fourthLeague">4. Liga</string>
+
 </resources>

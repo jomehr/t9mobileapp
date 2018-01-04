@@ -1,3 +1,4 @@
+
 package com.kick_it.jan.t9_mobileapp.schnittstellen;
 
 /*
@@ -5,24 +6,24 @@ package com.kick_it.jan.t9_mobileapp.schnittstellen;
  * CustomList for the Team Roster Tab to display an image and the name in a Row.
  */
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+        import android.annotation.SuppressLint;
+        import android.app.Activity;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ArrayAdapter;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
-import com.kick_it.jan.t9_mobileapp.R;
+        import com.kick_it.jan.t9_mobileapp.R;
 
-public class CustomList extends ArrayAdapter<String>{
+public class CustomRosterList extends ArrayAdapter<String>{
 
     private final Activity context;
     private final String[] web;
     private Integer[] imageId = null;
-    public CustomList(Activity context,
-                      String[] web, Integer[] imageId) {
+    public CustomRosterList(Activity context,
+                            String[] web, Integer[] imageId) {
         super(context, R.layout.item_roster, web);
         this.context = context;
         this.web = web;
@@ -41,5 +42,4 @@ public class CustomList extends ArrayAdapter<String>{
         imageView.setImageResource(imageId[position]);
         return rowView;
     }
-
 }

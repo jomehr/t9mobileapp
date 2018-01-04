@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,15 +15,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kick_it.jan.t9_mobileapp.menu.*;
-import com.kick_it.jan.t9_mobileapp.schnittstellen.InputFilterMinMax;
 import com.kick_it.jan.t9_mobileapp.R;
+import com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy;
+import com.kick_it.jan.t9_mobileapp.menu.menu_developer;
+import com.kick_it.jan.t9_mobileapp.menu.menu_faq;
+import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
+import com.kick_it.jan.t9_mobileapp.schnittstellen.InputFilterMinMax;
 
 
 /*
@@ -33,9 +36,13 @@ import com.kick_it.jan.t9_mobileapp.R;
 
 public class ProfileEdit extends AppCompatActivity {
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     private int mDay, mMonth, mYear;
-    private EditText editDay, editMonth, editYear;
-    private LinearLayout descriptionLayout;
+    private String mExperience, mFavouriteTeam;
+    private EditText editDay, editMonth, editYear, editExperience, editFavouriteTeam;
+    private LinearLayout descriptionLayout, residenceLayout, teamLayout, areaLayout;
     private TextView descriptionText;
 
     @Override
@@ -53,25 +60,35 @@ public class ProfileEdit extends AppCompatActivity {
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton submitBtn = findViewById(R.id.profiledit_submitbtn);
+        Button saveBtn = findViewById(R.id.profiledit_saveBtn);
         editDay = findViewById(R.id.profiledit_ageDay);
         editMonth = findViewById(R.id.profiledit_ageMonth);
         editYear = findViewById(R.id.profiledit_ageYear);
+        editExperience = findViewById(R.id.profiledit_experienceText);
+        editFavouriteTeam = findViewById(R.id.profiledit_favouriteTeamText);
         descriptionLayout = findViewById(R.id.profiledit_descriptionLayout);
-        LinearLayout residenceLayout = findViewById(R.id.profiledit_residenceLayout);
+        residenceLayout = findViewById(R.id.profiledit_residenceLayout);
         descriptionText = findViewById(R.id.profiledit_descriptionText);
+        teamLayout = findViewById(R.id.profiledit_teamLayout);
+        areaLayout = findViewById(R.id.profiledit_areaLayout);
+
+        sharedPreferences = getSharedPreferences("ProfilData",Context.MODE_PRIVATE);
+        if (sharedPreferences.getString("Geburtstag", null)!= null) {
+            getData();
+        }
 
         editDay.setFilters(new InputFilter[]{ new InputFilterMinMax(1, 31)});
         editMonth.setFilters(new InputFilter[]{ new InputFilterMinMax(1, 12)});
         editYear.setFilters(new InputFilter[]{ new InputFilterMinMax(1, 2018)});
 
-        submitBtn.setOnClickListener(new View.OnClickListener() {
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!validate()) {
                     onValidationFailed();
                 } else {
                     saveData();
+                    startActivity(new Intent(ProfileEdit.this, Profile.class));
                 }
             }
         });
@@ -84,6 +101,20 @@ public class ProfileEdit extends AppCompatActivity {
         });
 
         residenceLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProfileEdit.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        teamLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProfileEdit.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        areaLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ProfileEdit.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
@@ -249,13 +280,33 @@ public class ProfileEdit extends AppCompatActivity {
     }
 
     private void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("ProfilData",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        sharedPreferences = getSharedPreferences("ProfilData",Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         String appendDate = mDay + "." + mMonth + "." +mYear;
         editor.putString("Geburtstag", appendDate);
         editor.putString("ProfilBeschreibung", descriptionText.getText().toString());
+        editor.putString("Erfahrung", editExperience.getText().toString());
+        editor.putString("Lieblingsteam", editFavouriteTeam.getText().toString());
         editor.apply();
+    }
+
+    private void getData() {
+        String birthday = sharedPreferences.getString("Geburtstag", null);
+        String [] birthtmp = birthday.split("\\.");
+        editDay.setHint(birthtmp[0]);
+        editMonth.setHint(birthtmp[1]);
+        editYear.setHint(birthtmp[2]);
+
+        String descriptiontmp = sharedPreferences.getString("ProfilBeschreibung", null);
+        descriptionText.setHint(descriptiontmp);
+
+        String experiencetmp = sharedPreferences.getString("Erfahrung", null);
+        editExperience.setHint(experiencetmp);
+
+        String favouriteteamtmp = sharedPreferences.getString("Lieblingsteam", null);
+        editFavouriteTeam.setHint(favouriteteamtmp);
     }
 
 }

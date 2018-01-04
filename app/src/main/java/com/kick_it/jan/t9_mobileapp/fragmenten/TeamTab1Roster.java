@@ -11,7 +11,7 @@ import android.widget.Toast;
 import android.widget.ListView;
 
 import com.kick_it.jan.t9_mobileapp.aktivitaeten.Profile;
-import com.kick_it.jan.t9_mobileapp.schnittstellen.CustomList;
+import com.kick_it.jan.t9_mobileapp.schnittstellen.CustomRosterList;
 import com.kick_it.jan.t9_mobileapp.R;
 
 /*
@@ -45,8 +45,8 @@ public class TeamTab1Roster extends Fragment{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_teamtab1roster, container, false);
 
-        CustomList adapter = new CustomList(getActivity(), playernames, imageId);
-        ListView list = rootView.findViewById(R.id.listView1);
+        CustomRosterList adapter = new CustomRosterList(getActivity(), playernames, imageId);
+        ListView list = rootView.findViewById(R.id.teamtab1rosterlist);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

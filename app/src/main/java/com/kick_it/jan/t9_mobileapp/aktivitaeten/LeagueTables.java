@@ -13,19 +13,42 @@ import com.kick_it.jan.t9_mobileapp.R;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.kick_it.jan.t9_mobileapp.menu.menu_developer;
 import com.kick_it.jan.t9_mobileapp.menu.menu_faq;
 import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
+import com.kick_it.jan.t9_mobileapp.schnittstellen.CustomLeagueTableList;
 
 public class LeagueTables extends AppCompatActivity {
+
+    /*
+        Hardcoded , should import stats from Database
+     */
+    private final int[] firstLeagueRanks = {1, 2, 3, 4, 5, 6};
+    private final String[] firstLeagueTeamNames = {"FEK", "GRA", "TOW", "TOW", "TOW", "TOW"};
+    private final int[] firstLeagueGamesPlayed = {5, 5, 6, 6, 9, 9};
+    private final int[] firstLeagueGoalDiff = {14, 17, -9, -9, -9, -9};
+    private final int[] firstLeaguePoints = {13, 11, 9, 9, 9, 9};
+
+    private final int[] secondLeagueRanks = {1, 2, 3, 4, 5, 6};
+    private final String[] secondLeagueTeamNames = {"FEK", "GRA", "TOW", "TOW", "TOW", "TOW"};
+    private final int[] secondLeagueGamesPlayed = {5, 5, 6, 6, 9, 9};
+    private final int[] secondLeagueGoalDiff = {14, 17, -9, -9, -9, -9};
+    private final int[] secondLeaguePoints = {13, 11, 9, 9, 9, 9};
+
+    private final int[] thirdLeagueRanks = {1, 2, 3, 4, 5, 6};
+    private final String[] thirdLeagueTeamNames = {"FEK", "GRA", "TOW", "TOW", "TOW", "TOW"};
+    private final int[] thirdLeagueGamesPlayed = {5, 5, 6, 6, 9, 9};
+    private final int[] thirdLeagueGoaldDiff = {14, 17, -9, -9, -9, -9};
+    private final int[] thirdLeaguePoints = {13, 11, 9, 9, 9, 9};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leaguetables);
+        setContentView(R.layout.activity_league_tables);
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -35,6 +58,21 @@ public class LeagueTables extends AppCompatActivity {
             e.printStackTrace();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CustomLeagueTableList firstLeagueAdapter = new CustomLeagueTableList(this,
+                firstLeagueRanks, firstLeagueTeamNames, firstLeagueGamesPlayed, firstLeagueGoalDiff, firstLeaguePoints);
+        ListView firstleague = findViewById(R.id.firstleagueTable);
+        firstleague.setAdapter(firstLeagueAdapter);
+
+        CustomLeagueTableList secondLeagueAdapter = new CustomLeagueTableList(this,
+                secondLeagueRanks, secondLeagueTeamNames, secondLeagueGamesPlayed, secondLeagueGoalDiff, secondLeaguePoints);
+        ListView secondleague = findViewById(R.id.secondleagueTable);
+        secondleague.setAdapter(secondLeagueAdapter);
+
+        CustomLeagueTableList thirdLeagueAdapter = new CustomLeagueTableList(this,
+                thirdLeagueRanks, thirdLeagueTeamNames, thirdLeagueGamesPlayed, thirdLeagueGoaldDiff, thirdLeaguePoints);
+        ListView thirdleague = findViewById(R.id.thirdleagueTable);
+        thirdleague.setAdapter(thirdLeagueAdapter);
 
     }
 

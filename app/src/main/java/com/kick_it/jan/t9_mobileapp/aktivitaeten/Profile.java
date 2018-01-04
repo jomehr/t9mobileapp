@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -27,13 +28,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kick_it.jan.t9_mobileapp.R;
-import com.kick_it.jan.t9_mobileapp.menu.*;
+import com.kick_it.jan.t9_mobileapp.menu.menu_data_privacy;
+import com.kick_it.jan.t9_mobileapp.menu.menu_developer;
+import com.kick_it.jan.t9_mobileapp.menu.menu_faq;
+import com.kick_it.jan.t9_mobileapp.menu.menu_settings;
 
 /*
  * Created by Jan on 13.11.2017.
  */
 
 public class Profile extends AppCompatActivity {
+
+    private String PREFER_NAME_REGISTRATION = "Registration";
+    private String PREFER_NAME_PROFILDATA = "ProfilData";
+    private SharedPreferences sharedPreferencesReg;
+    private SharedPreferences sharedPreferencesProf;
+    private SharedPreferences.Editor editor;
 
     private final static int RESULT_LOAD_IMAGE = 1;
     private final static int PERMISSION_REQUEST_STORAGE = 0;
@@ -44,15 +54,21 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        SharedPreferences sharedPreferencesReg = getSharedPreferences("Registration", Context.MODE_PRIVATE);
-        SharedPreferences sharedPreferencesProf = getSharedPreferences("ProfilData", Context.MODE_PRIVATE);
+        sharedPreferencesReg = getSharedPreferences(PREFER_NAME_REGISTRATION, Context.MODE_PRIVATE);
+        sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA, Context.MODE_PRIVATE);
         String profileName = sharedPreferencesReg.getString("Name", "Profil");
         String profileBirthday = sharedPreferencesProf.getString("Geburtstag", null);
         String profileDescription = sharedPreferencesProf.getString("ProfilBeschreibung", null);
+        String profileExperience = sharedPreferencesProf.getString("Erfahrung", "nicht vorhanden");
+        String profileFavouriteTeam = sharedPreferencesProf.getString("Lieblingsteam", null);
+        //String picturePath = sharedPreferencesProf.getString("Profilbild", null);
+        String picturePath = PreferenceManager.getDefaultSharedPreferences(this).getString("picturePath", "");
 
         coordinatorLayout =   findViewById(R.id.profile_coordinatorLayout);
-        TextView birtdayText = findViewById(R.id.profile_ageValue);
+        TextView birthdayText = findViewById(R.id.profile_ageValue);
         TextView descriptionText = findViewById(R.id.profile_descriptionText);
+        TextView experienceText = findViewById(R.id.profile_experienceValue);
+        TextView favouriteTeamText = findViewById(R.id.profile_favouriteTeamValue);
         final Toolbar myToolbar = findViewById(R.id.profile_collapsingStaticToolbar);
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.profile_collapsingToolbar);
         AppBarLayout appBar = findViewById(R.id.profile_collapsingToolbarLayout);
@@ -99,8 +115,18 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        birtdayText.setText(profileBirthday);
-        descriptionText.setText(profileDescription);
+        if (profileBirthday != null) {
+            birthdayText.setText(profileBirthday);
+        }
+        if (profileDescription != null) {
+            descriptionText.setText(profileDescription);
+        }
+        if (profileExperience != null) {
+            experienceText.setText(profileExperience);
+        }
+        if (profileFavouriteTeam != null) {
+            favouriteTeamText.setText(profileFavouriteTeam);
+        }
 
         editBtn.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
@@ -115,11 +141,16 @@ public class Profile extends AppCompatActivity {
                 loadProfilePicture();
             }
         });
+
+        if(!picturePath.equals(""))
+        {
+            profilePicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu2, menu);
         return true;
     }
 
@@ -173,6 +204,9 @@ public class Profile extends AppCompatActivity {
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
+            //editor =  sharedPreferencesProf.edit();
+            //editor.putString("Profilbild", picturePath).commit();
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putString("picturePath", picturePath).apply();
             cursor.close();
 
             ImageView new_profilPicture = findViewById(R.id.profile_picture);
