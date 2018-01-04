@@ -8,7 +8,7 @@
     android:paddingTop="16dp"
     tools:context="com.kick_it.jan.t9_mobileapp.aktivitaeten.Team">
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/teamtab1rosterlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

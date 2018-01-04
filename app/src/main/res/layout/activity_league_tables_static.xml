@@ -76,7 +76,7 @@
                  app:ael_expanded="false"
                  app:ael_interpolator="accelerate"
                  app:ael_orientation="vertical">
-                 <ScrollView
+                 <android.support.v4.widget.NestedScrollView
                      android:layout_gravity="center_horizontal"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent">
@@ -606,7 +606,7 @@
                                  tools:ignore="HardcodedText" />
                          </TableRow>
                      </TableLayout>
-                 </ScrollView>
+                 </android.support.v4.widget.NestedScrollView>
 
              </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
@@ -665,7 +665,7 @@
                  app:ael_interpolator="accelerate"
                  app:ael_orientation="vertical">
 
-                 <ScrollView
+                 <android.support.v4.widget.NestedScrollView
                      android:layout_gravity="center_horizontal"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent">
@@ -1193,7 +1193,7 @@
                                  tools:ignore="HardcodedText" />
                          </TableRow>
                      </TableLayout>
-                 </ScrollView>
+                 </android.support.v4.widget.NestedScrollView>
              </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
             <RelativeLayout
@@ -1251,7 +1251,7 @@
                  app:ael_interpolator="accelerate"
                  app:ael_orientation="vertical">
 
-                <ScrollView
+                 <android.support.v4.widget.NestedScrollView
                     android:layout_gravity="center_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -1779,7 +1779,7 @@
                                 tools:ignore="HardcodedText" />
                         </TableRow>
                     </TableLayout>
-                </ScrollView>
+                 </android.support.v4.widget.NestedScrollView>
              </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
          </LinearLayout>
      </ScrollView>
