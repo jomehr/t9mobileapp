@@ -5,7 +5,7 @@
     android:id="@+id/eventRadar_constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.matchfinder.jan.t9_mobileapp.aktivitaeten.EventRadar">
+    tools:context="com.matchfinder.jan.t9_mobileapp.activities.EventRadar">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.matchfinder.jan.t9_mobileapp.aktivitaeten.EventRadar" />
+                tools:context="com.matchfinder.jan.t9_mobileapp.activities.EventRadar" />
 
             <ImageButton
                 android:id="@+id/eventRadar_btnAdd"

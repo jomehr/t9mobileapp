@@ -1,4 +1,4 @@
-package com.matchfinder.jan.t9_mobileapp.aktivitaeten;
+package com.matchfinder.jan.t9_mobileapp.activities;
 
 /*
  * Created by Christopher on 11.12.2017.

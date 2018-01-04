@@ -1,4 +1,4 @@
-package com.matchfinder.jan.t9_mobileapp.aktivitaeten;
+package com.matchfinder.jan.t9_mobileapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.matchfinder.jan.t9_mobileapp.R;
-import com.matchfinder.jan.t9_mobileapp.fragmenten.TeamTab1Roster;
-import com.matchfinder.jan.t9_mobileapp.fragmenten.TeamTab2Profile;
-import com.matchfinder.jan.t9_mobileapp.fragmenten.TeamTab3Chat;
+import com.matchfinder.jan.t9_mobileapp.fragments.TeamTab1Roster;
+import com.matchfinder.jan.t9_mobileapp.fragments.TeamTab2Profile;
+import com.matchfinder.jan.t9_mobileapp.fragments.TeamTab3Chat;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;

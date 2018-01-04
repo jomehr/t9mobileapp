@@ -1,4 +1,4 @@
-package com.matchfinder.jan.t9_mobileapp.aktivitaeten;
+package com.matchfinder.jan.t9_mobileapp.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -98,7 +98,7 @@ public class EventRadar extends AppCompatActivity implements
         myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAccuracy(Criteria.ACCURACY_LOW);
         criteria.setAltitudeRequired(true);
         criteria.setSpeedRequired(false);
 

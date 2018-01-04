@@ -5,7 +5,7 @@
     android:id="@+id/team"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Team">
+    tools:context="com.matchfinder.jan.t9_mobileapp.activities.Team">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

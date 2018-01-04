@@ -33,65 +33,65 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Homescreen"
+        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.Homescreen"
                  android:screenOrientation="portrait"/>
         <activity
             android:screenOrientation="portrait"
-            android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Profile"
-            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Homescreen">
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.Profile"
+            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.Homescreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Homescreen" />
+                android:value="com.matchfinder.jan.t9_mobileapp.activities.Homescreen" />
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.ProfileEdit"
-            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Profile">
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.ProfileEdit"
+            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.Profile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Profile" />
+                android:value="com.matchfinder.jan.t9_mobileapp.activities.Profile" />
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Team"
-            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.aktivitaeten.BunteLiga">
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.Team"
+            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.BunteLiga">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matchfinder.jan.t9_mobileapp.aktivitaeten.BunteLiga" />
+                android:value="com.matchfinder.jan.t9_mobileapp.activities.BunteLiga" />
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.EventRadar"
-            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Homescreen">
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.EventRadar"
+            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.Homescreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Homescreen" />
+                android:value="com.matchfinder.jan.t9_mobileapp.activities.Homescreen" />
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.BunteLiga"
-            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Homescreen">
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.BunteLiga"
+            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.Homescreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Homescreen" />
+                android:value="com.matchfinder.jan.t9_mobileapp.activities.Homescreen" />
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Search"
-            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Homescreen">
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.Search"
+            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.Homescreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Homescreen" />
+                android:value="com.matchfinder.jan.t9_mobileapp.activities.Homescreen" />
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.CreateEvent"
-            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.aktivitaeten.EventRadar">
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.CreateEvent"
+            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.EventRadar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matchfinder.jan.t9_mobileapp.aktivitaeten.EventRadar" />
+                android:value="com.matchfinder.jan.t9_mobileapp.activities.EventRadar" />
         </activity>
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Login"
+        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.Login"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -99,10 +99,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.Registration" android:screenOrientation="portrait" />
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.SplashScreen" android:screenOrientation="portrait"/>
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.LeagueNews" android:screenOrientation="portrait"/>
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.aktivitaeten.LeagueTables" android:screenOrientation="portrait"/>
+        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.Registration" android:screenOrientation="portrait" />
+        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.SplashScreen" android:screenOrientation="portrait"/>
+        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.LeagueNews" android:screenOrientation="portrait"/>
+        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.LeagueTables" android:screenOrientation="portrait"/>
 
         <activity android:name="com.matchfinder.jan.t9_mobileapp.menu.menu_developer" android:screenOrientation="portrait"/>
         <activity android:name="com.matchfinder.jan.t9_mobileapp.menu.menu_faq" android:screenOrientation="portrait"/>

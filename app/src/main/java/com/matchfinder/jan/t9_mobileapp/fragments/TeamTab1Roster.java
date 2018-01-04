@@ -1,4 +1,4 @@
-package com.matchfinder.jan.t9_mobileapp.fragmenten;
+package com.matchfinder.jan.t9_mobileapp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import android.widget.ListView;
 
-import com.matchfinder.jan.t9_mobileapp.aktivitaeten.Profile;
+import com.matchfinder.jan.t9_mobileapp.activities.Profile;
 import com.matchfinder.jan.t9_mobileapp.util.CustomRosterList;
 import com.matchfinder.jan.t9_mobileapp.R;
 

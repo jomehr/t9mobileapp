@@ -1,4 +1,4 @@
-package com.matchfinder.jan.t9_mobileapp.fragmenten;
+package com.matchfinder.jan.t9_mobileapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,16 +8,14 @@ import android.view.ViewGroup;
 
 import com.matchfinder.jan.t9_mobileapp.R;
 
-
 /*
  * Created by Christopher on 20.11.2017.
  */
 
-public class TeamTab2Profile extends Fragment {
+public class TeamTab3Chat extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_teamtab2profile, container, false);
-
+        return inflater.inflate(R.layout.fragment_teamtab3chat_static, container, false);
     }
 }

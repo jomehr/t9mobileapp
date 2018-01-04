@@ -1,75 +1,71 @@
-package com.matchfinder.jan.t9_mobileapp.aktivitaeten;
+package com.matchfinder.jan.t9_mobileapp.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.RelativeLayout;
 
 import com.matchfinder.jan.t9_mobileapp.R;
-import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
-import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
-import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
-import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
+import com.matchfinder.jan.t9_mobileapp.menu.*;
 
-public class Homescreen extends AppCompatActivity {
+/*
+ * Created by Jan on 17.11.2017.
+ */
 
-    private final int REQUEST = 1;
+public class BunteLiga extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homescreen);
+        setContentView(R.layout.activity_bunteliga);
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
         try {
-            getSupportActionBar().setTitle(R.string.app_name);
+            getSupportActionBar().setTitle(R.string.bunte_liga);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
 
-        //Listener für "click" auf Banner1
-        RelativeLayout banner1 = findViewById(R.id.homescreen_findGameContainer);
-        banner1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityIfNeeded(new Intent(Homescreen.this, EventRadar.class), REQUEST);
-                //startActivity(new Intent(Homescreen.this, EventRadar.class));
-            }
-        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        RelativeLayout banner2 = findViewById(R.id.searchTeamContainer);
-        banner2.setOnClickListener(new View.OnClickListener() {
+        //Clicklistener links to activity News
+        RelativeLayout news_btn = findViewById(R.id.newsContainer);
+        news_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, CreateEvent.class));
+                startActivity(new Intent(BunteLiga.this, LeagueNews.class));
             }
         });
-
-        RelativeLayout banner3 = findViewById(R.id.tableContainer);
-        banner3.setOnClickListener(new View.OnClickListener() {
+        //Clicklistener links to Fragment Teamsearch
+        RelativeLayout teamsearch_btn = findViewById(R.id.searchTeamContainer);
+        teamsearch_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, BunteLiga.class));
+                startActivity(new Intent(BunteLiga.this, Search.class));
             }
         });
-
-        /*
-        //TeamButton
-        RelativeLayout banner4 = findViewById(R.id.banner_btn4);
-        banner4.setOnClickListener(new View.OnClickListener() {
+        //Clicklistener links to activity Tables
+        RelativeLayout tables_btn = findViewById(R.id.tableContainer);
+        tables_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, Team.class));
+                startActivity(new Intent(BunteLiga.this, LeagueTables.class));
             }
         });
-        */
+        //Clicklistener links to activity Team
+        RelativeLayout team_btn = findViewById(R.id.teamContainer);
+        team_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BunteLiga.this, Team.class));
+            }
+        });
     }
 
     @Override
@@ -98,7 +94,7 @@ public class Homescreen extends AppCompatActivity {
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                startActivity(new Intent(this, Login.class));
+                startActivity(new Intent(this, Profile.class));
                 return true;
             case R.id.action_data_privacy:
                 startActivity(new Intent(this, menu_data_privacy.class));

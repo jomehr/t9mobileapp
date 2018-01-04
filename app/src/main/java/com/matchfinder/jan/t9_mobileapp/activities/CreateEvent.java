@@ -1,4 +1,4 @@
-package com.matchfinder.jan.t9_mobileapp.aktivitaeten;
+package com.matchfinder.jan.t9_mobileapp.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;

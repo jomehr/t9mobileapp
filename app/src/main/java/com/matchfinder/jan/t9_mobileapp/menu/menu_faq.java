@@ -8,8 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.matchfinder.jan.t9_mobileapp.R;
-import com.matchfinder.jan.t9_mobileapp.aktivitaeten.Profile;
-import com.matchfinder.jan.t9_mobileapp.aktivitaeten.Search;
+import com.matchfinder.jan.t9_mobileapp.activities.Profile;
+import com.matchfinder.jan.t9_mobileapp.activities.Search;
 
 
 /*
