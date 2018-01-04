@@ -1,6 +1,7 @@
 package com.matchfinder.jan.t9_mobileapp.db;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.db.entities.Event;
 import com.parse.Parse;
@@ -31,7 +32,7 @@ public class ParseServer {
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         // Optionally enable public read access.
-        // defaultACL.setPublicReadAccess(true);
+        defaultACL.setPublicReadAccess(true);
         //False = only master key access
         ParseACL.setDefaultACL(defaultACL, true);
 
@@ -85,15 +86,15 @@ public class ParseServer {
 
         ///Example
         try {
-            ParseObject object = query.get("mmcotyyC79");
+            ParseObject object = query.get("TtCmeUDrHg");
             event = new Event(object.getObjectId(),
                     object.getDouble("placeLat"),
                     object.getDouble("placeLng"),
                     object.getLong("dateAndTime"),
                     object.getInt("maxPlayersNumber"),
                     object.getString("description"));
-            //Toast.makeText(con,"Ort: " + object.getDouble("placeLat")+ " , " + object.getDouble("placeLng")
-            //        ,Toast.LENGTH_SHORT).show();
+            Toast.makeText(con,"Ort: " + object.getDouble("placeLat")+ " , " + object.getDouble("placeLng")
+                    ,Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             e.printStackTrace();
         }

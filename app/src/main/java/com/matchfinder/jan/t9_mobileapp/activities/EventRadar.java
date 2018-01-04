@@ -24,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
@@ -95,17 +96,6 @@ public class EventRadar extends AppCompatActivity implements
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_LOW);
-        criteria.setAltitudeRequired(true);
-        criteria.setSpeedRequired(false);
-
-        bestLocationProvider = myLocationManager.getBestProvider(criteria, true);
-        myLocationProvider = myLocationManager.getProvider(bestLocationProvider);
-
-
         //Listener für "click" auf EventRadar_Button
         ImageButton btn_Add = findViewById(R.id.eventRadar_btnAdd);
         btn_Add.setOnClickListener(new View.OnClickListener() {
@@ -134,16 +124,12 @@ public class EventRadar extends AppCompatActivity implements
         myGoogleMap.setOnMyLocationClickListener(this);
         enableMyLocation();
 
-
-        // Add a marker in Gummersbach and move the camera
-
-
         ///TEST
 
-        ParseServer ps = ParseServer.getInstance(this);
+        ParseServer ps = ParseServer.getInstance(getApplicationContext());
         ps.loadEventData(this);
         LatLng kosivSchool = new LatLng(ParseServer.event.getPlaceLatitude(), ParseServer.event.getPlaceLongitude());
-        //myGoogleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + "     " + ParseServer.event.getDescription()));
+        myGoogleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + ": " + ParseServer.event.getDescription()));
         //myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kosivSchool, 17.0f));
         ///
 
@@ -165,6 +151,18 @@ public class EventRadar extends AppCompatActivity implements
             myGoogleMap.setMyLocationEnabled(true);
 
             //Move to current Position
+            if (myLocationManager == null && myLocationProvider == null) {
+                myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+                Criteria criteria = new Criteria();
+                criteria.setAccuracy(Criteria.ACCURACY_FINE);
+                criteria.setAltitudeRequired(true);
+                criteria.setSpeedRequired(false);
+
+                bestLocationProvider = myLocationManager.getBestProvider(criteria, true);
+                myLocationProvider = myLocationManager.getProvider(bestLocationProvider);
+            }
+
             Location loc = myLocationManager.getLastKnownLocation(bestLocationProvider);
             double latitude = loc.getLatitude();
             double longitude = loc.getLongitude();
