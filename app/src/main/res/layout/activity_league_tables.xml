@@ -147,7 +147,6 @@
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
             <RelativeLayout
-                android:layout_below="@+id/expandableLayout1"
                 android:background="@drawable/border_shadow"
                 android:id="@+id/secondLeague"
                 android:layout_width="match_parent"
@@ -268,7 +267,6 @@
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
             <RelativeLayout
-                android:layout_below="@+id/expandableLayout2"
                 android:background="@drawable/border_shadow"
                 android:id="@+id/thirdLeagueBox"
                 android:layout_width="match_parent"
