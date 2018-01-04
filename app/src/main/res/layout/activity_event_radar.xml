@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/eventRadar_constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.kick_it.jan.t9_mobileapp.aktivitaeten.EventRadar">
@@ -37,8 +38,8 @@
                 style="@style/Widget.AppCompat.ImageButton"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginBottom="34dp"
                 android:layout_marginEnd="28dp"
                 android:background="@drawable/oval"
