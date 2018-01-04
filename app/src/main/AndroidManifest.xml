@@ -77,6 +77,14 @@
         </activity>
         <activity
             android:screenOrientation="portrait"
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.EventRadar"
+            android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.Homescreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.matchfinder.jan.t9_mobileapp.activities.Homescreen" />
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
             android:name="com.matchfinder.jan.t9_mobileapp.activities.CreateEvent"
             android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.EventRadar">
             <meta-data
