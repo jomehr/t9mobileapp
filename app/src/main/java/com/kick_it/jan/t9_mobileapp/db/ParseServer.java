@@ -96,8 +96,8 @@ public class ParseServer {
                     object.getLong("dateAndTime"),
                     object.getInt("maxPlayersNumber"),
                     object.getString("description"));
-            Toast.makeText(con,"Ort: " + object.getDouble("placeLat")+ " , " + object.getDouble("placeLng")
-                    ,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(con,"Ort: " + object.getDouble("placeLat")+ " , " + object.getDouble("placeLng")
+            //        ,Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             e.printStackTrace();
         }
