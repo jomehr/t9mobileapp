@@ -1,18 +1,24 @@
 package com.matchfinder.jan.t9_mobileapp.activities;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,6 +81,9 @@ public class EventRadar extends AppCompatActivity implements
     private LocationManager myLocationManager;
     private String bestLocationProvider;
     private LocationProvider myLocationProvider;
+    /// TEST
+    private Location currentLocation;
+    ///
 
     private final int REQUEST = 1;
 
@@ -130,11 +139,11 @@ public class EventRadar extends AppCompatActivity implements
         ps.loadEventData(this);
         LatLng kosivSchool = new LatLng(ParseServer.event.getPlaceLatitude(), ParseServer.event.getPlaceLongitude());
         myGoogleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + ": " + ParseServer.event.getDescription()));
+
         //myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kosivSchool, 17.0f));
+
         ///
 
-        //Kamera wird auf Campus hingerichtet mit 17.0 Zoom
-        //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusGummersbach, 17.0f));
     }
 
     /**
@@ -163,7 +172,124 @@ public class EventRadar extends AppCompatActivity implements
                 myLocationProvider = myLocationManager.getProvider(bestLocationProvider);
             }
             Location loc = myLocationManager.getLastKnownLocation(bestLocationProvider);
+            myGoogleMap.getMyLocation();
             loc = loc == null? myLocationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER): loc;
+            loc = loc == null? myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER): loc;
+            loc = loc == null? myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER): loc;
+            if (loc == null) {
+                /// TEST
+
+                // Fetch a reference to the system Location Manager
+                LocationManager locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+                // Identify a listener that responds to location updates
+                LocationListener locationListener = new LocationListener() {
+
+                    public void onLocationChanged(Location location) {
+                        // Called when a new location is found by the network location provider.
+                        currentLocation = location;
+                    }
+
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+                    }
+
+                    public void onProviderEnabled(String provider) {
+                    }
+
+                    public void onProviderDisabled(String provider) {
+                    }
+                };
+
+                // Register the listener with the Location Manager to receive location updates
+
+                ///DEBUG
+
+                if (locationManager.isProviderEnabled(bestLocationProvider)){
+                    locationManager.setTestProviderLocation(bestLocationProvider, new Location(bestLocationProvider));
+                    //locationManager.sendExtraCommand()
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                    locationManager.requestLocationUpdates(bestLocationProvider, 2 * 60 * 1000, 10, locationListener);
+                    Log.d("Location", "bestLocationProvider");
+                    if (currentLocation == null) {
+                        Log.d("Location", "bestLocationProvider hat null zurückgegeben");
+                        System.out.println("bestLocationProvider hat null zurückgegeben");
+                    }
+                    else {
+                        Log.d("Location", "bestLocationProvider hat LOCATION zurückgegeben");
+                        System.out.println("bestLocationProvider hat LOCATION zurückgegeben");
+                    }
+                }
+                else {
+                    Log.d("Location", "bestLocationProvider is not enabled.");
+                }
+
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2 * 60 * 1000 , 10, locationListener);
+                    Log.d("Location", "GPS_PROVIDER");
+                    if (currentLocation == null) {
+                        Log.d("Location", "GPS_PROVIDER hat null zurückgegeben");
+                        System.out.println("GPS_PROVIDER hat null zurückgegeben");
+                    }
+                    else {
+                        Log.d("Location", "GPS_PROVIDER hat LOCATION zurückgegeben");
+                        System.out.println("GPS_PROVIDER hat LOCATION zurückgegeben");
+                    }
+                }
+                else {
+                    Log.d("Location", "GPS is not enabled.");
+                }
+
+                if (locationManager.isProviderEnabled(LocationManager.PASSIVE_PROVIDER)) {
+                    locationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 2 * 60 * 1000, 10, locationListener);
+                    Log.d("Location", "PASSIVE_PROVIDER");
+                    if (currentLocation == null) {
+                        Log.d("Location", "PASSIVE_PROVIDER hat null zurückgegeben");
+                        System.out.println("PASSIVE_Provider hat null zurückgegeben");
+                    }
+                    else {
+                        Log.d("Location", "PASSIVE_PROVIDER hat LOCATION zurückgegeben");
+                        System.out.println("Passive_Provider hat LOCATION zurückgegeben");
+                    }
+                }
+                else {
+                    Log.d("Location", "PASSIVE_PROVIDER is not enabled.");
+                }
+
+                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2 * 60 * 1000, 10, locationListener);
+                    Log.d("Location", "NETWORK_PROVIDER");
+                    if (currentLocation == null) {
+                        Log.d("Location", "NETWORK_PROVIDER hat null zurückgegeben");
+                        System.out.println("Network_Provider hat null zurückgegeben");
+                    }
+                    else {
+                        Log.d("Location", "NETWORK_PROVIDER hat LOCATION zurückgegeben");
+                        System.out.println("Network_Provider hat LOCATION zurückgegeben");
+                    }
+                }
+                else {
+                    Log.d("Location", "Newtwork_Provider is not enabled.");
+                }
+
+                loc = currentLocation;
+                ///
+            }
+            /*
+            new AlertDialog.Builder(EventRadar.this)
+                    .setTitle("Please activate location")
+                    .setMessage("Click ok to goto settings else exit.")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            System.exit(0);
+                        }
+                    })
+                    .show();
+             */
             double latitude = loc.getLatitude();
             double longitude = loc.getLongitude();
             LatLng currentLatLng = new LatLng(latitude,longitude);
