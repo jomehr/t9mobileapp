@@ -151,7 +151,7 @@ public class EventRadar extends AppCompatActivity implements
             myGoogleMap.setMyLocationEnabled(true);
 
             //Move to current Position
-            if (myLocationManager == null && myLocationProvider == null) {
+            if (myLocationManager == null || myLocationProvider == null) {
                 myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
                 Criteria criteria = new Criteria();
@@ -162,8 +162,8 @@ public class EventRadar extends AppCompatActivity implements
                 bestLocationProvider = myLocationManager.getBestProvider(criteria, true);
                 myLocationProvider = myLocationManager.getProvider(bestLocationProvider);
             }
-
             Location loc = myLocationManager.getLastKnownLocation(bestLocationProvider);
+            loc = loc == null? myLocationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER): loc;
             double latitude = loc.getLatitude();
             double longitude = loc.getLongitude();
             LatLng currentLatLng = new LatLng(latitude,longitude);
