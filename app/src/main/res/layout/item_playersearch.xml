@@ -2,24 +2,22 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/border_shadow">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:layout_marginTop="15dp">
     <TableRow tools:ignore="UselessParent">
         <ImageView
-            android:id="@+id/image1"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="@drawable/ic_person_black_72dp"
-            android:contentDescription="@string/roster"
-            android:padding="4dp" />
+            android:id="@+id/search_player_picture"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="@string/roster"/>
         <TextView
             android:id="@+id/text1"
             android:layout_width="277dp"
-            android:background="#E2E2E2"
             android:layout_height="match_parent"
             android:gravity="center|end"
             android:paddingEnd="32dp"
             android:paddingStart="32dp"
-            android:textSize="24sp" />
+            android:textSize="22sp" />
     </TableRow>
 </TableLayout>

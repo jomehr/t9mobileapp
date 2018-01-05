@@ -18,8 +18,9 @@ import com.matchfinder.jan.t9_mobileapp.interfaces.IFragmentListener;
 import com.matchfinder.jan.t9_mobileapp.interfaces.ISearch;
 import com.matchfinder.jan.t9_mobileapp.R;
 
-import java.util.ArrayList;
+import com.matchfinder.jan.t9_mobileapp.util.CustomSearchPlayerList;
 
+import java.util.ArrayList;
 
 public class SearchTab1Playersearch extends Fragment implements ISearch {
 
@@ -28,6 +29,7 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
 
     private IFragmentListener mIFragmentListener = null;
     private ArrayAdapter<String> arrayAdapter = null;
+    //private CustomSearchPlayerList arrayAdapter = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,53 +37,45 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
         view = inflater.inflate(R.layout.fragment_searchtab1playersearch, container, false);
-        ListView listView = view.findViewById(R.id.listview1);
+
 
 
         // CREATE THE ARRAYLIST
-        ArrayList<String> strings = new ArrayList<>();
+        ArrayList<String> playerNameList = new ArrayList<>();
         // FILL THE ARRAYLIST
-            strings.add("Jan Mehr");
-            strings.add("Christopher Huntscha");
-            strings.add("Simon Mertens");
-            strings.add("Maximilian Storr");
-            strings.add("Taras Zaika");
-            strings.add("Tarek Al Ashi");
+            playerNameList.add("Jan Mehr");
+            playerNameList.add("Christopher Huntscha");
+            playerNameList.add("Simon Mertens");
+            playerNameList.add("Maximilian Storr");
+            playerNameList.add("Taras Zaika");
+            playerNameList.add("Tarek Al Ashi");
 
-        //Should be an Arraylist so you can dynamicly delete and add Entries
+        ArrayList<Integer> playerProfilePicture = new ArrayList<>();
+            playerProfilePicture.add(R.drawable.ic_person_black_72dp);
+            playerProfilePicture.add(R.drawable.ic_person_black_72dp);
+            playerProfilePicture.add(R.drawable.ic_person_black_72dp);
+            playerProfilePicture.add(R.drawable.ic_person_black_72dp);
+            playerProfilePicture.add(R.drawable.ic_person_black_72dp);
+            playerProfilePicture.add(R.drawable.ic_person_black_72dp);
+
+
         /*
-        Integer[] imageId = {
-                R.drawable.ic_person_black_72dp,
-                R.drawable.ic_person_black_72dp,
-                R.drawable.ic_person_black_72dp,
-                R.drawable.ic_person_black_72dp,
-                R.drawable.ic_person_black_72dp,
-                R.drawable.ic_person_black_72dp};
-         */
 
+        ListView playersearchlist = view.findViewById(R.id.listview1);
+        playersearchlist.setAdapter(firstLeagueAdapter);
+        */
+
+        //CustomSearchPlayerList firstLeagueAdapter = new CustomSearchPlayerList(getActivity(), playerNameList, playerProfilePicture);
         //standard item layout
-        arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);
-        //Own item Layout
-        //arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.item_playersearch, strings);
-
-        /*
-        * TESTING COSTUMList like in TeamTab1Roster
-        */
-        /*
-        CustomList adapter = new CustomList(getActivity(), list2, imageId);
-
-        listView.setAdapter(adapter);
-        Search searchActivity = (Search) getActivity();
-        searchActivity.getDataFromFragment_one(strings);
-        if (getArguments() != null) {
-            mSearchTerm = (String) getArguments().get(ARG_SEARCHTERM);
-        }
-        */
-
-        //Just the standard
+        //arrayAdapter = new CustomSearchPlayerList(getActivity(), playerNameList, playerProfilePicture);
+            arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, playerNameList);
+        ListView listView = view.findViewById(R.id.listview1);
         listView.setAdapter(arrayAdapter);
+
+
+
         Search searchActivity = (Search) getActivity();
-        searchActivity.getDataFromFragment_one(strings);
+        searchActivity.getDataFromFragment_one(playerNameList);
         if (getArguments() != null) {
             mSearchTerm = (String) getArguments().get(ARG_SEARCHTERM);
         }
