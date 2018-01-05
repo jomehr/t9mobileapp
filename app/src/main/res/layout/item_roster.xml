@@ -12,7 +12,6 @@
             android:contentDescription="@string/roster"
             android:background="#ebebeb"
             android:padding="4dp"/>
-
         <TextView
             android:id="@+id/text"
             android:layout_width="277dp"
