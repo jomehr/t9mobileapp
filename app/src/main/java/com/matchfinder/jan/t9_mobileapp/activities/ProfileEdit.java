@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
@@ -36,7 +37,10 @@ import com.matchfinder.jan.t9_mobileapp.util.InputFilterMinMax;
 
 public class ProfileEdit extends AppCompatActivity {
 
-    private SharedPreferences sharedPreferences;
+    private String PREFER_NAME_REGISTRATION = "Registration";
+    private String PREFER_NAME_PROFILDATA = "ProfilData";
+    private SharedPreferences sharedPreferencesReg;
+    private SharedPreferences sharedPreferencesProf;
     private SharedPreferences.Editor editor;
 
     private int mDay, mMonth, mYear;
@@ -72,8 +76,8 @@ public class ProfileEdit extends AppCompatActivity {
         teamLayout = findViewById(R.id.profiledit_teamLayout);
         areaLayout = findViewById(R.id.profiledit_areaLayout);
 
-        sharedPreferences = getSharedPreferences("ProfilData",Context.MODE_PRIVATE);
-        if (sharedPreferences.getString("Geburtstag", null)!= null) {
+        sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA,Context.MODE_PRIVATE);
+        if (sharedPreferencesProf.getString("Geburtstag", null)!= null) {
             getData();
         }
 
@@ -280,32 +284,42 @@ public class ProfileEdit extends AppCompatActivity {
     }
 
     private void saveData() {
-
-        sharedPreferences = getSharedPreferences("ProfilData",Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
+        sharedPreferencesReg = getSharedPreferences(PREFER_NAME_REGISTRATION, Context.MODE_PRIVATE);
+        String tmpName = sharedPreferencesReg.getString("Name", null);
+        String tmpMail = sharedPreferencesReg.getString("Email", null);
         String appendDate = mDay + "." + mMonth + "." +mYear;
+        String tmp = "in Arbeit";
+
+        //Store data locally in shared preference until app is deleted or cache cleared
+        sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA,Context.MODE_PRIVATE);
+        editor = sharedPreferencesProf.edit();
+
         editor.putString("Geburtstag", appendDate);
         editor.putString("ProfilBeschreibung", descriptionText.getText().toString());
         editor.putString("Erfahrung", editExperience.getText().toString());
         editor.putString("Lieblingsteam", editFavouriteTeam.getText().toString());
         editor.apply();
+
+        //Store data on server permanently
+        ParseServer ps = ParseServer.getInstance(this);
+
+        ps.saveProfileData(tmpName, tmpMail, appendDate, tmp, descriptionText.getText().toString(), tmp, tmp, editExperience.getText().toString(), editFavouriteTeam.getText().toString());
     }
 
     private void getData() {
-        String birthday = sharedPreferences.getString("Geburtstag", null);
+        String birthday = sharedPreferencesProf.getString("Geburtstag", null);
         String [] birthtmp = birthday.split("\\.");
         editDay.setHint(birthtmp[0]);
         editMonth.setHint(birthtmp[1]);
         editYear.setHint(birthtmp[2]);
 
-        String descriptiontmp = sharedPreferences.getString("ProfilBeschreibung", null);
+        String descriptiontmp = sharedPreferencesProf.getString("ProfilBeschreibung", null);
         descriptionText.setHint(descriptiontmp);
 
-        String experiencetmp = sharedPreferences.getString("Erfahrung", null);
+        String experiencetmp = sharedPreferencesProf.getString("Erfahrung", null);
         editExperience.setHint(experiencetmp);
 
-        String favouriteteamtmp = sharedPreferences.getString("Lieblingsteam", null);
+        String favouriteteamtmp = sharedPreferencesProf.getString("Lieblingsteam", null);
         editFavouriteTeam.setHint(favouriteteamtmp);
     }
 

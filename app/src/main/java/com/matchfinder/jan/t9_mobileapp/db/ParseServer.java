@@ -121,4 +121,22 @@ public class ParseServer {
         */
         ///
     }
+
+    public synchronized void saveProfileData (String name, String email, String birthday, String residence, String descriptopn, String team, String favouriteArea, String experience, String favouriteTeam) {
+
+        ParseObject profileObjekt = new ParseObject("Profile");
+
+        profileObjekt.put("name", name);
+        profileObjekt.put("email", email);
+        profileObjekt.put("birtday", birthday);
+        profileObjekt.put("residence", residence);
+        profileObjekt.put("description", descriptopn);
+        profileObjekt.put("team", team);
+        profileObjekt.put("favouriteArea", favouriteArea);
+        profileObjekt.put("experience", experience);
+        profileObjekt.put("favouriteTeam", favouriteTeam);
+
+        profileObjekt.saveInBackground();
+    }
+
 }
