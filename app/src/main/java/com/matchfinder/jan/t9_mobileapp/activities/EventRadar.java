@@ -13,7 +13,6 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -137,7 +136,17 @@ public class EventRadar extends AppCompatActivity implements
         /// Location TEST
 
         if (!getMyLocation()) {
-            locationServicesCheck(myLocationManager);
+            if(locationServicesCheck(myLocationManager)) {
+                // location services are enabled
+                LatLng germanyLatLng = new LatLng(50.980602, 10.314458);
+                myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(germanyLatLng, 6));
+
+            }
+            else {
+                // location services are disabled
+                LatLng germanyLatLng = new LatLng(50.980602, 10.314458);
+                myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(germanyLatLng, 6));
+            }
         }
 
         ///
@@ -195,76 +204,9 @@ public class EventRadar extends AppCompatActivity implements
         Location lastLocation = myLocationManager.getLastKnownLocation(bestLocationProvider);
         lastLocation = lastLocation == null? myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER): lastLocation;
         lastLocation = lastLocation == null? myLocationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER): lastLocation;
+        lastLocation = lastLocation == null? currentLocation: lastLocation;
 
         currentLocation = lastLocation;
-
-        /* DEBUG
-
-        // Request the current location if last location is null
-        if (lastLocation == null) {
-
-            /// TEST
-
-            // Identify a listener that responds to location updates
-            LocationListener myLocationListener = new LocationListener() {
-
-                public void onLocationChanged(Location location) {
-                    // Called when a new location is found by the network location provider.
-                    currentLocation = location;
-                }
-
-                public void onStatusChanged(String provider, int status, Bundle extras) {
-                }
-
-                public void onProviderEnabled(String provider) {
-                }
-
-                public void onProviderDisabled(String provider) {
-                }
-            };
-
-            // Register the listener with the Location Manager to receive location updates
-            myLocationManager.requestLocationUpdates(bestLocationProvider, 0, 0, myLocationListener);
-            // Warten 5 sec und noch mal prüfen
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (currentLocation == null) {
-                myLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, myLocationListener);
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            // Warten 5 sec und noch mal prüfen
-            if (currentLocation == null) {
-                myLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, myLocationListener);
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (currentLocation == null) {
-                myLocationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 0, 0, myLocationListener);
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            // Warten 5 sec und noch mal prüfen. Falls immer noch nichts abbrechen.
-            if (currentLocation == null)
-                Log.d("SCHEEEEEIIIISEEEEEE","SCHEEEEEIIIISEEEEEE");
-            ///
-
-
-        }
-
-        */
 
         if(currentLocation == null) {
             return false;
@@ -285,7 +227,7 @@ public class EventRadar extends AppCompatActivity implements
      * Check if Location Services are enabled. If not, start dialog window and settings.
      * @param lm LocatinManager provide information about Location-Services.
      */
-    private void locationServicesCheck(LocationManager lm) {
+    private boolean locationServicesCheck(LocationManager lm) {
 
         boolean gps_enabled = false;
         boolean network_enabled = false;
@@ -306,7 +248,7 @@ public class EventRadar extends AppCompatActivity implements
 
         if(!gps_enabled && !network_enabled) {
             // notify user
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("Please activate location"); //TODO Change Strings to Recource
             dialog.setMessage("Click ok to goto settings else exit.");
             dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -320,11 +262,51 @@ public class EventRadar extends AppCompatActivity implements
             dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                    System.exit(0);
+                    paramDialogInterface.cancel();
                 }
             });
             dialog.show();
         }
+        else {
+            return true;
+        }
+
+        // Check if the user has enabled the location data.
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {
+            Log.d("Location","Probable GPS_PROVIDER is null");
+            ex.printStackTrace();
+        }
+        try {
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch(Exception ex) {
+            Log.d("Location","Probable NETWORK_PROVIDER is null");
+            ex.printStackTrace();
+        }
+        return !gps_enabled && !network_enabled;
+    }
+
+    /**
+     * Get reference to new LocationListener
+     * @return LacationListener
+     */
+    private LocationListener getLocationListener() {
+        return new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                currentLocation = location;
+            }
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+            }
+            @Override
+            public void onProviderEnabled(String s) {
+            }
+            @Override
+            public void onProviderDisabled(String s) {
+            }
+        };
     }
 
     @Override
@@ -337,6 +319,18 @@ public class EventRadar extends AppCompatActivity implements
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
+
+        // Permission Chek
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission to access the location is missing.
+            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+        }
+
+        currentLocation = location;
+        LocationListener myLocationListener = getLocationListener();
+        myLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, myLocationListener);
         Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
     }
 
