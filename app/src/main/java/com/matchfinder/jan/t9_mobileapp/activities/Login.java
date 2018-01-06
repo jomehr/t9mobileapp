@@ -1,5 +1,6 @@
 package com.matchfinder.jan.t9_mobileapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 
 /*
  * Created by Jan on 07.12.2017.
@@ -22,35 +24,38 @@ public class Login extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    private EditText edit_email,edit_password;
+    private EditText edit_username,edit_password;
     private CheckBox check_remember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
-        sharedPreferences = getSharedPreferences("Registration", 0);
+        sharedPreferences = getSharedPreferences("Registration", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        editor.apply();
-
-        Button btn_login = findViewById(R.id.login_loginBtn);
-        TextView btn_register = findViewById(R.id.login_registerBtn);
-        edit_email = findViewById(R.id.login_inputEmail);
-        edit_password = findViewById(R.id.login_inputPassword);
-        check_remember = findViewById(R.id.login_checkBox);
-
         Boolean remember = sharedPreferences.getBoolean("Erinnerung", false);
         if (remember) {
-            edit_email.setText(sharedPreferences.getString("Email", null));
-            edit_password.setText(sharedPreferences.getString("Passwort", null));
-            check_remember.setChecked(true);
+            startActivity(new Intent(getApplicationContext(), Homescreen.class));
+            finish();
+        } else {
+            setContentView(R.layout.activity_login);
         }
+
+        final Button btn_login = findViewById(R.id.login_loginBtn);
+        TextView btn_register = findViewById(R.id.login_registerBtn);
+        edit_username = findViewById(R.id.login_inputUsername);
+        edit_password = findViewById(R.id.login_inputPassword);
+        check_remember = findViewById(R.id.login_checkBox);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                try {
+                    login();
+                    startActivity(new Intent(Login.this, Homescreen.class));
+                } catch (Exception e) {
+                    e.printStackTrace()
+                    ;}
             }
         });
 
@@ -74,7 +79,11 @@ public class Login extends AppCompatActivity {
             editor.commit();
         }
 
-        String email = edit_email.getText().toString();
+        ParseServer ps = ParseServer.getInstance(this);
+        ps.loginUser(this, edit_username.getText().toString(), edit_password.getText().toString());
+
+
+/*      String email = edit_email.getText().toString();
         String password = edit_password.getText().toString();
 
         String prefEmail = null;
@@ -91,20 +100,20 @@ public class Login extends AppCompatActivity {
             finish();
         }else {
             onLoginFailed();
-        }
+        }*/
     }
 
     private boolean validate() {
         boolean valid = true;
 
-        String email = edit_email.getText().toString();
+        String email = edit_username.getText().toString();
         String password = edit_password.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            edit_email.setError("Gebe eine valide Email-Adresse ein");
+        if (email.isEmpty()) {
+            edit_username.setError("Gebe einen Nutzernamen ein");
             valid = false;
         } else {
-            edit_email.setError(null);
+            edit_username.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 15) {

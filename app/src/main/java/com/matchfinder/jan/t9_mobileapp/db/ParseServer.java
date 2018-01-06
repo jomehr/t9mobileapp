@@ -1,21 +1,24 @@
 package com.matchfinder.jan.t9_mobileapp.db;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.db.entities.Event;
+import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 /*
  * Created by taraszaika on 02.01.18.
  * new ParseServer
  */
-public class ParseServer {
+public class ParseServer extends AppCompatActivity{
 
     public static Event event;
 
@@ -29,7 +32,7 @@ public class ParseServer {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(appContext);
 
-        ParseUser.enableAutomaticUser();
+        //ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         // Optionally enable public read access.
         defaultACL.setPublicReadAccess(true);
@@ -137,6 +140,45 @@ public class ParseServer {
         profileObjekt.put("favouriteTeam", favouriteTeam);
 
         profileObjekt.saveInBackground();
+    }
+
+    public synchronized void registerUser (Context appcontext, String email, final String username, String password) {
+
+        final Context context = appcontext;
+
+        if (ParseUser.getCurrentUser() != null) {
+            ParseUser.logOut();
+        }
+
+        ParseUser user = new ParseUser();
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPassword(password);
+
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Toast.makeText(context, "User erstellt: "+ username,Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public synchronized void loginUser (final Context appcontext, String username, String password) {
+        ParseUser.logInInBackground(username, password, new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (parseUser != null) {
+                    Toast.makeText(appcontext, "Login erfolgreich", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(appcontext, e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 }

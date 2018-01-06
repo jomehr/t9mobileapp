@@ -1,13 +1,14 @@
 package com.matchfinder.jan.t9_mobileapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.RelativeLayout;
 
 import com.matchfinder.jan.t9_mobileapp.R;
@@ -98,7 +99,14 @@ public class Homescreen extends AppCompatActivity {
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                startActivity(new Intent(this, Login.class));
+                SharedPreferences sharedPreferences = getSharedPreferences("Registration", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor =  sharedPreferences.edit();
+                if (sharedPreferences.getBoolean("Erinnerung", false) == true) {
+                    editor.putBoolean("Erinnerung", false).commit();
+                    startActivity(new Intent(this, Login.class));
+                } else {
+                    startActivity(new Intent(this, Login.class));
+                }
                 return true;
             case R.id.action_data_privacy:
                 startActivity(new Intent(this, menu_data_privacy.class));
