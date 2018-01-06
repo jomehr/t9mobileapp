@@ -2,8 +2,10 @@ package com.matchfinder.jan.t9_mobileapp.activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -82,6 +84,9 @@ public class EventRadar extends AppCompatActivity implements
     private LocationProvider myLocationProvider;
 
     private Location currentLocation;
+    private SharedPreferences sharedPreferencesLastLocation;
+    private LocationListener gpsLocationListener;
+    private LocationListener networkLocationListener;
 
     private final int REQUEST = 1;
 
@@ -89,7 +94,6 @@ public class EventRadar extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_radar);
-
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         try {
@@ -98,7 +102,7 @@ public class EventRadar extends AppCompatActivity implements
             e.printStackTrace();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        sharedPreferencesLastLocation = getSharedPreferences("Location", Context.MODE_PRIVATE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -129,27 +133,20 @@ public class EventRadar extends AppCompatActivity implements
 
         myGoogleMap.setOnMyLocationButtonClickListener(this);
         myGoogleMap.setOnMyLocationClickListener(this);
-        enableMyLocation();
 
-        /// TEST
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission to access the location is missing.
+            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+        }
+        else {
+            enableMyLocation();
+            initWithPermission();
 
-        /// Location TEST
-
-        if (!getMyLocation()) {
-            if(locationServicesCheck(myLocationManager)) {
-                // location services are enabled
-                LatLng germanyLatLng = new LatLng(50.980602, 10.314458);
-                myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(germanyLatLng, 6));
-
-            }
-            else {
-                // location services are disabled
-                LatLng germanyLatLng = new LatLng(50.980602, 10.314458);
-                myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(germanyLatLng, 6));
-            }
         }
 
-        ///
+        /// TEST
 
         ParseServer ps = ParseServer.getInstance(getApplicationContext());
         ps.loadEventData(this);
@@ -177,6 +174,51 @@ public class EventRadar extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Initialisieren with permmission. First steps. But only after permission check.
+     */
+    private void initWithPermission() {
+        if (!getMyLocation()) {
+            if(!locationServicesCheck(myLocationManager)) {
+                // location services are enabled
+                LatLng germanyLatLng = new LatLng(50.980602, 10.314458);
+                myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(germanyLatLng, 6));
+                Toast.makeText(this,"Your Location-Services are enabled\n" +
+                        "You can use some 'My Location' button.", Toast.LENGTH_LONG).show();
+
+            }
+            else {
+                // location services are disabled
+                LatLng germanyLatLng = new LatLng(50.980602, 10.314458);
+                myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(germanyLatLng, 6));
+                Toast.makeText(this,"Your Location-Services are probably disabled\n" +
+                        "You can not use some features.\nPlease go to settings to enable it.", Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            locationServicesCheck(myLocationManager);
+            //if(locationServicesCheck(myLocationManager)){
+            //   enableMyLocation();
+            //}
+        }
+
+    }
+
+    /**
+     * Initialisieren without permmission. First steps. But only after permission check.
+     */
+    private void initWithoutPermission() {
+        // location services are disabled
+        LatLng germanyLatLng = new LatLng(50.980602, 10.314458);
+        myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(germanyLatLng, 6));
+        Toast.makeText(this,"Your Location-Services are probably disabled\n" +
+                "You can not use some features.", Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Tries to get {@link Location} of Device. First of all it checkes last known {@link Location}. If no one is available it requests for one.
+     * @return true if location found, flase - if not.
+     */
     private boolean getMyLocation() {
 
         // Permission Chek
@@ -197,10 +239,15 @@ public class EventRadar extends AppCompatActivity implements
             criteria.setSpeedRequired(false);
 
             bestLocationProvider = myLocationManager.getBestProvider(criteria, true);
-            myLocationProvider = myLocationManager.getProvider(bestLocationProvider);
+            if (bestLocationProvider == null) {
+                return false;
+            }
+            else {
+                myLocationProvider = myLocationManager.getProvider(bestLocationProvider);
+            }
         }
 
-        // Find lasr location
+        // Find last location
         Location lastLocation = myLocationManager.getLastKnownLocation(bestLocationProvider);
         lastLocation = lastLocation == null? myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER): lastLocation;
         lastLocation = lastLocation == null? myLocationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER): lastLocation;
@@ -208,12 +255,29 @@ public class EventRadar extends AppCompatActivity implements
 
         currentLocation = lastLocation;
 
+        double sharedLatitude = sharedPreferencesLastLocation.getString("Latitude", null) != null ?
+                Double.parseDouble(sharedPreferencesLastLocation.getString("Latitude", null)) : 0;
+        double sharedLongitude = sharedPreferencesLastLocation.getString("Longitude", null) != null ?
+                Double.parseDouble(sharedPreferencesLastLocation.getString("Longitude", null)) : 0;
+
         if(currentLocation == null) {
-            return false;
+            if (sharedLatitude == 0 && sharedLongitude == 0) {
+                requestLocation();
+                return false;
+            }
+            else {
+                myLocationManager.removeUpdates(getGpsLocationListener());
+                myLocationManager.removeUpdates(getNetworkLocationListener());
+                LatLng currentLatLng = new LatLng(sharedLatitude, sharedLongitude);
+                myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
+                return true;
+            }
         }
 
         else {
             // Move cammera to my Location
+            myLocationManager.removeUpdates(getGpsLocationListener());
+            myLocationManager.removeUpdates(getNetworkLocationListener());
             double latitude = currentLocation.getLatitude();
             double longitude = currentLocation.getLongitude();
             LatLng currentLatLng = new LatLng(latitude, longitude);
@@ -224,7 +288,7 @@ public class EventRadar extends AppCompatActivity implements
     }
 
     /**
-     * Check if Location Services are enabled. If not, start dialog window and settings.
+     * Check if Location Services are enabled. If they are not, start dialog window and settings.
      * @param lm LocatinManager provide information about Location-Services.
      */
     private boolean locationServicesCheck(LocationManager lm) {
@@ -288,37 +352,9 @@ public class EventRadar extends AppCompatActivity implements
     }
 
     /**
-     * Get reference to new LocationListener
-     * @return LacationListener
+     * Request for Location with GPS_PROVIDER and NETWORK_PROVIDER
      */
-    private LocationListener getLocationListener() {
-        return new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                currentLocation = location;
-            }
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-            }
-            @Override
-            public void onProviderEnabled(String s) {
-            }
-            @Override
-            public void onProviderDisabled(String s) {
-            }
-        };
-    }
-
-    @Override
-    public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
-        return false;
-    }
-
-    @Override
-    public void onMyLocationClick(@NonNull Location location) {
+    private void requestLocation(){
 
         // Permission Chek
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -328,10 +364,96 @@ public class EventRadar extends AppCompatActivity implements
                     Manifest.permission.ACCESS_FINE_LOCATION, true);
         }
 
-        currentLocation = location;
-        LocationListener myLocationListener = getLocationListener();
-        myLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, myLocationListener);
-        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
+        LocationListener gpsListener = getGpsLocationListener();
+        myLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
+        LocationListener networkListener = getNetworkLocationListener();
+        myLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkListener);
+    }
+
+    /**
+     * Get GPS_PROVIDER {@link LocationListener}
+     * @return LocationListener
+     */
+    private LocationListener getGpsLocationListener() {
+        return gpsLocationListener != null ? gpsLocationListener: new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                currentLocation = location;
+                SharedPreferences.Editor editor = sharedPreferencesLastLocation.edit();
+                editor.putString("Latitude", Double.toString(location.getLatitude()));
+                editor.putString("Longitude", Double.toString(location.getLongitude()));
+                editor.apply();
+                LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+            }
+        };
+    }
+
+    /**
+     * Get NETWORK_PROVIDER {@link LocationListener}
+     * @return LocationListener
+     */
+    private LocationListener getNetworkLocationListener() {
+        return networkLocationListener != null ? networkLocationListener: new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                currentLocation = location;
+                SharedPreferences.Editor editor = sharedPreferencesLastLocation.edit();
+                editor.putString("Latitude", Double.toString(location.getLatitude()));
+                editor.putString("Longitude", Double.toString(location.getLongitude()));
+                editor.apply();
+                LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+            }
+        };
+    }
+
+    /**
+     * Tries to find current {@link Location}. If found one, animates the camera to the user's current position.
+     * @return boolean
+     */
+    @Override
+    public boolean onMyLocationButtonClick() {
+        locationServicesCheck(myLocationManager);
+        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        // Return false so that we don't consume the event and the default behavior still occurs
+        // (the camera animates to the user's current position).
+        return false;
+    }
+
+    /**
+     * Make toast on "my location point" Click.
+     * @param location my current location point.
+     */
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Toast.makeText(this, "Current location:\n" + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -345,8 +467,10 @@ public class EventRadar extends AppCompatActivity implements
                 Manifest.permission.ACCESS_FINE_LOCATION)) {
             // Enable the my location layer if the permission has been granted.
             enableMyLocation();
+            initWithPermission();
         } else {
             // Display the missing permission error dialog when the fragments resume.
+            initWithoutPermission();
             mPermissionDenied = true;
         }
     }
@@ -357,6 +481,7 @@ public class EventRadar extends AppCompatActivity implements
         if (mPermissionDenied) {
             // Permission was not granted, display error dialog.
             showMissingPermissionError();
+            initWithoutPermission();
             mPermissionDenied = false;
         }
     }
