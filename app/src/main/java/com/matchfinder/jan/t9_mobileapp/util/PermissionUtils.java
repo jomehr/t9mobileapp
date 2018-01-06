@@ -42,8 +42,16 @@ public abstract class PermissionUtils {
                                          String permission, boolean finishActivity) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
             // Display a dialog with rationale.
-            PermissionUtils.RationaleDialog.newInstance(requestId, finishActivity)
-                    .show(activity.getSupportFragmentManager(), "dialog");
+            if (!permission.equals( Manifest.permission.ACCESS_FINE_LOCATION)) {
+                PermissionUtils.RationaleDialog.newInstance(requestId, finishActivity)
+                        .show(activity.getSupportFragmentManager(), "dialog");
+            }
+            /// TEST
+            else if (activity.getPackageManager()
+                    .checkPermission(permission, activity.getPackageName()) != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(activity, new String[]{permission}, requestId);
+            }
+            ///
         } else {
             // Location permission has not been granted yet, request it.
             ActivityCompat.requestPermissions(activity, new String[]{permission}, requestId);

@@ -143,7 +143,6 @@ public class EventRadar extends AppCompatActivity implements
         else {
             enableMyLocation();
             initWithPermission();
-
         }
 
         /// TEST
@@ -191,8 +190,7 @@ public class EventRadar extends AppCompatActivity implements
                 // location services are disabled
                 LatLng germanyLatLng = new LatLng(50.980602, 10.314458);
                 myGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(germanyLatLng, 6));
-                Toast.makeText(this,"Your Location-Services are probably disabled\n" +
-                        "You can not use some features.\nPlease go to settings to enable it.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Your Location-Services are probably disabled. You can not use some features.", Toast.LENGTH_LONG).show();
             }
         }
         else {
@@ -336,6 +334,8 @@ public class EventRadar extends AppCompatActivity implements
         }
 
         // Check if the user has enabled the location data.
+        // !!!NEVER USED BECOUSE of MULTI-THREAD
+        // TODO Implement in right way "Check if the user has enabled the location data."
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
         } catch(Exception ex) {
