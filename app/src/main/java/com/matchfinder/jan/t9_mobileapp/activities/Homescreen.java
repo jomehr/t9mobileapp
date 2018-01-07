@@ -3,6 +3,8 @@ package com.matchfinder.jan.t9_mobileapp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
@@ -40,8 +43,13 @@ public class Homescreen extends AppCompatActivity {
         banner1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityIfNeeded(new Intent(Homescreen.this, EventRadar.class), REQUEST);
-                //startActivity(new Intent(Homescreen.this, EventRadar.class));
+                if (isNetworkAvailable()) {
+                    startActivityIfNeeded(new Intent(Homescreen.this, EventRadar.class), REQUEST);
+                }
+                else {
+                    Toast.makeText(Homescreen.this, "Internetverbindung fällt. Es ist notwendig für diese Funktion", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -71,6 +79,17 @@ public class Homescreen extends AppCompatActivity {
             }
         });
         */
+    }
+
+    /**
+     * Check if Network is Available becaouse it is very important to soma features.
+     * @return boolean true if Network is available and false if not.
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override
