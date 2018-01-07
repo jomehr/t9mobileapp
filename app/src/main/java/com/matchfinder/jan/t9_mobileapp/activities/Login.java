@@ -29,15 +29,14 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         sharedPreferences = getSharedPreferences("Registration", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         Boolean remember = sharedPreferences.getBoolean("Erinnerung", false);
         if (remember) {
-            startActivity(new Intent(getApplicationContext(), Homescreen.class));
+            startActivity(new Intent(Login.this, Homescreen.class));
             finish();
         } else {
+            super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_login);
         }
 
@@ -50,14 +49,19 @@ public class Login extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    login();
-                    startActivity(new Intent(Login.this, Homescreen.class));
-                } catch (Exception e) {
-                    e.printStackTrace()
-                    ;}
+                   if (login() == true) {
+                        if(check_remember.isChecked()) {
+                            editor.putBoolean("Erinnerung", true);
+                            editor.commit();
+                        }
+                        startActivity(new Intent(Login.this, Homescreen.class));
+                        finish();
+                    } else {
+                       onLoginFailed();
+                   }
             }
         });
+
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,66 +71,25 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void login() {
-
-        if (!validate()) {
-            onLoginFailed();
-            return;
-        }
-
-        if(check_remember.isChecked()) {
-            editor.putBoolean("Erinnerung", true);
-            editor.commit();
-        }
+    private boolean login() {
 
         ParseServer ps = ParseServer.getInstance(this);
-        ps.loginUser(this, edit_username.getText().toString(), edit_password.getText().toString());
+        boolean succes = true;
+        boolean result = ps.loginUser(this, edit_username.getText().toString(), edit_password.getText().toString());
 
-
-/*      String email = edit_email.getText().toString();
-        String password = edit_password.getText().toString();
-
-        String prefEmail = null;
-        String prefPw = null;
-
-        if (sharedPreferences.contains("Email")) {
-            prefEmail = sharedPreferences.getString("Email", null);
-        }
-        if (sharedPreferences.contains("Passwort")) {
-            prefPw = sharedPreferences.getString("Passwort", null);
-        }
-        if (email.equals(prefEmail) && password.equals(prefPw)) {
-            startActivity(new Intent(getApplicationContext(), Homescreen.class));
-            finish();
-        }else {
-            onLoginFailed();
-        }*/
-    }
-
-    private boolean validate() {
-        boolean valid = true;
-
-        String email = edit_username.getText().toString();
-        String password = edit_password.getText().toString();
-
-        if (email.isEmpty()) {
-            edit_username.setError("Gebe einen Nutzernamen ein");
-            valid = false;
-        } else {
-            edit_username.setError(null);
+        //input vallidation, false if input empty
+        if (edit_username.getText().toString().isEmpty() || edit_password.getText().toString().isEmpty()) {
+            succes =  false;
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 15) {
-            edit_password.setError("Passwort muss zwischen 4 und 15 Zeichen lang sein");
-            valid = false;
-        } else {
-            edit_password.setError(null);
+        if (!result){
+            succes = result;
         }
 
-        return valid;
+        return succes;
     }
 
     private void onLoginFailed() {
-        Toast.makeText(getApplicationContext(), "Falsche Login-Daten",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Falsche Login-Daten",Toast.LENGTH_SHORT).show();
     }
 }

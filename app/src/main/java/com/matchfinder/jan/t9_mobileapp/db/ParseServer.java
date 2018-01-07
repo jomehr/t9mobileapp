@@ -21,6 +21,8 @@ import com.parse.SignUpCallback;
 public class ParseServer extends AppCompatActivity{
 
     public static Event event;
+    public boolean login_succes;
+    public boolean register_succes;
 
     // Eine (versteckte) Klassenvariable vom Typ der eigene Klasse
     private static ParseServer instance;
@@ -30,7 +32,7 @@ public class ParseServer extends AppCompatActivity{
     private ParseServer (Context appContext) {
 
         // Enable Local Datastore.
-        Parse.enableLocalDatastore(appContext);
+        //Parse.enableLocalDatastore(appContext);
 
         //ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
@@ -142,11 +144,11 @@ public class ParseServer extends AppCompatActivity{
         profileObjekt.saveInBackground();
     }
 
-    public synchronized void registerUser (Context appcontext, String email, final String username, String password) {
+    public synchronized boolean registerUser (final Context appcontext, String email, final String username, String password) {
 
-        final Context context = appcontext;
+        ParseUser currentUser = ParseUser.getCurrentUser();
 
-        if (ParseUser.getCurrentUser() != null) {
+        if (currentUser != null) {
             ParseUser.logOut();
         }
 
@@ -159,26 +161,33 @@ public class ParseServer extends AppCompatActivity{
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    Toast.makeText(context, "User erstellt: "+ username,Toast.LENGTH_SHORT).show();
+                    register_succes = true;
+                    Toast.makeText(appcontext, "User erstellt: "+ username,Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                    register_succes = false;
+                    Toast.makeText(appcontext, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+        return register_succes;
     }
 
-    public synchronized void loginUser (final Context appcontext, String username, String password) {
+    public synchronized boolean loginUser (final Context appcontext, String username, String password) {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
-                if (parseUser != null) {
+                if (parseUser != null && e == null) {
+                    login_succes = true;
                     Toast.makeText(appcontext, "Login erfolgreich", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(appcontext, e.getMessage(),Toast.LENGTH_SHORT).show();
+                    login_succes = false;
+                    Toast.makeText(appcontext, e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
         });
+        return login_succes;
     }
 
 }

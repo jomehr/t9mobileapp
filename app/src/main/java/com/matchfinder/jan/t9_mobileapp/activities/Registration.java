@@ -36,11 +36,13 @@ public class Registration extends AppCompatActivity{
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    register();
-                } catch  (Exception e) {
-                    e.printStackTrace();
+                if (register() == true) {
+                    startActivity(new Intent(Registration.this, Login.class));
+                    finish();
+                } else {
+                    onRegistrationFailed();
                 }
+
             }
         });
 
@@ -48,48 +50,31 @@ public class Registration extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Registration.this, Login.class));
+                finish();
             }
         });
     }
 
-    private void register() {
-        ParseServer ps = ParseServer.getInstance(this);
+    private boolean register() {
 
-        String email = edit_email.getText().toString();
-        String username = edit_name.getText().toString();
+        final String email = edit_email.getText().toString();
+        final String username = edit_name.getText().toString();
         String password = edit_password.getText().toString();
+
+        boolean succes = true;
+
+        ParseServer ps = ParseServer.getInstance(this);
+        boolean result = ps.registerUser(Registration.this, email, username, password);
 
         if (!validate(email, username, password)) {
-            onRegistrationFailed();
-            return;
+            succes =  false;
         }
 
-        ps.registerUser(this, email, username, password);
+        if (!result) {
+            succes = result;
+        }
 
-
-/*      SharedPreferences sharedPreferences = getSharedPreferences(PREFER_NAME,0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        String email = edit_email.getText().toString();
-        String name = edit_name.getText().toString();
-        String password = edit_password.getText().toString();
-
-        String curMail = sharedPreferences.getString("Email", null);
-
-        if (sharedPreferences.contains("Email") &&
-                curMail.equals(email)){
-            Toast.makeText(getApplicationContext(), "Account existiert bereits",Toast.LENGTH_SHORT).show();
-        } else {
-            //editor.clear().commit();
-            editor.putString("Email", email);
-            editor.putString("Name", name);
-            editor.putString("Passwort", password);
-            editor.apply();
-            Toast.makeText(getApplicationContext(), "Daten bearbeitet",Toast.LENGTH_SHORT).show();
-
-            startActivity(new Intent(Registration.this, Login.class));
-            finish();
-        }*/
+        return succes;
     }
 
 
