@@ -1,6 +1,9 @@
 package com.matchfinder.jan.t9_mobileapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -33,16 +36,28 @@ public class Registration extends AppCompatActivity{
         edit_name = findViewById(R.id.register_inputName);
         edit_password = findViewById(R.id.register_inputPassword);
 
+
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (register() == true) {
-                    startActivity(new Intent(Registration.this, Login.class));
-                    finish();
-                } else {
-                    onRegistrationFailed();
+                if (!isNetworkAvailable()) {
+                    Toast.makeText(Registration.this, "keine Internetverbindung", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-
+                if (!validate()) {
+                    onRegistrationFailed();
+                    return;
+                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            registerParse();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
             }
         });
 
@@ -55,31 +70,13 @@ public class Registration extends AppCompatActivity{
         });
     }
 
-    private boolean register() {
 
-        final String email = edit_email.getText().toString();
-        final String username = edit_name.getText().toString();
-        String password = edit_password.getText().toString();
-
-        boolean succes = true;
-
-        ParseServer ps = ParseServer.getInstance(this);
-        boolean result = ps.registerUser(Registration.this, email, username, password);
-
-        if (!validate(email, username, password)) {
-            succes =  false;
-        }
-
-        if (!result) {
-            succes = result;
-        }
-
-        return succes;
-    }
-
-
-    private boolean validate(String email, String username, String password) {
+    private boolean validate() {
         boolean valid = true;
+
+        String email = edit_email.getText().toString();
+        String username = edit_name.getText().toString();
+        String password = edit_password.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             edit_email.setError("Gebe eine valide Email-Adresse ein");
@@ -105,7 +102,23 @@ public class Registration extends AppCompatActivity{
         return valid;
     }
 
+    private void registerParse () {
+
+        final String email = edit_email.getText().toString();
+        final String username = edit_name.getText().toString();
+        final String password = edit_password.getText().toString();
+
+        ParseServer ps = ParseServer.getInstance(Registration.this);
+        ps.registerUser(this, email, username, password, this);
+    }
+
     private void onRegistrationFailed() {
         Toast.makeText(this, "Registrierung fehlgeschlagen",Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

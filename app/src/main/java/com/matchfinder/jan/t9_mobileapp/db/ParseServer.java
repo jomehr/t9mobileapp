@@ -1,9 +1,13 @@
 package com.matchfinder.jan.t9_mobileapp.db;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.matchfinder.jan.t9_mobileapp.activities.Homescreen;
+import com.matchfinder.jan.t9_mobileapp.activities.Login;
 import com.matchfinder.jan.t9_mobileapp.db.entities.Event;
 import com.parse.LogInCallback;
 import com.parse.Parse;
@@ -21,8 +25,7 @@ import com.parse.SignUpCallback;
 public class ParseServer extends AppCompatActivity{
 
     public static Event event;
-    public boolean login_succes;
-    public boolean register_succes;
+    private boolean b;
 
     // Eine (versteckte) Klassenvariable vom Typ der eigene Klasse
     private static ParseServer instance;
@@ -144,11 +147,9 @@ public class ParseServer extends AppCompatActivity{
         profileObjekt.saveInBackground();
     }
 
-    public synchronized boolean registerUser (final Context appcontext, String email, final String username, String password) {
+    public synchronized void registerUser (final Context appcontext, String email, final String username, String password, final Activity activity) {
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
-
-        if (currentUser != null) {
+        if (ParseUser.getCurrentUser() != null) {
             ParseUser.logOut();
         }
 
@@ -161,33 +162,39 @@ public class ParseServer extends AppCompatActivity{
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    register_succes = true;
-                    Toast.makeText(appcontext, "User erstellt: "+ username,Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(appcontext, "User erstellt: "+ username, Toast.LENGTH_SHORT).show();
+                    activity.startActivity(new Intent(appcontext, Login.class));
+                    activity.finish();
                 } else {
-                    register_succes = false;
                     Toast.makeText(appcontext, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
-
-        return register_succes;
     }
 
-    public synchronized boolean loginUser (final Context appcontext, String username, String password) {
+    public synchronized void loginUser (final Context appcontext, final String username, String password, final Activity activity) {
+
+        if (ParseUser.getCurrentUser() != null) {
+            ParseUser.logOut();
+        }
+
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
-                if (parseUser != null && e == null) {
-                    login_succes = true;
+                if (parseUser != null) {
                     Toast.makeText(appcontext, "Login erfolgreich", Toast.LENGTH_SHORT).show();
+                    activity.startActivity(new Intent( appcontext, Homescreen.class));
+                    activity.finish();
                 } else {
-                    login_succes = false;
                     Toast.makeText(appcontext, e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
         });
-        return login_succes;
+    }
+
+    public synchronized boolean logOut() {
+        ParseUser.logOut();
+        return ParseUser.getCurrentUser() == null;
     }
 
 }

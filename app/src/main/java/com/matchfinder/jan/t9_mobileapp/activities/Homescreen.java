@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
@@ -120,11 +121,14 @@ public class Homescreen extends AppCompatActivity {
             case R.id.action_sign_out:
                 SharedPreferences sharedPreferences = getSharedPreferences("Registration", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor =  sharedPreferences.edit();
-                if (sharedPreferences.getBoolean("Erinnerung", false) == true) {
-                    editor.putBoolean("Erinnerung", false).commit();
+                ParseServer ps =ParseServer.getInstance(this);
+                if (sharedPreferences.getBoolean("Erinnerung", false))
+                    editor.putBoolean("Erinnerung", false).apply();
+
+                if (ps.logOut()) {
                     startActivity(new Intent(this, Login.class));
-                } else {
-                    startActivity(new Intent(this, Login.class));
+                }else {
+                    Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
                 }
                 return true;
             case R.id.action_data_privacy:
