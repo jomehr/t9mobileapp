@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity {
         ps.loginUser(this, edit_username.getText().toString(), edit_password.getText().toString(), this);
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(2000); ///TODO Thread.sleep() unerwünscht.
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
