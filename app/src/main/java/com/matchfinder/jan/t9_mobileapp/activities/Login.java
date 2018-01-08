@@ -26,7 +26,7 @@ import com.parse.ParseUser;
 public class Login extends AppCompatActivity {
 
     private EditText edit_username,edit_password;
-    public ProgressBar progressbar;
+    private ProgressBar progressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +43,12 @@ public class Login extends AppCompatActivity {
         }
 
         Button btn_login = findViewById(R.id.login_loginBtn);
+        TextView btn_forgotPassword = findViewById(R.id.login_forgotPasswordBtn);
         TextView btn_register = findViewById(R.id.login_registerBtn);
         edit_username = findViewById(R.id.login_inputUsername);
         edit_password = findViewById(R.id.login_inputPassword);
         final CheckBox check_remember = findViewById(R.id.login_checkBox);
         progressbar =  findViewById(R.id.login_progressBar);
-
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +83,13 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Registration.class));
+            }
+        });
+
+        btn_forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(Login.this, "wird noch implementiert", Toast.LENGTH_SHORT).show();
             }
         });
     }
