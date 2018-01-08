@@ -31,8 +31,9 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getSharedPreferences("Registration", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
         Boolean remember = sharedPreferences.getBoolean("Erinnerung", false);
+
         if (remember) {
             startActivity(new Intent(Login.this, Homescreen.class));
             finish();
@@ -45,26 +46,25 @@ public class Login extends AppCompatActivity {
         TextView btn_register = findViewById(R.id.login_registerBtn);
         edit_username = findViewById(R.id.login_inputUsername);
         edit_password = findViewById(R.id.login_inputPassword);
-        CheckBox check_remember = findViewById(R.id.login_checkBox);
+        final CheckBox check_remember = findViewById(R.id.login_checkBox);
         progressbar =  findViewById(R.id.login_progressBar);
-
-        if(check_remember.isChecked()) {
-            editor.putBoolean("Erinnerung", true);
-            editor.apply();
-        } else {
-            editor.putBoolean("Erinnerung", false);
-            editor.apply();
-        }
 
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressbar.setVisibility(View.VISIBLE);
+
+                if(check_remember.isChecked()) {
+                    editor.putBoolean("Erinnerung", true);
+                    editor.apply();
+                }
+
                 if (!isNetworkAvailable()) {
                     Toast.makeText(Login.this, "keine Internetverbindung", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -90,24 +90,27 @@ public class Login extends AppCompatActivity {
 
     private void loginParse() {
         ParseServer ps = ParseServer.getInstance(Login.this);
-        ps.loginUser(getApplicationContext(), edit_username.getText().toString(), edit_password.getText().toString(), this);
+        ps.loginUser(this, edit_username.getText().toString(), edit_password.getText().toString(), this);
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         if (ParseUser.getCurrentUser() == null) {
             progressbar.setVisibility(View.INVISIBLE);
         }
     }
 
-    private void onLoginFailed() {
+/*    private void onLoginFailed() {
         Toast.makeText(this, "Falsche Login-Daten",Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

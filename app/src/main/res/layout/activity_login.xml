@@ -16,7 +16,6 @@
         android:layout_below="@+id/login_appName"
         android:layout_centerHorizontal="true"
         android:indeterminate="true"
-        android:indeterminateBehavior="cycle"
         android:visibility="invisible"/>
 
     <TextView
