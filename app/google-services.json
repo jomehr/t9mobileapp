@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "980151783157",
+    "firebase_url": "https://kick-it-matchfinder.firebaseio.com",
+    "project_id": "kick-it-matchfinder",
+    "storage_bucket": "kick-it-matchfinder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980151783157:android:f4aca180ee51c622",
+        "android_client_info": {
+          "package_name": "com.matchfinder.jan.t9_mobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980151783157-br74387vrn4ejrnvgc2ei91v16agv27c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALOS4_zOYal1g6dt899RLRuCOvSup9PEM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

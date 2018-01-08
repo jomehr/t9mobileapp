@@ -15,8 +15,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:minHeight="?android:attr/actionBarSize"
         android:theme="@style/AppTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
@@ -25,8 +25,8 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:minHeight="?android:attr/actionBarSize"
         android:theme="@style/AppTheme"/>
 
     <!-- View pager to swipe views -->

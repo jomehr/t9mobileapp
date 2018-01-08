@@ -14,14 +14,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.interfaces.IFragmentListener;
+import com.matchfinder.jan.t9_mobileapp.interfaces.ISearch;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
-import com.matchfinder.jan.t9_mobileapp.interfaces.IFragmentListener;
-import com.matchfinder.jan.t9_mobileapp.interfaces.ISearch;
 import com.matchfinder.jan.t9_mobileapp.util.PageAdapter;
-import com.matchfinder.jan.t9_mobileapp.R;
 
 import java.util.ArrayList;
 

@@ -13,12 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.activities.Search;
+import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.interfaces.IFragmentListener;
 import com.matchfinder.jan.t9_mobileapp.interfaces.ISearch;
-import com.matchfinder.jan.t9_mobileapp.R;
-
-import com.matchfinder.jan.t9_mobileapp.util.CustomSearchPlayerList;
 
 import java.util.ArrayList;
 
@@ -42,24 +41,14 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
 
         // CREATE THE ARRAYLIST
         ArrayList<String> playerNameList = new ArrayList<>();
-        // FILL THE ARRAYLIST
-            playerNameList.add("Jan Mehr");
-            playerNameList.add("Christopher Huntscha");
-            playerNameList.add("Simon Mertens");
-            playerNameList.add("Maximilian Storr");
-            playerNameList.add("Taras Zaika");
-            playerNameList.add("Tarek Al Ashi");
 
-        ArrayList<Integer> playerProfilePicture = new ArrayList<>();
+       /* ArrayList<Integer> playerProfilePicture = new ArrayList<>();
             playerProfilePicture.add(R.drawable.ic_person_black_72dp);
             playerProfilePicture.add(R.drawable.ic_person_black_72dp);
             playerProfilePicture.add(R.drawable.ic_person_black_72dp);
             playerProfilePicture.add(R.drawable.ic_person_black_72dp);
             playerProfilePicture.add(R.drawable.ic_person_black_72dp);
             playerProfilePicture.add(R.drawable.ic_person_black_72dp);
-
-
-        /*
 
         ListView playersearchlist = view.findViewById(R.id.listview1);
         playersearchlist.setAdapter(firstLeagueAdapter);
@@ -68,9 +57,13 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
         //CustomSearchPlayerList firstLeagueAdapter = new CustomSearchPlayerList(getActivity(), playerNameList, playerProfilePicture);
         //standard item layout
         //arrayAdapter = new CustomSearchPlayerList(getActivity(), playerNameList, playerProfilePicture);
-            arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, playerNameList);
+        ParseServer ps = ParseServer.getInstance(getContext());
+
+        arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, playerNameList);
         ListView listView = view.findViewById(R.id.listview1);
         listView.setAdapter(arrayAdapter);
+
+        ps.loadUserList(arrayAdapter);
 
 
 

@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.activities.Homescreen;
 import com.matchfinder.jan.t9_mobileapp.activities.Login;
 import com.matchfinder.jan.t9_mobileapp.db.entities.Event;
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -17,6 +19,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.util.List;
 
 /*
  * Created by taraszaika on 02.01.18.
@@ -195,6 +199,21 @@ public class ParseServer extends AppCompatActivity{
     public synchronized boolean logOut() {
         ParseUser.logOut();
         return ParseUser.getCurrentUser() == null;
+    }
+
+    public void loadUserList(final ArrayAdapter mUserAdapter) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> userObjects, ParseException error) {
+                if (userObjects != null) {
+                    mUserAdapter.clear();
+                    for (int i = 0; i < userObjects.size(); i++) {
+                        mUserAdapter.add(userObjects.get(i).getUsername());
+                    }
+                }
+            }
+        });
     }
 
 }
