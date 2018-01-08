@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -30,17 +31,11 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
         SharedPreferences sharedPreferences = getSharedPreferences("Registration", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         Boolean remember = sharedPreferences.getBoolean("Erinnerung", false);
-
-        if (remember) {
-            startActivity(new Intent(Login.this, Homescreen.class));
-            finish();
-        } else {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_login);
-        }
 
         Button btn_login = findViewById(R.id.login_loginBtn);
         TextView btn_register = findViewById(R.id.login_registerBtn);
@@ -49,6 +44,10 @@ public class Login extends AppCompatActivity {
         final CheckBox check_remember = findViewById(R.id.login_checkBox);
         progressbar =  findViewById(R.id.login_progressBar);
 
+        if (remember) {
+            startActivity(new Intent(Login.this, Homescreen.class));
+            finish();
+        }
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +68,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
+                            Looper.prepare();
                             loginParse();
                         } catch (Exception e) {
                             e.printStackTrace();
