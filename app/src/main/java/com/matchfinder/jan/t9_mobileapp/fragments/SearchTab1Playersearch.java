@@ -57,6 +57,8 @@ public class SearchTab1Playersearch extends Fragment implements ISearch {
         //CustomSearchPlayerList firstLeagueAdapter = new CustomSearchPlayerList(getActivity(), playerNameList, playerProfilePicture);
         //standard item layout
         //arrayAdapter = new CustomSearchPlayerList(getActivity(), playerNameList, playerProfilePicture);
+
+        //vllt onresume
         ParseServer ps = ParseServer.getInstance(getContext());
 
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, playerNameList);
