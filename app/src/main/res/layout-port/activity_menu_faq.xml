@@ -34,6 +34,12 @@
                     android:layout_margin="15dp"
                     android:text="@string/faq"
                     tools:ignore="HardcodedText" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Link to FAQ"
+                    android:onClick="openFAQ"
+                    android:id="@+id/faqButton"/>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

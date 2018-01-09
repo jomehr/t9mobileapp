@@ -1,11 +1,13 @@
 package com.matchfinder.jan.t9_mobileapp.menu;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.activities.Profile;
@@ -30,6 +32,12 @@ public class menu_faq extends AppCompatActivity {
             e.printStackTrace();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void openFAQ(View view)
+    {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jomehr/t9mobileapp/blob/master/app-debug.apk"));
+        startActivity(browserIntent);
     }
 
     @Override
