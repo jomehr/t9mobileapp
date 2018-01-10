@@ -24,6 +24,60 @@
             android:padding="15dp">
 
             <LinearLayout
+                android:id="@+id/profiledit_nameLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:showDividers="middle|end"
+                android:divider="@drawable/divider_green_vertical"
+                android:orientation="horizontal"
+                android:weightSum="7">
+
+                <ImageView
+                    android:contentDescription="@string/editAgeImage"
+                    android:id="@+id/profiledit_nameImage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_person_black_72dp" />
+
+                <EditText
+                    android:id="@+id/profiledit_firstName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="5dp"
+                    android:layout_weight="3"
+                    android:inputType="textPersonName"
+                    android:hint="@string/first_name"
+                    android:background="@null"
+                    android:focusable = "true"
+                    android:textColorHighlight = "@color/colorAccent"
+                    android:textColorHint = "@color/colorSecondaryText"
+                    android:layout_gravity="center"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimaryText"/>
+
+                <EditText
+                    android:id="@+id/profiledit_lastname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="5dp"
+                    android:layout_weight="3"
+                    android:inputType="textPersonName"
+                    android:hint="@string/last_name"
+                    android:background="@null"
+                    android:focusable = "true"
+                    android:textColorHighlight = "@color/colorAccent"
+                    android:textColorHint = "@color/colorSecondaryText"
+                    android:layout_gravity="center"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimaryText"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/profiledit_ageLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

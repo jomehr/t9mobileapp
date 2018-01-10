@@ -10,14 +10,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,16 +35,11 @@ import com.matchfinder.jan.t9_mobileapp.util.InputFilterMinMax;
 
 public class ProfileEdit extends AppCompatActivity {
 
-    private String PREFER_NAME_REGISTRATION = "Registration";
-    private String PREFER_NAME_PROFILDATA = "ProfilData";
-    private SharedPreferences sharedPreferencesReg;
+    private final static String PREFER_NAME_PROFILDATA = "ProfilData";
     private SharedPreferences sharedPreferencesProf;
-    private SharedPreferences.Editor editor;
 
     private int mDay, mMonth, mYear;
-    private String mExperience, mFavouriteTeam;
-    private EditText editDay, editMonth, editYear, editExperience, editFavouriteTeam;
-    private LinearLayout descriptionLayout, residenceLayout, teamLayout, areaLayout;
+    private EditText editFirstName, editLastName, editDay, editMonth, editYear, editExperience, editFavouriteTeam;
     private TextView descriptionText;
 
     @Override
@@ -65,16 +58,18 @@ public class ProfileEdit extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Button saveBtn = findViewById(R.id.profiledit_saveBtn);
+        editFirstName = findViewById(R.id.profiledit_firstName);
+        editLastName = findViewById(R.id.profiledit_lastname);
         editDay = findViewById(R.id.profiledit_ageDay);
         editMonth = findViewById(R.id.profiledit_ageMonth);
         editYear = findViewById(R.id.profiledit_ageYear);
         editExperience = findViewById(R.id.profiledit_experienceText);
         editFavouriteTeam = findViewById(R.id.profiledit_favouriteTeamText);
-        descriptionLayout = findViewById(R.id.profiledit_descriptionLayout);
-        residenceLayout = findViewById(R.id.profiledit_residenceLayout);
+        LinearLayout descriptionLayout = findViewById(R.id.profiledit_descriptionLayout);
+        LinearLayout residenceLayout = findViewById(R.id.profiledit_residenceLayout);
         descriptionText = findViewById(R.id.profiledit_descriptionText);
-        teamLayout = findViewById(R.id.profiledit_teamLayout);
-        areaLayout = findViewById(R.id.profiledit_areaLayout);
+        LinearLayout teamLayout = findViewById(R.id.profiledit_teamLayout);
+        LinearLayout areaLayout = findViewById(R.id.profiledit_areaLayout);
 
         sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA,Context.MODE_PRIVATE);
         if (sharedPreferencesProf.getString("Geburtstag", null)!= null) {
@@ -126,43 +121,6 @@ public class ProfileEdit extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.action_search:
-                startActivity(new Intent(this, Search.class));
-                return true;
-            case R.id.action_profile:
-                startActivity(new Intent(this, Profile.class));
-                return true;
-            case R.id.action_settings:
-                startActivity(new Intent(this, menu_settings.class));
-                return true;
-            case R.id.action_developer:
-                startActivity(new Intent(this, menu_developer.class));
-                return true;
-            case R.id.action_faq:
-                startActivity(new Intent(this, menu_faq.class));
-                return true;
-            case R.id.action_sign_out:
-                startActivity(new Intent(this, Login.class));
-                return true;
-            case R.id.action_data_privacy:
-                startActivity(new Intent(this, menu_data_privacy.class));
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private boolean validate() {
         boolean valid = true;
@@ -202,116 +160,75 @@ public class ProfileEdit extends AppCompatActivity {
     //Text Picker
     private void textPickerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //String descText = descriptionText.toString();
-        builder.setTitle(R.string.description);
+        builder.setTitle("Title");
 
         // Set up the input
         final EditText input = new EditText(this);
-        input.setSingleLine(false);
-        input.setMinLines(1);
-        input.setMaxLines(6);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         input.setHint(descriptionText.getHint());
-
-        //Set margins
-        FrameLayout container = new FrameLayout(this);
-        FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.leftMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
-        params.rightMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
-        input.setLayoutParams(params);
-
-        container.addView(input);
-
-        input.setText(descriptionText.getText());
-
-        //View zuweisen
-        builder.setView(container);
-
-        //Tastatur öfnnen
-        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(128)});
+        input.setMaxLines(4);
+        builder.setTitle("Beschreibung").setView(input);
 
         // Set up the buttons
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //Tastatur schlissen
-                //imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-                try {
-                    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                }
-                //Set TextViewLayout to WRAP_CONTENT
-                ViewGroup.LayoutParams paramsDescriptionText = descriptionText.getLayoutParams();
-                paramsDescriptionText.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                descriptionText.setLayoutParams(paramsDescriptionText);
-
-                //Set eventDescriptionLayout (Linear Layout) paddingBottom to 10dp
-                descriptionLayout.setPadding(0,0,0,10);
-
                 descriptionText.setText(input.getText().toString());
             }
         });
-
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //Tastatur schlissen
-                //imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-                try {
-                    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                }
-
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
 
         builder.show();
-
-        //Tastatur automatisch öfnnen
-        input.requestFocus();
-        try {
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-
-        /*
-        TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schkiesst sich die Tastatur
-        TODO Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.
-        */
     }
 
     private void saveData() {
-        sharedPreferencesReg = getSharedPreferences(PREFER_NAME_REGISTRATION, Context.MODE_PRIVATE);
-        String tmpName = sharedPreferencesReg.getString("Name", null);
-        String tmpMail = sharedPreferencesReg.getString("Email", null);
+        String appendName = editFirstName.getText().toString() + " " +editLastName.getText().toString();
         String appendDate = mDay + "." + mMonth + "." +mYear;
         String tmp = "in Arbeit";
 
         //Store data locally in shared preference until app is deleted or cache cleared
-        sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA,Context.MODE_PRIVATE);
-        editor = sharedPreferencesProf.edit();
-
+        SharedPreferences.Editor editor = sharedPreferencesProf.edit();
+        editor.putString("EchterName", appendName);
         editor.putString("Geburtstag", appendDate);
         editor.putString("ProfilBeschreibung", descriptionText.getText().toString());
         editor.putString("Erfahrung", editExperience.getText().toString());
         editor.putString("Lieblingsteam", editFavouriteTeam.getText().toString());
         editor.apply();
 
+        //TODO implement class or function to resize and decode images, otherwise OOM-exception
+/*        //get profiepicture and convert it
+        String picturePath = sharedPreferencesProf.getString("Profilbild", "");
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = false;
+        options.inSampleSize = 2;
+        Bitmap bitmap = BitmapFactory.decodeFile(picturePath, options);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte [] data = stream.toByteArray();*/
+
         //Store data on server permanently
         ParseServer ps = ParseServer.getInstance(this);
-
-        ps.saveProfileData(tmpName, tmpMail, appendDate, tmp, descriptionText.getText().toString(), tmp, tmp, editExperience.getText().toString(), editFavouriteTeam.getText().toString());
+        ps.saveProfileData(appendName, appendDate, tmp, descriptionText.getText().toString(), tmp, tmp, editExperience.getText().toString(), editFavouriteTeam.getText().toString());
     }
 
     private void getData() {
         String birthday = sharedPreferencesProf.getString("Geburtstag", null);
+        String realname = sharedPreferencesProf.getString("EchterName", null);
+        assert birthday != null && realname != null;
         String [] birthtmp = birthday.split("\\.");
+        String [] nametmp = realname.split(" ");
         editDay.setHint(birthtmp[0]);
         editMonth.setHint(birthtmp[1]);
         editYear.setHint(birthtmp[2]);
+        editFirstName.setHint(nametmp[0]);
+        editLastName.setHint(nametmp[1]);
 
         String descriptiontmp = sharedPreferencesProf.getString("ProfilBeschreibung", null);
         descriptionText.setHint(descriptiontmp);
@@ -321,6 +238,44 @@ public class ProfileEdit extends AppCompatActivity {
 
         String favouriteteamtmp = sharedPreferencesProf.getString("Lieblingsteam", null);
         editFavouriteTeam.setHint(favouriteteamtmp);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.action_search:
+                startActivity(new Intent(this, Search.class));
+                return true;
+            case R.id.action_profile:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_settings:
+                startActivity(new Intent(this, menu_settings.class));
+                return true;
+            case R.id.action_developer:
+                startActivity(new Intent(this, menu_developer.class));
+                return true;
+            case R.id.action_faq:
+                startActivity(new Intent(this, menu_faq.class));
+                return true;
+            case R.id.action_sign_out:
+                startActivity(new Intent(this, Login.class));
+                return true;
+            case R.id.action_data_privacy:
+                startActivity(new Intent(this, menu_data_privacy.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

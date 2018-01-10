@@ -39,7 +39,7 @@ public class ParseServer extends AppCompatActivity{
     private ParseServer (Context appContext) {
 
         // Enable Local Datastore.
-        //Parse.enableLocalDatastore(appContext);
+        Parse.enableLocalDatastore(appContext);
 
         //ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
@@ -133,13 +133,21 @@ public class ParseServer extends AppCompatActivity{
         */
         ///
     }
+    //TODO implement class to decode and resize images and test commented code (add byte[] data to function)
+    public synchronized void saveProfileData (String name, String birthday, String residence, String descriptopn, String team, String favouriteArea, String experience, String favouriteTeam) {
 
-    public synchronized void saveProfileData (String name, String email, String birthday, String residence, String descriptopn, String team, String favouriteArea, String experience, String favouriteTeam) {
-
+        String userid = ParseUser.getCurrentUser().getObjectId();
         ParseObject profileObjekt = new ParseObject("Profile");
+/*        ParseFile profilePicture = new ParseFile(userid+"profilimage.png", data);
+        try {
+            profilePicture.save();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        profileObjekt.put("picture", profilePicture);*/
+        profileObjekt.put("user", ParseObject.createWithoutData(ParseUser.class, userid));
         profileObjekt.put("name", name);
-        profileObjekt.put("email", email);
         profileObjekt.put("birtday", birthday);
         profileObjekt.put("residence", residence);
         profileObjekt.put("description", descriptopn);
@@ -148,7 +156,7 @@ public class ParseServer extends AppCompatActivity{
         profileObjekt.put("experience", experience);
         profileObjekt.put("favouriteTeam", favouriteTeam);
 
-        profileObjekt.saveInBackground();
+        profileObjekt.saveEventually();
     }
 
     public synchronized void registerUser (final Context appcontext, String email, final String username, String password, final Activity activity) {
@@ -197,8 +205,13 @@ public class ParseServer extends AppCompatActivity{
     }
 
     public synchronized boolean logOut() {
-        ParseUser.logOut();
-        return ParseUser.getCurrentUser() == null;
+        ParseUser curUser = ParseUser.getCurrentUser();
+        if (curUser != null) {
+            ParseUser.logOut();
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public void loadUserList(final ArrayAdapter mUserAdapter) {

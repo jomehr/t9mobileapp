@@ -2,7 +2,6 @@ package com.matchfinder.jan.t9_mobileapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -119,14 +118,10 @@ public class Homescreen extends AppCompatActivity {
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                SharedPreferences sharedPreferences = getSharedPreferences("Registration", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor =  sharedPreferences.edit();
                 ParseServer ps =ParseServer.getInstance(this);
-                if (sharedPreferences.getBoolean("Erinnerung", false))
-                    editor.putBoolean("Erinnerung", false).apply();
-
                 if (ps.logOut()) {
                     startActivity(new Intent(this, Login.class));
+                    finish();
                 }else {
                     Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
                 }

@@ -1,16 +1,16 @@
 package com.matchfinder.jan.t9_mobileapp.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,32 +33,26 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        SharedPreferences sharedPreferences = getSharedPreferences("Registration", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
-        Boolean remember = sharedPreferences.getBoolean("Erinnerung", false);
 
         Button btn_login = findViewById(R.id.login_loginBtn);
         TextView btn_forgotPassword = findViewById(R.id.login_forgotPasswordBtn);
         TextView btn_register = findViewById(R.id.login_registerBtn);
         edit_username = findViewById(R.id.login_inputUsername);
         edit_password = findViewById(R.id.login_inputPassword);
-        final CheckBox check_remember = findViewById(R.id.login_checkBox);
         progressbar =  findViewById(R.id.login_progressBar);
 
-        if (remember) {
+        ParseServer.getInstance(this);
+        if (ParseUser.getCurrentUser() != null) {
             startActivity(new Intent(Login.this, Homescreen.class));
             finish();
         }
+
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressbar.setVisibility(View.VISIBLE);
 
-                if(check_remember.isChecked()) {
-                    editor.putBoolean("Erinnerung", true);
-                    editor.apply();
-                }
 
                 if (!isNetworkAvailable()) {
                     Toast.makeText(Login.this, "keine Internetverbindung", Toast.LENGTH_SHORT).show();
@@ -117,8 +111,21 @@ public class Login extends AppCompatActivity {
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        NetworkInfo activeNetworkInfo = connectivityManager != null ? connectivityManager.getActiveNetworkInfo() : null;
 
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.close_app)
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                }).create().show();
     }
 }

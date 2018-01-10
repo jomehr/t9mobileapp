@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -28,10 +27,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
+import com.parse.ParseUser;
 
 /*
  * Created by Jan on 13.11.2017.
@@ -39,11 +40,11 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
 
 public class Profile extends AppCompatActivity {
 
-    private String PREFER_NAME_REGISTRATION = "Registration";
-    private String PREFER_NAME_PROFILDATA = "ProfilData";
-    private SharedPreferences sharedPreferencesReg;
+
+    private static  final String PREFER_NAME_PROFILDATA = "ProfilData";
     private SharedPreferences sharedPreferencesProf;
     private SharedPreferences.Editor editor;
+
 
     private final static int RESULT_LOAD_IMAGE = 1;
     private final static int PERMISSION_REQUEST_STORAGE = 0;
@@ -54,15 +55,22 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        sharedPreferencesReg = getSharedPreferences(PREFER_NAME_REGISTRATION, Context.MODE_PRIVATE);
+        //get data from shared pref
         sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA, Context.MODE_PRIVATE);
-        String profileName = sharedPreferencesReg.getString("Name", "Profil");
+        editor = sharedPreferencesProf.edit();
+        String profileName = sharedPreferencesProf.getString("Name", "Profil");
         String profileBirthday = sharedPreferencesProf.getString("Geburtstag", null);
         String profileDescription = sharedPreferencesProf.getString("ProfilBeschreibung", null);
-        String profileExperience = sharedPreferencesProf.getString("Erfahrung", "nicht vorhanden");
+        String profileExperience = sharedPreferencesProf.getString("Erfahrung", null);
         String profileFavouriteTeam = sharedPreferencesProf.getString("Lieblingsteam", null);
-        //String picturePath = sharedPreferencesProf.getString("Profilbild", null);
-        String picturePath = PreferenceManager.getDefaultSharedPreferences(this).getString("picturePath", "");
+        String picturePath = sharedPreferencesProf.getString("Profilbild", null);
+
+        //get data from server
+        ParseServer.getInstance(this);
+        if (profileName.equals("Profil")) {
+            profileName = ParseUser.getCurrentUser().getUsername();
+            editor.putString("Name", profileName);
+        }
 
         coordinatorLayout =   findViewById(R.id.profile_coordinatorLayout);
         TextView birthdayText = findViewById(R.id.profile_ageValue);
@@ -72,7 +80,6 @@ public class Profile extends AppCompatActivity {
         final Toolbar myToolbar = findViewById(R.id.profile_collapsingStaticToolbar);
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.profile_collapsingToolbar);
         AppBarLayout appBar = findViewById(R.id.profile_collapsingToolbarLayout);
-        //final View optionalData =  findViewById(R.id.profile_infoOptional);
         FloatingActionButton editBtn = findViewById(R.id.profile_editBtn);
         ImageView profilePicture =  findViewById(R.id.profile_picture);
 
@@ -132,6 +139,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Profile.this, ProfileEdit.class));
+                finish();
             }
         });
 
@@ -142,7 +150,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        if(!picturePath.equals(""))
+        if(picturePath != null)
         {
             profilePicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
@@ -154,37 +162,6 @@ public class Profile extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.action_search:
-                startActivity(new Intent(this, Search.class));
-                return true;
-            case R.id.action_profile:
-                startActivity(new Intent(this, Profile.class));
-                return true;
-            case R.id.action_settings:
-                startActivity(new Intent(this, menu_settings.class));
-                return true;
-            case R.id.action_developer:
-                startActivity(new Intent(this, menu_developer.class));
-                return true;
-            case R.id.action_faq:
-                startActivity(new Intent(this, menu_faq.class));
-                return true;
-            case R.id.action_data_privacy:
-                startActivity(new Intent(this, menu_data_privacy.class));
-                return true;
-            case R.id.action_sign_out:
-                startActivity(new Intent(this, Login.class));
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -204,9 +181,8 @@ public class Profile extends AppCompatActivity {
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
-            //editor =  sharedPreferencesProf.edit();
-            //editor.putString("Profilbild", picturePath).commit();
-            PreferenceManager.getDefaultSharedPreferences(this).edit().putString("picturePath", picturePath).apply();
+            editor = sharedPreferencesProf.edit();
+            editor.putString("Profilbild", picturePath).apply();
             cursor.close();
 
             ImageView new_profilPicture = findViewById(R.id.profile_picture);
@@ -255,5 +231,37 @@ public class Profile extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     PERMISSION_REQUEST_STORAGE);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.action_search:
+                startActivity(new Intent(this, Search.class));
+                return true;
+            case R.id.action_profile:
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            case R.id.action_settings:
+                startActivity(new Intent(this, menu_settings.class));
+                return true;
+            case R.id.action_developer:
+                startActivity(new Intent(this, menu_developer.class));
+                return true;
+            case R.id.action_faq:
+                startActivity(new Intent(this, menu_faq.class));
+                return true;
+            case R.id.action_data_privacy:
+                startActivity(new Intent(this, menu_data_privacy.class));
+                return true;
+            case R.id.action_sign_out:
+                startActivity(new Intent(this, Login.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
