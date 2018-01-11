@@ -31,7 +31,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
@@ -39,6 +39,13 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
 import com.matchfinder.jan.t9_mobileapp.util.PermissionUtils;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Updated by taraszaika on 20.11.17.
@@ -62,6 +69,7 @@ import com.matchfinder.jan.t9_mobileapp.util.PermissionUtils;
 public class EventRadar extends AppCompatActivity implements
         GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
+        GoogleMap.OnMarkerClickListener,
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback{
 
@@ -78,6 +86,7 @@ public class EventRadar extends AppCompatActivity implements
     private boolean mPermissionDenied = false;
 
     private GoogleMap myGoogleMap;
+    private Marker myMarker;
 
     private LocationManager myLocationManager;
     private String bestLocationProvider;
@@ -133,6 +142,7 @@ public class EventRadar extends AppCompatActivity implements
 
         myGoogleMap.setOnMyLocationButtonClickListener(this);
         myGoogleMap.setOnMyLocationClickListener(this);
+        myGoogleMap.setOnMarkerClickListener(this);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -148,9 +158,9 @@ public class EventRadar extends AppCompatActivity implements
         /// TEST
 
         ParseServer ps = ParseServer.getInstance(getApplicationContext());
-        ps.loadEventData(this);
-        LatLng kosivSchool = new LatLng(ParseServer.event.getPlaceLatitude(), ParseServer.event.getPlaceLongitude());
-        myGoogleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + ": " + ParseServer.event.getDescription()));
+        ps.loadEventData(this, myGoogleMap);
+        //LatLng kosivSchool = new LatLng(ParseServer.event.getPlaceLatitude(), ParseServer.event.getPlaceLongitude());
+        //myMarker = myGoogleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + ": " + ParseServer.event.getDescription()));
 
         //myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kosivSchool, 17.0f));
 
@@ -454,6 +464,54 @@ public class EventRadar extends AppCompatActivity implements
     @Override
     public void onMyLocationClick(@NonNull Location location) {
         Toast.makeText(this, "Current location:\n" + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+
+        //TODO finalize view and show all event data, show this view for every event, and handle click on "Beitreten"
+        final String id = marker.getTitle();
+        final ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+        query.getInBackground(id, new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e==null) {
+                    Toast.makeText(EventRadar.this, id , Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EventRadar.this);
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                    Calendar date = Calendar.getInstance();
+                    date.setTimeInMillis(object.getLong("dateAndTime"));
+                    // Set up the input
+                    // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                    builder.setMessage(
+                            object.getString("description") + "\n"
+                                    + "startet um: " + sdf.format(date.getTime()) + "\n"
+                                    + "maximale Spieler: " + object.getNumber("maxPlayersNumber")
+                    );
+
+                    // Set up the buttons
+                    builder.setPositiveButton("Beitreten", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ParseServer.getInstance(EventRadar.this).addParticipantsToEvent(EventRadar.this, id);
+                        }
+                    });
+                    builder.setNegativeButton("Zurück", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    builder.show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), e.getMessage()+ " " +id , Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        return true;
     }
 
     @Override

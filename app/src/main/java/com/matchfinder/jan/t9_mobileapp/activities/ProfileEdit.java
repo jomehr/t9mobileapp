@@ -160,7 +160,6 @@ public class ProfileEdit extends AppCompatActivity {
     //Text Picker
     private void textPickerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Title");
 
         // Set up the input
         final EditText input = new EditText(this);

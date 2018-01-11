@@ -7,10 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.matchfinder.jan.t9_mobileapp.activities.Homescreen;
 import com.matchfinder.jan.t9_mobileapp.activities.Login;
 import com.matchfinder.jan.t9_mobileapp.db.entities.Event;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -18,8 +22,12 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
+import org.json.JSONArray;
+
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -29,7 +37,6 @@ import java.util.List;
 public class ParseServer extends AppCompatActivity{
 
     public static Event event;
-    private boolean b;
 
     // Eine (versteckte) Klassenvariable vom Typ der eigene Klasse
     private static ParseServer instance;
@@ -78,26 +85,74 @@ public class ParseServer extends AppCompatActivity{
     public synchronized void saveEventData (double placeLat, double placeLng, long dateAndTime, int maxPlayersNumber, String description) {
 
         ParseObject eventObjekt = new ParseObject("Event");
+        JSONArray participants = new JSONArray();
+        participants.put(ParseUser.getCurrentUser().getObjectId());
+        participants.put(ParseUser.getCurrentUser().getUsername());
 
+        eventObjekt.put("createdby", ParseUser.getCurrentUser());
+        eventObjekt.put("participants", participants);
         eventObjekt.put("placeLat", placeLat);
         eventObjekt.put("placeLng", placeLng);
         eventObjekt.put("dateAndTime", dateAndTime);
-        eventObjekt.put("maxPleyersNumber", maxPlayersNumber);
+        eventObjekt.put("maxPlayersNumber", maxPlayersNumber);
         eventObjekt.put("description", description);
 
-        eventObjekt.saveInBackground();
+        eventObjekt.saveEventually();
 
     }
 
-    public synchronized void loadEventData(Context appContex)  {
+    public synchronized void addParticipantsToEvent( final Context appcontext, final String gameid) {
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+        query.getInBackground(gameid, new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e==null) {
+                    object.addAllUnique("participants", Arrays.asList(ParseUser.getCurrentUser().getObjectId(), ParseUser.getCurrentUser().getUsername()));
+                    object.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if(e==null){
+                                Toast.makeText(appcontext, "Du hast dich für das Spiel angemeldet", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(appcontext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(appcontext, e.getMessage() + gameid, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public synchronized void loadEventData(final Context appContex, final GoogleMap googleMap)  {
 
         //save context to handle it into the inner class for making Toast on UI
         final Context con = appContex;
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> eventList, ParseException e) {
+                if (e == null) {
+                    int i;
+                    for (i = 0 ; i < eventList.size(); i++) {
+                        ParseObject object = eventList.get(i);
+                        LatLng coordinate = new LatLng(object.getDouble("placeLat"), object.getDouble("placeLng"));
+                        googleMap.addMarker(new MarkerOptions().position(coordinate).title(object.getObjectId()).snippet(object.getObjectId()));
+                    }
+                    Toast.makeText(appContex, Integer.toString(i) + " Events gefunden" , Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(appContex, e.getMessage() , Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
         ///Example
-        try {
+/*        try {
             ParseObject object = query.get("SkNnLghmo3");
             event = new Event(object.getObjectId(),
                     object.getDouble("placeLat"),
@@ -109,7 +164,7 @@ public class ParseServer extends AppCompatActivity{
                     ,Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 
         /*
         query.getInBackground("mmcotyyC79", new GetCallback<ParseObject>() {
