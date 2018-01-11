@@ -469,7 +469,7 @@ public class EventRadar extends AppCompatActivity implements
     @Override
     public boolean onMarkerClick(final Marker marker) {
 
-        //TODO finalize view and show all event data, show this view for every event, and handle click on "Beitreten"
+        //TODO finalize view, show all participants, implement int curParticipants and increment for every new participant, lock positive button if curParticipants = maxParticipants
         final String id = marker.getTitle();
         final ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         query.getInBackground(id, new GetCallback<ParseObject>() {

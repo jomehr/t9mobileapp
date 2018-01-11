@@ -27,7 +27,6 @@ import com.parse.SignUpCallback;
 
 import org.json.JSONArray;
 
-import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -85,9 +84,13 @@ public class ParseServer extends AppCompatActivity{
     public synchronized void saveEventData (double placeLat, double placeLng, long dateAndTime, int maxPlayersNumber, String description) {
 
         ParseObject eventObjekt = new ParseObject("Event");
+        ParseACL eventACL =  new ParseACL();
+        eventACL.setPublicReadAccess(true);
+        eventACL.setPublicWriteAccess(true);
+        eventObjekt.setACL(eventACL);
+
         JSONArray participants = new JSONArray();
         participants.put(ParseUser.getCurrentUser().getObjectId());
-        participants.put(ParseUser.getCurrentUser().getUsername());
 
         eventObjekt.put("createdby", ParseUser.getCurrentUser());
         eventObjekt.put("participants", participants);
@@ -102,13 +105,13 @@ public class ParseServer extends AppCompatActivity{
     }
 
     public synchronized void addParticipantsToEvent( final Context appcontext, final String gameid) {
-
+        //TODO if possoble implement array of pointers to user instead of id-array
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         query.getInBackground(gameid, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
                 if (e==null) {
-                    object.addAllUnique("participants", Arrays.asList(ParseUser.getCurrentUser().getObjectId(), ParseUser.getCurrentUser().getUsername()));
+                    object.addUnique("participants", ParseUser.getCurrentUser().getObjectId());
                     object.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
