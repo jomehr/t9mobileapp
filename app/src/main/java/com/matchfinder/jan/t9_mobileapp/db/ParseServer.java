@@ -83,14 +83,17 @@ public class ParseServer extends AppCompatActivity{
 
     public synchronized void saveEventData (double placeLat, double placeLng, long dateAndTime, int maxPlayersNumber, String description) {
 
+        //currently saves participants as pointer to user, if you just want the id of user add .getobejctid()
+        //TODO add checkbox in createEvent activitx and xml, if creator wants to participate, only add creator if checkbox enabled
         ParseObject eventObjekt = new ParseObject("Event");
         ParseACL eventACL =  new ParseACL();
         eventACL.setPublicReadAccess(true);
+        eventObjekt.setACL(eventACL);
         eventACL.setPublicWriteAccess(true);
         eventObjekt.setACL(eventACL);
 
         JSONArray participants = new JSONArray();
-        participants.put(ParseUser.getCurrentUser().getObjectId());
+        participants.put(ParseUser.getCurrentUser());
 
         eventObjekt.put("createdby", ParseUser.getCurrentUser());
         eventObjekt.put("participants", participants);
@@ -111,7 +114,7 @@ public class ParseServer extends AppCompatActivity{
             @Override
             public void done(ParseObject object, ParseException e) {
                 if (e==null) {
-                    object.addUnique("participants", ParseUser.getCurrentUser().getObjectId());
+                    object.addUnique("participants", ParseUser.getCurrentUser());
                     object.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
