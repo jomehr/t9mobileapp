@@ -143,7 +143,7 @@ public class ParseServer extends AppCompatActivity{
                     for (i = 0 ; i < eventList.size(); i++) {
                         ParseObject object = eventList.get(i);
                         LatLng coordinate = new LatLng(object.getDouble("placeLat"), object.getDouble("placeLng"));
-                        googleMap.addMarker(new MarkerOptions().position(coordinate));
+                        googleMap.addMarker(new MarkerOptions().position(coordinate).title(object.getObjectId()));
                     }
                     Toast.makeText(appContex, Integer.toString(i) + " Events gefunden" , Toast.LENGTH_SHORT).show();
                 } else {
