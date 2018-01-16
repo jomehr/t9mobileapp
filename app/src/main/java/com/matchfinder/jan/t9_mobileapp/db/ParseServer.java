@@ -108,7 +108,6 @@ public class ParseServer extends AppCompatActivity{
     }
 
     public synchronized void addParticipantsToEvent( final Context appcontext, final String gameid) {
-        //TODO if possoble implement array of pointers to user instead of id-array
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         query.getInBackground(gameid, new GetCallback<ParseObject>() {
             @Override
@@ -135,10 +134,7 @@ public class ParseServer extends AppCompatActivity{
     }
 
     public synchronized void loadEventData(final Context appContex, final GoogleMap googleMap)  {
-
-        //save context to handle it into the inner class for making Toast on UI
-        final Context con = appContex;
-
+        //TODO only show Events in the area of the user, currently every event in the database
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> eventList, ParseException e) {
@@ -147,7 +143,7 @@ public class ParseServer extends AppCompatActivity{
                     for (i = 0 ; i < eventList.size(); i++) {
                         ParseObject object = eventList.get(i);
                         LatLng coordinate = new LatLng(object.getDouble("placeLat"), object.getDouble("placeLng"));
-                        googleMap.addMarker(new MarkerOptions().position(coordinate).title(object.getObjectId()).snippet(object.getObjectId()));
+                        googleMap.addMarker(new MarkerOptions().position(coordinate));
                     }
                     Toast.makeText(appContex, Integer.toString(i) + " Events gefunden" , Toast.LENGTH_SHORT).show();
                 } else {
@@ -155,44 +151,6 @@ public class ParseServer extends AppCompatActivity{
                 }
             }
         });
-
-
-        ///Example
-/*        try {
-            ParseObject object = query.get("SkNnLghmo3");
-            event = new Event(object.getObjectId(),
-                    object.getDouble("placeLat"),
-                    object.getDouble("placeLng"),
-                    object.getLong("dateAndTime"),
-                    object.getInt("maxPlayersNumber"),
-                    object.getString("description"));
-            Toast.makeText(con,"Ort: " + object.getDouble("placeLat")+ " , " + object.getDouble("placeLng")
-                    ,Toast.LENGTH_SHORT).show();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-
-        /*
-        query.getInBackground("mmcotyyC79", new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    // object will be your event
-                      event = new Event(object.getObjectId(),
-                            object.getDouble("placeLat"),
-                            object.getDouble("placeLng"),
-                            object.getLong("dateAndTime"),
-                            object.getInt("maxPlayersNumber"),
-                            object.getString("description"));
-                    Toast.makeText(con,"Ort: " + object.getDouble("placeLat")+ " , " + object.getDouble("placeLng")
-                            ,Toast.LENGTH_SHORT).show();
-                } else {
-                    // something went wrong
-                    Log.d("Getting", "Something wrong getting File " + e);
-                }
-            }
-        });
-        */
-        ///
     }
     //TODO implement class to decode and resize images and test commented code (add byte[] data to function)
     public synchronized void saveProfileData (String name, String birthday, String residence, String descriptopn, String team, String favouriteArea, String experience, String favouriteTeam) {
