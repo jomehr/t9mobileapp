@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/cropped_background_image"
     tools:context="com.matchfinder.jan.t9_mobileapp.activities.LeagueTables">
 
     <include layout="@layout/toolbar"
@@ -137,5 +138,4 @@
             android:textColor="@android:color/white"
             android:textSize="20sp"/>
     </RelativeLayout>
-
-</LinearLayout>
+    </LinearLayout>
