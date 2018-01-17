@@ -18,6 +18,8 @@
     <!-- Miscellaneous -->
     <string name="add_action">addButton</string>
     <string name="create">Erstellen</string>
+    <string name="create_league">Liga erstellen</string>
+    <string name="search_league">Liga suchen</string>
     <string name="max_amount">Maximale Spieler-Anzahl</string>
     <string name="event_ticker">Eventticker</string>
     <string name="single_event">Single Event</string>
@@ -41,7 +43,8 @@
     <string name="experience_as_player">Erfahrung als Kicker:</string>
 
     <!-- SetTitle(), etc. -->
-    <string name="bunte_liga">Bunte Liga</string>
+    <string name="leagues">Ligen</string>
+    <string name="league">Liga</string>
     <string name="home_eventradar">Events</string>
     <string name="home_searchplayer">Spieler</string>
     <string name="home_searchteam">Teams</string>

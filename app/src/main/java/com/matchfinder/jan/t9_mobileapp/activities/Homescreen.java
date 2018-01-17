@@ -65,7 +65,7 @@ public class Homescreen extends AppCompatActivity {
         banner3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, BunteLiga.class));
+                startActivity(new Intent(Homescreen.this, Leagues.class));
             }
         });
 

@@ -1,72 +1,38 @@
 package com.matchfinder.jan.t9_mobileapp.activities;
 
+/**
+ * Created by Chris on 17.01.2018.
+ */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.matchfinder.jan.t9_mobileapp.R;
-import com.matchfinder.jan.t9_mobileapp.menu.*;
+import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
+import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
+import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
+import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
 
-/*
- * Created by Jan on 17.11.2017.
- */
-
-public class BunteLiga extends AppCompatActivity {
+public class CreateLeague extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bunteliga);
+        setContentView(R.layout.activity_leagues);
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
         try {
-            getSupportActionBar().setTitle(R.string.bunte_liga);
+            getSupportActionBar().setTitle(R.string.leagues);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //Clicklistener links to activity News
-        RelativeLayout news_btn = findViewById(R.id.newsContainer);
-        news_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(BunteLiga.this, LeagueNews.class));
             }
-        });
-        //Clicklistener links to Fragment Teamsearch
-        RelativeLayout teamsearch_btn = findViewById(R.id.searchTeamContainer);
-        teamsearch_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(BunteLiga.this, Search.class));
-            }
-        });
-        //Clicklistener links to activity Tables
-        RelativeLayout tables_btn = findViewById(R.id.tableContainer);
-        tables_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(BunteLiga.this, LeagueTables.class));
-            }
-        });
-        //Clicklistener links to activity Team
-        RelativeLayout team_btn = findViewById(R.id.teamContainer);
-        team_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(BunteLiga.this, Team.class));
-            }
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
