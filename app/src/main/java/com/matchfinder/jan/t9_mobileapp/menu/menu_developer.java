@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.activities.Homescreen;
 import com.matchfinder.jan.t9_mobileapp.activities.Profile;
 import com.matchfinder.jan.t9_mobileapp.activities.Search;
 
@@ -30,6 +32,13 @@ public class menu_developer extends AppCompatActivity {
             e.printStackTrace();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Homescreen.class));
+            }
+        });
     }
 
     @Override

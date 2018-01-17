@@ -1,13 +1,23 @@
 package com.matchfinder.jan.t9_mobileapp.menu;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.activities.Homescreen;
 import com.matchfinder.jan.t9_mobileapp.activities.Profile;
 import com.matchfinder.jan.t9_mobileapp.activities.Search;
 
@@ -17,12 +27,26 @@ import com.matchfinder.jan.t9_mobileapp.activities.Search;
  */
 
 public class menu_settings extends AppCompatActivity {
+    Button defaultButton, redButton, yellowButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_settings);
 
-        Toolbar myToolbar = findViewById(R.id.toolbar);
+        defaultButton=(Button)findViewById(R.id.defaultButton);
+        redButton=(Button)findViewById(R.id.redButton);
+        yellowButton=(Button)findViewById(R.id.yellowButton);
+
+        final EditText to = (EditText) findViewById(R.id.sendTo);
+        final EditText subject = (EditText) findViewById(R.id.subject);
+        final EditText message = (EditText) findViewById(R.id.EmailText);
+        Button sendE = (Button) findViewById(R.id.sendEmail);
+
+        defaultButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        redButton.setBackgroundColor(getResources().getColor(R.color.colorRed));
+        yellowButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+        final Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         try {
             getSupportActionBar().setTitle(R.string.settings);
@@ -30,6 +54,74 @@ public class menu_settings extends AppCompatActivity {
             e.printStackTrace();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        defaultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    Window window = getWindow();
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+                }
+            }
+        });
+        redButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorRed)));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    Window window = getWindow();
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(getResources().getColor(R.color.colorRed));
+                }
+            }
+        });
+
+        /*redButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myToolbar.setBackgroundColor(Color.GRAY);
+            }
+        });*/
+
+
+        yellowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorAccent)));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    Window window = getWindow();
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(getResources().getColor(R.color.colorAccent));
+                }
+            }
+        });
+
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Homescreen.class));
+            }
+        });
+
+        sendE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String toS = to.getText().toString();
+                String subS = subject.getText().toString();
+                String mesS = message.getText().toString();
+
+                Intent email = new Intent (Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, toS);
+                //email.putExtra(Intent.EXTRA_EMAIL, new String[], new String[]{toS});
+                email.putExtra(Intent.EXTRA_SUBJECT, subS);
+                email.putExtra(Intent.EXTRA_TEXT, mesS);
+
+                email.setType("message/rfc822");
+                startActivity(Intent.createChooser(email, "Choose app to send your feedback"));
+
+            }
+        });
     }
 
     @Override

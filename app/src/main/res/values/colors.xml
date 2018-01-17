@@ -9,4 +9,7 @@
     <color name="colorPrimaryOpacity">#a2031305</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+    <color name ="colorBlue">#2b58df</color>
+    <color name ="colorRed">#97211f</color>
+    <color name ="colorYellow">#fcfff700</color>
 </resources>
