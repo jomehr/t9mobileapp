@@ -20,7 +20,7 @@ import com.matchfinder.jan.t9_mobileapp.R;
 
 public class TeamTab1Roster extends Fragment{
     /*
-        Hardcoded names, should get names from the Database and and them before building the layout
+        Hardcoded names, should get names dynamicly from the Database and and them before building the layout
      */
     private final String[] playernames = {
             "Jan Mehr",
@@ -62,4 +62,3 @@ public class TeamTab1Roster extends Fragment{
         return rootView;
     }
 }
-

@@ -25,6 +25,7 @@ public class League extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         try {
             getSupportActionBar().setTitle(R.string.league);

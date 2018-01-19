@@ -52,6 +52,7 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
         //Adding toolbar to the activity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         try {
             getSupportActionBar().setTitle(R.string.search);
         } catch (NullPointerException e) {

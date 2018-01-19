@@ -34,12 +34,12 @@ public class Team extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         try {
             getSupportActionBar().setTitle(R.string.team);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -64,7 +64,6 @@ public class Team extends AppCompatActivity {
         return true;
     }
 
-    //deleted PlaceholderFragment class from here
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
