@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         edit_password = findViewById(R.id.login_inputPassword);
         progressbar =  findViewById(R.id.login_progressBar);
 
-        ParseServer.getInstance(this);
+        ParseServer.getInstanceWithPublicReadAccess(this);
         if (ParseUser.getCurrentUser() != null) {
             startActivity(new Intent(Login.this, Homescreen.class));
             finish();
@@ -91,7 +91,7 @@ public class Login extends AppCompatActivity {
 
 
     private void loginParse() {
-        ParseServer ps = ParseServer.getInstance(Login.this);
+        ParseServer ps = ParseServer.getInstanceWithPublicReadAccess(Login.this);
         ps.loginUser(this, edit_username.getText().toString(), edit_password.getText().toString(), this);
 
         try {

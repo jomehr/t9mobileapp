@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.activities.Homescreen;
 import com.matchfinder.jan.t9_mobileapp.activities.Login;
 import com.matchfinder.jan.t9_mobileapp.db.entities.Event;
@@ -37,11 +38,14 @@ public class ParseServer extends AppCompatActivity{
 
     public static Event event;
 
-    // Eine (versteckte) Klassenvariable vom Typ der eigene Klasse
-    private static ParseServer instance;
+    // Mehre (versteckte) Klassenvariablen vom Typ der eigene Klasse
+    private static ParseServer instanceWithPublicReadAccess;
+    private static ParseServer instanceWithoutPublicAcces;
+    private static ParseServer instanceWithPublicReadAndWriteAccess;
 
     // Verhindere die Erzeugung des Objektes über andere Methoden
     // Context appContext is an APP-Context is used for LocalDatastore. At most you use "this"-reference of activity.
+    // Without Public Access
     private ParseServer (Context appContext) {
 
         // Enable Local Datastore.
@@ -49,8 +53,78 @@ public class ParseServer extends AppCompatActivity{
 
         //ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
-        // Optionally enable public read access.
+        // Optionally enable public read access. NO disable
+        //defaultACL.setPublicReadAccess(false);
+        //False = only master key access
+        ParseACL.setDefaultACL(defaultACL, true);
+
+        // Only for Logcat and debug mode
+        // Parse.addParseNetworkInterceptor(new ParseLogInterceptor());
+
+        //initialize
+        final String YOUR_APPLICATION_ID = "MatchFinder";
+        final String YOUR_CLIENT_KEY = "matchfinderclientkey";
+        final String YOUR_SERVER_URL = "https://matchfinder.dock.moxd.io/api/";
+        Parse.initialize(new Parse.Configuration.Builder(appContext.getApplicationContext())
+                .applicationId(YOUR_APPLICATION_ID)
+                .clientKey(YOUR_CLIENT_KEY)
+                .server(YOUR_SERVER_URL)   // '/' important after 'api'
+                .build());
+
+    }
+
+    // Genau wie oben aber nur Instance mit Public Read but not Write Access
+    private ParseServer (Context appContext, boolean wihtPublicReadAccess) {
+
+        if (!wihtPublicReadAccess) {
+            System.out.println(R.string.logig_mistake);
+        }
+
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(appContext);
+
+        //ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+        // Optionally enable public read access. YES enable.
         defaultACL.setPublicReadAccess(true);
+        //False = only master key access
+        ParseACL.setDefaultACL(defaultACL, true);
+
+        // Only for Logcat and debug mode
+        // Parse.addParseNetworkInterceptor(new ParseLogInterceptor());
+
+        //initialize
+        final String YOUR_APPLICATION_ID = "MatchFinder";
+        final String YOUR_CLIENT_KEY = "matchfinderclientkey";
+        final String YOUR_SERVER_URL = "https://matchfinder.dock.moxd.io/api/";
+        Parse.initialize(new Parse.Configuration.Builder(appContext.getApplicationContext())
+                .applicationId(YOUR_APPLICATION_ID)
+                .clientKey(YOUR_CLIENT_KEY)
+                .server(YOUR_SERVER_URL)   // '/' important after 'api'
+                .build());
+
+    }
+
+    // Genau wie oben aber nur Instance mit Public Read and Write Access
+    private ParseServer (Context appContext, boolean wihtPublicReadAccess, boolean wihtPublicWriteAccess) {
+
+        if (!wihtPublicReadAccess && !wihtPublicWriteAccess) {
+            System.out.println(R.string.logig_mistake);
+        }
+
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(appContext);
+
+        //ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+
+        // Optionally enable public read access. YES enable.
+        defaultACL.setPublicReadAccess(true);
+        //False = only master key access
+        ParseACL.setDefaultACL(defaultACL, true);
+
+        // Optionally enable public write access. YES enable.
+        defaultACL.setPublicWriteAccess(true);
         //False = only master key access
         ParseACL.setDefaultACL(defaultACL, true);
 
@@ -74,11 +148,27 @@ public class ParseServer extends AppCompatActivity{
     // Durch 'synchronized' wird sichergestellt dass diese Methode nur von einem Thread
     // zu einer Zeit durchlaufen wird. Der nächste Thread erhält immer eine komplett
     // initialisierte Instanz.
-    public static synchronized ParseServer getInstance (Context appContext) {
-        if (ParseServer.instance == null) {
-            ParseServer.instance = new ParseServer (appContext);
+    public static synchronized ParseServer getInstanceWithPublicReadAccess(Context appContext) {
+        if (ParseServer.instanceWithoutPublicAcces == null) {
+            ParseServer.instanceWithoutPublicAcces = new ParseServer (appContext);
         }
-        return ParseServer.instance;
+        return ParseServer.instanceWithoutPublicAcces;
+    }
+
+    // Genau wie oben aber nur Instance mit Public Read but not Write Access
+    public static synchronized ParseServer getInstanceWithoutPublicAccess (Context appContext) {
+        if (ParseServer.instanceWithPublicReadAccess == null) {
+            ParseServer.instanceWithPublicReadAccess = new ParseServer (appContext, true);
+        }
+        return ParseServer.instanceWithPublicReadAccess;
+    }
+
+    //Genau wie oben aber nur Instance mit Public Read and Write Access
+    public static synchronized ParseServer getInstanceWithPublicReadAndWriteAccess (Context appContext) {
+        if (ParseServer.instanceWithPublicReadAndWriteAccess == null) {
+            ParseServer.instanceWithPublicReadAndWriteAccess = new ParseServer (appContext, true, true);
+        }
+        return ParseServer.instanceWithPublicReadAndWriteAccess;
     }
 
     public synchronized void saveEventData (double placeLat, double placeLng, long dateAndTime, int maxPlayersNumber, String description) {

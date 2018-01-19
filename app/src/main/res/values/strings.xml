@@ -18,6 +18,7 @@
     <!-- Miscellaneous -->
     <string name="add_action">addButton</string>
     <string name="create">Erstellen</string>
+    <string name="event_saved">Event Saved</string>
     <string name="create_league">Liga erstellen</string>
     <string name="search_league">Liga suchen</string>
     <string name="max_amount">Maximale Spieler-Anzahl</string>
@@ -113,5 +114,8 @@
     <string name="close_app">Wollen Sie die App wirklich schließen</string>
     <string name="first_name">Vorname</string>
     <string name="last_name">Nachname</string>
+
+    <!-- ERROR Srings -->
+    <string name="logig_mistake">    LOGIG_MISTAKE    </string>
 
 </resources>

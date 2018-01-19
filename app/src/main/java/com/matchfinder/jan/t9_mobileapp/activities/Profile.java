@@ -66,7 +66,7 @@ public class Profile extends AppCompatActivity {
         String picturePath = sharedPreferencesProf.getString("Profilbild", null);
 
         //get data from server
-        ParseServer.getInstance(this);
+        ParseServer.getInstanceWithPublicReadAccess(this);
         if (profileName.equals("Profil")) {
             profileName = ParseUser.getCurrentUser().getUsername();
             editor.putString("Name", profileName);

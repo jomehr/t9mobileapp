@@ -108,7 +108,7 @@ public class Registration extends AppCompatActivity{
         final String username = edit_name.getText().toString();
         final String password = edit_password.getText().toString();
 
-        ParseServer ps = ParseServer.getInstance(Registration.this);
+        ParseServer ps = ParseServer.getInstanceWithPublicReadAccess(Registration.this);
         ps.registerUser(this, email, username, password, this);
     }
 

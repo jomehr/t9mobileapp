@@ -213,7 +213,7 @@ public class ProfileEdit extends AppCompatActivity {
         byte [] data = stream.toByteArray();*/
 
         //Store data on server permanently
-        ParseServer ps = ParseServer.getInstance(this);
+        ParseServer ps = ParseServer.getInstanceWithPublicReadAccess(this);
         ps.saveProfileData(appendName, appendDate, tmp, descriptionText.getText().toString(), tmp, tmp, editExperience.getText().toString(), editFavouriteTeam.getText().toString());
     }
 

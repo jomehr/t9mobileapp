@@ -82,6 +82,7 @@ public class CreateEvent extends AppCompatActivity implements
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         creatEventButton = findViewById(R.id.createEvent_createButton);
+        creatEventButton.setEnabled(false);
 
         eventOrtText =  findViewById(R.id.createEvent_eventOrtText);
         eventDateAndTimeText = findViewById(R.id.createEvent_eventDateAndTimeText);
@@ -127,16 +128,14 @@ public class CreateEvent extends AppCompatActivity implements
      */
     private void createEvent() {
 
-        ParseServer ps = ParseServer.getInstance(this);
-
-        //TODO: unable createEvent-Button until at least Place, Date and Time are chosen
+        ParseServer ps = ParseServer.getInstanceWithPublicReadAccess(this);
 
         //Default eventPlace
         eventPlace = eventPlace == null? new LatLng(0,0) : eventPlace;
 
         ps.saveEventData(eventPlace.latitude, eventPlace.longitude, eventDateAndTimeFinal, eventMaxPlayersNumber, eventDescription);
 
-        Toast.makeText(this, "Event Saved ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.event_saved, Toast.LENGTH_SHORT).show();
     }
 
     //Place Picker
@@ -163,9 +162,10 @@ public class CreateEvent extends AppCompatActivity implements
                 eventOrtText.setLayoutParams(params);
 
                 //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
-                if(eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime))
+                if(eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime)) {
+                    creatEventButton.setEnabled(true);
                     creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
-
+                }
                 eventPlace = place.getLatLng();
                 eventOrtText.setText(place.getAddress());
             }
@@ -216,8 +216,10 @@ public class CreateEvent extends AppCompatActivity implements
         eventDateAndTimeText.setLayoutParams(params);
 
         //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
-        if(eventOrtText.getText() != getResources().getString(R.string.pick_place))
+        if(eventOrtText.getText() != getResources().getString(R.string.pick_place)) {
+            creatEventButton.setEnabled(true);
             creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+        }
 
         //TextView füllen
         String dateAndTimeText =  (String) ("Datum: " + String.format("%02d", dayFinal) + "." + String.format("%02d",monthFinal) + "." + yearFinal
