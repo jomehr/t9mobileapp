@@ -18,6 +18,7 @@ import android.widget.EditText;
 
 import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.activities.Homescreen;
+import com.matchfinder.jan.t9_mobileapp.activities.Login;
 import com.matchfinder.jan.t9_mobileapp.activities.Profile;
 import com.matchfinder.jan.t9_mobileapp.activities.Search;
 
@@ -27,20 +28,19 @@ import com.matchfinder.jan.t9_mobileapp.activities.Search;
  */
 
 public class menu_settings extends AppCompatActivity {
-    Button defaultButton, redButton, yellowButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_settings);
 
-        defaultButton=(Button)findViewById(R.id.defaultButton);
-        redButton=(Button)findViewById(R.id.redButton);
-        yellowButton=(Button)findViewById(R.id.yellowButton);
+        Button defaultButton = findViewById(R.id.defaultButton);
+        Button redButton = findViewById(R.id.redButton);
+        Button yellowButton = findViewById(R.id.yellowButton);
 
-        final EditText to = (EditText) findViewById(R.id.sendTo);
-        final EditText subject = (EditText) findViewById(R.id.subject);
-        final EditText message = (EditText) findViewById(R.id.EmailText);
-        Button sendE = (Button) findViewById(R.id.sendEmail);
+        final EditText to = findViewById(R.id.sendTo);
+        final EditText subject =  findViewById(R.id.subject);
+        final EditText message =  findViewById(R.id.EmailText);
+        Button sendE = findViewById(R.id.sendEmail);
 
         defaultButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         redButton.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -150,7 +150,7 @@ public class menu_settings extends AppCompatActivity {
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                startActivity(new Intent(this, Profile.class));
+                startActivity(new Intent(this, Login.class));
                 return true;
             case R.id.action_data_privacy:
                 startActivity(new Intent(this, menu_data_privacy.class));
