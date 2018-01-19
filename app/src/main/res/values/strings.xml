@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kick It - Matchfinder</string>
+    <string name="app_name">FootNation</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDEYH_d0EQpvyxlYvNWnsKReSY7T1enYFU</string>
 
     <!-- Placeholder -->

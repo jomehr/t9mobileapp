@@ -53,7 +53,7 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
-        RelativeLayout banner2 = findViewById(R.id.searchTeamContainer);
+        RelativeLayout banner2 = findViewById(R.id.homescreen_createEventContainer);
         banner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,11 +61,12 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
-        RelativeLayout banner3 = findViewById(R.id.tableContainer);
+        RelativeLayout banner3 = findViewById(R.id.homescreen_leagueContainer);
         banner3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Homescreen.this, Leagues.class));
+                finish();
             }
         });
 

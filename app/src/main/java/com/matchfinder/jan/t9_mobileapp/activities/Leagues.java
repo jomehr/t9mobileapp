@@ -41,6 +41,7 @@ public class Leagues extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Leagues.this, CreateLeague.class));
+                finish();
             }
         });
 
