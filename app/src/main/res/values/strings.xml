@@ -19,6 +19,9 @@
     <string name="add_action">addButton</string>
     <string name="create">Erstellen</string>
     <string name="event_saved">Event Saved</string>
+    <string name="participant_added">Du hast dich für das Spiel angemeldet</string>
+    <string name="you_are_already_a_participant">Du bist bereits für dieses Spiel angemeldet</string>
+    <string name="you_can_not_join_this_game">Leider können Sie diesem Spiel nicht mehr beitreten. Die maximale Spielerzahl wurde erreicht.</string>
     <string name="create_league">Liga erstellen</string>
     <string name="search_league">Liga suchen</string>
     <string name="max_amount">Maximale Spieler-Anzahl</string>

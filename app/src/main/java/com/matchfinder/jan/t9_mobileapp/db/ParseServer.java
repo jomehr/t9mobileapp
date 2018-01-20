@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.activities.Homescreen;
 import com.matchfinder.jan.t9_mobileapp.activities.Login;
 import com.matchfinder.jan.t9_mobileapp.db.entities.Event;
@@ -26,6 +27,8 @@ import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -37,7 +40,7 @@ public class ParseServer extends AppCompatActivity {
 
     public static Event event;
 
-    // Mehre (versteckte) Klassenvariablen vom Typ der eigene Klasse
+    // Eine (versteckte) Klassenvariable vom Typ der eigene Klasse
     private static ParseServer instance;
 
     // Verhindere die Erzeugung des Objektes über andere Methoden
@@ -103,32 +106,67 @@ public class ParseServer extends AppCompatActivity {
         eventObjekt.put("placeLat", placeLat);
         eventObjekt.put("placeLng", placeLng);
         eventObjekt.put("dateAndTime", dateAndTime);
-        eventObjekt.put("maxPlayersNumber", maxPlayersNumber);
+
+        // only till the checkbox feature implemented else wihtout (maxPleyersNumber - 1)
+        maxPlayersNumber = maxPlayersNumber != -1 ? (maxPlayersNumber - 1) : -1;
+        eventObjekt.put("maxPlayersNumber", (maxPlayersNumber));
+
         eventObjekt.put("description", description);
 
         eventObjekt.saveEventually();
 
     }
 
-    public synchronized void addParticipantsToEvent(final Context appcontext, final String gameid) {
+    public synchronized void addParticipantsToEvent(final Context appcontext, final String eventId) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
-        query.getInBackground(gameid, new GetCallback<ParseObject>() {
+        query.getInBackground(eventId, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    object.addUnique("participants", ParseUser.getCurrentUser());
-                    object.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e == null) {
-                                Toast.makeText(appcontext, "Du hast dich für das Spiel angemeldet", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(appcontext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    boolean containsCurrentUser = false;
+                    JSONArray participants = object.getJSONArray("participants");
+                    int maxPlayersNumber = object.getInt("maxPlayersNumber");
+
+                    // Check if CurrentUser is already a participant
+                    for (int i = 0; i < participants.length(); i++) {
+                        try {
+                            JSONObject user = (JSONObject) participants.get(i);
+                            String participantUserId = user.getString("objectId");
+                            String currentUserId = ParseUser.getCurrentUser().getObjectId();
+                            if (currentUserId.equals(participantUserId)) {
+                                containsCurrentUser = true;
                             }
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
                         }
-                    });
+                    }
+
+                    // Add participant only if
+                    // (CurrentUser is not a participant yet AND maxPlayersNumber is greater than 0)
+                    // OR
+                    // (CurrentUser is not a participant yet AND maxPlayersNumber is not limited (equal -1))
+                    if ((!containsCurrentUser && maxPlayersNumber > 0) || (!containsCurrentUser && maxPlayersNumber == -1)) {
+                        object.addUnique("participants", ParseUser.getCurrentUser());
+                        object.put("maxPlayersNumber", (maxPlayersNumber - 1));
+                        object.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    Toast.makeText(appcontext, R.string.participant_added, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(appcontext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                    else if (containsCurrentUser) {
+                        Toast.makeText(appcontext, R.string.you_are_already_a_participant, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(appcontext, R.string.you_can_not_join_this_game, Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(appcontext, e.getMessage() + gameid, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(appcontext, e.getMessage() + eventId, Toast.LENGTH_SHORT).show();
                 }
             }
         });
