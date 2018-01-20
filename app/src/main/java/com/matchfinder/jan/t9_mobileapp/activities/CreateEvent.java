@@ -128,7 +128,7 @@ public class CreateEvent extends AppCompatActivity implements
      */
     private void createEvent() {
 
-        ParseServer ps = ParseServer.getInstanceWithPublicReadAccess(this);
+        ParseServer ps = ParseServer.getInstance(this);
 
         //Default eventPlace
         eventPlace = eventPlace == null? new LatLng(0,0) : eventPlace;
@@ -164,7 +164,7 @@ public class CreateEvent extends AppCompatActivity implements
                 //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
                 if(eventDateAndTimeText.getText() != getResources().getString(R.string.setDateAndTime)) {
                     creatEventButton.setEnabled(true);
-                    creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+                    creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark, null));
                 }
                 eventPlace = place.getLatLng();
                 eventOrtText.setText(place.getAddress());
@@ -218,7 +218,7 @@ public class CreateEvent extends AppCompatActivity implements
         //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
         if(eventOrtText.getText() != getResources().getString(R.string.pick_place)) {
             creatEventButton.setEnabled(true);
-            creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+            creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark, null));
         }
 
         //TextView füllen
@@ -328,8 +328,8 @@ public class CreateEvent extends AppCompatActivity implements
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
         /*
-        TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schkiesst sich die Tastatur
-        TODO Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.
+        TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schliesst sich die Tastatur nicht.
+        Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.
         */
     }
 

@@ -27,6 +27,8 @@ import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -34,97 +36,25 @@ import java.util.List;
  * Created by taraszaika on 02.01.18.
  * new ParseServer
  */
-public class ParseServer extends AppCompatActivity{
+public class ParseServer extends AppCompatActivity {
 
     public static Event event;
 
-    // Mehre (versteckte) Klassenvariablen vom Typ der eigene Klasse
-    private static ParseServer instanceWithPublicReadAccess;
-    private static ParseServer instanceWithoutPublicAcces;
-    private static ParseServer instanceWithPublicReadAndWriteAccess;
+    // Eine (versteckte) Klassenvariable vom Typ der eigene Klasse
+    private static ParseServer instance;
 
     // Verhindere die Erzeugung des Objektes über andere Methoden
     // Context appContext is an APP-Context is used for LocalDatastore. At most you use "this"-reference of activity.
     // Without Public Access
-    private ParseServer (Context appContext) {
+    private ParseServer(Context appContext) {
 
         // Enable Local Datastore.
         Parse.enableLocalDatastore(appContext);
 
         //ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
-        // Optionally enable public read access. NO disable
-        //defaultACL.setPublicReadAccess(false);
-        //False = only master key access
-        ParseACL.setDefaultACL(defaultACL, true);
-
-        // Only for Logcat and debug mode
-        // Parse.addParseNetworkInterceptor(new ParseLogInterceptor());
-
-        //initialize
-        final String YOUR_APPLICATION_ID = "MatchFinder";
-        final String YOUR_CLIENT_KEY = "matchfinderclientkey";
-        final String YOUR_SERVER_URL = "https://matchfinder.dock.moxd.io/api/";
-        Parse.initialize(new Parse.Configuration.Builder(appContext.getApplicationContext())
-                .applicationId(YOUR_APPLICATION_ID)
-                .clientKey(YOUR_CLIENT_KEY)
-                .server(YOUR_SERVER_URL)   // '/' important after 'api'
-                .build());
-
-    }
-
-    // Genau wie oben aber nur Instance mit Public Read but not Write Access
-    private ParseServer (Context appContext, boolean wihtPublicReadAccess) {
-
-        if (!wihtPublicReadAccess) {
-            System.out.println(R.string.logig_mistake);
-        }
-
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(appContext);
-
-        //ParseUser.enableAutomaticUser();
-        ParseACL defaultACL = new ParseACL();
-        // Optionally enable public read access. YES enable.
-        defaultACL.setPublicReadAccess(true);
-        //False = only master key access
-        ParseACL.setDefaultACL(defaultACL, true);
-
-        // Only for Logcat and debug mode
-        // Parse.addParseNetworkInterceptor(new ParseLogInterceptor());
-
-        //initialize
-        final String YOUR_APPLICATION_ID = "MatchFinder";
-        final String YOUR_CLIENT_KEY = "matchfinderclientkey";
-        final String YOUR_SERVER_URL = "https://matchfinder.dock.moxd.io/api/";
-        Parse.initialize(new Parse.Configuration.Builder(appContext.getApplicationContext())
-                .applicationId(YOUR_APPLICATION_ID)
-                .clientKey(YOUR_CLIENT_KEY)
-                .server(YOUR_SERVER_URL)   // '/' important after 'api'
-                .build());
-
-    }
-
-    // Genau wie oben aber nur Instance mit Public Read and Write Access
-    private ParseServer (Context appContext, boolean wihtPublicReadAccess, boolean wihtPublicWriteAccess) {
-
-        if (!wihtPublicReadAccess && !wihtPublicWriteAccess) {
-            System.out.println(R.string.logig_mistake);
-        }
-
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(appContext);
-
-        //ParseUser.enableAutomaticUser();
-        ParseACL defaultACL = new ParseACL();
-
-        // Optionally enable public read access. YES enable.
-        defaultACL.setPublicReadAccess(true);
-        //False = only master key access
-        ParseACL.setDefaultACL(defaultACL, true);
-
-        // Optionally enable public write access. YES enable.
-        defaultACL.setPublicWriteAccess(true);
+        // Optionally enable public read access. Yes enable
+        defaultACL.setPublicReadAccess(false);
         //False = only master key access
         ParseACL.setDefaultACL(defaultACL, true);
 
@@ -148,34 +78,20 @@ public class ParseServer extends AppCompatActivity{
     // Durch 'synchronized' wird sichergestellt dass diese Methode nur von einem Thread
     // zu einer Zeit durchlaufen wird. Der nächste Thread erhält immer eine komplett
     // initialisierte Instanz.
-    public static synchronized ParseServer getInstanceWithPublicReadAccess(Context appContext) {
-        if (ParseServer.instanceWithoutPublicAcces == null) {
-            ParseServer.instanceWithoutPublicAcces = new ParseServer (appContext);
+    public static synchronized ParseServer getInstance(Context appContext) {
+        if (ParseServer.instance == null) {
+            ParseServer.instance = new ParseServer(appContext);
         }
-        return ParseServer.instanceWithoutPublicAcces;
+        return ParseServer.instance;
     }
-
-    // Genau wie oben aber nur Instance mit Public Read but not Write Access
-    public static synchronized ParseServer getInstanceWithoutPublicAccess (Context appContext) {
-        if (ParseServer.instanceWithPublicReadAccess == null) {
-            ParseServer.instanceWithPublicReadAccess = new ParseServer (appContext, true);
-        }
-        return ParseServer.instanceWithPublicReadAccess;
-    }
-
-    //Genau wie oben aber nur Instance mit Public Read and Write Access
-    public static synchronized ParseServer getInstanceWithPublicReadAndWriteAccess (Context appContext) {
-        if (ParseServer.instanceWithPublicReadAndWriteAccess == null) {
-            ParseServer.instanceWithPublicReadAndWriteAccess = new ParseServer (appContext, true, true);
-        }
-        return ParseServer.instanceWithPublicReadAndWriteAccess;
-    }
-
-    public synchronized void saveEventData (double placeLat, double placeLng, long dateAndTime, int maxPlayersNumber, String description) {
+    public synchronized void saveEventData(double placeLat, double placeLng, long dateAndTime, int maxPlayersNumber, String description) {
 
         //currently saves participants as pointer to user, if you just want the id of user add .getobejctid()
-        //TODO add checkbox in createEvent activitx and xml, if creator wants to participate, only add creator if checkbox enabled
+        //TODO add checkbox in createEvent activity and xml, if creator wants to participate, only add creator if checkbox enabled
+
         ParseObject eventObjekt = new ParseObject("Event");
+
+        // Sete Public Read and Write Access
         ParseACL eventACL =  new ParseACL();
         eventACL.setPublicReadAccess(true);
         eventObjekt.setACL(eventACL);
@@ -190,60 +106,94 @@ public class ParseServer extends AppCompatActivity{
         eventObjekt.put("placeLat", placeLat);
         eventObjekt.put("placeLng", placeLng);
         eventObjekt.put("dateAndTime", dateAndTime);
-        eventObjekt.put("maxPlayersNumber", maxPlayersNumber);
+
+        // only till the checkbox feature implemented else wihtout (maxPleyersNumber - 1)
+        maxPlayersNumber = maxPlayersNumber != -1 ? (maxPlayersNumber - 1) : -1;
+        eventObjekt.put("maxPlayersNumber", (maxPlayersNumber));
+
         eventObjekt.put("description", description);
 
         eventObjekt.saveEventually();
 
     }
 
-    public synchronized void addParticipantsToEvent( final Context appcontext, final String gameid) {
+    public synchronized void addParticipantsToEvent(final Context appcontext, final String eventId) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
-        query.getInBackground(gameid, new GetCallback<ParseObject>() {
+        query.getInBackground(eventId, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
-                if (e==null) {
-                    object.addUnique("participants", ParseUser.getCurrentUser());
-                    object.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if(e==null){
-                                Toast.makeText(appcontext, "Du hast dich für das Spiel angemeldet", Toast.LENGTH_SHORT).show();
+                if (e == null) {
+                    boolean containsCurrentUser = false;
+                    JSONArray participants = object.getJSONArray("participants");
+                    int maxPlayersNumber = object.getInt("maxPlayersNumber");
+
+                    // Check if CurrentUser is already a participant
+                    for (int i = 0; i < participants.length(); i++) {
+                        try {
+                            JSONObject user = (JSONObject) participants.get(i);
+                            String participantUserId = user.getString("objectId");
+                            String currentUserId = ParseUser.getCurrentUser().getObjectId();
+                            if (currentUserId.equals(participantUserId)) {
+                                containsCurrentUser = true;
                             }
-                            else {
-                                Toast.makeText(appcontext, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
                         }
-                    });
-                }
-                else {
-                    Toast.makeText(appcontext, e.getMessage() + gameid, Toast.LENGTH_SHORT).show();
+                    }
+
+                    // Add participant only if
+                    // (CurrentUser is not a participant yet AND maxPlayersNumber is greater than 0)
+                    // OR
+                    // (CurrentUser is not a participant yet AND maxPlayersNumber is not limited (equal -1))
+                    if ((!containsCurrentUser && maxPlayersNumber > 0) || (!containsCurrentUser && maxPlayersNumber == -1)) {
+                        object.addUnique("participants", ParseUser.getCurrentUser());
+                        object.put("maxPlayersNumber", (maxPlayersNumber - 1));
+                        object.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    Toast.makeText(appcontext, R.string.participant_added, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(appcontext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                    else if (containsCurrentUser) {
+                        Toast.makeText(appcontext, R.string.you_are_already_a_participant, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(appcontext, R.string.you_can_not_join_this_game, Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(appcontext, e.getMessage() + eventId, Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    public synchronized void loadEventData(final Context appContex, final GoogleMap googleMap)  {
+    public synchronized void loadEventData(final Context appContex, final GoogleMap googleMap) {
         //TODO only show Events in the area of the user, currently every event in the database
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> eventList, ParseException e) {
                 if (e == null) {
                     int i;
-                    for (i = 0 ; i < eventList.size(); i++) {
+                    for (i = 0; i < eventList.size(); i++) {
                         ParseObject object = eventList.get(i);
                         LatLng coordinate = new LatLng(object.getDouble("placeLat"), object.getDouble("placeLng"));
                         googleMap.addMarker(new MarkerOptions().position(coordinate).title(object.getObjectId()));
                     }
-                    Toast.makeText(appContex, Integer.toString(i) + " Events gefunden" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(appContex, Integer.toString(i) + " Events gefunden", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(appContex, e.getMessage() , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(appContex, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
     //TODO implement class to decode and resize images and test commented code (add byte[] data to function)
-    public synchronized void saveProfileData (String name, String birthday, String residence, String descriptopn, String team, String favouriteArea, String experience, String favouriteTeam) {
+    public synchronized void saveProfileData(String name, String birthday, String residence, String descriptopn, String team, String favouriteArea, String experience, String favouriteTeam) {
 
         String userid = ParseUser.getCurrentUser().getObjectId();
         ParseObject profileObjekt = new ParseObject("Profile");
@@ -268,7 +218,8 @@ public class ParseServer extends AppCompatActivity{
         profileObjekt.saveEventually();
     }
 
-    public synchronized void registerUser (final Context appcontext, String email, final String username, String password, final Activity activity) {
+    // TODO set ParseACL to userOnly Read and Write and not PublicRead
+    public synchronized void registerUser(final Context appcontext, String email, final String username, String password, final Activity activity) {
 
         if (ParseUser.getCurrentUser() != null) {
             ParseUser.logOut();
@@ -283,7 +234,7 @@ public class ParseServer extends AppCompatActivity{
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    Toast.makeText(appcontext, "User erstellt: "+ username, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(appcontext, "User erstellt: " + username, Toast.LENGTH_SHORT).show();
                     activity.startActivity(new Intent(appcontext, Login.class));
                     activity.finish();
                 } else {
@@ -293,7 +244,7 @@ public class ParseServer extends AppCompatActivity{
         });
     }
 
-    public synchronized void loginUser (final Context appcontext, final String username, String password, final Activity activity) {
+    public synchronized void loginUser(final Context appcontext, final String username, String password, final Activity activity) {
 
         if (ParseUser.getCurrentUser() != null) {
             ParseUser.logOut();
@@ -304,10 +255,10 @@ public class ParseServer extends AppCompatActivity{
             public void done(ParseUser parseUser, ParseException e) {
                 if (parseUser != null) {
                     Toast.makeText(appcontext, "Login erfolgreich", Toast.LENGTH_SHORT).show();
-                    activity.startActivity(new Intent( appcontext, Homescreen.class));
+                    activity.startActivity(new Intent(appcontext, Homescreen.class));
                     activity.finish();
                 } else {
-                    Toast.makeText(appcontext, e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(appcontext, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -318,7 +269,7 @@ public class ParseServer extends AppCompatActivity{
         if (curUser != null) {
             ParseUser.logOut();
             return true;
-        }else {
+        } else {
             return false;
         }
     }

@@ -19,6 +19,7 @@
         app:srcCompat="@raw/screen_background3"
         tools:ignore="ContentDescription" />
 
+    <!-- TODO Make Banners not in the middle of the screen -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

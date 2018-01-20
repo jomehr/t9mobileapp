@@ -119,7 +119,7 @@ public class Homescreen extends AppCompatActivity {
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                ParseServer ps =ParseServer.getInstanceWithPublicReadAccess(this);
+                ParseServer ps =ParseServer.getInstance(this);
                 if (ps.logOut()) {
                     startActivity(new Intent(this, Login.class));
                     finish();

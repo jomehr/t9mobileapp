@@ -157,7 +157,7 @@ public class EventRadar extends AppCompatActivity implements
 
         /// TEST
 
-        ParseServer ps = ParseServer.getInstanceWithPublicReadAccess(getApplicationContext());
+        ParseServer ps = ParseServer.getInstance(getApplicationContext());
         ps.loadEventData(this, myGoogleMap);
         //LatLng kosivSchool = new LatLng(ParseServer.event.getPlaceLatitude(), ParseServer.event.getPlaceLongitude());
         //myMarker = myGoogleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + ": " + ParseServer.event.getDescription()));
@@ -321,7 +321,7 @@ public class EventRadar extends AppCompatActivity implements
         if(!gps_enabled && !network_enabled) {
             // notify user
             final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setTitle("Please activate location"); //TODO Change Strings to Recource
+            dialog.setTitle(R.string.please_activate_location_services);
             dialog.setMessage("Click ok to goto settings else exit.");
             dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
@@ -451,7 +451,7 @@ public class EventRadar extends AppCompatActivity implements
     @Override
     public boolean onMyLocationButtonClick() {
         locationServicesCheck(myLocationManager);
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.your_location_is_being_searched, Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
@@ -463,20 +463,19 @@ public class EventRadar extends AppCompatActivity implements
      */
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(this, "Current location:\n" + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Current location:\n" + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onMarkerClick(final Marker marker) {
 
-        //TODO finalize view, show all participants, implement int curParticipants and increment for every new participant, lock positive button if curParticipants = maxParticipants
+        // TODO finalize view, show all participants, lock positive button if curParticipants = maxParticipants
         final String id = marker.getTitle();
         final ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         query.getInBackground(id, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
                 if (e==null) {
-                    Toast.makeText(EventRadar.this, id , Toast.LENGTH_SHORT).show();
                     AlertDialog.Builder builder = new AlertDialog.Builder(EventRadar.this);
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
                     Calendar date = Calendar.getInstance();
@@ -493,7 +492,7 @@ public class EventRadar extends AppCompatActivity implements
                     builder.setPositiveButton("Beitreten", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ParseServer.getInstanceWithPublicReadAccess(EventRadar.this).addParticipantsToEvent(EventRadar.this, id);
+                            ParseServer.getInstance(EventRadar.this).addParticipantsToEvent(EventRadar.this, id);
                         }
                     });
                     builder.setNegativeButton("Zurück", new DialogInterface.OnClickListener() {
