@@ -128,7 +128,7 @@ public class CreateEvent extends AppCompatActivity implements
      */
     private void createEvent() {
 
-        ParseServer ps = ParseServer.getInstanceWithPublicReadAccess(this);
+        ParseServer ps = ParseServer.getInstance(this);
 
         //Default eventPlace
         eventPlace = eventPlace == null? new LatLng(0,0) : eventPlace;

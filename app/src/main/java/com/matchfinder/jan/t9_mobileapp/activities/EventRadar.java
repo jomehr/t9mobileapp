@@ -157,7 +157,7 @@ public class EventRadar extends AppCompatActivity implements
 
         /// TEST
 
-        ParseServer ps = ParseServer.getInstanceWithPublicReadAccess(getApplicationContext());
+        ParseServer ps = ParseServer.getInstance(getApplicationContext());
         ps.loadEventData(this, myGoogleMap);
         //LatLng kosivSchool = new LatLng(ParseServer.event.getPlaceLatitude(), ParseServer.event.getPlaceLongitude());
         //myMarker = myGoogleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + ": " + ParseServer.event.getDescription()));
@@ -493,7 +493,7 @@ public class EventRadar extends AppCompatActivity implements
                     builder.setPositiveButton("Beitreten", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ParseServer.getInstanceWithPublicReadAccess(EventRadar.this).addParticipantsToEvent(EventRadar.this, id);
+                            ParseServer.getInstance(EventRadar.this).addParticipantsToEvent(EventRadar.this, id);
                         }
                     });
                     builder.setNegativeButton("Zurück", new DialogInterface.OnClickListener() {
