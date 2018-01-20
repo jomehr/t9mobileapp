@@ -46,8 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@raw/profilpic"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/banner_text1"

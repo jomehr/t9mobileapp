@@ -141,8 +141,7 @@ public class Profile extends AppCompatActivity {
         editBtn.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, ProfileEdit.class));
-                finish();
+                startActivity(new Intent(Profile.this, CreateProfile.class));
             }
         });
 

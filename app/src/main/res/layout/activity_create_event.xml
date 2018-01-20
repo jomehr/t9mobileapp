@@ -108,7 +108,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="@string/max_amount"
+                android:text="@string/max_player_amount"
                 android:textSize="24sp"
                 android:textColor="@color/colorBlack"
                 android:visibility="visible" />
@@ -146,23 +146,16 @@
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
             <Button
                 android:id="@+id/createEvent_createButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
+                android:layout_gravity="end"
                 android:layout_marginTop="15dp"
                 android:background="@color/colorPrimaryLight"
                 android:padding="15dp"
                 android:text="@string/create"
                 android:textStyle="bold" />
-        </RelativeLayout>
-
 
     </LinearLayout>
 

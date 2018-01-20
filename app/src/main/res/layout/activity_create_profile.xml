@@ -217,7 +217,7 @@
                     android:focusable = "true"
                     android:textColorHighlight = "@color/colorAccent"
                     android:textColorHint = "@color/colorSecondaryText"
-                    android:layout_gravity="center"
+                    android:layout_gravity="start"
                     android:textSize="24sp"
                     android:textColor="@color/colorPrimaryText"/>
             </LinearLayout>

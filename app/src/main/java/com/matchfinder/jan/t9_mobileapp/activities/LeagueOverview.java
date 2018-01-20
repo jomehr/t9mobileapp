@@ -50,7 +50,7 @@ public class LeagueOverview extends AppCompatActivity {
         createLeagueContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LeagueOverview.this, "an diesem Feature wird noch gearbeitet", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(LeagueOverview.this, CreateLeague.class));
             }
         });
 

@@ -27,7 +27,7 @@
     <string name="you_can_not_join_this_game">Leider können Sie diesem Spiel nicht mehr beitreten. Die maximale Spielerzahl wurde erreicht.</string>
     <string name="create_league">Liga erstellen</string>
     <string name="search_league">Liga suchen</string>
-    <string name="max_amount">Maximale Spieler-Anzahl</string>
+    <string name="max_player_amount">Max. Spieler-Anzahl</string>
     <string name="event_ticker">Eventticker</string>
     <string name="single_event">Single Event</string>
     <string name="chat_put_post">Post verfassen&#8230;</string>
@@ -123,5 +123,6 @@
 
     <!-- ERROR Srings -->
     <string name="logig_mistake">    LOGIG_MISTAKE    </string>
+    <string name="max_team_amount">Max. Team-Anzahl</string>
 
 </resources>

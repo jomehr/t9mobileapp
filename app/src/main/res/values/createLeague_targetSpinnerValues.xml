@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="createLeague_targetSpinnerValues">
+        <item>offen</item>
+        <item>Jugendliche</item>
+        <item>junge Erwachsene</item>
+        <item>Erwachsene</item>
+        <item>Betriebsmannschaft</item>
+        <item>Schulmannschaft</item>
+    </string-array>
+</resources>

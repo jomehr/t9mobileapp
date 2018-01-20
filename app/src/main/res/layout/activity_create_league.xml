@@ -1,11 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/cropped_background_image">
 
-    <include layout="@layout/toolbar"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar" />
+
+    <ImageView
+        android:contentDescription="@string/colored_background"
+        android:id="@+id/backgroundimageview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@raw/screen_background3"
+        android:scaleType="centerCrop"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <LinearLayout
+            android:id="@+id/createLeague_informationContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="@drawable/divider_green"
+            android:showDividers="middle"
+            android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/createLeague_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_help_outline_black_24dp"
+                    android:drawablePadding="30dp"
+                    android:text="Typ:"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:visibility="visible" />
+
+                <Spinner
+                    android:id="@+id/createLeague_typeSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="20dp"
+                    android:gravity="start"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/createLeague_leagueOrtText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:drawableStart="@drawable/ic_add_location_black_30dp"
+                android:drawablePadding="30dp"
+                android:padding="10dp"
+                android:text="@string/pick_place"
+                android:textColor="@color/colorBlack"
+                android:textSize="24sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/createLeague_leagueMaxTeams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:drawableStart="@drawable/ic_max_players_black_30dp"
+                android:drawablePadding="30dp"
+                android:padding="10dp"
+                android:text="@string/max_team_amount"
+                android:textColor="@color/colorBlack"
+                android:textSize="24sp"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/createLeague_leagueTarget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:drawableStart="@drawable/ic_search_black_72dp"
+                    android:drawablePadding="30dp"
+                    android:text="Zielgruppe"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:visibility="visible" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/createLeague_targetSpinner"
+                    android:layout_marginStart="45dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="start" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/createLeague_leagueDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:drawableStart="@drawable/ic_edit_black_30dp"
+                android:drawablePadding="30dp"
+                android:padding="10dp"
+                android:text="@string/description"
+                android:textColor="@color/colorBlack"
+                android:textSize="24sp"
+                android:visibility="visible" />
+            <Button
+                android:id="@+id/createEvent_createButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="50dp"
+                android:background="@color/colorPrimaryLight"
+                android:padding="15dp"
+                android:text="@string/create"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

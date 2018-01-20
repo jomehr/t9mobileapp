@@ -1,6 +1,8 @@
 package com.matchfinder.jan.t9_mobileapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +21,8 @@ import com.matchfinder.jan.t9_mobileapp.menu.*;
  */
 
 public class League extends AppCompatActivity {
+    private static  final String PREFER_NAME_TEAMDATA = "TeamData";
+    private SharedPreferences sharedPreferencesTeam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +67,16 @@ public class League extends AppCompatActivity {
         });
         //Clicklistener links to activity Team
         RelativeLayout team_btn = findViewById(R.id.teamContainer);
+        sharedPreferencesTeam = getSharedPreferences(PREFER_NAME_TEAMDATA, Context.MODE_PRIVATE);
         team_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(League.this, Team.class));
+                //TODO set defValue to false and implement CreateTeam logic and layout
+                if (sharedPreferencesTeam.getBoolean("inTeam", true)) {
+                    startActivity(new Intent(League.this, Team.class));
+                }else {
+                    startActivity(new Intent(League.this, CreateTeam.class));
+                }
             }
         });
     }

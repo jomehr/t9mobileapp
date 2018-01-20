@@ -33,7 +33,7 @@ import com.matchfinder.jan.t9_mobileapp.util.InputFilterMinMax;
  * Created by Jan on 18.12.2017.
  */
 
-public class ProfileEdit extends AppCompatActivity {
+public class CreateProfile extends AppCompatActivity {
 
     private final static String PREFER_NAME_PROFILDATA = "ProfilData";
     private SharedPreferences sharedPreferencesProf;
@@ -45,7 +45,7 @@ public class ProfileEdit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profiledit);
+        setContentView(R.layout.activity_create_profile);
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -87,7 +87,7 @@ public class ProfileEdit extends AppCompatActivity {
                     onValidationFailed();
                 } else {
                     saveData();
-                    startActivity(new Intent(ProfileEdit.this, Profile.class));
+                    startActivity(new Intent(CreateProfile.this, Profile.class));
                 }
             }
         });
@@ -102,21 +102,21 @@ public class ProfileEdit extends AppCompatActivity {
         residenceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfileEdit.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateProfile.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
             }
         });
 
         teamLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfileEdit.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateProfile.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
             }
         });
 
         areaLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfileEdit.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateProfile.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -164,7 +164,7 @@ public class ProfileEdit extends AppCompatActivity {
         // Set up the input
         final EditText input = new EditText(this);
         // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setInputType(InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
         input.setHint(descriptionText.getHint());
         input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(128)});
         input.setMaxLines(4);

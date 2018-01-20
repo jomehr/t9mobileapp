@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +37,9 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
+import com.matchfinder.jan.t9_mobileapp.util.PickerEditor;
 
+import java.lang.reflect.Field;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -143,9 +146,7 @@ public class CreateEvent extends AppCompatActivity implements
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
             startActivityForResult(builder.build(this),PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
+        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
         //TODO catch-Block implementieren
@@ -235,18 +236,20 @@ public class CreateEvent extends AppCompatActivity implements
     private void numberPickerDialog() {
 
         final NumberPicker myNumberPicker = new NumberPicker(getApplicationContext());
+        PickerEditor.setNumberPickerTextColor(myNumberPicker, getColor(R.color.colorBlack));
         myNumberPicker.setMaxValue(22);
-        myNumberPicker.setMinValue(1);
+        myNumberPicker.setMinValue(2);
+
 
         //Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(myNumberPicker);
-        builder.setTitle(R.string.max_amount);
+        builder.setTitle(R.string.max_player_amount);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 eventMaxPlayersNumber = myNumberPicker.getValue();
-                eventMaxPlayersNumberText.setText(String.format("%01d", myNumberPicker.getValue()));
+                eventMaxPlayersNumberText.setText(String.format("%01d", eventMaxPlayersNumber));
             }
         });
 
@@ -259,6 +262,7 @@ public class CreateEvent extends AppCompatActivity implements
 
         builder.show();
     }
+
 
     //Text Picker
     private void textPickerDialog() {
