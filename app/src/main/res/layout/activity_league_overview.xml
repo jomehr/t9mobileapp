@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Static screen, needs to be dynamic to parse databank entries over-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.matchfinder.jan.t9_mobileapp.activities.LeagueTables">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ImageView
+        android:id="@+id/backgroundimageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@raw/screen_background3"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:padding="15dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/leaguecontainer"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/border_shadow"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="expandableSecondLeague">
+
+            <ImageView
+                android:id="@+id/secondleague_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/button_image"
+                android:scaleType="centerCrop"
+                android:src="@raw/profilpic" />
+
+            <TextView
+                android:id="@+id/secondleague_txt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:background="@color/colorPrimaryOpacity"
+                android:gravity="bottom|start"
+                android:padding="4dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/league"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/createLeagueContainer"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/border_shadow"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="expandableFirstLeague">
+
+            <ImageView
+                android:id="@+id/firstleague_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/button_image"
+                android:scaleType="centerCrop"
+                android:src="@raw/profilpic" />
+
+            <TextView
+                android:id="@+id/fistleague_txt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:background="@color/colorPrimaryOpacity"
+                android:text="@string/create_league"
+                android:gravity="bottom|end"
+                android:padding="4dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/searchLeagueContainer"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/border_shadow"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="expandableFirstLeague">
+
+            <ImageView
+                android:id="@+id/firstleague_img1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/button_image"
+                android:scaleType="centerCrop"
+                android:src="@raw/profilpic" />
+
+            <TextView
+                android:id="@+id/fistleague_txt1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:background="@color/colorPrimaryOpacity"
+                android:text="@string/search_league"
+                android:gravity="bottom|start"
+                android:padding="4dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

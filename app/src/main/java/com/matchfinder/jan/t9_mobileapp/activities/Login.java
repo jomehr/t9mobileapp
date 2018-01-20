@@ -27,7 +27,6 @@ import com.parse.ParseUser;
 public class Login extends AppCompatActivity {
 
     private EditText edit_username,edit_password;
-    private ProgressBar progressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class Login extends AppCompatActivity {
         TextView btn_register = findViewById(R.id.login_registerBtn);
         edit_username = findViewById(R.id.login_inputUsername);
         edit_password = findViewById(R.id.login_inputPassword);
-        progressbar =  findViewById(R.id.login_progressBar);
 
         ParseServer.getInstance(this);
         if (ParseUser.getCurrentUser() != null) {
@@ -47,30 +45,14 @@ public class Login extends AppCompatActivity {
             finish();
         }
 
-
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressbar.setVisibility(View.VISIBLE);
-
-
                 if (!isNetworkAvailable()) {
                     Toast.makeText(Login.this, "keine Internetverbindung", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Looper.prepare();
-                            loginParse();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-
+                loginParse();
             }
         });
 
@@ -89,25 +71,11 @@ public class Login extends AppCompatActivity {
         });
     }
 
-
     private void loginParse() {
         ParseServer ps = ParseServer.getInstance(Login.this);
         ps.loginUser(this, edit_username.getText().toString(), edit_password.getText().toString(), this);
-
-        try {
-            Thread.sleep(2000); ///TODO Thread.sleep() unerwünscht.
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        if (ParseUser.getCurrentUser() == null) {
-            progressbar.setVisibility(View.INVISIBLE);
-        }
     }
 
-/*    private void onLoginFailed() {
-        Toast.makeText(this, "Falsche Login-Daten",Toast.LENGTH_SHORT).show();
-    }*/
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

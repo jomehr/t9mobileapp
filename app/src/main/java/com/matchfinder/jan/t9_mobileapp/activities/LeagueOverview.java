@@ -19,12 +19,12 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
 
-public class Leagues extends AppCompatActivity {
+public class LeagueOverview extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leagues);
+        setContentView(R.layout.activity_league_overview);
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -40,8 +40,7 @@ public class Leagues extends AppCompatActivity {
         createLeagueContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Leagues.this, CreateLeague.class));
-                finish();
+                startActivity(new Intent(LeagueOverview.this, CreateLeague.class));
             }
         });
 
@@ -49,7 +48,12 @@ public class Leagues extends AppCompatActivity {
         league.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Leagues.this, League.class));
+                try {
+                    startActivity(new Intent(LeagueOverview.this, League.class));
+                } catch (OutOfMemoryError oome) {
+                    oome.printStackTrace();
+                    startActivity(new Intent(LeagueOverview.this, League.class));
+                }
             }
         });
 
@@ -57,7 +61,7 @@ public class Leagues extends AppCompatActivity {
         searchLeagueContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Leagues.this, SearchLeague.class));
+                startActivity(new Intent(LeagueOverview.this, SearchLeague.class));
             }
         });
 

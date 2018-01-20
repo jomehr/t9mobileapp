@@ -33,8 +33,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.Homescreen"
-                 android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.Homescreen"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
         <activity
             android:screenOrientation="portrait"
             android:name="com.matchfinder.jan.t9_mobileapp.activities.Profile"
@@ -98,7 +100,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.Leagues"
+        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.LeagueOverview"
             android:screenOrientation="portrait"
             android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.Homescreen">
             <meta-data

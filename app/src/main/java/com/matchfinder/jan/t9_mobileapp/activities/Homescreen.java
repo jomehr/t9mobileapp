@@ -47,7 +47,7 @@ public class Homescreen extends AppCompatActivity {
                     startActivityIfNeeded(new Intent(Homescreen.this, EventRadar.class), REQUEST);
                 }
                 else {
-                    Toast.makeText(Homescreen.this, "Internetverbindung fällt. Es ist notwendig für diese Funktion", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Homescreen.this, "Internetverbindung fehlt. Es ist notwendig für diese Funktion", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -65,8 +65,7 @@ public class Homescreen extends AppCompatActivity {
         banner3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, Leagues.class));
-                finish();
+                startActivity(new Intent(Homescreen.this, LeagueOverview.class));
             }
         });
 

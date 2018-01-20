@@ -67,6 +67,8 @@ public class Profile extends AppCompatActivity {
 
         //get data from server
         ParseServer.getInstance(this);
+        //TODO load data from server if userdata exists and sharedpref is empty
+        ParseServer.getInstance(this);
         if (profileName.equals("Profil")) {
             profileName = ParseUser.getCurrentUser().getUsername();
             editor.putString("Name", profileName);
