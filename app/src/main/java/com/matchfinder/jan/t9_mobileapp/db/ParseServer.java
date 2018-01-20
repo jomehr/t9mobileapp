@@ -218,6 +218,7 @@ public class ParseServer extends AppCompatActivity {
         profileObjekt.saveEventually();
     }
 
+    // TODO set ParseACL to userOnly Read and Write and not PublicRead
     public synchronized void registerUser(final Context appcontext, String email, final String username, String password, final Activity activity) {
 
         if (ParseUser.getCurrentUser() != null) {
