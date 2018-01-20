@@ -321,7 +321,7 @@ public class EventRadar extends AppCompatActivity implements
         if(!gps_enabled && !network_enabled) {
             // notify user
             final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setTitle("Please activate location"); //TODO Change Strings to Recource
+            dialog.setTitle(R.string.please_activate_location_services);
             dialog.setMessage("Click ok to goto settings else exit.");
             dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
@@ -469,7 +469,7 @@ public class EventRadar extends AppCompatActivity implements
     @Override
     public boolean onMarkerClick(final Marker marker) {
 
-        //TODO finalize view, show all participants, implement int curParticipants and increment for every new participant, lock positive button if curParticipants = maxParticipants
+        // TODO finalize view, show all participants, lock positive button if curParticipants = maxParticipants
         final String id = marker.getTitle();
         final ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         query.getInBackground(id, new GetCallback<ParseObject>() {

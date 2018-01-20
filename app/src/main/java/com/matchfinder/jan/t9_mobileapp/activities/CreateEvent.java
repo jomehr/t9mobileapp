@@ -328,8 +328,8 @@ public class CreateEvent extends AppCompatActivity implements
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
         /*
-        TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schkiesst sich die Tastatur
-        TODO Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.
+        TODO Beim Click auf Homebutton vor dem Click auf OK oder CANCEL schliesst sich die Tastatur nicht.
+        Es muss eingestellt sein, dass die Tastatur sich immer beim App-Schliessen schliesst.
         */
     }
 
