@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.fragments.TeamTab1Roster;
 import com.matchfinder.jan.t9_mobileapp.fragments.TeamTab2Profile;
 import com.matchfinder.jan.t9_mobileapp.fragments.TeamTab3Chat;
@@ -127,7 +129,13 @@ public class Team extends AppCompatActivity {
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                startActivity(new Intent(this, Profile.class));
+                ParseServer ps =ParseServer.getInstance(this);
+                if (ps.logOut()) {
+                    startActivity(new Intent(this, Login.class));
+                    finish();
+                }else {
+                    Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.action_data_privacy:
                 startActivity(new Intent(this, menu_data_privacy.class));

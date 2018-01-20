@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
@@ -261,7 +262,13 @@ public class Profile extends AppCompatActivity {
                 startActivity(new Intent(this, menu_data_privacy.class));
                 return true;
             case R.id.action_sign_out:
-                startActivity(new Intent(this, Login.class));
+                ParseServer ps =ParseServer.getInstance(this);
+                if (ps.logOut()) {
+                    startActivity(new Intent(this, Login.class));
+                    finish();
+                }else {
+                    Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

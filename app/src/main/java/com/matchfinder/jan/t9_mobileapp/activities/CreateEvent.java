@@ -222,8 +222,8 @@ public class CreateEvent extends AppCompatActivity implements
         }
 
         //TextView füllen
-        String dateAndTimeText =  (String) ("Datum: " + String.format("%02d", dayFinal) + "." + String.format("%02d",monthFinal) + "." + yearFinal
-                + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal));
+        String dateAndTimeText = "Datum: " + String.format("%02d", dayFinal) + "." + String.format("%02d",monthFinal) + "." + yearFinal
+                + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal);
         eventDateAndTimeText.setText(dateAndTimeText);
 
         //set eventDateAndTimeFinal (long) number in milliseconds
@@ -383,7 +383,13 @@ public class CreateEvent extends AppCompatActivity implements
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                startActivity(new Intent(this, Profile.class));
+                ParseServer ps =ParseServer.getInstance(this);
+                if (ps.logOut()) {
+                    startActivity(new Intent(this, Login.class));
+                    finish();
+                }else {
+                    Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.action_data_privacy:
                 startActivity(new Intent(this, menu_data_privacy.class));

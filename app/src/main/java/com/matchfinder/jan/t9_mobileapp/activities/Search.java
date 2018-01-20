@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.interfaces.IFragmentListener;
 import com.matchfinder.jan.t9_mobileapp.interfaces.ISearch;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
@@ -99,7 +101,13 @@ public class Search extends AppCompatActivity implements TabLayout.OnTabSelected
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                startActivity(new Intent(this, Login.class));
+                ParseServer ps =ParseServer.getInstance(this);
+                if (ps.logOut()) {
+                    startActivity(new Intent(this, Login.class));
+                    finish();
+                }else {
+                    Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.action_data_privacy:
                 startActivity(new Intent(this, menu_data_privacy.class));

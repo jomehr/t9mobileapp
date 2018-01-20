@@ -12,8 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.R;
+import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
@@ -36,24 +38,19 @@ public class LeagueOverview extends AppCompatActivity {
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        RelativeLayout createLeagueContainer = findViewById(R.id.createLeagueContainer);
-        createLeagueContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LeagueOverview.this, CreateLeague.class));
-            }
-        });
-
         RelativeLayout league = findViewById(R.id.leaguecontainer);
         league.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    startActivity(new Intent(LeagueOverview.this, League.class));
-                } catch (OutOfMemoryError oome) {
-                    oome.printStackTrace();
-                    startActivity(new Intent(LeagueOverview.this, League.class));
-                }
+                startActivity(new Intent(LeagueOverview.this, League.class));
+            }
+        });
+
+        RelativeLayout createLeagueContainer = findViewById(R.id.createLeagueContainer);
+        createLeagueContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LeagueOverview.this, "an diesem Feature wird noch gearbeitet", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -61,7 +58,7 @@ public class LeagueOverview extends AppCompatActivity {
         searchLeagueContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LeagueOverview.this, SearchLeague.class));
+                Toast.makeText(LeagueOverview.this, "an diesem Feature wird noch gearbeitet", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -93,7 +90,13 @@ public class LeagueOverview extends AppCompatActivity {
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                startActivity(new Intent(this, Profile.class));
+                ParseServer ps =ParseServer.getInstance(this);
+                if (ps.logOut()) {
+                    startActivity(new Intent(this, Login.class));
+                    finish();
+                }else {
+                    Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.action_data_privacy:
                 startActivity(new Intent(this, menu_data_privacy.class));
