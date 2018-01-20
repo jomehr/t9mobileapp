@@ -451,7 +451,7 @@ public class EventRadar extends AppCompatActivity implements
     @Override
     public boolean onMyLocationButtonClick() {
         locationServicesCheck(myLocationManager);
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.your_location_is_being_searched, Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
@@ -463,7 +463,7 @@ public class EventRadar extends AppCompatActivity implements
      */
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(this, "Current location:\n" + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Current location:\n" + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -476,7 +476,6 @@ public class EventRadar extends AppCompatActivity implements
             @Override
             public void done(ParseObject object, ParseException e) {
                 if (e==null) {
-                    Toast.makeText(EventRadar.this, id , Toast.LENGTH_SHORT).show();
                     AlertDialog.Builder builder = new AlertDialog.Builder(EventRadar.this);
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
                     Calendar date = Calendar.getInstance();
