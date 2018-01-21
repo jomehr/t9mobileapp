@@ -581,7 +581,7 @@ public class EventRadar extends AppCompatActivity implements
                 if (ps.logOut()) {
                     startActivity(new Intent(this, Login.class));
                     finish();
-                }else {
+                } else {
                     Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
                 }
                 return true;

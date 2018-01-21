@@ -30,8 +30,7 @@
             android:id="@+id/leaguecontainer"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/border_shadow"
+            android:layout_marginTop="25dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="expandableSecondLeague">
@@ -42,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/button_image"
                 android:scaleType="centerCrop"
-                android:src="@raw/profilpic" />
+                android:src="@raw/banner_liga"/>
 
             <TextView
                 android:id="@+id/secondleague_txt"
@@ -66,8 +65,7 @@
             android:id="@+id/createLeagueContainer"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/border_shadow"
+            android:layout_marginTop="40dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="expandableFirstLeague">
@@ -78,7 +76,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/button_image"
                 android:scaleType="centerCrop"
-                android:src="@raw/profilpic" />
+                android:src="@raw/banner_create_liga" />
 
             <TextView
                 android:id="@+id/fistleague_txt"
@@ -102,8 +100,7 @@
             android:id="@+id/searchLeagueContainer"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/border_shadow"
+            android:layout_marginTop="40dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="expandableFirstLeague">
@@ -114,7 +111,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/button_image"
                 android:scaleType="centerCrop"
-                android:src="@raw/profilpic" />
+                android:src="@raw/banner_search_liga" />
 
             <TextView
                 android:id="@+id/fistleague_txt1"

@@ -32,8 +32,7 @@
             android:id="@+id/homescreen_findGameContainer"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/border_shadow"
+            android:layout_marginTop="25dp"
             android:clickable="true"
             android:focusable="true">
 
@@ -68,8 +67,7 @@
             android:id="@+id/homescreen_createEventContainer"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:background="@drawable/border_shadow"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:clickable="true"
             android:focusable="true">
 
@@ -104,8 +102,7 @@
             android:id="@+id/homescreen_leagueContainer"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/border_shadow"
+            android:layout_marginTop="40dp"
             android:clickable="true"
             android:focusable="true">
 
@@ -115,7 +112,7 @@
                 android:layout_height="match_parent"
                 android:drawingCacheQuality="auto"
                 android:scaleType="centerCrop"
-                android:src="@raw/banner_liga"
+                android:src="@raw/banner_ligen"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="ContentDescription" />
 
@@ -130,7 +127,7 @@
                 android:padding="4dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:text="@string/league"
+                android:text="@string/leagues"
                 android:textAlignment="gravity"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"

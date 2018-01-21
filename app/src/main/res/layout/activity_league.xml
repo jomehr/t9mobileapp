@@ -1,196 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.matchfinder.jan.t9_mobileapp.activities.League">
+    tools:context="com.matchfinder.jan.t9_mobileapp.activities.LeagueOverview">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        app:layout_constraintBottom_toTopOf="@+id/newsContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        layout="@layout/toolbar" />
 
-    <!--buggy mit goßen bitmaps-->
     <ImageView
-        android:contentDescription="@string/colored_background"
         android:id="@+id/backgroundimageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
         app:srcCompat="@raw/screen_background3"
-        android:scaleType="centerCrop"/>
+        tools:ignore="ContentDescription" />
 
-    <RelativeLayout
-        android:background="@drawable/border_shadow"
-        android:id="@+id/newsContainer"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:clickable="true"
-        android:focusable="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:padding="15dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/banner_img2"
+        <RelativeLayout
+            android:id="@+id/newsContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@raw/profilpic"
-            android:scaleType="centerCrop" />
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:clickable="true"
+            android:focusable="true">
 
-        <TextView
-            android:id="@+id/banner_text1"
+            <ImageView
+                android:id="@+id/banner_img2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@raw/banner_news"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/banner_text1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:background="@color/colorPrimaryOpacity"
+                android:gravity="bottom|end"
+                android:padding="4dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/news"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/searchTeamContainer"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerVertical="true"
-            android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|left"
-            android:padding="4dp"
-            android:paddingLeft="16dp"
-            android:paddingStart="16dp"
-            android:text="@string/news"
-            android:textAlignment="gravity"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-    </RelativeLayout>
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:clickable="true"
+            android:focusable="true">
 
-    <RelativeLayout
-        android:background="@drawable/border_shadow"
-        android:id="@+id/searchTeamContainer"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newsContainer"
-        android:focusable="true">
+            <ImageView
+                android:contentDescription="@string/button_image"
+                android:id="@+id/banner_image2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@raw/banner_team"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:contentDescription="@string/button_image"
-            android:id="@+id/banner_image2"
+            <TextView
+                android:id="@+id/banner_text2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:background="@color/colorPrimaryOpacity"
+                android:gravity="bottom|start"
+                android:padding="4dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/search_teams"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/banner_image2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tableContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@raw/banner_team"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:clickable="true"
+            android:focusable="true">
 
-        <TextView
-            android:id="@+id/banner_text2"
+            <ImageView
+                android:contentDescription="@string/button_image"
+                android:id="@+id/banner_image3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@raw/banner_ligen"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/banner_text3"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:background="@color/colorPrimaryOpacity"
+                android:gravity="bottom|end"
+                android:padding="4dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/tabels"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/banner_image3" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/teamContainer"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerVertical="true"
-            android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|right"
-            android:padding="4dp"
-            android:paddingLeft="16dp"
-            android:paddingStart="16dp"
-            android:text="@string/search_teams"
-            android:textAlignment="gravity"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/banner_image2" />
-    </RelativeLayout>
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:clickable="true"
+            android:focusable="true">
 
-    <RelativeLayout
-        android:background="@drawable/border_shadow"
-        android:id="@+id/tableContainer"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchTeamContainer" android:focusable="true">
+            <ImageView
+                android:contentDescription="@string/button_image"
+                android:id="@+id/team_btnImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@raw/banner_teams2"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:contentDescription="@string/button_image"
-            android:id="@+id/banner_image3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@raw/banner_liga"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/team_btntext"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:background="@color/colorPrimaryOpacity"
+                android:gravity="bottom|start"
+                android:padding="4dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/your_team"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/team_btnImage" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/banner_text3"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerVertical="true"
-            android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|left"
-            android:padding="4dp"
-            android:paddingLeft="16dp"
-            android:paddingStart="16dp"
-            android:text="@string/tabels"
-            android:textAlignment="gravity"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/banner_image3" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:background="@drawable/border_shadow"
-        android:id="@+id/teamContainer"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableContainer" android:focusable="true">
-
-        <ImageView
-            android:contentDescription="@string/button_image"
-            android:id="@+id/team_btnImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@raw/banner_teams2"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/team_btntext"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerVertical="true"
-            android:background="@color/colorPrimaryOpacity"
-            android:gravity="bottom|right"
-            android:padding="4dp"
-            android:paddingLeft="16dp"
-            android:paddingStart="16dp"
-            android:text="@string/your_team"
-            android:textAlignment="gravity"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/team_btnImage" />
-    </RelativeLayout>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
