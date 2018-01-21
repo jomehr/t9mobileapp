@@ -3,16 +3,11 @@ package com.matchfinder.jan.t9_mobileapp.db;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.matchfinder.jan.t9_mobileapp.R;
@@ -58,7 +53,7 @@ public class ParseServer extends AppCompatActivity {
 
         //ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
-        // Optionally enable public read access. Yes enable
+        // Optionally enable public read access. No disable
         defaultACL.setPublicReadAccess(false);
         //False = only master key access
         ParseACL.setDefaultACL(defaultACL, true);
