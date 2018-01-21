@@ -3,11 +3,15 @@ package com.matchfinder.jan.t9_mobileapp.db;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -184,7 +188,7 @@ public class ParseServer extends AppCompatActivity {
                     for (i = 0; i < eventList.size(); i++) {
                         ParseObject object = eventList.get(i);
                         LatLng coordinate = new LatLng(object.getDouble("placeLat"), object.getDouble("placeLng"));
-                        googleMap.addMarker(new MarkerOptions().position(coordinate).title(object.getObjectId()).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_ball)));
+                        googleMap.addMarker(new MarkerOptions().position(coordinate).title(object.getObjectId()));
                     }
                     Toast.makeText(appContex, Integer.toString(i) + " Events gefunden", Toast.LENGTH_SHORT).show();
                 } else {
