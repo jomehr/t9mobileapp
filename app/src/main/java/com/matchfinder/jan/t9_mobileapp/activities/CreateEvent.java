@@ -219,7 +219,7 @@ public class CreateEvent extends AppCompatActivity implements
         //Button Color anpassen nur wenn zumindest ort, datum und uhrzeit gesetz sind
         if(eventOrtText.getText() != getResources().getString(R.string.pick_place)) {
             creatEventButton.setEnabled(true);
-            creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark, null));
+            creatEventButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
         }
 
         //TextView füllen
