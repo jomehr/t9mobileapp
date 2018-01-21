@@ -66,7 +66,7 @@ public class ParseServer extends AppCompatActivity {
         final String YOUR_APPLICATION_ID = "MatchFinder";
         final String YOUR_CLIENT_KEY = "matchfinderclientkey";
         final String YOUR_SERVER_URL = "https://matchfinder.dock.moxd.io/api/";
-        Parse.initialize(new Parse.Configuration.Builder(appContext.getApplicationContext())
+        Parse.initialize(new Parse.Configuration.Builder(appContext)
                 .applicationId(YOUR_APPLICATION_ID)
                 .clientKey(YOUR_CLIENT_KEY)
                 .server(YOUR_SERVER_URL)   // '/' important after 'api'
@@ -85,6 +85,7 @@ public class ParseServer extends AppCompatActivity {
         }
         return ParseServer.instance;
     }
+
     public synchronized void saveEventData(double placeLat, double placeLng, long dateAndTime, int maxPlayersNumber, String description) {
 
         //currently saves participants as pointer to user, if you just want the id of user add .getobejctid()
@@ -275,7 +276,7 @@ public class ParseServer extends AppCompatActivity {
         }
     }
 
-    public void loadUserList(final ArrayAdapter mUserAdapter) {
+    public synchronized void loadUserList(final ArrayAdapter mUserAdapter) {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
@@ -285,6 +286,35 @@ public class ParseServer extends AppCompatActivity {
                     for (int i = 0; i < userObjects.size(); i++) {
                         mUserAdapter.add(userObjects.get(i).getUsername());
                     }
+                }
+            }
+        });
+    }
+
+    public synchronized void saveLeagueData(final Context context, String type, String city, int maxTeams, String target, String description) {
+
+        ParseObject leagueObject = new ParseObject("League");
+
+        ParseACL leagueACL =  new ParseACL();
+        leagueACL.setPublicReadAccess(true);
+        leagueObject.setACL(leagueACL);
+        leagueACL.setPublicWriteAccess(true);
+        leagueObject.setACL(leagueACL);
+
+        leagueObject.put("createdby", ParseUser.getCurrentUser());
+        leagueObject.put("type", type);
+        leagueObject.put("inCity", city);
+        leagueObject.put("maxTeams", maxTeams);
+        leagueObject.put("target", target);
+        leagueObject.put("description", description);
+
+        leagueObject.saveEventually(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Toast.makeText(context, "Liga wurde gespeichert", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });

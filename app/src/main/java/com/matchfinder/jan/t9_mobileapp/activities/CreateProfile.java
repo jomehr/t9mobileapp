@@ -154,7 +154,7 @@ public class CreateProfile extends AppCompatActivity {
     }
 
     private void onValidationFailed() {
-        Toast.makeText(getApplicationContext(), "Validierung fehlgeschlagen",Toast.LENGTH_SHORT).show();
+        Toast.makeText(CreateProfile.this, "Validierung fehlgeschlagen",Toast.LENGTH_SHORT).show();
     }
 
     //Text Picker

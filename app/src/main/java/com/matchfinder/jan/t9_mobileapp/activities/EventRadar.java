@@ -157,7 +157,7 @@ public class EventRadar extends AppCompatActivity implements
 
         /// TEST
 
-        ParseServer ps = ParseServer.getInstance(getApplicationContext());
+        ParseServer ps = ParseServer.getInstance(this);
         ps.loadEventData(this, myGoogleMap);
         //LatLng kosivSchool = new LatLng(ParseServer.event.getPlaceLatitude(), ParseServer.event.getPlaceLongitude());
         //myMarker = myGoogleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + ": " + ParseServer.event.getDescription()));
@@ -505,7 +505,7 @@ public class EventRadar extends AppCompatActivity implements
                     builder.show();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), e.getMessage()+ " " +id , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EventRadar.this, e.getMessage()+ " " +id , Toast.LENGTH_SHORT).show();
                 }
             }
         });

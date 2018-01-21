@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -50,8 +51,9 @@ public class CreateLeague extends AppCompatActivity {
 
     private static int PLACE_PICKER_REQUEST = 1;
     private int leagueMaxTeamNumber = -1;
-    private String type, target;
+    private String type, target, city;
     private TextView leagueLocation, leagueMaxTeams, leagueTarget, leagueDescription;
+    private Button saveBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class CreateLeague extends AppCompatActivity {
         leagueMaxTeams = findViewById(R.id.createLeague_leagueMaxTeams);
         leagueTarget =  findViewById(R.id.createLeague_leagueTarget);
         leagueDescription = findViewById(R.id.createLeague_leagueDescription);
+        saveBtn = findViewById(R.id.createEvent_createButton);
 
 
         final Spinner typeSpinner = findViewById(R.id.createLeague_typeSpinner);
@@ -124,8 +127,20 @@ public class CreateLeague extends AppCompatActivity {
                 textPickerDialog();
             }
         });
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (saveBtn.isEnabled()) {
+                    saveLeague();
+                } else {
+                    Toast.makeText(CreateLeague.this, "Gebe die benötigten Daten ein um die Liga zu speichern", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
+    //Place Picker
     public void pickAPlace() {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
@@ -135,6 +150,7 @@ public class CreateLeague extends AppCompatActivity {
         }
     }
 
+    //get city from Place Picker
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
@@ -144,19 +160,24 @@ public class CreateLeague extends AppCompatActivity {
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 leagueLocation.setLayoutParams(params);
 
+                //get place from Place Picker and reverse geocode it to get string of current city
                 Place place = PlacePicker.getPlace(this, data);
                 Geocoder geocoder = new Geocoder(this);
-                try
-                {
+                try {
                     List<Address> addresses = geocoder.getFromLocation(place.getLatLng().latitude,place.getLatLng().longitude, 1);
-                    String city = addresses.get(0).getLocality();
+                    city = addresses.get(0).getLocality();
 
                     leagueLocation.setText(city);
 
-                } catch (IOException e)
-                {
+                    //enable savebutton
+                    if (leagueMaxTeamNumber >= 4){
+                        saveBtn.setEnabled(true);
+                        saveBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+                    }
+
+                } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, "Etwas ist schief gelaufen", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateLeague.this, "Etwas ist schief gelaufen", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -170,7 +191,6 @@ public class CreateLeague extends AppCompatActivity {
         myNumberPicker.setMaxValue(18);
         myNumberPicker.setMinValue(4);
 
-
         //Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(myNumberPicker);
         builder.setTitle(R.string.max_team_amount);
@@ -180,6 +200,11 @@ public class CreateLeague extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 leagueMaxTeamNumber = myNumberPicker.getValue();
                 leagueMaxTeams.setText(String.format("%01d", leagueMaxTeamNumber));
+
+                if (leagueLocation.getText().toString() != "Ort Auswählen") {
+                    saveBtn.setEnabled(true);
+                    saveBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary, null));
+                }
             }
         });
 
@@ -221,6 +246,13 @@ public class CreateLeague extends AppCompatActivity {
         });
 
         builder.show();
+    }
+
+    //save data to parse server
+    private void saveLeague() {
+        ParseServer ps = ParseServer.getInstance(this);
+
+        ps.saveLeagueData(this, type, city, leagueMaxTeamNumber, target, leagueDescription.getText().toString());
     }
 
     @Override
