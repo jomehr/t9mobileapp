@@ -20,10 +20,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,6 +37,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
+import com.matchfinder.jan.t9_mobileapp.db.entities.Event;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
@@ -46,6 +50,7 @@ import com.parse.ParseQuery;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Updated by taraszaika on 20.11.17.
@@ -159,12 +164,6 @@ public class EventRadar extends AppCompatActivity implements
 
         ParseServer ps = ParseServer.getInstance(this);
         ps.loadEventData(this, myGoogleMap);
-        //LatLng kosivSchool = new LatLng(ParseServer.event.getPlaceLatitude(), ParseServer.event.getPlaceLongitude());
-        //myMarker = myGoogleMap.addMarker(new MarkerOptions().position(kosivSchool).title(ParseServer.event.getObjectId() + ": " + ParseServer.event.getDescription()));
-
-        //myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kosivSchool, 17.0f));
-
-        ///
 
     }
 
@@ -468,41 +467,13 @@ public class EventRadar extends AppCompatActivity implements
 
     @Override
     public boolean onMarkerClick(final Marker marker) {
-
-        // TODO finalize view, show all participants, lock positive button if curParticipants = maxParticipants
         final String id = marker.getTitle();
         final ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         query.getInBackground(id, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
                 if (e==null) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(EventRadar.this);
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-                    Calendar date = Calendar.getInstance();
-                    date.setTimeInMillis(object.getLong("dateAndTime"));
-                    // Set up the input
-                    // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-                    builder.setMessage(
-                            object.getString("description") + "\n"
-                                    + "startet um: " + sdf.format(date.getTime()) + "\n"
-                                    + "maximale Spieler: " + object.getNumber("maxPlayersNumber")
-                    );
-
-                    // Set up the buttons
-                    builder.setPositiveButton("Beitreten", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ParseServer.getInstance(EventRadar.this).addParticipantsToEvent(EventRadar.this, id);
-                        }
-                    });
-                    builder.setNegativeButton("Zurück", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-
-                    builder.show();
+                    showAlertDialog(object);
                 }
                 else {
                     Toast.makeText(EventRadar.this, e.getMessage()+ " " +id , Toast.LENGTH_SHORT).show();
@@ -511,6 +482,67 @@ public class EventRadar extends AppCompatActivity implements
         });
 
         return true;
+    }
+
+    /**
+     * Method to convert Date and Time - milliseconds to String.
+     * @return Date and Time as a String of format dd.MM.yyyy HH:mm:ss.
+     */
+    private String convertLongToDate(long eventDateAndTime) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        Date eventDate = new Date(eventDateAndTime);
+        return  dateFormat.format(eventDate);
+    }
+
+    private void showAlertDialog(final ParseObject object) {
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.dialog_event_join, null);
+
+        TextView eventDateAndTimeText = dialogLayout.findViewById(R.id.dialog_event_join_eventDateAndTimeText);
+        TextView eventMaxPlayersText = dialogLayout.findViewById(R.id.dialog_event_join_eventMaxPlayersText);
+        TextView eventDescriptionText = dialogLayout.findViewById(R.id.dialog_event_join_eventDescriptionText);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(EventRadar.this);
+        alert.setTitle(R.string.join_event);
+        // this is set the view from XML inside AlertDialog
+        alert.setView(dialogLayout);
+
+        // Set up the buttons
+        alert.setPositiveButton(R.string.join, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ParseServer.getInstance(EventRadar.this).addParticipantsToEvent(EventRadar.this, object.getObjectId());
+            }
+        });
+
+        alert.setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alert.create();
+        dialog.show();
+
+        // Set Date And Time Text
+        String dateAndTimeString = convertLongToDate(object.getLong("dateAndTime"));
+        String[] dateAndTime = dateAndTimeString.split(" ");
+
+        dateAndTimeString = getResources().getString(R.string.date) + " " + dateAndTime[0] +
+                "\n" + getResources().getString(R.string.time) + " " + dateAndTime[1];
+        eventDateAndTimeText.setText(dateAndTimeString);
+
+        // Set Max Players Number
+        String maxPlayersString = getResources().getString(R.string.players_amount) + " " + Integer.toString(object.getInt("maxPlayersNumber"));
+        eventMaxPlayersText.setText(maxPlayersString);
+
+        // Set Description Text
+        String descriptionString = object.getString("description");
+        eventDescriptionText.setText(descriptionString);
+
+
     }
 
     @Override

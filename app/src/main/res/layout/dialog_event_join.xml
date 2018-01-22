@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.EventRadar"
+    android:id="@+id/dialog_event_join"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/divider_yellow"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:showDividers="middle">
+
+    <LinearLayout
+        android:id="@+id/dialog_event_join_eventDateAndTime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            app:srcCompat="@drawable/ic_insert_invitation_black_30dp"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/button_image"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/dialog_event_join_eventDateAndTimeText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/setDateAndTime"
+            android:textColor="@color/colorBlack"
+            android:textSize="24sp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_event_join_eventMaxPlayers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            app:srcCompat="@drawable/ic_max_players_black_30dp"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/button_image"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/dialog_event_join_eventMaxPlayersText"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/max_player_amount"
+            android:textColor="@color/colorBlack"
+            android:textSize="24sp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_event_join_eventDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingBottom="100dp">
+
+        <ImageView
+            app:srcCompat="@drawable/ic_edit_black_30dp"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/button_image"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/dialog_event_join_eventDescriptionText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:text="@string/description"
+            android:textColor="@color/colorBlack"
+            android:textSize="24sp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+</LinearLayout>

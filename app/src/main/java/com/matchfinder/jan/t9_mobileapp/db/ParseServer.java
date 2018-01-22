@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.matchfinder.jan.t9_mobileapp.R;
@@ -179,13 +180,13 @@ public class ParseServer extends AppCompatActivity {
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> eventList, ParseException e) {
                 if (e == null) {
-                    int i;
-                    for (i = 0; i < eventList.size(); i++) {
+                    for (int i = 0; i < eventList.size(); i++) {
                         ParseObject object = eventList.get(i);
                         LatLng coordinate = new LatLng(object.getDouble("placeLat"), object.getDouble("placeLng"));
-                        googleMap.addMarker(new MarkerOptions().position(coordinate).title(object.getObjectId()));
+                        googleMap.addMarker(new MarkerOptions().position(coordinate).title(object.getObjectId())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_ball2)));
                     }
-                    Toast.makeText(appContex, Integer.toString(i) + " Events gefunden", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(appContex, eventList.size() + " Events gefunden", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(appContex, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

@@ -223,8 +223,8 @@ public class CreateEvent extends AppCompatActivity implements
         }
 
         //TextView füllen
-        String dateAndTimeText = "Datum: " + String.format("%02d", dayFinal) + "." + String.format("%02d",monthFinal) + "." + yearFinal
-                + "\nUhrzeit: " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal);
+        String dateAndTimeText = R.string.date + String.format("%02d", dayFinal) + "." + String.format("%02d",monthFinal) + "." + yearFinal
+                + "\n" + R.string.time + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal);
         eventDateAndTimeText.setText(dateAndTimeText);
 
         //set eventDateAndTimeFinal (long) number in milliseconds
@@ -347,17 +347,6 @@ public class CreateEvent extends AppCompatActivity implements
         String dateString = String.format("%02d", dayFinal) + "."+ String.format("%02d", monthFinal) + "." + yearFinal + " "
                 + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal) + ":00";
         return dateFormat.parse(dateString, new ParsePosition(0)).getTime();
-    }
-
-    /**
-     * Method to convert Date and Time - milliseconds to String.
-     * @return Date and Time as a String of format dd.MM.yyyy HH:mm:ss.
-     */
-    private String convertLongToDate() {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-        Date eventDate = new Date(eventDateAndTimeFinal);
-        return  dateFormat.format(eventDate);
     }
 
     //Menü
