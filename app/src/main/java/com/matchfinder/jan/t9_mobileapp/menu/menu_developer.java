@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.matchfinder.jan.t9_mobileapp.R;
@@ -15,6 +16,7 @@ import com.matchfinder.jan.t9_mobileapp.activities.Login;
 import com.matchfinder.jan.t9_mobileapp.activities.Profile;
 import com.matchfinder.jan.t9_mobileapp.activities.Search;
 import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
+import com.matchfinder.jan.t9_mobileapp.util.CustomDeveloperList;
 
 
 /*
@@ -22,6 +24,10 @@ import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
  */
 
 public class menu_developer extends AppCompatActivity {
+   ListView lst;
+   String [] developerName = {"Jan Mehr", "Taras Zaika", "Christopher Huntscha", "Tarek Al Ashi"};
+   Integer [] imgid = {R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp, R.drawable.ic_person_black_72dp};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,11 @@ public class menu_developer extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Homescreen.class));
             }
         });
+
+        lst = (ListView) findViewById(R.id.list);
+        CustomDeveloperList a = new CustomDeveloperList(this, developerName, imgid);
+        lst.setAdapter(a);
+
     }
 
     @Override
