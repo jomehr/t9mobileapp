@@ -18,6 +18,12 @@
     <!-- Miscellaneous -->
     <string name="add_action">addButton</string>
     <string name="create">Erstellen</string>
+    <string name="join">Beitreten</string>
+    <string name="join_event">Event beitreten</string>
+    <string name="back">Zurück</string>
+    <string name="date">Datum:</string>
+    <string name="time">Uhrzeit:</string>
+    <string name="players_amount">Spieler-Anzahl:</string>
     <string name="your_location_is_being_searched">Deine Standort wird gesucht</string>
     <string name="please_activate_location_services">Bitte aktivieren Sie die Standortdienste.</string>
     <string name="location_services_disanled_info">Klicken Sie auf OK, um zu den Einstellungen zu gelangen. Sonst CANCEL.</string>
