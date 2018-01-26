@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -195,10 +198,10 @@ public class ParseServer extends AppCompatActivity {
     }
 
     //TODO implement class to decode and resize images and test commented code (add byte[] data to function)
-    public synchronized void saveProfileData(String name, String birthday, String residence, String descriptopn, String team, String favouriteArea, String experience, String favouriteTeam) {
+    public synchronized void saveProfileData(String name, String birthday, String residence, String description, String team, String favouriteArea, String experience, String favouriteTeam) {
 
-        String userid = ParseUser.getCurrentUser().getObjectId();
         ParseObject profileObjekt = new ParseObject("Profile");
+        ParseUser user = ParseUser.getCurrentUser();
 /*        ParseFile profilePicture = new ParseFile(userid+"profilimage.png", data);
         try {
             profilePicture.save();
@@ -207,17 +210,43 @@ public class ParseServer extends AppCompatActivity {
         }
 
         profileObjekt.put("picture", profilePicture);*/
-        profileObjekt.put("user", ParseObject.createWithoutData(ParseUser.class, userid));
+        profileObjekt.put("user", user);
         profileObjekt.put("name", name);
-        profileObjekt.put("birtday", birthday);
+        profileObjekt.put("birthday", birthday);
         profileObjekt.put("residence", residence);
-        profileObjekt.put("description", descriptopn);
+        profileObjekt.put("description", description);
         profileObjekt.put("team", team);
         profileObjekt.put("favouriteArea", favouriteArea);
         profileObjekt.put("experience", experience);
         profileObjekt.put("favouriteTeam", favouriteTeam);
 
+        user.put("profileInit", true);
+        user.saveEventually();
+
         profileObjekt.saveEventually();
+    }
+
+    public synchronized void loadProfileData
+            (final Context appContext, final TextView profileInit, final LinearLayout profileData, final TextView realName, final TextView birthdayText,
+             final TextView descriptionText, final TextView experienceText, final TextView favouriteTeamText) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+        query.whereEqualTo("user", ParseUser.getCurrentUser());
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    profileInit.setVisibility(View.GONE);
+                    profileData.setVisibility(View.VISIBLE);
+                    realName.setText(objects.get(0).getString("name"));
+                    birthdayText.setText(objects.get(0).getString("birthday"));
+                    descriptionText.setText(objects.get(0).getString("description"));
+                    experienceText.setText(objects.get(0).getString("experience"));
+                    favouriteTeamText.setText(objects.get(0).getString("favouriteTeam"));
+                } else {
+                    Toast.makeText(appContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     // TODO set ParseACL to userOnly Read and Write and not PublicRead

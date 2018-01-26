@@ -14,7 +14,6 @@ import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewCompat;
@@ -24,6 +23,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,60 +36,77 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
 import com.parse.ParseUser;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /*
  * Created by Jan on 13.11.2017.
  */
 
 public class Profile extends AppCompatActivity {
 
-
-    private static  final String PREFER_NAME_PROFILDATA = "ProfilData";
+    private static final String PREFER_NAME_PROFILDATA = "ProfilData";
     private SharedPreferences sharedPreferencesProf;
-    private SharedPreferences.Editor editor;
-
 
     private final static int RESULT_LOAD_IMAGE = 1;
     private final static int PERMISSION_REQUEST_STORAGE = 0;
-    private View coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        //get data from shared pref
-        sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA, Context.MODE_PRIVATE);
-        editor = sharedPreferencesProf.edit();
-        String profileName = sharedPreferencesProf.getString("Name", "Profil");
-        String profileBirthday = sharedPreferencesProf.getString("Geburtstag", null);
-        String profileDescription = sharedPreferencesProf.getString("ProfilBeschreibung", null);
-        String profileExperience = sharedPreferencesProf.getString("Erfahrung", null);
-        String profileFavouriteTeam = sharedPreferencesProf.getString("Lieblingsteam", null);
-        String picturePath = sharedPreferencesProf.getString("Profilbild", null);
-
-        //get data from server
-        ParseServer.getInstance(this);
-        //TODO load data from server if userdata exists and sharedpref is empty
-        ParseServer.getInstance(this);
-        if (profileName.equals("Profil")) {
-            profileName = ParseUser.getCurrentUser().getUsername();
-            editor.putString("Name", profileName);
-        }
-
-        coordinatorLayout =   findViewById(R.id.profile_coordinatorLayout);
+        TextView realName = findViewById(R.id.profile_realName);
         TextView birthdayText = findViewById(R.id.profile_ageValue);
         TextView descriptionText = findViewById(R.id.profile_descriptionText);
         TextView experienceText = findViewById(R.id.profile_experienceValue);
         TextView favouriteTeamText = findViewById(R.id.profile_favouriteTeamValue);
+        TextView profileInitText = findViewById(R.id.profile_notInit);
+        LinearLayout profileData = findViewById(R.id.profile_profileData);
         final Toolbar myToolbar = findViewById(R.id.profile_collapsingStaticToolbar);
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.profile_collapsingToolbar);
         AppBarLayout appBar = findViewById(R.id.profile_collapsingToolbarLayout);
         FloatingActionButton editBtn = findViewById(R.id.profile_editBtn);
-        ImageView profilePicture =  findViewById(R.id.profile_picture);
+        CircleImageView profilePicture = findViewById(R.id.profile_picture);
+        ProgressBar progressBar = findViewById(R.id.profile_progressBar);
+
+        //get data from shared pref
+        sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA, Context.MODE_PRIVATE);
+        String profileName = sharedPreferencesProf.getString("EchterName", "Profil");
+
+        //get data from server if userdata exist and sharedpred empty
+        //TODO save profile data in sharedpref if sharedpref is empty but data exists on server
+        ParseServer ps = ParseServer.getInstance(this);
+        if (profileName.equals("Profil")) {
+            progressBar.setVisibility(View.GONE);
+            boolean profileInit = ParseUser.getCurrentUser().getBoolean("profileInit");
+            if (profileInit) {
+                ps.loadProfileData(this, profileInitText, profileData, realName, birthdayText, descriptionText, experienceText, favouriteTeamText);
+            }
+        } else if (!profileName.equals("Profil")) {
+            progressBar.setVisibility(View.GONE);
+
+            String profileBirthday = sharedPreferencesProf.getString("Geburtstag", null);
+            String profileDescription = sharedPreferencesProf.getString("ProfilBeschreibung", null);
+            String profileExperience = sharedPreferencesProf.getString("Erfahrung", null);
+            String profileFavouriteTeam = sharedPreferencesProf.getString("Lieblingsteam", null);
+            String picturePath = sharedPreferencesProf.getString("Profilbild", null);
+
+            birthdayText.setText(profileBirthday);
+            descriptionText.setText(profileDescription);
+            experienceText.setText(profileExperience);
+            favouriteTeamText.setText(profileFavouriteTeam);
+            profilePicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+            profileInitText.setVisibility(View.GONE);
+            profileData.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            profileInitText.setVisibility(View.VISIBLE);
+        }
 
         setSupportActionBar(myToolbar);
         try {
-            getSupportActionBar().setTitle(profileName);
+            getSupportActionBar().setTitle(ParseUser.getCurrentUser().getUsername());
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -102,10 +120,6 @@ public class Profile extends AppCompatActivity {
                 if ((collapsingToolbarLayout.getHeight() + verticalOffset) < (2 * ViewCompat.getMinimumHeight(collapsingToolbarLayout))) {
                     try {
                         myToolbar.getOverflowIcon().setColorFilter(getColor(R.color.colorPrimaryText), PorterDuff.Mode.SRC_ATOP);
-                    } catch (NullPointerException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         myToolbar.getNavigationIcon().setColorFilter(getColor(R.color.colorPrimaryText), PorterDuff.Mode.SRC_ATOP);
                     } catch (NullPointerException e) {
                         e.printStackTrace();
@@ -113,10 +127,6 @@ public class Profile extends AppCompatActivity {
                 } else {
                     try {
                         myToolbar.getOverflowIcon().setColorFilter(getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
-                    } catch (NullPointerException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         myToolbar.getNavigationIcon().setColorFilter(getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
                     } catch (NullPointerException e) {
                         e.printStackTrace();
@@ -124,19 +134,6 @@ public class Profile extends AppCompatActivity {
                 }
             }
         });
-
-        if (profileBirthday != null) {
-            birthdayText.setText(profileBirthday);
-        }
-        if (profileDescription != null) {
-            descriptionText.setText(profileDescription);
-        }
-        if (profileExperience != null) {
-            experienceText.setText(profileExperience);
-        }
-        if (profileFavouriteTeam != null) {
-            favouriteTeamText.setText(profileFavouriteTeam);
-        }
 
         editBtn.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
@@ -152,18 +149,22 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        if(picturePath != null)
-        {
-            profilePicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+    }
+
+    private void loadProfilePicture() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Permission is already available, start camera preview
+            Intent i = new Intent(
+                    Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+            startActivityForResult(i, RESULT_LOAD_IMAGE);
+        } else {
+            // Permission is missing and must be requested.
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    PERMISSION_REQUEST_STORAGE);
         }
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu2, menu);
-        return true;
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -183,7 +184,7 @@ public class Profile extends AppCompatActivity {
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
-            editor = sharedPreferencesProf.edit();
+            SharedPreferences.Editor editor = sharedPreferencesProf.edit();
             editor.putString("Profilbild", picturePath).apply();
             cursor.close();
 
@@ -193,46 +194,10 @@ public class Profile extends AppCompatActivity {
         }
     }
 
-    private void loadProfilePicture() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED) {
-            // Permission is already available, start camera preview
-            Intent i = new Intent(
-                    Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-            startActivityForResult(i, RESULT_LOAD_IMAGE);
-        } else {
-            // Permission is missing and must be requested.
-            requestStoragePermission();
-        }
-    }
-
-    private void requestStoragePermission() {
-        // Permission has not been granted and must be requested.
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            // Provide an additional rationale to the user if the permission was not granted
-            // and the user would benefit from additional context for the use of the permission.
-            // Display a SnackBar with a button to request the missing permission.
-            Snackbar.make(coordinatorLayout, "Speicherzugang wird benötigt um auf Bilder zugreifen zu können",
-                    Snackbar.LENGTH_INDEFINITE).setAction("OK", new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // Request the permission
-                    ActivityCompat.requestPermissions(Profile.this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            PERMISSION_REQUEST_STORAGE);
-                }
-            }).show();
-
-        } else {
-            Snackbar.make(coordinatorLayout,
-                    "Speicherzugang nicht vorhanden. Zugang freigeben?",
-                    Snackbar.LENGTH_SHORT).show();
-            // Request the permission. The result will be received in onRequestPermissionResult().
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    PERMISSION_REQUEST_STORAGE);
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu2, menu);
+        return true;
     }
 
     @Override
@@ -261,12 +226,12 @@ public class Profile extends AppCompatActivity {
                 startActivity(new Intent(this, menu_data_privacy.class));
                 return true;
             case R.id.action_sign_out:
-                ParseServer ps =ParseServer.getInstance(this);
+                ParseServer ps = ParseServer.getInstance(this);
                 if (ps.logOut()) {
                     startActivity(new Intent(this, Login.class));
                     finish();
-                }else {
-                    Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Fehler beim Logout", Toast.LENGTH_SHORT).show();
                 }
                 return true;
         }

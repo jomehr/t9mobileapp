@@ -10,7 +10,7 @@
     </style>
 
     <style name="expandedappbar" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:drawable">@android:color/white</item>
     </style>

@@ -14,10 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,12 +40,7 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
 import com.matchfinder.jan.t9_mobileapp.util.PickerEditor;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-import static java.util.Arrays.asList;
 
 public class CreateLeague extends AppCompatActivity {
 
@@ -155,11 +150,6 @@ public class CreateLeague extends AppCompatActivity {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
 
-                //Layout anpassen
-                ViewGroup.LayoutParams params = leagueLocation.getLayoutParams();
-                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                leagueLocation.setLayoutParams(params);
-
                 //get place from Place Picker and reverse geocode it to get string of current city
                 Place place = PlacePicker.getPlace(this, data);
                 Geocoder geocoder = new Geocoder(this);
@@ -228,8 +218,11 @@ public class CreateLeague extends AppCompatActivity {
         input.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         input.setHint(leagueDescription.getText());
         input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(128)});
+        input.setGravity(Gravity.START | Gravity.TOP);
+        input.setLines(2);
         input.setMaxLines(4);
-        builder.setTitle("Beschreibung").setView(input);
+        input.setSingleLine(false);
+        builder.setTitle(getString(R.string.description)).setView(input);
 
         // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

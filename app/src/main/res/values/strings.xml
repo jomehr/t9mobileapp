@@ -130,5 +130,10 @@
     <!-- ERROR Srings -->
     <string name="logig_mistake">    LOGIG_MISTAKE    </string>
     <string name="max_team_amount">Max. Team-Anzahl</string>
+    <string name="validation_failed">Validierung fehlgeschlagen</string>
+    <string name="invalid_date">invalides Datum!</string>
+    <string name="invalid_year">invalides Jahr!</string>
+    <string name="work_in_progress">Feature in Arbeit</string>
+    <string name="profile_noProfile_text">Du scheinst noch kein Profil angelegt zu haben. Andere Spieler würden gerne sehen mit wem sie spielen werden. Klicke auf den gelben Button um dein Profil zu vervollständigen.</string>
 
 </resources>

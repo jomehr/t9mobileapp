@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -102,21 +103,21 @@ public class CreateProfile extends AppCompatActivity {
         residenceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CreateProfile.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateProfile.this, R.string.work_in_progress, Toast.LENGTH_SHORT).show();
             }
         });
 
         teamLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CreateProfile.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateProfile.this, R.string.work_in_progress, Toast.LENGTH_SHORT).show();
             }
         });
 
         areaLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CreateProfile.this, "Feature in Arbeit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateProfile.this, R.string.work_in_progress, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -130,21 +131,21 @@ public class CreateProfile extends AppCompatActivity {
         mYear = Integer.parseInt(editYear.getText().toString());
 
         if (mYear < 1930 || mYear > 2018) {
-            editYear.setError("invalides Jahr!");
+            editYear.setError(getString(R.string.invalid_year));
             valid = false;
         }else {
             editDay.setError(null);
         }
 
         if (mDay > 30 && (mMonth == 2 || mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11)) {
-            editDay.setError("invalides Datum!");
+            editDay.setError(getString(R.string.invalid_date));
             valid = false;
         }else {
             editDay.setError(null);
         }
 
         if(mDay == 29 && mMonth == 2 && (mYear%4 != 0 && (mYear%100 == 0 || mYear%400 != 0))) {
-            editDay.setError("invalides Datum!");
+            editDay.setError(getString(R.string.invalid_date));
             valid = false;
         }else {
             editDay.setError(null);
@@ -154,7 +155,7 @@ public class CreateProfile extends AppCompatActivity {
     }
 
     private void onValidationFailed() {
-        Toast.makeText(CreateProfile.this, "Validierung fehlgeschlagen",Toast.LENGTH_SHORT).show();
+        Toast.makeText(CreateProfile.this, R.string.validation_failed, Toast.LENGTH_SHORT).show();
     }
 
     //Text Picker
@@ -164,11 +165,14 @@ public class CreateProfile extends AppCompatActivity {
         // Set up the input
         final EditText input = new EditText(this);
         // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
+        input.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         input.setHint(descriptionText.getHint());
         input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(128)});
+        input.setGravity(Gravity.START | Gravity.TOP);
+        input.setLines(2);
         input.setMaxLines(4);
-        builder.setTitle("Beschreibung").setView(input);
+        input.setSingleLine(false);
+        builder.setTitle(getString(R.string.description)).setView(input);
 
         // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -202,12 +206,12 @@ public class CreateProfile extends AppCompatActivity {
         editor.apply();
 
         //TODO implement class or function to resize and decode images, otherwise OOM-exception
-/*        //get profiepicture and convert it
+/*      //get profiepicture and convert it
         String picturePath = sharedPreferencesProf.getString("Profilbild", "");
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
-        options.inSampleSize = 2;
+        options.inSampleSize = 8;
         Bitmap bitmap = BitmapFactory.decodeFile(picturePath, options);
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte [] data = stream.toByteArray();*/
@@ -241,7 +245,7 @@ public class CreateProfile extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu2, menu);
         return true;
     }
 
