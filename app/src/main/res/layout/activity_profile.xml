@@ -68,7 +68,7 @@
         <LinearLayout
             android:id="@+id/profile_nested_linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -87,12 +87,6 @@
                 android:typeface="sans"
                 android:visibility="gone" />
 
-            <ProgressBar
-                android:id="@+id/profile_progressBar"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="80dp" />
 
             <LinearLayout
                 android:id="@+id/profile_profileData"
@@ -212,35 +206,6 @@
                         android:hint="@string/n_a"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="24sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/profile_area"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/profile_areaHeader"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="20dp"
-                        android:text="@string/favorite_football_ground"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textSize="24sp" />
-
-                    <Button
-                        android:id="@+id/profile_areaBtn"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/ic_map_black_24dp" />
-
                 </LinearLayout>
 
                 <LinearLayout

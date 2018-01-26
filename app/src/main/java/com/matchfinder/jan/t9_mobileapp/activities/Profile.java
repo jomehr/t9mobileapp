@@ -24,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +56,7 @@ public class Profile extends AppCompatActivity {
 
         TextView realName = findViewById(R.id.profile_realName);
         TextView birthdayText = findViewById(R.id.profile_ageValue);
+        TextView residenceText = findViewById(R.id.profile_residenceValue);
         TextView descriptionText = findViewById(R.id.profile_descriptionText);
         TextView experienceText = findViewById(R.id.profile_experienceValue);
         TextView favouriteTeamText = findViewById(R.id.profile_favouriteTeamValue);
@@ -67,7 +67,6 @@ public class Profile extends AppCompatActivity {
         AppBarLayout appBar = findViewById(R.id.profile_collapsingToolbarLayout);
         FloatingActionButton editBtn = findViewById(R.id.profile_editBtn);
         CircleImageView profilePicture = findViewById(R.id.profile_picture);
-        ProgressBar progressBar = findViewById(R.id.profile_progressBar);
 
         //get data from shared pref
         sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA, Context.MODE_PRIVATE);
@@ -77,14 +76,13 @@ public class Profile extends AppCompatActivity {
         //TODO save profile data in sharedpref if sharedpref is empty but data exists on server
         ParseServer ps = ParseServer.getInstance(this);
         if (profileName.equals("Profil")) {
-            progressBar.setVisibility(View.GONE);
             boolean profileInit = ParseUser.getCurrentUser().getBoolean("profileInit");
             if (profileInit) {
-                ps.loadProfileData(this, profileInitText, profileData, realName, birthdayText, descriptionText, experienceText, favouriteTeamText);
+                ps.loadProfileData(this, profileData, realName, birthdayText, residenceText, descriptionText, experienceText, favouriteTeamText);
+            } else {
+                profileInitText.setVisibility(View.VISIBLE);
             }
-        } else if (!profileName.equals("Profil")) {
-            progressBar.setVisibility(View.GONE);
-
+        } else {
             String profileBirthday = sharedPreferencesProf.getString("Geburtstag", null);
             String profileDescription = sharedPreferencesProf.getString("ProfilBeschreibung", null);
             String profileExperience = sharedPreferencesProf.getString("Erfahrung", null);
@@ -97,11 +95,7 @@ public class Profile extends AppCompatActivity {
             favouriteTeamText.setText(profileFavouriteTeam);
             profilePicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
-            profileInitText.setVisibility(View.GONE);
             profileData.setVisibility(View.VISIBLE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-            profileInitText.setVisibility(View.VISIBLE);
         }
 
         setSupportActionBar(myToolbar);

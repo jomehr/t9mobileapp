@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
@@ -21,6 +23,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
@@ -29,6 +35,9 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
 import com.matchfinder.jan.t9_mobileapp.util.InputFilterMinMax;
 
+import java.io.IOException;
+import java.util.List;
+
 
 /*
  * Created by Jan on 18.12.2017.
@@ -36,12 +45,14 @@ import com.matchfinder.jan.t9_mobileapp.util.InputFilterMinMax;
 
 public class CreateProfile extends AppCompatActivity {
 
+    private static int PLACE_PICKER_REQUEST = 1;
     private final static String PREFER_NAME_PROFILDATA = "ProfilData";
     private SharedPreferences sharedPreferencesProf;
 
     private int mDay, mMonth, mYear;
+    private String city;
     private EditText editFirstName, editLastName, editDay, editMonth, editYear, editExperience, editFavouriteTeam;
-    private TextView descriptionText;
+    private TextView descriptionText, residenceText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +77,10 @@ public class CreateProfile extends AppCompatActivity {
         editYear = findViewById(R.id.profiledit_ageYear);
         editExperience = findViewById(R.id.profiledit_experienceText);
         editFavouriteTeam = findViewById(R.id.profiledit_favouriteTeamText);
+        descriptionText = findViewById(R.id.profiledit_descriptionText);
+        residenceText = findViewById(R.id.profiledit_residenceText);
         LinearLayout descriptionLayout = findViewById(R.id.profiledit_descriptionLayout);
         LinearLayout residenceLayout = findViewById(R.id.profiledit_residenceLayout);
-        descriptionText = findViewById(R.id.profiledit_descriptionText);
-        LinearLayout teamLayout = findViewById(R.id.profiledit_teamLayout);
-        LinearLayout areaLayout = findViewById(R.id.profiledit_areaLayout);
 
         sharedPreferencesProf = getSharedPreferences(PREFER_NAME_PROFILDATA,Context.MODE_PRIVATE);
         if (sharedPreferencesProf.getString("Geburtstag", null)!= null) {
@@ -103,21 +113,7 @@ public class CreateProfile extends AppCompatActivity {
         residenceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CreateProfile.this, R.string.work_in_progress, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        teamLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(CreateProfile.this, R.string.work_in_progress, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        areaLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(CreateProfile.this, R.string.work_in_progress, Toast.LENGTH_SHORT).show();
+                pickAPlace();
             }
         });
     }
@@ -191,6 +187,38 @@ public class CreateProfile extends AppCompatActivity {
         builder.show();
     }
 
+    //Place Picker
+    public void pickAPlace() {
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try {
+            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //get city from Place Picker
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+
+                //get place from Place Picker and reverse geocode it to get string of current city
+                Place place = PlacePicker.getPlace(this, data);
+                Geocoder geocoder = new Geocoder(this);
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 1);
+                    city = addresses.get(0).getLocality();
+
+                    residenceText.setText(city);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(CreateProfile.this, "Etwas ist schief gelaufen", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
     private void saveData() {
         String appendName = editFirstName.getText().toString() + " " +editLastName.getText().toString();
         String appendDate = mDay + "." + mMonth + "." +mYear;
@@ -200,6 +228,7 @@ public class CreateProfile extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferencesProf.edit();
         editor.putString("EchterName", appendName);
         editor.putString("Geburtstag", appendDate);
+        editor.putString("Wohnort", city);
         editor.putString("ProfilBeschreibung", descriptionText.getText().toString());
         editor.putString("Erfahrung", editExperience.getText().toString());
         editor.putString("Lieblingsteam", editFavouriteTeam.getText().toString());
@@ -218,7 +247,7 @@ public class CreateProfile extends AppCompatActivity {
 
         //Store data on server permanently
         ParseServer ps = ParseServer.getInstance(this);
-        ps.saveProfileData(appendName, appendDate, tmp, descriptionText.getText().toString(), tmp, tmp, editExperience.getText().toString(), editFavouriteTeam.getText().toString());
+        ps.saveProfileData(appendName, appendDate, city, descriptionText.getText().toString(), tmp, editExperience.getText().toString(), editFavouriteTeam.getText().toString());
     }
 
     private void getData() {
@@ -232,6 +261,9 @@ public class CreateProfile extends AppCompatActivity {
         editYear.setHint(birthtmp[2]);
         editFirstName.setHint(nametmp[0]);
         editLastName.setHint(nametmp[1]);
+
+        String residencetmp = sharedPreferencesProf.getString("Wohnort", null);
+        residenceText.setHint(residencetmp);
 
         String descriptiontmp = sharedPreferencesProf.getString("ProfilBeschreibung", null);
         descriptionText.setHint(descriptiontmp);

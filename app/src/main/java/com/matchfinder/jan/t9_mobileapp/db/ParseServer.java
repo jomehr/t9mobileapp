@@ -198,7 +198,8 @@ public class ParseServer extends AppCompatActivity {
     }
 
     //TODO implement class to decode and resize images and test commented code (add byte[] data to function)
-    public synchronized void saveProfileData(String name, String birthday, String residence, String description, String team, String favouriteArea, String experience, String favouriteTeam) {
+    //TODO check if profile already exist and just update in that case, currently it creates another profile
+    public synchronized void saveProfileData(String name, String birthday, String residence, String description, String team, String experience, String favouriteTeam) {
 
         ParseObject profileObjekt = new ParseObject("Profile");
         ParseUser user = ParseUser.getCurrentUser();
@@ -216,7 +217,6 @@ public class ParseServer extends AppCompatActivity {
         profileObjekt.put("residence", residence);
         profileObjekt.put("description", description);
         profileObjekt.put("team", team);
-        profileObjekt.put("favouriteArea", favouriteArea);
         profileObjekt.put("experience", experience);
         profileObjekt.put("favouriteTeam", favouriteTeam);
 
@@ -227,21 +227,21 @@ public class ParseServer extends AppCompatActivity {
     }
 
     public synchronized void loadProfileData
-            (final Context appContext, final TextView profileInit, final LinearLayout profileData, final TextView realName, final TextView birthdayText,
-             final TextView descriptionText, final TextView experienceText, final TextView favouriteTeamText) {
+            (final Context appContext, final LinearLayout profileData, final TextView realName, final TextView birthdayText,
+             final TextView residenceText, final TextView descriptionText, final TextView experienceText, final TextView favouriteTeamText) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
         query.whereEqualTo("user", ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
-                    profileInit.setVisibility(View.GONE);
-                    profileData.setVisibility(View.VISIBLE);
                     realName.setText(objects.get(0).getString("name"));
                     birthdayText.setText(objects.get(0).getString("birthday"));
+                    residenceText.setText(objects.get(0).getString("residence"));
                     descriptionText.setText(objects.get(0).getString("description"));
                     experienceText.setText(objects.get(0).getString("experience"));
                     favouriteTeamText.setText(objects.get(0).getString("favouriteTeam"));
+                    profileData.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(appContext, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -249,7 +249,6 @@ public class ParseServer extends AppCompatActivity {
         });
     }
 
-    // TODO set ParseACL to userOnly Read and Write and not PublicRead
     public synchronized void registerUser(final Context appcontext, String email, final String username, String password, final Activity activity) {
 
         if (ParseUser.getCurrentUser() != null) {
@@ -307,6 +306,7 @@ public class ParseServer extends AppCompatActivity {
 
     public synchronized void loadUserList(final ArrayAdapter mUserAdapter) {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.addAscendingOrder("username");
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> userObjects, ParseException error) {
