@@ -130,11 +130,11 @@ public class ParseServer extends AppCompatActivity {
                     int maxPlayersNumber = object.getInt("maxPlayersNumber");
 
                     // Check if CurrentUser is already a participant
+                    String currentUserId = ParseUser.getCurrentUser().getObjectId();
                     for (int i = 0; i < participants.length(); i++) {
                         try {
                             JSONObject user = (JSONObject) participants.get(i);
                             String participantUserId = user.getString("objectId");
-                            String currentUserId = ParseUser.getCurrentUser().getObjectId();
                             if (currentUserId.equals(participantUserId)) {
                                 containsCurrentUser = true;
                             }

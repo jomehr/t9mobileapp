@@ -223,8 +223,8 @@ public class CreateEvent extends AppCompatActivity implements
         }
 
         //TextView füllen
-        String dateAndTimeText = R.string.date + String.format("%02d", dayFinal) + "." + String.format("%02d",monthFinal) + "." + yearFinal
-                + "\n" + R.string.time + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal);
+        String dateAndTimeText = getResources().getString(R.string.date) + " " + String.format("%02d", dayFinal) + "." + String.format("%02d",monthFinal) + "." + yearFinal
+                + "\n" + getResources().getString(R.string.time) + " " + String.format("%02d", hourFinal) + ":" + String.format("%02d", minuteFinal);
         eventDateAndTimeText.setText(dateAndTimeText);
 
         //set eventDateAndTimeFinal (long) number in milliseconds
