@@ -15,6 +15,7 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -24,8 +25,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +36,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.matchfinder.jan.t9_mobileapp.R;
 import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
-import com.matchfinder.jan.t9_mobileapp.db.entities.Event;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
@@ -49,7 +47,6 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -122,7 +119,7 @@ public class EventRadar extends AppCompatActivity implements
         mapFragment.getMapAsync(this);
 
         //Listener für "click" auf EventRadar_Button
-        ImageButton btn_Add = findViewById(R.id.eventRadar_btnAdd);
+        FloatingActionButton btn_Add = findViewById(R.id.eventRadar_btnAdd);
         btn_Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

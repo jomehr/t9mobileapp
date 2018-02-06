@@ -222,75 +222,7 @@
                     android:textColor="@color/colorPrimaryText"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/profiledit_teamLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:divider="@drawable/divider_green_vertical"
-                android:showDividers="middle|end"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal"
-                android:weightSum="7">
 
-                <ImageView
-                    android:id="@+id/profiledit_teamImage"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_group_black_72dp" />
-
-                <TextView
-                    android:id="@+id/profiledit_teamText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:padding="5dp"
-                    android:maxLength="128"
-                    android:layout_weight="6"
-                    android:hint="@string/profiledit_yourteam"
-                    android:background="@null"
-                    android:focusable = "true"
-                    android:textColorHighlight = "@color/colorAccent"
-                    android:textColorHint = "@color/colorSecondaryText"
-                    android:layout_gravity="center"
-                    android:textSize="24sp"
-                    android:textColor="@color/colorPrimaryText"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/profiledit_areaLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:divider="@drawable/divider_green_vertical"
-                android:showDividers="middle|end"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal"
-                android:weightSum="7">
-
-                <ImageView
-                    android:id="@+id/profiledit_areaImage"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_map_black_24dp" />
-
-                <TextView
-                    android:id="@+id/profiledit_areaText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:padding="5dp"
-                    android:maxLength="128"
-                    android:layout_weight="6"
-                    android:hint="@string/profiledit_favouriteareas"
-                    android:background="@null"
-                    android:focusable = "true"
-                    android:textColorHighlight = "@color/colorAccent"
-                    android:textColorHint = "@color/colorSecondaryText"
-                    android:layout_gravity="center"
-                    android:textSize="24sp"
-                    android:textColor="@color/colorPrimaryText"/>
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/profiledit_experienceLayout"

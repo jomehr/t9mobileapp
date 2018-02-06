@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@raw/screen_background3"
+        android:src="@raw/screen_background3"
         android:scaleType="centerCrop"/>
 
     <include
