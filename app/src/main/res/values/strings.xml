@@ -1,22 +1,22 @@
 <resources>
-    <string name="app_name">FootNation</string>
+    <string name="app_name" translatable="false">FootNation</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDEYH_d0EQpvyxlYvNWnsKReSY7T1enYFU</string>
 
     <!-- Placeholder -->
-    <string name="teamname">Die Streetfoodballer</string>
-    <string name="teamplayercount">Spieleranzahl: 6</string>
-    <string name="teamestablishment">Gegründet am 12.12.2005</string>
-    <string name="templatestring_long">""Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsumy""</string>
+    <string name="teamname" translatable="false">Die Streetfoodballer</string>
+    <string name="teamplayercount" translatable="false">Spieleranzahl: 6</string>
+    <string name="teamestablishment" translatable="false">Gegründet am 12.12.2005</string>
+    <string name="templatestring_long" translatable="false">""Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsumy""</string>
 
-    <string name="msg1">Denn foult der gleiche Mann noch mal den Gegner regelrecht brutal, so zeigt die rote Karte diesem: Mit Recht wird er vom Feld verwiesen!</string>
-    <string name="msg2">So mancher stürzt von ganz allein zu Boden hin und hält das Bein. Dann hilft kein Arzt und keine Salbe: Es handelt sich um eine Schwalbe!</string>
-    <string name="msg3">Wer sich an keine Regeln hält, der fliegt zur Strafe selbst vom Feld! Denn für böse Spielvernichter gibt es einen Schiedsrichter.</string>
-    <string name="msg4">Trifft man den Gegner ohne Ball im vollen Lauf, kommt er zu Fall. Die gelbe Karte sieht der Treter, doch rächt sich die Verwarnung später.</string>
-    <string name="msg5">Im Fußball wie in jedem Spiel gehört ein Foul zum schlechten Stil. Doch allen geht es um die Kugel, darum entsteht auch schnell ein Rudel.</string>
-    <string name="clock">20:37</string>
+    <string name="msg1" translatable="false">Denn foult der gleiche Mann noch mal den Gegner regelrecht brutal, so zeigt die rote Karte diesem: Mit Recht wird er vom Feld verwiesen!</string>
+    <string name="msg2" translatable="false">So mancher stürzt von ganz allein zu Boden hin und hält das Bein. Dann hilft kein Arzt und keine Salbe: Es handelt sich um eine Schwalbe!</string>
+    <string name="msg3" translatable="false">Wer sich an keine Regeln hält, der fliegt zur Strafe selbst vom Feld! Denn für böse Spielvernichter gibt es einen Schiedsrichter.</string>
+    <string name="msg4" translatable="false">Trifft man den Gegner ohne Ball im vollen Lauf, kommt er zu Fall. Die gelbe Karte sieht der Treter, doch rächt sich die Verwarnung später.</string>
+    <string name="msg5" translatable="false">Im Fußball wie in jedem Spiel gehört ein Foul zum schlechten Stil. Doch allen geht es um die Kugel, darum entsteht auch schnell ein Rudel.</string>
+    <string name="clock" translatable="false">20:37</string>
 
     <!-- Miscellaneous -->
-    <string name="add_action">addButton</string>
+    <string name="add_action" translatable="false">addButton</string>
     <string name="create">Erstellen</string>
     <string name="join">Beitreten</string>
     <string name="join_event">Event beitreten</string>
@@ -26,8 +26,8 @@
     <string name="players_amount">Spieler-Anzahl:</string>
     <string name="your_location_is_being_searched">Deine Standort wird gesucht</string>
     <string name="please_activate_location_services">Bitte aktivieren Sie die Standortdienste.</string>
-    <string name="location_services_disanled_info">Klicken Sie auf OK, um zu den Einstellungen zu gelangen. Sonst CANCEL.</string>
-    <string name="event_saved">Event Saved</string>
+    <string name="location_services_disanled_info">Klicken Sie auf OK, um zu den Einstellungen zu gelangen. Sonst ZURÜCK.</string>
+    <string name="event_saved">Event gespeichert</string>
     <string name="participant_added">Du hast dich für das Spiel angemeldet</string>
     <string name="you_are_already_a_participant">Du bist bereits für dieses Spiel angemeldet</string>
     <string name="you_can_not_join_this_game">Leider können Sie diesem Spiel nicht mehr beitreten. Die maximale Spielerzahl wurde erreicht.</string>
@@ -35,8 +35,8 @@
     <string name="search_league">Liga suchen</string>
     <string name="max_player_amount">Max. Spieler-Anzahl</string>
     <string name="event_ticker">Eventticker</string>
-    <string name="single_event">Single Event</string>
-    <string name="chat_put_post">Post verfassen&#8230;</string>
+    <string name="single_event">Einzelned Event</string>
+    <string name="chat_put_post">Post verfassen:</string>
     <string name="pick_place">Ort Auswählen</string>
     <string name="setDateAndTime">Datum und Uhrzeit</string>
     <string name="description">Beschreibung</string>
@@ -50,7 +50,7 @@
     <string name="residence">Wohnort:</string>
     <string name="your_selected_age">Alter:</string>
     <string name="your_selected_team">Team:</string>
-    <string name="n_a">N/A</string>
+    <string name="n_a" translatable="false">N/A</string>
     <string name="team">Team</string>
     <string name="favorite_football_ground">Lieblings-Bolzplätze:</string>
     <string name="experience_as_player">Erfahrung als Kicker:</string>
@@ -62,11 +62,11 @@
     <string name="home_searchplayer">Spieler</string>
     <string name="home_searchteam">Teams</string>
     <string name="home_search">Suche</string>
-    <string name="home_profile">Eigenes Profil</string>
+    <string name="home_profile">Dein Profil</string>
     <string name="teamtab2profile">Profil</string>
     <string name="search_teams">Teams suchen</string>
     <string name="search">Suche</string>
-    <string name="news">News</string>
+    <string name="news">Neuigkeiten</string>
     <string name="tabels">Tabellen</string>
     <string name="roster">Aufstellung</string>
     <string name="teamtab3teamchat">Chat</string>
@@ -95,11 +95,11 @@
     <string name="registration">Registrierung</string>
     <string name="register">Registrieren</string>
     <string name="already_a_member">Bereits ein Mitglied? Loge dich ein!</string>
-    <string name="login">Login</string>
+    <string name="login">Anmelden</string>
     <string name="enter_passwort">Passwort eingben</string>
     <string name="enter_email">E-Mail eingeben</string>
     <string name="enter_username">Nutzername eingeben</string>
-    <string name="autologin">Auto-Login</string>
+    <string name="autologin" translatable="false">Auto-Login</string>
     <string name="experiences">Erfahrungen:</string>
     <string name="favourite_team">Lieblings-Team:</string>
     <string name="profile_defaultDescription">Beschreibe dich in wenigen Worten. Deine Mitspieler würden gerne mehr über dich erfahren.</string>
@@ -119,21 +119,26 @@
     <string name="fourthLeague">4. Liga</string>
 
     <!-- Permission Strings -->
-    <string name="permission_rationale_location">Access to the location service is required for this feature.</string>
-    <string name="location_permission_denied">Your Location-Services are probably disabled. You can not use some features.\nPlease go to settings to enable it.</string>
-    <string name="permission_required_toast">Location permission is required for this featue.</string>
+    <string name="permission_rationale_location">"Zugang zu "</string>
+    <string name="location_permission_denied">Dein Standortdienst ist wahrscheinlich deaktiviert. Du kannst einige Funktionen nicht verwenden. Bitte aktiviere sie in den Einstellungen.</string>
+    <string name="permission_required_toast">Standortdienste werden für diese Funktion benötigt</string>
     <string name="forgot_password">Passwort vergessen?</string>
     <string name="close_app">Wollen Sie die App wirklich schließen</string>
     <string name="first_name">Vorname</string>
     <string name="last_name">Nachname</string>
 
     <!-- ERROR Srings -->
-    <string name="logig_mistake">    LOGIG_MISTAKE    </string>
+    <string name="logig_mistake" translatable="false">    LOGIG_MISTAKE    </string>
     <string name="max_team_amount">Max. Team-Anzahl</string>
     <string name="validation_failed">Validierung fehlgeschlagen</string>
     <string name="invalid_date">invalides Datum!</string>
     <string name="invalid_year">invalides Jahr!</string>
     <string name="work_in_progress">Feature in Arbeit</string>
+
+
     <string name="profile_noProfile_text">Du scheinst noch kein Profil angelegt zu haben. Andere Spieler würden gerne sehen mit wem sie spielen werden. Klicke auf den gelben Button um dein Profil zu vervollständigen.</string>
+    <string name="createleague_type">Typ:</string>
+    <string name="createleague_targetgroup">Zielgruppe:</string>
+    <string name="save">Speichern</string>
 
 </resources>

@@ -50,7 +50,7 @@ public class menu_developer extends AppCompatActivity {
             }
         });
 
-        lst = (ListView) findViewById(R.id.list);
+        lst = findViewById(R.id.list);
         CustomDeveloperList a = new CustomDeveloperList(this, developerName, imgid);
         lst.setAdapter(a);
 

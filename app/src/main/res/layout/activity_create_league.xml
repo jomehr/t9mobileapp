@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="30dp"
                     android:drawableStart="@drawable/ic_help_outline_black_24dp"
-                    android:text="Typ:"
+                    android:text="@string/createleague_type"
                     android:textColor="@color/colorBlack"
                     android:textSize="24sp"
                     android:visibility="visible" />
@@ -100,7 +100,7 @@
                     android:gravity="start"
                     android:drawableStart="@drawable/ic_search_black_72dp"
                     android:drawablePadding="30dp"
-                    android:text="Zielgruppe"
+                    android:text="@string/createleague_targetgroup"
                     android:textColor="@color/colorBlack"
                     android:textSize="24sp"
                     android:visibility="visible" />

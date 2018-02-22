@@ -1,7 +1,6 @@
 package com.matchfinder.jan.t9_mobileapp.menu;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +21,6 @@ import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /*
@@ -58,7 +56,7 @@ public class menu_faq extends AppCompatActivity {
             }
         });
 
-        listView = (ExpandableListView)findViewById(R.id.lvExp);
+        listView = findViewById(R.id.lvExp);
         initData();
         listAdapter = new com.matchfinder.jan.t9_mobileapp.util.ExpandableListAdapter(this, listDataHeader, listHash);
         listView.setAdapter(listAdapter);

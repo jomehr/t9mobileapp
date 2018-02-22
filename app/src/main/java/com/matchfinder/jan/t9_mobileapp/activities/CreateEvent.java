@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -39,11 +38,9 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
 import com.matchfinder.jan.t9_mobileapp.util.PickerEditor;
 
-import java.lang.reflect.Field;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /*
  * Created by Taras on 20.11.2017.
