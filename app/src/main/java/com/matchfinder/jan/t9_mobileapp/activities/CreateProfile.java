@@ -234,17 +234,6 @@ public class CreateProfile extends AppCompatActivity {
         editor.putString("Lieblingsteam", editFavouriteTeam.getText().toString());
         editor.apply();
 
-        //TODO implement class or function to resize and decode images, otherwise OOM-exception
-/*      //get profiepicture and convert it
-        String picturePath = sharedPreferencesProf.getString("Profilbild", "");
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = false;
-        options.inSampleSize = 8;
-        Bitmap bitmap = BitmapFactory.decodeFile(picturePath, options);
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte [] data = stream.toByteArray();*/
-
         //Store data on server permanently
         ParseServer ps = ParseServer.getInstance(this);
         ps.saveProfileData(appendName, appendDate, city, descriptionText.getText().toString(), tmp, editExperience.getText().toString(), editFavouriteTeam.getText().toString());

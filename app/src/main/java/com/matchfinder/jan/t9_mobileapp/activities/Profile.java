@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.net.Uri;
@@ -33,6 +34,7 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
+import com.matchfinder.jan.t9_mobileapp.util.ImageDecoder;
 import com.parse.ParseUser;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,6 +51,8 @@ public class Profile extends AppCompatActivity {
     private final static int RESULT_LOAD_IMAGE = 1;
     private final static int PERMISSION_REQUEST_STORAGE = 0;
 
+    TextView profileInitText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +64,7 @@ public class Profile extends AppCompatActivity {
         TextView descriptionText = findViewById(R.id.profile_descriptionText);
         TextView experienceText = findViewById(R.id.profile_experienceValue);
         TextView favouriteTeamText = findViewById(R.id.profile_favouriteTeamValue);
-        TextView profileInitText = findViewById(R.id.profile_notInit);
+        profileInitText = findViewById(R.id.profile_notInit);
         LinearLayout profileData = findViewById(R.id.profile_profileData);
         final Toolbar myToolbar = findViewById(R.id.profile_collapsingStaticToolbar);
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.profile_collapsingToolbar);
@@ -178,13 +182,13 @@ public class Profile extends AppCompatActivity {
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
+            Bitmap profilPicture = ImageDecoder.decodeSampledBitmapFromFile(picturePath, 400, 400);
             SharedPreferences.Editor editor = sharedPreferencesProf.edit();
             editor.putString("Profilbild", picturePath).apply();
             cursor.close();
 
             ImageView new_profilPicture = findViewById(R.id.profile_picture);
-            new_profilPicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
+            new_profilPicture.setImageBitmap(profilPicture);
         }
     }
 
