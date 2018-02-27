@@ -103,4 +103,5 @@
     <string name="createleague_targetgroup">Audience:</string>
     <string name="save">Save</string>
     <string name="profile_noProfile_text">You don\' seem to have a profile. Other players would like to see with whom they will play. Click on the yellow button to create your profile</string>
+    <string name="location_services_disanled_info">Click on OK to go to Settings, else BACK.</string>
 </resources>
