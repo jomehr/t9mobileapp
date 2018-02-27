@@ -60,8 +60,8 @@
     <string name="logout">Log off</string>
     <string name="editAgeImage">Age</string>
     <string name="editPlaceImage">Residence</string>
-    <string name="colored_background" translatable="false">Background in colour</string>
-    <string name="button_image" translatable="false">Background in colour</string>
+    <string name="colored_background">colored background</string>
+    <string name="button_image">button image</string>
     <string name="football">Login picture with ball</string>
     <string name="editDescritionImage">Description</string>
     <string name="not_a_member_yet">Not a member? Sign up!</string>
@@ -104,4 +104,19 @@
     <string name="save">Save</string>
     <string name="profile_noProfile_text">You don\' seem to have a profile. Other players would like to see with whom they will play. Click on the yellow button to create your profile</string>
     <string name="location_services_disanled_info">Click on OK to go to Settings, else BACK.</string>
+
+    <string-array name="createLeague_targetSpinnerValues">
+        <item>open</item>
+        <item>teenager</item>
+        <item>young adults</item>
+        <item>adults</item>
+        <item>operating crew</item>
+        <item>school team</item>
+    </string-array>
+
+    <string-array name="createLeague_typeSpinnerValues">
+        <item>league</item>
+        <item>competition</item>
+    </string-array>
+
 </resources>
