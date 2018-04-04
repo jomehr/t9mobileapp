@@ -7,14 +7,15 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.matchfinder.jan.t9_mobileapp.R;
-import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_data_privacy;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_developer;
 import com.matchfinder.jan.t9_mobileapp.menu.menu_faq;
@@ -22,7 +23,8 @@ import com.matchfinder.jan.t9_mobileapp.menu.menu_settings;
 
 public class Homescreen extends AppCompatActivity {
 
-    private final int REQUEST = 1;
+    private static final int REQUEST = 1;
+    private static final String TAG = "HOMESCREEN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,12 +120,22 @@ public class Homescreen extends AppCompatActivity {
                 startActivity(new Intent(this, menu_faq.class));
                 return true;
             case R.id.action_sign_out:
-                ParseServer ps =ParseServer.getInstance(this);
-                if (ps.logOut()) {
+                //ParseServer ps =ParseServer.getInstance(this);
+                /*if (ps.logOut()) {
                     startActivity(new Intent(this, Login.class));
                     finish();
-                }else {
+                  }else {
                     Toast.makeText(this, "Fehler beim Logout",Toast.LENGTH_SHORT).show();
+                }*/
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
+                if (mAuth.getCurrentUser() == null) {
+                    Log.d(TAG, "signOut:success");
+                    startActivity(new Intent(this, Login.class));
+                    finish();
+                } else {
+                    Log.w(TAG, "signOut:failure");
+                    Toast.makeText(Homescreen.this, "Abmeldung fehlgeschlagen", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             case R.id.action_data_privacy:

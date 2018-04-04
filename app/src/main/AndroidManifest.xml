@@ -97,10 +97,6 @@
         </activity>
         <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.Login"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.LeagueOverview"
             android:launchMode="singleTop"
@@ -124,9 +120,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.matchfinder.jan.t9_mobileapp.activities.League" />
         </activity>
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.Registration" android:screenOrientation="portrait" />
-        <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.SplashScreen" android:screenOrientation="portrait"/>
-
+        <activity
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.Registration"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.matchfinder.jan.t9_mobileapp.activities.SplashScreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name="com.matchfinder.jan.t9_mobileapp.activities.LeagueNews"
             android:screenOrientation="portrait"
             android:parentActivityName="com.matchfinder.jan.t9_mobileapp.activities.League">

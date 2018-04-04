@@ -6,82 +6,103 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.matchfinder.jan.t9_mobileapp.R;
-import com.matchfinder.jan.t9_mobileapp.db.ParseServer;
-import com.parse.ParseUser;
 
 /*
  * Created by Jan on 07.12.2017.
  */
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText edit_username,edit_password;
+    private static final String TAG = "LOGIN";
+
+    private EditText edit_email, edit_password;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button btn_login = findViewById(R.id.login_loginBtn);
-        TextView btn_forgotPassword = findViewById(R.id.login_forgotPasswordBtn);
-        TextView btn_register = findViewById(R.id.login_registerBtn);
-        edit_username = findViewById(R.id.login_inputUsername);
+        mAuth = FirebaseAuth.getInstance();
+
+        //Views
+        edit_email = findViewById(R.id.login_inputUsername);
         edit_password = findViewById(R.id.login_inputPassword);
 
+        //Button
+        findViewById(R.id.login_loginBtn).setOnClickListener(this);
+        findViewById(R.id.login_registerBtn).setOnClickListener(this);
+        findViewById(R.id.login_forgotPasswordBtn).setOnClickListener(this);
+
+/*
         ParseServer.getInstance(this);
         if (ParseUser.getCurrentUser() != null) {
             startActivity(new Intent(Login.this, Homescreen.class));
             finish();
-        }
-
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isNetworkAvailable()) {
-                    Toast.makeText(Login.this, "keine Internetverbindung", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                loginParse();
-            }
-        });
-
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Login.this, Registration.class));
-            }
-        });
-
-        btn_forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(Login.this, "wird noch implementiert", Toast.LENGTH_SHORT).show();
-            }
-        });
+        }*/
     }
-
-    private void loginParse() {
-        ParseServer ps = ParseServer.getInstance(Login.this);
-        ps.loginUser(this, edit_username.getText().toString(), edit_password.getText().toString(), this);
-    }
-
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager != null ? connectivityManager.getActiveNetworkInfo() : null;
 
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void loginFirebase(String email, String password) {
+        Log.d(TAG, "signIn:" + email);
+        if (!validateForm(email, password)) {
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "signInWithEmail:success");
+                            startActivity(new Intent(Login.this, Homescreen.class));
+                            finish();
+                        } else {
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(Login.this, "Login fehlgeschlagen", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private boolean validateForm(String email, String password) {
+        boolean valid = true;
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            edit_email.setError("Gebe eine valide Email-Adresse ein");
+            valid = false;
+        } else {
+            edit_email.setError(null);
+        }
+
+        if (password.isEmpty()) {
+            edit_password.setError("Gebe das Passwort ein");
+            valid = false;
+        } else {
+            edit_password.setError(null);
+        }
+
+        return valid;
     }
 
     @Override
@@ -96,4 +117,28 @@ public class Login extends AppCompatActivity {
                     }
                 }).create().show();
     }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.login_loginBtn) {
+            if (!isNetworkAvailable()) {
+                Toast.makeText(Login.this, "keine Internetverbindung", Toast.LENGTH_SHORT).show();
+            } else {
+                //loginParse();
+                loginFirebase(edit_email.getText().toString(), edit_password.getText().toString());
+            }
+        } else if (i == R.id.login_registerBtn) {
+            startActivity(new Intent(Login.this, Registration.class));
+        } else if (i == R.id.login_forgotPasswordBtn) {
+            //TODO implement Email-Reset
+            //startActivity(new Intent(Login.this, ResetEmail.class));
+        }
+    }
+
+
+/*    private void loginParse() {
+        ParseServer ps = ParseServer.getInstance(Login.this);
+        ps.loginUser(this, edit_username.getText().toString(), edit_password.getText().toString(), this);
+    }*/
 }
